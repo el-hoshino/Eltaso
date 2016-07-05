@@ -26,13 +26,13 @@ infix operator …= {
 	precedence 130
 }
 
-func =? <T> (inout lhs: T, rhs: T?) {
+public func =? <T> (inout lhs: T, rhs: T?) {
 	if let rhs = rhs {
 		lhs = rhs
 	}
 }
 
-func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
 	if lhs.startIndex >= rhs.startIndex && lhs.endIndex <= rhs.endIndex {
 		return true
 	} else {
@@ -40,7 +40,7 @@ func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
 	}
 }
 
-func …= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool {
 	if lhs.start >= rhs.start && lhs.end <= rhs.end {
 		return true
 	} else {
@@ -48,7 +48,7 @@ func …= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpenInterv
 	}
 }
 
-func …= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool {
 	if lhs.start >= rhs.start && lhs.end <= rhs.end {
 		return true
 	} else {
@@ -56,7 +56,7 @@ func …= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInterval<T
 	}
 }
 
-func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
 	if lhs >= rhs.startIndex && lhs < rhs.endIndex {
 		return true
 	} else {
@@ -64,7 +64,7 @@ func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
 	}
 }
 
-func …= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> Bool {
 	if lhs >= rhs.start && lhs < rhs.end {
 		return true
 	} else {
@@ -72,7 +72,7 @@ func …= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> Bool {
 	}
 }
 
-func …= <T where T: Comparable> (lhs: T, rhs: ClosedInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: T, rhs: ClosedInterval<T>) -> Bool {
 	if lhs >= rhs.start && lhs <= rhs.end {
 		return true
 	} else {

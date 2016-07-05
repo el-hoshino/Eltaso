@@ -11,6 +11,7 @@
 		79E14E8D1D2B90DA00AF6EE4 /* Eltaso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E14E821D2B90DA00AF6EE4 /* Eltaso.framework */; };
 		79E14E921D2B90DA00AF6EE4 /* EltasoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E911D2B90DA00AF6EE4 /* EltasoTests.swift */; };
 		79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */; };
+		79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E9E1D2B918100AF6EE4 /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		79E14E911D2B90DA00AF6EE4 /* EltasoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EltasoTests.swift; sourceTree = "<group>"; };
 		79E14E931D2B90DA00AF6EE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		79E14E9E1D2B918100AF6EE4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				79E14E851D2B90DA00AF6EE4 /* Eltaso.h */,
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
+				79E14E9E1D2B918100AF6EE4 /* UIImage.swift */,
 			);
 			path = Eltaso;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
+				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

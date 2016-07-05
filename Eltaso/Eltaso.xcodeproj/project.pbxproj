@@ -15,6 +15,7 @@
 		79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA01D2B93AB00AF6EE4 /* Bool.swift */; };
 		79E14EA31D2B93E200AF6EE4 /* RandomAccessIndexType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */; };
 		79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA61D2B989A00AF6EE4 /* Array.swift */; };
+		79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA81D2BA74F00AF6EE4 /* Console.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		79E14EA01D2B93AB00AF6EE4 /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomAccessIndexType.swift; sourceTree = "<group>"; };
 		79E14EA61D2B989A00AF6EE4 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		79E14EA81D2BA74F00AF6EE4 /* Console.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
 				79E14E9E1D2B918100AF6EE4 /* UIImage.swift */,
+				79E14EA81D2BA74F00AF6EE4 /* Console.swift */,
 			);
 			path = Eltaso;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
+				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE41D2C31AF00E07C8A /* CGRect.swift */; };
 		79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE81D2C32AA00E07C8A /* UIView.swift */; };
+		79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */; };
 		79E14E861D2B90DA00AF6EE4 /* Eltaso.h in Headers */ = {isa = PBXBuildFile; fileRef = 79E14E851D2B90DA00AF6EE4 /* Eltaso.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79E14E8D1D2B90DA00AF6EE4 /* Eltaso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E14E821D2B90DA00AF6EE4 /* Eltaso.framework */; };
 		79E14E921D2B90DA00AF6EE4 /* EltasoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E911D2B90DA00AF6EE4 /* EltasoTests.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		79092CE41D2C31AF00E07C8A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		79092CE81D2C32AA00E07C8A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		79E14E821D2B90DA00AF6EE4 /* Eltaso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Eltaso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E14E851D2B90DA00AF6EE4 /* Eltaso.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Eltaso.h; sourceTree = "<group>"; };
 		79E14E871D2B90DA00AF6EE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				79E14E851D2B90DA00AF6EE4 /* Eltaso.h */,
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
+				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
 				79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */,
 				79E14EA01D2B93AB00AF6EE4 /* Bool.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
@@ -220,6 +223,7 @@
 			files = (
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
+				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,

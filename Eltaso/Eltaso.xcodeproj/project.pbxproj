@@ -12,6 +12,7 @@
 		79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */; };
 		79092CED1D2C333300E07C8A /* CallbackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEC1D2C333300E07C8A /* CallbackButton.swift */; };
 		79092CEF1D2C335B00E07C8A /* CallbackSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */; };
+		79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */; };
 		79E14E861D2B90DA00AF6EE4 /* Eltaso.h in Headers */ = {isa = PBXBuildFile; fileRef = 79E14E851D2B90DA00AF6EE4 /* Eltaso.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79E14E8D1D2B90DA00AF6EE4 /* Eltaso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E14E821D2B90DA00AF6EE4 /* Eltaso.framework */; };
 		79E14E921D2B90DA00AF6EE4 /* EltasoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E911D2B90DA00AF6EE4 /* EltasoTests.swift */; };
@@ -39,6 +40,7 @@
 		79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		79092CEC1D2C333300E07C8A /* CallbackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackButton.swift; sourceTree = "<group>"; };
 		79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackSwitch.swift; sourceTree = "<group>"; };
+		79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementExchangableView.swift; sourceTree = "<group>"; };
 		79E14E821D2B90DA00AF6EE4 /* Eltaso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Eltaso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E14E851D2B90DA00AF6EE4 /* Eltaso.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Eltaso.h; sourceTree = "<group>"; };
 		79E14E871D2B90DA00AF6EE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				79E14EA81D2BA74F00AF6EE4 /* Console.swift */,
 				79092CEC1D2C333300E07C8A /* CallbackButton.swift */,
 				79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */,
+				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 			);
 			path = Eltaso;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			files = (
 				79092CEF1D2C335B00E07C8A /* CallbackSwitch.swift in Sources */,
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
+				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,

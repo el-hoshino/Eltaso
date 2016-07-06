@@ -13,6 +13,7 @@ public struct GCD {
 	public enum Thread {
 		
 		case Main
+		case Global(priority: QueuePriority)
 		case Static(queue: dispatch_queue_t)
 		case Dynamic(name: String, attribute: QueueAttribute)
 		
@@ -21,11 +22,38 @@ public struct GCD {
 			case .Main:
 				return dispatch_get_main_queue()
 				
+			case .Global(priority: let priority):
+				return dispatch_get_global_queue(priority.value, 0)
+				
 			case .Static(queue: let queue):
 				return queue
 				
 			case .Dynamic(name: let name, attribute: let attribute):
-				return dispatch_queue_create(name, attribute.queueAttribute)
+				return dispatch_queue_create(name, attribute.value)
+			}
+		}
+		
+		public enum QueuePriority {
+			case High
+			case Default
+			case Low
+			case Background
+			
+			var value: dispatch_queue_priority_t {
+				switch self {
+				case .High:
+					return DISPATCH_QUEUE_PRIORITY_HIGH
+					
+				case .Default:
+					return DISPATCH_QUEUE_PRIORITY_DEFAULT
+					
+				case .Low:
+					return DISPATCH_QUEUE_PRIORITY_LOW
+					
+				case .Background:
+					return DISPATCH_QUEUE_PRIORITY_BACKGROUND
+				}
+				
 			}
 		}
 		
@@ -33,7 +61,7 @@ public struct GCD {
 			case Serial
 			case Concurrent
 			
-			var queueAttribute: dispatch_queue_attr_t {
+			var value: dispatch_queue_attr_t {
 				switch self {
 				case .Serial:
 					return DISPATCH_QUEUE_SERIAL

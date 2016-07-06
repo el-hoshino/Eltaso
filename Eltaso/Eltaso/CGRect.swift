@@ -8,21 +8,21 @@
 
 import Foundation
 
-extension CGRect {
+public extension CGRect {
 	
-	var top: CGFloat {
+	public var top: CGFloat {
 		return self.origin.y
 	}
 	
-	var bottom: CGFloat {
+	public var bottom: CGFloat {
 		return self.origin.y + self.height
 	}
 	
-	var left: CGFloat {
+	public var left: CGFloat {
 		return self.origin.x
 	}
 	
-	var right: CGFloat {
+	public var right: CGFloat {
 		return self.origin.x + self.width
 	}
 	

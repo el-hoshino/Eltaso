@@ -14,4 +14,12 @@ public extension Array {
 		return self.startIndex ..< self.endIndex
 	}
 	
+	public var second: Element? {
+		if self.count > 1 {
+			return self[1]
+		} else {
+			return nil
+		}
+	}
+	
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		162414B01D2CC3B900141C64 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414AF1D2CC3B900141C64 /* GCD.swift */; };
+		162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D21D2F6CC700141C64 /* OptionalType.swift */; };
+		162414D51D2F6D5600141C64 /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* SequenceType.swift */; };
 		79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE41D2C31AF00E07C8A /* CGRect.swift */; };
 		79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE81D2C32AA00E07C8A /* UIView.swift */; };
 		79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		162414AF1D2CC3B900141C64 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
+		162414D21D2F6CC700141C64 /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
+		162414D41D2F6D5600141C64 /* SequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceType.swift; sourceTree = "<group>"; };
 		79092CE41D2C31AF00E07C8A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		79092CE81D2C32AA00E07C8A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
@@ -100,7 +104,9 @@
 				79E14E851D2B90DA00AF6EE4 /* Eltaso.h */,
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
+				162414D21D2F6CC700141C64 /* OptionalType.swift */,
 				79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */,
+				162414D41D2F6D5600141C64 /* SequenceType.swift */,
 				79E14EA01D2B93AB00AF6EE4 /* Bool.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
@@ -238,6 +244,8 @@
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
+				162414D51D2F6D5600141C64 /* SequenceType.swift in Sources */,
+				162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */,
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,

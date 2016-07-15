@@ -142,3 +142,37 @@ extension GCD { // MARK: Queues
 	}
 	
 }
+
+extension GCD { // MARK: Main Thread Actions
+	
+	public static func runMainThreadAction(action: (() -> Void)) {
+		
+		if NSThread.isMainThread() {
+			action()
+		} else {
+			GCD.runAsynchronizedQueue(with: action)
+		}
+		
+	}
+	
+}
+
+extension GCD { // MARK: Check queue running status
+	
+	public static func isQueueRunning(queue: dispatch_queue_t) -> Bool {
+		
+		var isRunning = true
+		
+		let semaphore = GCD.createSemaphore(queue.hash)
+		dispatch_async(queue) { 
+			isRunning = false
+			GCD.fireSemaphore(semaphore)
+		}
+		
+		GCD.waitForSemaphore(semaphore, until: .TimeAfter(delta: 0.001))
+		
+		return isRunning
+		
+	}
+	
+}

@@ -10,8 +10,22 @@ import UIKit
 
 public extension UIImage {
 	
-	convenience init?(named name: String, inBundle bundle: NSBundle?) {
+	public convenience init?(named name: String, inBundle bundle: NSBundle?) {
 		self.init(named: name, inBundle: bundle, compatibleWithTraitCollection: nil)
+	}
+	
+	public func getCroppedImage(inRect rect: CGRect) -> UIImage {
+		
+		UIGraphicsBeginImageContextWithOptions(rect.size, false, self.scale)
+		
+		let drawPoint = CGPoint(x: -rect.origin.x, y: -rect.origin.y)
+		self.drawAtPoint(drawPoint)
+		let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
+		
+		UIGraphicsEndImageContext()
+		
+		return croppedImage
+		
 	}
 	
 }

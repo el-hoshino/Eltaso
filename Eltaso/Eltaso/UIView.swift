@@ -16,4 +16,10 @@ public extension UIView {
 		}
 	}
 	
+	public func addSubviews(subviews: [UIView]) {
+		subviews.forEach { (view) in
+			self.addSubview(view)
+		}
+	}
+	
 }

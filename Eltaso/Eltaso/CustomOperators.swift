@@ -8,6 +8,14 @@
 
 import Foundation
 
+public func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
+	var dictionary = lhs
+	rhs.forEach { (pair) in
+		dictionary[pair.0] = pair.1
+	}
+	return dictionary
+}
+
 public func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
 	return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
 }

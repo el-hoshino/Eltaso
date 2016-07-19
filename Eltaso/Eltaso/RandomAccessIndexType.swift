@@ -18,11 +18,11 @@ public extension RandomAccessIndexType {
 		return self.advancedBy(-1)
 	}
 	
-	mutating func increase(by n: Self.Distance) {
+	mutating func increase(by n: Self.Distance = 1) {
 		self = self.advancedBy(n)
 	}
 	
-	mutating func decrease(by n: Self.Distance) {
+	mutating func decrease(by n: Self.Distance = 1) {
 		self = self.advancedBy(-n)
 	}
 	

@@ -22,4 +22,23 @@ public extension UIView {
 		}
 	}
 	
+	public static func animateJumpViews(views: [UIView], forHeight height: CGFloat, within duration: NSTimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
+		
+		let initialDuration = duration * 0.2
+		let reversingDuration = duration - initialDuration
+		UIView.animateWithDuration(initialDuration, animations: { 
+			views.forEach({ (view) in
+				view.frame.origin.y -= height
+			})
+		}) { (_) in
+			UIView.animateWithDuration(reversingDuration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: [], animations: {
+				views.forEach({ (view) in
+					view.frame.origin.y += height
+					reversing?()
+				})
+			}, completion: completion)
+		}
+		
+	}
+	
 }

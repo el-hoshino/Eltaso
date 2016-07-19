@@ -12,6 +12,15 @@
 		162414D51D2F6D5600141C64 /* SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* SequenceType.swift */; };
 		16A530F91D38EA6500041952 /* ObjectConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530F81D38EA6500041952 /* ObjectConvertible.swift */; };
 		16A530FB1D38F5CE00041952 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530FA1D38F5CE00041952 /* Int.swift */; };
+		16C02D271D3E07B900288942 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D261D3E07B900288942 /* GlobalFunctions.swift */; };
+		16C02D291D3E09EC00288942 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D281D3E09EC00288942 /* Double.swift */; };
+		16C02D2D1D3E0A7F00288942 /* NSTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D2C1D3E0A7F00288942 /* NSTimeInterval.swift */; };
+		16C02D2F1D3E0AEC00288942 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D2E1D3E0AEC00288942 /* String.swift */; };
+		16C02D311D3E0FE600288942 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D301D3E0FE600288942 /* Dictionary.swift */; };
+		16C02D331D3E109400288942 /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D321D3E109400288942 /* NSData.swift */; };
+		16C02D351D3E10FA00288942 /* NSMutableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D341D3E10FA00288942 /* NSMutableData.swift */; };
+		16C02D371D3E114E00288942 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D361D3E114E00288942 /* CGSize.swift */; };
+		16C02D3F1D3E1E2600288942 /* IntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */; };
 		79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE41D2C31AF00E07C8A /* CGRect.swift */; };
 		79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE81D2C32AA00E07C8A /* UIView.swift */; };
 		79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */; };
@@ -45,6 +54,15 @@
 		162414D41D2F6D5600141C64 /* SequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceType.swift; sourceTree = "<group>"; };
 		16A530F81D38EA6500041952 /* ObjectConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectConvertible.swift; sourceTree = "<group>"; };
 		16A530FA1D38F5CE00041952 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		16C02D261D3E07B900288942 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		16C02D281D3E09EC00288942 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		16C02D2C1D3E0A7F00288942 /* NSTimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeInterval.swift; sourceTree = "<group>"; };
+		16C02D2E1D3E0AEC00288942 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		16C02D301D3E0FE600288942 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		16C02D321D3E109400288942 /* NSData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSData.swift; sourceTree = "<group>"; };
+		16C02D341D3E10FA00288942 /* NSMutableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableData.swift; sourceTree = "<group>"; };
+		16C02D361D3E114E00288942 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSlider.swift; sourceTree = "<group>"; };
 		79092CE41D2C31AF00E07C8A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		79092CE81D2C32AA00E07C8A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
@@ -107,15 +125,23 @@
 			children = (
 				79E14E851D2B90DA00AF6EE4 /* Eltaso.h */,
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
+				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
 				162414D21D2F6CC700141C64 /* OptionalType.swift */,
 				16A530F81D38EA6500041952 /* ObjectConvertible.swift */,
 				79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */,
 				162414D41D2F6D5600141C64 /* SequenceType.swift */,
 				16A530FA1D38F5CE00041952 /* Int.swift */,
+				16C02D281D3E09EC00288942 /* Double.swift */,
 				79E14EA01D2B93AB00AF6EE4 /* Bool.swift */,
+				16C02D2C1D3E0A7F00288942 /* NSTimeInterval.swift */,
+				16C02D2E1D3E0AEC00288942 /* String.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
+				16C02D301D3E0FE600288942 /* Dictionary.swift */,
+				16C02D361D3E114E00288942 /* CGSize.swift */,
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
+				16C02D321D3E109400288942 /* NSData.swift */,
+				16C02D341D3E10FA00288942 /* NSMutableData.swift */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
 				79E14E9E1D2B918100AF6EE4 /* UIImage.swift */,
 				79092CE81D2C32AA00E07C8A /* UIView.swift */,
@@ -123,6 +149,7 @@
 				162414AF1D2CC3B900141C64 /* GCD.swift */,
 				79092CEC1D2C333300E07C8A /* CallbackButton.swift */,
 				79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */,
+				16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 			);
 			path = Eltaso;
@@ -247,19 +274,28 @@
 			files = (
 				79092CEF1D2C335B00E07C8A /* CallbackSwitch.swift in Sources */,
 				162414B01D2CC3B900141C64 /* GCD.swift in Sources */,
+				16C02D371D3E114E00288942 /* CGSize.swift in Sources */,
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
 				162414D51D2F6D5600141C64 /* SequenceType.swift in Sources */,
 				16A530FB1D38F5CE00041952 /* Int.swift in Sources */,
 				16A530F91D38EA6500041952 /* ObjectConvertible.swift in Sources */,
+				16C02D2D1D3E0A7F00288942 /* NSTimeInterval.swift in Sources */,
+				16C02D271D3E07B900288942 /* GlobalFunctions.swift in Sources */,
+				16C02D3F1D3E1E2600288942 /* IntervalSlider.swift in Sources */,
+				16C02D291D3E09EC00288942 /* Double.swift in Sources */,
 				162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */,
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
+				16C02D331D3E109400288942 /* NSData.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,
+				16C02D311D3E0FE600288942 /* Dictionary.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
+				16C02D351D3E10FA00288942 /* NSMutableData.swift in Sources */,
 				79E14EA31D2B93E200AF6EE4 /* RandomAccessIndexType.swift in Sources */,
+				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,
 				79092CED1D2C333300E07C8A /* CallbackButton.swift in Sources */,
 				79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */,
 			);

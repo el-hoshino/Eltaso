@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIColor {
 	
-	convenience init(hexRGBAValue: UInt) {
+	public convenience init(hexRGBAValue: UInt) {
 		let hexRed = (hexRGBAValue & 0xFF000000) >> 24
 		let hexGreen = (hexRGBAValue & 0x00FF0000) >> 16
 		let hexBlue = (hexRGBAValue & 0x0000FF00) >> 8

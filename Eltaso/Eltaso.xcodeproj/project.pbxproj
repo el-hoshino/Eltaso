@@ -229,6 +229,8 @@
 				TargetAttributes = {
 					79E14E811D2B90DA00AF6EE4 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = KC8N9BMQJY;
+						DevelopmentTeamName = "XIANGXIN SHI";
 					};
 					79E14E8B1D2B90DA00AF6EE4 = {
 						CreatedOnToolsVersion = 7.3;

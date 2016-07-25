@@ -14,4 +14,12 @@ public extension CGSize {
 		self.init(width: length, height: length)
 	}
 	
+	var maxLength: CGFloat {
+		return max(self.width, self.height)
+	}
+	
+	var minLength: CGFloat {
+		return min(self.width, self.height)
+	}
+	
 }

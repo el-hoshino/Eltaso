@@ -24,6 +24,14 @@ public func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 	return CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
 }
 
+public func *= (inout lhs: CGSize, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
+public func *= (inout lhs: CGPoint, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
 infix operator =? {
 	associativity none
 	precedence 130

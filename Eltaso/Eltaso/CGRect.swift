@@ -11,19 +11,39 @@ import Foundation
 public extension CGRect {
 	
 	public var top: CGFloat {
-		return self.origin.y
+		get {
+			return self.origin.y
+		}
+		set {
+			self.origin.y = newValue
+		}
 	}
 	
 	public var bottom: CGFloat {
-		return self.origin.y + self.height
+		get {
+			return self.origin.y + self.height
+		}
+		set {
+			self.size.height = newValue - self.origin.y
+		}
 	}
 	
 	public var left: CGFloat {
-		return self.origin.x
+		get {
+			return self.origin.x
+		}
+		set {
+			self.origin.x = newValue
+		}
 	}
 	
 	public var right: CGFloat {
-		return self.origin.x + self.width
+		get {
+			return self.origin.x + self.width
+		}
+		set {
+			self.size.width = newValue - self.origin.x
+		}
 	}
 	
 }

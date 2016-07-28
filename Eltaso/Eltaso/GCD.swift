@@ -176,3 +176,15 @@ extension GCD { // MARK: Check queue running status
 	}
 	
 }
+
+extension GCD { // MARK: Once
+	
+	public static func runOnceAction(action: (() -> Void), inout withToken token: dispatch_once_t) {
+		
+		dispatch_once(&token) { 
+			action()
+		}
+		
+	}
+	
+}

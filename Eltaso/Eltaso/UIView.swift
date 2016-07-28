@@ -10,6 +10,10 @@ import Foundation
 
 public extension UIView {
 	
+	public var midPoint: CGPoint {
+		return CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+	}
+	
 	public func removeAllSubviews() {
 		self.subviews.forEach { (subview) in
 			subview.removeFromSuperview()

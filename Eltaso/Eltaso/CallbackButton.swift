@@ -10,9 +10,11 @@ import Foundation
 
 public class CallbackButton: UIButton {
 	
-	private var action: (() -> Void)?
+	private var action: ((sender: CallbackButton) -> Void)?
 	
-	public init(image: UIImage, withAction action: (() -> Void)? = nil) {
+	public var category: String?
+	
+	public init(image: UIImage, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
 		
 		self.action = action
 		
@@ -23,7 +25,7 @@ public class CallbackButton: UIButton {
 		
 	}
 	
-	public init(frame: CGRect, withAction action: (() -> Void)? = nil) {
+	public init(frame: CGRect, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
 		
 		self.action = action
 		
@@ -43,7 +45,7 @@ public class CallbackButton: UIButton {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func setAction(action: () -> Void) {
+	public func setAction(action: (sender: CallbackButton) -> Void) {
 		
 		self.action = action
 		
@@ -51,7 +53,7 @@ public class CallbackButton: UIButton {
 	
 	func tapped(sender: CallbackButton) {
 		
-		self.action?()
+		self.action?(sender: sender)
 		
 	}
 	

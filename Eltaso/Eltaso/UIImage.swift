@@ -18,7 +18,7 @@ public extension UIImage {
 		
 		UIGraphicsBeginImageContextWithOptions(rect.size, false, self.scale)
 		
-		let drawPoint = CGPoint(x: -rect.origin.x, y: -rect.origin.y)
+		let drawPoint = rect.origin * -1
 		self.drawAtPoint(drawPoint)
 		let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
 		

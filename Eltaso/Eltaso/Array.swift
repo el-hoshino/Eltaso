@@ -23,9 +23,11 @@ public extension Array {
 	}
 	
 	public func appending(element: Element) -> Array<Element> {
-		var array = self
-		array.append(element)
-		return array
+		return self + [element]
+	}
+	
+	public func appending(elements: [Element]) -> Array<Element> {
+		return self + elements
 	}
 	
 }

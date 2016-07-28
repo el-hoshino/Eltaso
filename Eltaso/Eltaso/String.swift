@@ -12,10 +12,15 @@ public extension String {
 	
 	public func droppingFirst(n: Int = 1) -> String {
 		
-		var token = self
-		let removingRange = token.startIndex ..< token.startIndex.advancedBy(n)
-		token.removeRange(removingRange)
-		return token
+		let remainingIndex = self.startIndex.advancedBy(n, limit: self.endIndex)
+		return self.substringFromIndex(remainingIndex)
+		
+	}
+	
+	public func droppingLast(n: Int = 1) -> String {
+		
+		let remainingIndex = self.endIndex.advancedBy(-n, limit: self.startIndex)
+		return self.substringToIndex(remainingIndex)
 		
 	}
 	

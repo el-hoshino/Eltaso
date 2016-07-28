@@ -12,7 +12,7 @@ public class IntervalSlider: UISlider {
 	
 	public var interval: Float?
 	
-	private var valueChangedAction: ((newValue: Float) -> Void)?
+	private var valueChangedAction: ((sender: IntervalSlider, newValue: Float) -> Void)?
 	
 	public init(frame: CGRect = .zero, interval: Float? = 1) {
 		
@@ -21,7 +21,7 @@ public class IntervalSlider: UISlider {
 		super.init(frame: frame)
 		
 		self.addTarget(self, action: #selector(IntervalSlider.roundValue), forControlEvents: .ValueChanged)
-		self.addTarget(self, action: #selector(IntervalSlider.additionalActionOnValueChanged), forControlEvents: .ValueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.additionalActionOnValueChanged(_:)), forControlEvents: .ValueChanged)
 		
 	}
 	
@@ -41,11 +41,11 @@ public class IntervalSlider: UISlider {
 		
 	}
 	
-	@objc private func additionalActionOnValueChanged() {
-		self.valueChangedAction?(newValue: self.value)
+	@objc private func additionalActionOnValueChanged(sender: IntervalSlider) {
+		self.valueChangedAction?(sender: sender, newValue: self.value)
 	}
 	
-	public func setValueChangedAction(action: ((newValue: Float) -> Void)?) {
+	public func setValueChangedAction(action: ((sender: IntervalSlider, newValue: Float) -> Void)?) {
 		self.valueChangedAction = action
 	}
 	

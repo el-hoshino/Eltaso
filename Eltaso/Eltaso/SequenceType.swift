@@ -8,6 +8,14 @@
 
 import Foundation
 
+public extension SequenceType {
+	
+	func flatten <T> (in type: T.Type) -> [T] {
+		return self.flatMap { $0 as? T }
+	}
+	
+}
+
 public extension SequenceType where Generator.Element: OptionalType {
 	
 	var flatten: [Generator.Element.T] {

@@ -10,10 +10,6 @@ import Foundation
 
 public extension Array {
 	
-	public var indexRange: Range<Int> {
-		return self.startIndex ..< self.endIndex
-	}
-	
 	public var second: Element? {
 		if self.count > 1 {
 			return self[1]

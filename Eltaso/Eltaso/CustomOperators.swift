@@ -16,6 +16,10 @@ public func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Va
 	return dictionary
 }
 
+public func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+	return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+}
+
 public func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
 	return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
 }
@@ -30,6 +34,10 @@ public func *= (inout lhs: CGSize, rhs: CGFloat) {
 
 public func *= (inout lhs: CGPoint, rhs: CGFloat) {
 	lhs = lhs * rhs
+}
+
+public func += (inout lhs: CGPoint, rhs: CGPoint) {
+	lhs = lhs + rhs
 }
 
 infix operator =? {

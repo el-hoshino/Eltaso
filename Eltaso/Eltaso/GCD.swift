@@ -145,12 +145,16 @@ extension GCD { // MARK: Queues
 
 extension GCD { // MARK: Main Thread Actions
 	
-	public static func runMainThreadAction(action: (() -> Void)) {
+	public static func runMainThreadAction(action: (() -> Void), forcedSync shouldForcedSync: Bool = false) {
 		
 		if NSThread.isMainThread() {
 			action()
 		} else {
-			GCD.runAsynchronizedQueue(with: action)
+			if shouldForcedSync {
+				GCD.runSynchronizedQueue(with: action)
+			} else {
+				GCD.runAsynchronizedQueue(with: action)
+			}
 		}
 		
 	}

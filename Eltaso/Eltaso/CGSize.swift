@@ -22,4 +22,16 @@ public extension CGSize {
 		return min(self.width, self.height)
 	}
 	
+	var aspectRatio: CGFloat {
+		return self.width / self.height
+	}
+	
+	func createSize(fromInsets insets: UIEdgeInsets) -> CGSize {
+		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)
+	}
+	
+	func createSize(fromMargin margin: CGFloat) -> CGSize {
+		return CGSize(width: self.width + (margin * 2), height: self.height + (margin * 2))
+	}
+	
 }

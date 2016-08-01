@@ -26,6 +26,14 @@ public extension CGSize {
 		return self.width / self.height
 	}
 	
+	public var isAspectRatioGreaterThan16by10: Bool {
+		return self.aspectRatio > 16 / 10
+	}
+	
+	public var isAspectRatioLessThan10by16: Bool {
+		return self.aspectRatio < 10 / 16
+	}
+	
 	func createSize(fromInsets insets: UIEdgeInsets) -> CGSize {
 		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)
 	}

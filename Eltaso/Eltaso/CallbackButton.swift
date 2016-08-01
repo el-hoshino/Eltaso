@@ -14,30 +14,28 @@ public class CallbackButton: UIButton {
 	
 	public var category: String?
 	
-	public init(image: UIImage, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
+	public init(image: UIImage, category: String? = nil, tag: Int = 0, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
 		
 		self.action = action
+		self.category = category
 		
 		super.init(frame: CGRect(origin: CGPointZero, size: image.size))
 		
+		self.tag = tag
 		self.setImage(image, forState: .Normal)
 		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), forControlEvents: .TouchUpInside)
 		
 	}
 	
-	public init(frame: CGRect, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
+	public init(frame: CGRect = .zero, category: String? = nil, tag: Int = 0, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
 		
 		self.action = action
+		self.category = category
 		
 		super.init(frame: frame)
 		
+		self.tag = tag
 		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), forControlEvents: .TouchUpInside)
-		
-	}
-	
-	public convenience init() {
-		
-		self.init(frame: CGRectZero)
 		
 	}
 	

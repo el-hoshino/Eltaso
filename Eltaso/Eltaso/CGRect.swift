@@ -46,4 +46,8 @@ public extension CGRect {
 		}
 	}
 	
+	public var zeroPositionedFrame: CGRect {
+		return CGRect(origin: .zero, size: self.size)
+	}
+	
 }

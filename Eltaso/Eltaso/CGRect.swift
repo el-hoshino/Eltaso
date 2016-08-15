@@ -10,6 +10,16 @@ import Foundation
 
 public extension CGRect {
 	
+	public static func createAspectFillFrame(fromContentSize contentSize: CGSize, andCanvasSize canvasSize: CGSize) -> CGRect {
+		let scale = max(canvasSize.width / contentSize.width, canvasSize.height / contentSize.height)
+		let scaledContentSize = contentSize * scale
+		let scaledContentX = (canvasSize.width - scaledContentSize.width) / 2
+		let scaledContentY = (canvasSize.height - scaledContentSize.height) / 2
+		let scaledContentOrigin = CGPoint(x: scaledContentX, y: scaledContentY)
+		let scaledContentFrame = CGRect(origin: scaledContentOrigin, size: scaledContentSize)
+		return scaledContentFrame
+	}
+	
 	public var top: CGFloat {
 		get {
 			return self.origin.y

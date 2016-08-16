@@ -10,6 +10,11 @@ import Foundation
 
 public extension Bool {
 	
+	static func createRandom() -> Bool {
+		let randomNumber = Int.createRandom(range: 0 ... 1)
+		return Bool(randomNumber)
+	}
+	
 	mutating public func reverse() {
 		self = !self
 	}

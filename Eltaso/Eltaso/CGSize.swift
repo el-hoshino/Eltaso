@@ -34,11 +34,11 @@ public extension CGSize {
 		return self.aspectRatio < 10 / 16
 	}
 	
-	func createSize(fromInsets insets: UIEdgeInsets) -> CGSize {
+	public func createSize(fromInsets insets: UIEdgeInsets) -> CGSize {
 		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)
 	}
 	
-	func createSize(fromMargin margin: CGFloat) -> CGSize {
+	public func createSize(fromMargin margin: CGFloat) -> CGSize {
 		return CGSize(width: self.width + (margin * 2), height: self.height + (margin * 2))
 	}
 	

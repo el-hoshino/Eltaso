@@ -10,16 +10,18 @@ import Foundation
 
 public class CallbackSwitch: UISwitch {
 	
-	private var action: ((sender: CallbackSwitch) -> Void)?
+	private var onValueChangedAction: ((sender: CallbackSwitch) -> Void)?
 	
-	public init(frame: CGRect = .zero, action: ((sender: CallbackSwitch) -> Void)? = nil) {
-		
-		self.action = action
+	public override init(frame: CGRect) {
 		
 		super.init(frame: frame)
 		
 		self.addTarget(self, action: #selector(CallbackSwitch.switchValueChanged(_:)), forControlEvents: .ValueChanged)
 		
+	}
+	
+	public convenience init() {
+		self.init(frame: .zero)
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
@@ -28,13 +30,13 @@ public class CallbackSwitch: UISwitch {
 	
 	@objc private func switchValueChanged(sender: CallbackSwitch) {
 		
-		self.action?(sender: sender)
+		self.onValueChangedAction?(sender: sender)
 		
 	}
 	
-	public func setAction(action: ((sender: CallbackSwitch) -> Void)) {
+	public func setOnValueChangedAction(action: ((sender: CallbackSwitch) -> Void)) {
 		
-		self.action = action
+		self.onValueChangedAction = action
 		
 	}
 	

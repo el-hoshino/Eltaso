@@ -43,15 +43,15 @@ public class CallbackButton: UIButton {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func setAction(action: (sender: CallbackButton) -> Void) {
+	@objc private func tapped(sender: CallbackButton) {
 		
-		self.action = action
+		self.action?(sender: sender)
 		
 	}
 	
-	func tapped(sender: CallbackButton) {
+	public func setAction(action: (sender: CallbackButton) -> Void) {
 		
-		self.action?(sender: sender)
+		self.action = action
 		
 	}
 	

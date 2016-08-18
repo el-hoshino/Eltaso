@@ -10,11 +10,9 @@ import Foundation
 
 public class CallbackSwitch: UISwitch {
 	
-	private var action: ((sender: CallbackSwitch) -> Void)?
+	private var onValueChangedAction: ((sender: CallbackSwitch) -> Void)?
 	
-	public init(frame: CGRect, action: ((sender: CallbackSwitch) -> Void)? = nil) {
-		
-		self.action = action
+	public override init(frame: CGRect) {
 		
 		super.init(frame: frame)
 		
@@ -22,19 +20,23 @@ public class CallbackSwitch: UISwitch {
 		
 	}
 	
+	public convenience init() {
+		self.init(frame: .zero)
+	}
+	
 	required public init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func setAction(action: ((sender: CallbackSwitch) -> Void)) {
+	@objc private func switchValueChanged(sender: CallbackSwitch) {
 		
-		self.action = action
+		self.onValueChangedAction?(sender: sender)
 		
 	}
 	
-	func switchValueChanged(sender: CallbackSwitch) {
+	public func setOnValueChangedAction(action: ((sender: CallbackSwitch) -> Void)) {
 		
-		self.action?(sender: sender)
+		self.onValueChangedAction = action
 		
 	}
 	

@@ -10,13 +10,29 @@ import Foundation
 
 public class CallbackButton: UIButton {
 	
-	private var action: ((sender: CallbackButton) -> Void)?
+	private var onTappedAction: ((sender: CallbackButton) -> Void)?
+	private var onLongPressedAction: ((sender: CallbackButton) -> Void)?
+	
+	lazy private var longPressGesture: UILongPressGestureRecognizer = {
+		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(CallbackButton.longPressed(_:)))
+		return gesture
+	}()
+	public var longPressEnabled = false {
+		willSet {
+			switch newValue {
+			case true:
+				self.addGestureRecognizer(self.longPressGesture)
+				
+			case false:
+				self.removeGestureRecognizer(self.longPressGesture)
+			}
+		}
+	}
 	
 	public var category: String?
 	
-	public init(image: UIImage, category: String? = nil, tag: Int = 0, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
+	public init(image: UIImage, category: String? = nil, tag: Int = 0) {
 		
-		self.action = action
 		self.category = category
 		
 		super.init(frame: CGRect(origin: CGPointZero, size: image.size))
@@ -27,9 +43,8 @@ public class CallbackButton: UIButton {
 		
 	}
 	
-	public init(frame: CGRect = .zero, category: String? = nil, tag: Int = 0, withAction action: ((sender: CallbackButton) -> Void)? = nil) {
+	public init(frame: CGRect = .zero, category: String? = nil, tag: Int = 0) {
 		
-		self.action = action
 		self.category = category
 		
 		super.init(frame: frame)
@@ -43,15 +58,33 @@ public class CallbackButton: UIButton {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func setAction(action: (sender: CallbackButton) -> Void) {
+	@objc private func tapped(sender: CallbackButton) {
 		
-		self.action = action
+		self.onTappedAction?(sender: sender)
 		
 	}
 	
-	func tapped(sender: CallbackButton) {
+	@objc private func longPressed(sender: UILongPressGestureRecognizer) {
 		
-		self.action?(sender: sender)
+		switch sender.state {
+		case .Began:
+			self.onLongPressedAction?(sender: self)
+			
+		default:
+			return
+		}
+		
+	}
+	
+	public func setOnTappedAction(action: (sender: CallbackButton) -> Void) {
+		
+		self.onTappedAction = action
+		
+	}
+	
+	public func setOnLongPressedAction(action: (sender: CallbackButton) -> Void) {
+		
+		self.onLongPressedAction = action
 		
 	}
 	

@@ -37,4 +37,8 @@ public extension NSTimeInterval {
 		
 	}
 	
+	public static func estimatedTime(since baseTime: NSDate) -> NSTimeInterval {
+		return -baseTime.timeIntervalSinceNow
+	}
+	
 }

@@ -50,6 +50,11 @@ infix operator …= {
 	precedence 130
 }
 
+infix operator !…= {
+	associativity none
+	precedence 130
+}
+
 public func =? <T> (inout lhs: T, rhs: T?) {
 	if let rhs = rhs {
 		lhs = rhs
@@ -102,4 +107,28 @@ public func …= <T where T: Comparable> (lhs: T, rhs: ClosedInterval<T>) -> Boo
 	} else {
 		return false
 	}
+}
+
+public func !…= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
+	return !(lhs …= rhs)
+}
+
+public func !…= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool {
+	return !(lhs …= rhs)
+}
+
+public func !…= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool {
+	return !(lhs …= rhs)
+}
+
+public func !…= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
+	return !(lhs …= rhs)
+}
+
+public func !…= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> Bool {
+	return !(lhs …= rhs)
+}
+
+public func !…= <T where T: Comparable> (lhs: T, rhs: ClosedInterval<T>) -> Bool {
+	return !(lhs …= rhs)
 }

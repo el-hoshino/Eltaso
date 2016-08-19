@@ -37,6 +37,11 @@ public extension NSTimeInterval {
 		
 	}
 	
+	public static let minuteLength: NSTimeInterval = 60
+	public static let hourLength: NSTimeInterval = .minuteLength * 60
+	public static let dayLength: NSTimeInterval = .hourLength * 24
+	public static let weekLength: NSTimeInterval = .dayLength * 7
+	
 	public static func estimatedTime(since baseTime: NSDate) -> NSTimeInterval {
 		return -baseTime.timeIntervalSinceNow
 	}

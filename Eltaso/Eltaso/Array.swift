@@ -18,12 +18,25 @@ public extension Array {
 		}
 	}
 	
+	public var shuffled: Array<Element> {
+		var array = self
+		for i in array.indices.reverse() {
+			let j = Int.createRandom(range: 0 ..< i)
+			(array[i], array[j]) = (array[j], array[i])
+		}
+		return array
+	}
+	
 	public func appending(element: Element) -> Array<Element> {
 		return self + [element]
 	}
 	
 	public func appending(elements: [Element]) -> Array<Element> {
 		return self + elements
+	}
+	
+	public mutating func shuffle() {
+		self = self.shuffled
 	}
 	
 }

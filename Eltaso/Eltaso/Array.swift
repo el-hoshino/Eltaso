@@ -20,8 +20,8 @@ public extension Array {
 	
 	public var shuffled: Array<Element> {
 		var array = self
-		for i in array.indices.reverse() {
-			let j = Int.createRandom(range: 0 ..< i)
+		for i in array.indices.reverse().dropLast() {
+			let j = Int.createRandom(range: array.indices.startIndex ..< i)
 			(array[i], array[j]) = (array[j], array[i])
 		}
 		return array

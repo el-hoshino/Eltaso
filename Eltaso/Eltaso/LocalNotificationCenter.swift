@@ -19,6 +19,7 @@ public class LocalNotificationCenter {
 				}
 				return fireDate.timeIntervalSinceNow >= 0
 			})
+			self.application.scheduledLocalNotifications = self.scheduledNotifications
 		}
 	}
 	
@@ -49,7 +50,6 @@ public extension LocalNotificationCenter {
 	public func removeAllNotifications() {
 		
 		self.scheduledNotifications.removeAll()
-		self.application.cancelAllLocalNotifications()
 		
 	}
 	
@@ -58,21 +58,18 @@ public extension LocalNotificationCenter {
 		self.scheduledNotifications = self.scheduledNotifications.filter({ (notification) -> Bool in
 			notification.category != category
 		})
-		self.application.scheduledLocalNotifications = self.scheduledNotifications
 		
 	}
 	
 	public func scheduleNotification(notification: UILocalNotification) {
 		
 		self.scheduledNotifications.append(notification)
-		self.application.scheduleLocalNotification(notification)
 		
 	}
 	
 	public func scheduleNotifications(notifications: [UILocalNotification]) {
 		
 		self.scheduledNotifications += notifications
-		self.application.scheduledLocalNotifications = self.scheduledNotifications
 		
 	}
 	

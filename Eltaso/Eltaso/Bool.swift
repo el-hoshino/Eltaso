@@ -15,8 +15,12 @@ public extension Bool {
 		return Bool(randomNumber)
 	}
 	
-	mutating public func reverse() {
-		self = !self
+	var negated: Bool {
+		return !self
+	}
+	
+	mutating public func negate() {
+		self = self.negated
 	}
 	
 }

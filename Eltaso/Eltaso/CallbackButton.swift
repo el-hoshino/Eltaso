@@ -10,8 +10,8 @@ import Foundation
 
 open class CallbackButton: UIButton {
 	
-	fileprivate var onTappedAction: ((sender: CallbackButton) -> Void)?
-	fileprivate var onLongPressedAction: ((sender: CallbackButton) -> Void)?
+	fileprivate var onTappedAction: ((_ sender: CallbackButton) -> Void)?
+	fileprivate var onLongPressedAction: ((_ sender: CallbackButton) -> Void)?
 	
 	lazy fileprivate var longPressGesture: UILongPressGestureRecognizer = {
 		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(CallbackButton.longPressed(_:)))
@@ -60,7 +60,7 @@ open class CallbackButton: UIButton {
 	
 	@objc fileprivate func tapped(_ sender: CallbackButton) {
 		
-		self.onTappedAction?(sender: sender)
+		self.onTappedAction?(sender)
 		
 	}
 	
@@ -68,7 +68,7 @@ open class CallbackButton: UIButton {
 		
 		switch sender.state {
 		case .began:
-			self.onLongPressedAction?(sender: self)
+			self.onLongPressedAction?(self)
 			
 		default:
 			return
@@ -76,13 +76,13 @@ open class CallbackButton: UIButton {
 		
 	}
 	
-	open func setOnTappedAction(_ action: (sender: CallbackButton) -> Void) {
+	open func setOnTappedAction(_ action: @escaping (_ sender: CallbackButton) -> Void) {
 		
 		self.onTappedAction = action
 		
 	}
 	
-	open func setOnLongPressedAction(_ action: (sender: CallbackButton) -> Void) {
+	open func setOnLongPressedAction(_ action: @escaping (_ sender: CallbackButton) -> Void) {
 		
 		self.onLongPressedAction = action
 		

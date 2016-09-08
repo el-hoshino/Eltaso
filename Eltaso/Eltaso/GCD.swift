@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 public struct GCD {
 	
 	public enum Thread {
@@ -219,3 +219,4 @@ extension GCD { // MARK: Once
 	}
 	
 }
+*/

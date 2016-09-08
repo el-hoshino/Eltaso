@@ -12,13 +12,13 @@ extension Date {
 	
 	public static func getDateAtSpecificTime(hour: Int = 0, minute: Int = 0, second: Int = 0) throws -> Date {
 		
-		enum Error: ErrorProtocol {
+		enum Error: Swift.Error {
 			case failedToGetSpecificDateFromCurrentDate
 		}
 		
 		let currentDate = Date()
 		let currentCalendar = Calendar.current
-		let dateComponents = (currentCalendar as NSCalendar).components([.year, .month, .day], from: currentDate)
+		var dateComponents = (currentCalendar as NSCalendar).components([.year, .month, .day], from: currentDate)
 		dateComponents.hour = hour
 		dateComponents.minute = minute
 		dateComponents.second = second
@@ -33,7 +33,7 @@ extension Date {
 	
 	public func getDateByAddingInterval(_ interval: Int, toUnit unit: NSCalendar.Unit) throws -> Date {
 		
-		enum Error: ErrorProtocol {
+		enum Error: Swift.Error {
 			case failedToGetEdittedDateFromCurrentDate
 		}
 		
@@ -45,7 +45,7 @@ extension Date {
 		
 	}
 	
-	public func getDateComponents(inTimeZone timeZone: TimeZone = .current()) -> DateComponents {
+	public func getDateComponents(inTimeZone timeZone: TimeZone = .current) -> DateComponents {
 		
 		let calendar = Calendar.current
 		let components = calendar.dateComponents(in: timeZone, from: self)

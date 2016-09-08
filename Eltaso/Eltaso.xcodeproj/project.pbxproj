@@ -42,7 +42,6 @@
 		79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */; };
 		79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14E9E1D2B918100AF6EE4 /* UIImage.swift */; };
 		79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA01D2B93AB00AF6EE4 /* Bool.swift */; };
-		79E14EA31D2B93E200AF6EE4 /* RandomAccessIndexType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */; };
 		79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA61D2B989A00AF6EE4 /* Array.swift */; };
 		79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E14EA81D2BA74F00AF6EE4 /* Console.swift */; };
 /* End PBXBuildFile section */
@@ -96,7 +95,6 @@
 		79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		79E14E9E1D2B918100AF6EE4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		79E14EA01D2B93AB00AF6EE4 /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
-		79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomAccessIndexType.swift; sourceTree = "<group>"; };
 		79E14EA61D2B989A00AF6EE4 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		79E14EA81D2BA74F00AF6EE4 /* Console.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,11 +141,10 @@
 			children = (
 				79E14E851D2B90DA00AF6EE4 /* Eltaso.h */,
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
-				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
+				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
 				162414D21D2F6CC700141C64 /* OptionalType.swift */,
 				16A530F81D38EA6500041952 /* ObjectConvertible.swift */,
-				79E14EA21D2B93E200AF6EE4 /* RandomAccessIndexType.swift */,
 				162414D41D2F6D5600141C64 /* SequenceType.swift */,
 				16A530FA1D38F5CE00041952 /* Int.swift */,
 				16C02D281D3E09EC00288942 /* Double.swift */,
@@ -248,7 +245,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Crazism;
 				TargetAttributes = {
 					79E14E811D2B90DA00AF6EE4 = {
@@ -333,7 +330,6 @@
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
 				16C02D351D3E10FA00288942 /* NSMutableData.swift in Sources */,
-				79E14EA31D2B93E200AF6EE4 /* RandomAccessIndexType.swift in Sources */,
 				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,
 				79092CED1D2C333300E07C8A /* CallbackButton.swift in Sources */,
 				79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */,
@@ -373,8 +369,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -423,8 +421,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -444,6 +444,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -455,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -475,6 +477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

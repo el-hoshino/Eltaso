@@ -12,7 +12,7 @@ public extension Bool {
 	
 	static func createRandom() -> Bool {
 		let randomNumber = Int.createRandom(range: 0 ... 1)
-		return Bool(randomNumber)
+		return randomNumber != 0
 	}
 	
 	var negated: Bool {

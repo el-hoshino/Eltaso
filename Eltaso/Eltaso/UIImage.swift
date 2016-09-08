@@ -24,7 +24,8 @@ public extension UIImage {
 		
 		UIGraphicsEndImageContext()
 		
-		return croppedImage
+		// TODO: Needs fix for forced-unwrap
+		return croppedImage!
 		
 	}
 	

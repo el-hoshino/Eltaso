@@ -40,20 +40,11 @@ public func += (lhs: inout CGPoint, rhs: CGPoint) {
 	lhs = lhs + rhs
 }
 
-infix operator =? {
-	associativity none
-	precedence 130
-}
+infix operator =? : AssignmentPrecedence
 
-infix operator …= {
-	associativity none
-	precedence 130
-}
+infix operator …= : ComparisonPrecedence
 
-infix operator !…= {
-	associativity none
-	precedence 130
-}
+infix operator !…= : ComparisonPrecedence
 
 public func =? <T> (lhs: inout T, rhs: T?) {
 	if let rhs = rhs {
@@ -61,7 +52,7 @@ public func =? <T> (lhs: inout T, rhs: T?) {
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
+public func …= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool where T: Comparable {
 	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
@@ -69,23 +60,15 @@ public func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool 
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
-	if lhs.start >= rhs.start && lhs.end <= rhs.end {
+public func …= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
 		return false
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool {
-	if lhs.start >= rhs.start && lhs.end <= rhs.end {
-		return true
-	} else {
-		return false
-	}
-}
-
-public func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
+public func …= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
 	if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
 		return true
 	} else {
@@ -93,42 +76,26 @@ public func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
-	if lhs >= rhs.start && lhs < rhs.end {
+public func …= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+	if lhs >= rhs.lowerBound && lhs <= rhs.upperBound {
 		return true
 	} else {
 		return false
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: T, rhs: ClosedRange<T>) -> Bool {
-	if lhs >= rhs.start && lhs <= rhs.end {
-		return true
-	} else {
-		return false
-	}
-}
-
-public func !…= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
+public func !…= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
+public func !…= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool {
+public func !…= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
-	return !(lhs …= rhs)
-}
-
-public func !…= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
-	return !(lhs …= rhs)
-}
-
-public func !…= <T where T: Comparable> (lhs: T, rhs: ClosedRange<T>) -> Bool {
+public func !…= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }

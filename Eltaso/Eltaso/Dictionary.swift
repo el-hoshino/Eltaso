@@ -10,7 +10,7 @@ import Foundation
 
 public extension Dictionary {
 	
-	public init<S: Sequence where S.Iterator.Element == Element> (tuples seq: S) {
+	public init<S: Sequence> (tuples seq: S) where S.Iterator.Element == Element {
 		self.init()
 		for (k,v) in seq {
 			self[k] = v

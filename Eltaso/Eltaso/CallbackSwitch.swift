@@ -16,7 +16,7 @@ open class CallbackSwitch: UISwitch {
 		
 		super.init(frame: frame)
 		
-		self.addTarget(self, action: #selector(CallbackSwitch.switchValueChanged(_:)), for: .valueChanged)
+		self.addTarget(self, action: #selector(CallbackSwitch.valueChanged(_:)), for: .valueChanged)
 		
 	}
 	
@@ -28,15 +28,15 @@ open class CallbackSwitch: UISwitch {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	@objc fileprivate func switchValueChanged(_ sender: CallbackSwitch) {
+	@objc fileprivate func valueChanged(_ sender: CallbackSwitch) {
 		
-		self.onValueChangedAction?(sender: sender)
+		self.onValueChangedAction?(sender)
 		
 	}
 	
-	open func setOnValueChangedAction(_ action: ((_ sender: CallbackSwitch) -> Void)) {
+	open func setOnValueChangedAction(_ action: (_ sender: CallbackSwitch) -> Void) {
 		
-		self.onValueChangedAction = action
+//		self.onValueChangedAction = action
 		
 	}
 	

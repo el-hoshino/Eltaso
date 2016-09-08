@@ -8,49 +8,49 @@
 
 import Foundation
 
-public class Downloader {
+open class Downloader {
 	
 	public enum Result {
 		
-		public enum Error: ErrorType {
-			case NSError(error: Foundation.NSError)
-			case InvalidURL(url: NSURL)
-			case InvalidFile
+		public enum Error: ErrorProtocol {
+			case nsError(error: Foundation.NSError)
+			case invalidURL(url: URL)
+			case invalidFile
 		}
 		
-		case Success(data: NSData, response: NSURLResponse)
-		case Failure(error: Error)
+		case success(data: Data, response: URLResponse)
+		case failure(error: Error)
 		
 	}
 	
-	private init() {
+	fileprivate init() {
 		
 	}
 	
-	public static let shared = Downloader()
+	open static let shared = Downloader()
 	
-	public func downloadData(from url: NSURL, completionHandler: (result: Result) -> Void) {
+	open func downloadData(from url: URL, completionHandler: (result: Result) -> Void) {
 		
-		let session = NSURLSession.sharedSession()
-		let task = session.downloadTaskWithURL(url) { (localURL, response, error) in
+		let session = URLSession.shared
+		let task = session.downloadTask(with: url, completionHandler: { (localURL, response, error) in
 			
 			guard let localURL = localURL, response = response else {
 				if let error = error {
-					completionHandler(result: .Failure(error: .NSError(error: error)))
+					completionHandler(result: .failure(error: .nsError(error: error)))
 				} else {
-					completionHandler(result: .Failure(error: .InvalidURL(url: url)))
+					completionHandler(result: .failure(error: .invalidURL(url: url)))
 				}
 				return
 			}
 			
-			guard let data = NSData(contentsOfURL: localURL) else {
-				completionHandler(result: .Failure(error: .InvalidFile))
+			guard let data = try? Data(contentsOf: localURL) else {
+				completionHandler(result: .failure(error: .invalidFile))
 				return
 			}
 			
-			completionHandler(result: .Success(data: data, response: response))
+			completionHandler(result: .success(data: data, response: response))
 			
-		}
+		}) 
 		
 		task.resume()
 		

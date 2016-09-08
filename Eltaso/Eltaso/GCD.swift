@@ -12,62 +12,62 @@ public struct GCD {
 	
 	public enum Thread {
 		
-		case Main
-		case Global(priority: QueuePriority)
-		case Static(queue: dispatch_queue_t)
-		case Dynamic(name: String, attribute: QueueAttribute)
+		case main
+		case global(priority: QueuePriority)
+		case `static`(queue: DispatchQueue)
+		case dynamic(name: String, attribute: QueueAttribute)
 		
-		public var queue: dispatch_queue_t {
+		public var queue: DispatchQueue {
 			switch self {
-			case .Main:
-				return dispatch_get_main_queue()
+			case .main:
+				return DispatchQueue.main
 				
-			case .Global(priority: let priority):
-				return dispatch_get_global_queue(priority.value, 0)
+			case .global(priority: let priority):
+				return DispatchQueue.global(priority: priority.value)
 				
-			case .Static(queue: let queue):
+			case .static(queue: let queue):
 				return queue
 				
-			case .Dynamic(name: let name, attribute: let attribute):
-				return dispatch_queue_create(name, attribute.value)
+			case .dynamic(name: let name, attribute: let attribute):
+				return DispatchQueue(label: name, attributes: attribute.value)
 			}
 		}
 		
 		public enum QueuePriority {
-			case High
-			case Default
-			case Low
-			case Background
+			case high
+			case `default`
+			case low
+			case background
 			
 			var value: dispatch_queue_priority_t {
 				switch self {
-				case .High:
-					return DISPATCH_QUEUE_PRIORITY_HIGH
+				case .high:
+					return DispatchQueue.GlobalQueuePriority.high
 					
-				case .Default:
-					return DISPATCH_QUEUE_PRIORITY_DEFAULT
+				case .default:
+					return DispatchQueue.GlobalQueuePriority.default
 					
-				case .Low:
-					return DISPATCH_QUEUE_PRIORITY_LOW
+				case .low:
+					return DispatchQueue.GlobalQueuePriority.low
 					
-				case .Background:
-					return DISPATCH_QUEUE_PRIORITY_BACKGROUND
+				case .background:
+					return DispatchQueue.GlobalQueuePriority.background
 				}
 				
 			}
 		}
 		
 		public enum QueueAttribute {
-			case Serial
-			case Concurrent
+			case serial
+			case concurrent
 			
-			var value: dispatch_queue_attr_t {
+			var value: DispatchQueue.Attributes {
 				switch self {
-				case .Serial:
-					return DISPATCH_QUEUE_SERIAL
+				case .serial:
+					return DispatchQueue.Attributes()
 					
-				case .Concurrent:
-					return DISPATCH_QUEUE_CONCURRENT
+				case .concurrent:
+					return DispatchQueue.Attributes.concurrent
 				}
 			}
 		}
@@ -75,23 +75,23 @@ public struct GCD {
 	}
 	
 	public enum DispatchTime {
-		case Forever
-		case TimeAfter(delta: NSTimeInterval)
+		case forever
+		case timeAfter(delta: TimeInterval)
 		
-		public var dispatchTimeType: dispatch_time_t {
+		public var dispatchTimeType: Dispatch.DispatchTime {
 			switch self {
-			case .Forever:
-				return DISPATCH_TIME_FOREVER
+			case .forever:
+				return DispatchTime.distantFuture
 				
-			case .TimeAfter(delta: let delta):
-				let nanoseconds = Int64(delta * NSTimeInterval(NSEC_PER_SEC))
-				let time = dispatch_time(DISPATCH_TIME_NOW, nanoseconds)
+			case .timeAfter(delta: let delta):
+				let nanoseconds = Int64(delta * TimeInterval(NSEC_PER_SEC))
+				let time = DispatchTime.now() + Double(nanoseconds) / Double(NSEC_PER_SEC)
 				return time
 			}
 		}
 	}
 	
-	private init() {
+	fileprivate init() {
 		
 	}
 	
@@ -99,68 +99,68 @@ public struct GCD {
 
 extension GCD { // MARK: Semaphores
 	
-	public static func createSemaphore(value: Int = 0) -> dispatch_semaphore_t {
-		return dispatch_semaphore_create(value)
+	public static func createSemaphore(_ value: Int = 0) -> DispatchSemaphore {
+		return DispatchSemaphore(value: value)
 	}
 	
-	public static func fireSemaphore(semaphore: dispatch_semaphore_t) {
-		dispatch_semaphore_signal(semaphore)
+	public static func fireSemaphore(_ semaphore: DispatchSemaphore) {
+		semaphore.signal()
 	}
 	
-	public static func waitForSemaphore(semaphore: dispatch_semaphore_t, until deadLine: DispatchTime = .Forever) {
-		dispatch_semaphore_wait(semaphore, deadLine.dispatchTimeType)
+	public static func waitForSemaphore(_ semaphore: DispatchSemaphore, until deadLine: DispatchTime = .forever) {
+		semaphore.wait(timeout: deadLine.dispatchTimeType)
 	}
 	
 }
 
 extension GCD { // MARK: Groups
 	
-	public static func createGroup() -> dispatch_group_t {
-		return dispatch_group_create()
+	public static func createGroup() -> DispatchGroup {
+		return DispatchGroup()
 	}
 	
-	public static func waitForGroup(group: dispatch_group_t, until deadLine: DispatchTime = .Forever) {
-		dispatch_group_wait(group, deadLine.dispatchTimeType)
+	public static func waitForGroup(_ group: DispatchGroup, until deadLine: DispatchTime = .forever) {
+		group.wait(timeout: deadLine.dispatchTimeType)
 	}
 	
 }
 
 extension GCD { // MARK: Queues
 	
-	public static func runSynchronizedQueue(at thread: Thread = .Main, with action: (() -> Void)) {
+	public static func runSynchronizedQueue(at thread: Thread = .main, with action: (() -> Void)) {
 		
-		dispatch_sync(thread.queue) {
+		thread.queue.sync {
 			action()
 		}
 		
 	}
 	
-	public static func runAsynchronizedQueue(in group: dispatch_group_t? = nil, at thread: Thread = .Main, waitUntilStartForMax waitTime: NSTimeInterval? = nil, with action: (() -> Void)) {
+	public static func runAsynchronizedQueue(in group: DispatchGroup? = nil, at thread: Thread = .main, waitUntilStartForMax waitTime: TimeInterval? = nil, with action: (() -> Void)) {
 		
 		switch (group, waitTime) {
-		case (.Some(let group), .Some(let waitTime)):
+		case (.some(let group), .some(let waitTime)):
 			let semaphore = GCD.createSemaphore(thread.queue.hash)
-			dispatch_group_async(group, thread.queue, { 
+			thread.queue.async(group: group, execute: { 
 				GCD.fireSemaphore(semaphore)
 				action()
 			})
-			GCD.waitForSemaphore(semaphore, until: waitTime == 0 || waitTime == .infinity ? .Forever : .TimeAfter(delta: waitTime))
+			GCD.waitForSemaphore(semaphore, until: waitTime == 0 || waitTime == .infinity ? .forever : .timeAfter(delta: waitTime))
 			
-		case (.Some(let group), .None):
-			dispatch_group_async(group, thread.queue, { 
+		case (.some(let group), .none):
+			thread.queue.async(group: group, execute: { 
 				action()
 			})
 			
-		case (.None, .Some(let waitTime)):
+		case (.none, .some(let waitTime)):
 			let semaphore = GCD.createSemaphore(thread.queue.hash)
-			dispatch_async(thread.queue, {
+			thread.queue.async(execute: {
 				GCD.fireSemaphore(semaphore)
 				action()
 			})
-			GCD.waitForSemaphore(semaphore, until: waitTime == 0 || waitTime == .infinity ? .Forever : .TimeAfter(delta: waitTime))
+			GCD.waitForSemaphore(semaphore, until: waitTime == 0 || waitTime == .infinity ? .forever : .timeAfter(delta: waitTime))
 			
-		case (.None, .None):
-			dispatch_async(thread.queue) {
+		case (.none, .none):
+			thread.queue.async {
 				action()
 			}
 			
@@ -172,9 +172,9 @@ extension GCD { // MARK: Queues
 
 extension GCD { // MARK: Main Thread Actions
 	
-	public static func runMainThreadAction(action: (() -> Void), forcedSync shouldForcedSync: Bool = false) {
+	public static func runMainThreadAction(_ action: (() -> Void), forcedSync shouldForcedSync: Bool = false) {
 		
-		if NSThread.isMainThread() {
+		if Foundation.Thread.isMainThread {
 			action()
 		} else {
 			if shouldForcedSync {
@@ -190,17 +190,17 @@ extension GCD { // MARK: Main Thread Actions
 
 extension GCD { // MARK: Check queue running status
 	
-	public static func isQueueRunning(queue: dispatch_queue_t) -> Bool {
+	public static func isQueueRunning(_ queue: DispatchQueue) -> Bool {
 		
 		var isRunning = true
 		
 		let semaphore = GCD.createSemaphore(queue.hash)
-		dispatch_async(queue) { 
+		queue.async { 
 			isRunning = false
 			GCD.fireSemaphore(semaphore)
 		}
 		
-		GCD.waitForSemaphore(semaphore, until: .TimeAfter(delta: 0.001))
+		GCD.waitForSemaphore(semaphore, until: .timeAfter(delta: 0.001))
 		
 		return isRunning
 		
@@ -210,7 +210,7 @@ extension GCD { // MARK: Check queue running status
 
 extension GCD { // MARK: Once
 	
-	public static func runOnceAction(action: (() -> Void), inout withToken token: dispatch_once_t) {
+	public static func runOnceAction(_ action: (() -> Void), withToken token: inout Int) {
 		
 		dispatch_once(&token) { 
 			action()

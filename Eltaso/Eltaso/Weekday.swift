@@ -9,48 +9,48 @@
 import Foundation
 
 public enum Weekday: Int {
-	case Sunday = 1 // According to NSCalendar's weekday property
-	case Monday
-	case Tuesday
-	case Wednesday
-	case Thursday
-	case Friday
-	case Saturday
+	case sunday = 1 // According to NSCalendar's weekday property
+	case monday
+	case tuesday
+	case wednesday
+	case thursday
+	case friday
+	case saturday
 	
 	public var japanese: String {
 		switch self {
-		case .Sunday:
+		case .sunday:
 			return "日"
 			
-		case .Monday:
+		case .monday:
 			return "月"
 			
-		case .Tuesday:
+		case .tuesday:
 			return "火"
 			
-		case .Wednesday:
+		case .wednesday:
 			return "水"
 			
-		case .Thursday:
+		case .thursday:
 			return "木"
 			
-		case .Friday:
+		case .friday:
 			return "金"
 			
-		case .Saturday:
+		case .saturday:
 			return "土"
 		}
 	}
 	
 	public static var all: [Weekday] {
 		return [
-			.Sunday,
-			.Monday,
-			.Tuesday,
-			.Wednesday,
-			.Thursday,
-			.Friday,
-			.Saturday,
+			.sunday,
+			.monday,
+			.tuesday,
+			.wednesday,
+			.thursday,
+			.friday,
+			.saturday,
 		]
 	}
 	

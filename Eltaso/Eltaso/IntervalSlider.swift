@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class IntervalSlider: UISlider {
+open class IntervalSlider: UISlider {
 	
-	public var interval: Float?
+	open var interval: Float?
 	
-	private var onValueChangedAction: ((sender: IntervalSlider, newValue: Float) -> Void)?
+	fileprivate var onValueChangedAction: ((sender: IntervalSlider, newValue: Float) -> Void)?
 	
 	public init(frame: CGRect = .zero, interval: Float? = 1) {
 		
@@ -20,8 +20,8 @@ public class IntervalSlider: UISlider {
 		
 		super.init(frame: frame)
 		
-		self.addTarget(self, action: #selector(IntervalSlider.roundValue), forControlEvents: .ValueChanged)
-		self.addTarget(self, action: #selector(IntervalSlider.additionalActionOnValueChanged(_:)), forControlEvents: .ValueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.roundValue), for: .valueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.additionalActionOnValueChanged(_:)), for: .valueChanged)
 		
 	}
 	
@@ -30,7 +30,7 @@ public class IntervalSlider: UISlider {
 		super.init(coder: aDecoder)
 	}
 	
-	@objc private func roundValue() {
+	@objc fileprivate func roundValue() {
 		
 		guard let interval = self.interval else {
 			return
@@ -41,11 +41,11 @@ public class IntervalSlider: UISlider {
 		
 	}
 	
-	@objc private func additionalActionOnValueChanged(sender: IntervalSlider) {
+	@objc fileprivate func additionalActionOnValueChanged(_ sender: IntervalSlider) {
 		self.onValueChangedAction?(sender: sender, newValue: self.value)
 	}
 	
-	public func setOnValueChangedAction(action: ((sender: IntervalSlider, newValue: Float) -> Void)?) {
+	open func setOnValueChangedAction(_ action: ((sender: IntervalSlider, newValue: Float) -> Void)?) {
 		self.onValueChangedAction = action
 	}
 	

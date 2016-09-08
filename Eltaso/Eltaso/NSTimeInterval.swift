@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension NSTimeInterval {
+public extension TimeInterval {
 	
 	public var timeFormattedDescription: String {
 		var seconds = Int(self)
@@ -37,12 +37,12 @@ public extension NSTimeInterval {
 		
 	}
 	
-	public static let minuteLength: NSTimeInterval = 60
-	public static let hourLength: NSTimeInterval = .minuteLength * 60
-	public static let dayLength: NSTimeInterval = .hourLength * 24
-	public static let weekLength: NSTimeInterval = .dayLength * 7
+	public static let minuteLength: TimeInterval = 60
+	public static let hourLength: TimeInterval = .minuteLength * 60
+	public static let dayLength: TimeInterval = .hourLength * 24
+	public static let weekLength: TimeInterval = .dayLength * 7
 	
-	public static func estimatedTime(since baseTime: NSDate) -> NSTimeInterval {
+	public static func estimatedTime(since baseTime: Date) -> TimeInterval {
 		return -baseTime.timeIntervalSinceNow
 	}
 	

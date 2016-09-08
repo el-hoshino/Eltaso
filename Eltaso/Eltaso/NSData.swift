@@ -8,23 +8,23 @@
 
 import Foundation
 
-public extension NSData {
+public extension Data {
 	
 	public func getSingleByte() -> UInt8 {
 		var byte: UInt8 = 0
-		self.getBytes(&byte, length: 1)
+		(self as NSData).getBytes(&byte, length: 1)
 		return byte
 	}
 	
 	public func getDualByte() -> UInt16 {
 		var dualByte: UInt16 = 0
-		self.getBytes(&dualByte, length: 2)
+		(self as NSData).getBytes(&dualByte, length: 2)
 		return dualByte
 	}
 	
 	public func getQuadByte() -> UInt32 {
 		var quadByte: UInt32 = 0
-		self.getBytes(&quadByte, length: 4)
+		(self as NSData).getBytes(&quadByte, length: 4)
 		return quadByte
 	}
 	

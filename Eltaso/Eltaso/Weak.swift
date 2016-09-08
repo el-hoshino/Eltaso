@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class Weak <T: AnyObject> {
-	public weak var value: T?
+open class Weak <T: AnyObject> {
+	open weak var value: T?
 	public init(_ object: T?) {
 		self.value = object
 	}

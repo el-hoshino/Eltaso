@@ -10,24 +10,24 @@ import Foundation
 
 public extension NSMutableData {
 	
-	public func removeLast(n: Int = 1) {
+	public func removeLast(_ n: Int = 1) {
 		let range = NSMakeRange(self.length - n, n)
-		self.replaceBytesInRange(range, withBytes: nil, length: 0)
+		self.replaceBytes(in: range, withBytes: nil, length: 0)
 	}
 	
-	public func appendByte(byte: UInt8) {
+	public func appendByte(_ byte: UInt8) {
 		var byte = byte
-		self.appendBytes(&byte, length: 1)
+		self.append(&byte, length: 1)
 	}
 	
-	public func appendDualByte(dualByte: UInt16) {
+	public func appendDualByte(_ dualByte: UInt16) {
 		var dualByte = dualByte
-		self.appendBytes(&dualByte, length: 2)
+		self.append(&dualByte, length: 2)
 	}
 	
-	public func appendQuadByte(quadByte: UInt32) {
+	public func appendQuadByte(_ quadByte: UInt32) {
 		var quadByte = quadByte
-		self.appendBytes(&quadByte, length: 4)
+		self.append(&quadByte, length: 4)
 	}
 	
 }

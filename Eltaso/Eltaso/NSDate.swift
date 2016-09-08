@@ -8,47 +8,47 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
 	
-	public static func getDateAtSpecificTime(hour hour: Int = 0, minute: Int = 0, second: Int = 0) throws -> NSDate {
+	public static func getDateAtSpecificTime(hour: Int = 0, minute: Int = 0, second: Int = 0) throws -> Date {
 		
-		enum Error: ErrorType {
-			case FailedToGetSpecificDateFromCurrentDate
+		enum Error: ErrorProtocol {
+			case failedToGetSpecificDateFromCurrentDate
 		}
 		
-		let currentDate = NSDate()
-		let currentCalendar = NSCalendar.currentCalendar()
-		let dateComponents = currentCalendar.components([.Year, .Month, .Day], fromDate: currentDate)
+		let currentDate = Date()
+		let currentCalendar = Calendar.current
+		let dateComponents = (currentCalendar as NSCalendar).components([.year, .month, .day], from: currentDate)
 		dateComponents.hour = hour
 		dateComponents.minute = minute
 		dateComponents.second = second
 		
-		guard let thisTime = currentCalendar.dateFromComponents(dateComponents) else {
-			throw Error.FailedToGetSpecificDateFromCurrentDate
+		guard let thisTime = currentCalendar.date(from: dateComponents) else {
+			throw Error.failedToGetSpecificDateFromCurrentDate
 		}
 		
 		return thisTime
 		
 	}
 	
-	public func getDateByAddingInterval(interval: Int, toUnit unit: NSCalendarUnit) throws -> NSDate {
+	public func getDateByAddingInterval(_ interval: Int, toUnit unit: NSCalendar.Unit) throws -> Date {
 		
-		enum Error: ErrorType {
-			case FailedToGetEdittedDateFromCurrentDate
+		enum Error: ErrorProtocol {
+			case failedToGetEdittedDateFromCurrentDate
 		}
 		
-		let calendar = NSCalendar.currentCalendar()
-		guard let date = calendar.dateByAddingUnit(unit, value: interval, toDate: self, options: []) else {
-			throw Error.FailedToGetEdittedDateFromCurrentDate
+		let calendar = Calendar.current
+		guard let date = (calendar as NSCalendar).date(byAdding: unit, value: interval, to: self, options: []) else {
+			throw Error.failedToGetEdittedDateFromCurrentDate
 		}
 		return date
 		
 	}
 	
-	public func getDateComponents(inTimeZone timeZone: NSTimeZone = .defaultTimeZone()) -> NSDateComponents {
+	public func getDateComponents(inTimeZone timeZone: TimeZone = .current()) -> DateComponents {
 		
-		let calendar = NSCalendar.currentCalendar()
-		let components = calendar.componentsInTimeZone(timeZone, fromDate: self)
+		let calendar = Calendar.current
+		let components = calendar.dateComponents(in: timeZone, from: self)
 		return components
 		
 	}

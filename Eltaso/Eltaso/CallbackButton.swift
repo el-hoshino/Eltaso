@@ -8,16 +8,16 @@
 
 import Foundation
 
-public class CallbackButton: UIButton {
+open class CallbackButton: UIButton {
 	
-	private var onTappedAction: ((sender: CallbackButton) -> Void)?
-	private var onLongPressedAction: ((sender: CallbackButton) -> Void)?
+	fileprivate var onTappedAction: ((sender: CallbackButton) -> Void)?
+	fileprivate var onLongPressedAction: ((sender: CallbackButton) -> Void)?
 	
-	lazy private var longPressGesture: UILongPressGestureRecognizer = {
+	lazy fileprivate var longPressGesture: UILongPressGestureRecognizer = {
 		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(CallbackButton.longPressed(_:)))
 		return gesture
 	}()
-	public var longPressEnabled = false {
+	open var longPressEnabled = false {
 		willSet {
 			switch newValue {
 			case true:
@@ -29,17 +29,17 @@ public class CallbackButton: UIButton {
 		}
 	}
 	
-	public var category: String?
+	open var category: String?
 	
 	public init(image: UIImage, category: String? = nil, tag: Int = 0) {
 		
 		self.category = category
 		
-		super.init(frame: CGRect(origin: CGPointZero, size: image.size))
+		super.init(frame: CGRect(origin: CGPoint.zero, size: image.size))
 		
 		self.tag = tag
-		self.setImage(image, forState: .Normal)
-		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), forControlEvents: .TouchUpInside)
+		self.setImage(image, for: UIControlState())
+		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), for: .touchUpInside)
 		
 	}
 	
@@ -50,7 +50,7 @@ public class CallbackButton: UIButton {
 		super.init(frame: frame)
 		
 		self.tag = tag
-		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), forControlEvents: .TouchUpInside)
+		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), for: .touchUpInside)
 		
 	}
 	
@@ -58,16 +58,16 @@ public class CallbackButton: UIButton {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	@objc private func tapped(sender: CallbackButton) {
+	@objc fileprivate func tapped(_ sender: CallbackButton) {
 		
 		self.onTappedAction?(sender: sender)
 		
 	}
 	
-	@objc private func longPressed(sender: UILongPressGestureRecognizer) {
+	@objc fileprivate func longPressed(_ sender: UILongPressGestureRecognizer) {
 		
 		switch sender.state {
-		case .Began:
+		case .began:
 			self.onLongPressedAction?(sender: self)
 			
 		default:
@@ -76,13 +76,13 @@ public class CallbackButton: UIButton {
 		
 	}
 	
-	public func setOnTappedAction(action: (sender: CallbackButton) -> Void) {
+	open func setOnTappedAction(_ action: (sender: CallbackButton) -> Void) {
 		
 		self.onTappedAction = action
 		
 	}
 	
-	public func setOnLongPressedAction(action: (sender: CallbackButton) -> Void) {
+	open func setOnLongPressedAction(_ action: (sender: CallbackButton) -> Void) {
 		
 		self.onLongPressedAction = action
 		

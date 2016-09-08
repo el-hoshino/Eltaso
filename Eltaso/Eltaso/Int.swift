@@ -10,10 +10,10 @@ import Foundation
 
 public extension Int {
 	
-	public static func createRandom(range range: Range<Int>) -> Int {
-		let rangeLength = range.endIndex - range.startIndex
+	public static func createRandom(range: Range<Int>) -> Int {
+		let rangeLength = range.upperBound - range.lowerBound
 		let random = arc4random_uniform(UInt32(rangeLength))
-		return Int(random) + range.startIndex
+		return Int(random) + range.lowerBound
 	}
 	
 }

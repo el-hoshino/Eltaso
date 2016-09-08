@@ -10,17 +10,17 @@ import Foundation
 
 public struct Console {
 	
-	private init(){}
+	fileprivate init(){}
 	
 	public static let shared = Console()
 	
-	public func info(items: Any...) {
+	public func info(_ items: Any...) {
 		#if DEBUG
 			print(items)
 		#endif
 	}
 	
-	public func warning(items: Any...) {
+	public func warning(_ items: Any...) {
 		#if DEBUG
 			print("---!!!", terminator: "")
 			print(items, terminator: "")

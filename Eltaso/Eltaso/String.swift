@@ -10,17 +10,17 @@ import Foundation
 
 public extension String {
 	
-	public func droppingFirst(n: Int = 1) -> String {
+	public func droppingFirst(_ n: Int = 1) -> String {
 		
-		let remainingIndex = self.startIndex.advancedBy(n, limit: self.endIndex)
-		return self.substringFromIndex(remainingIndex)
+		let remainingIndex = self.characters.index(self.startIndex, offsetBy: n, limitedBy: self.endIndex)
+		return self.substring(from: remainingIndex)
 		
 	}
 	
-	public func droppingLast(n: Int = 1) -> String {
+	public func droppingLast(_ n: Int = 1) -> String {
 		
-		let remainingIndex = self.endIndex.advancedBy(-n, limit: self.startIndex)
-		return self.substringToIndex(remainingIndex)
+		let remainingIndex = self.characters.index(self.endIndex, offsetBy: -n, limitedBy: self.startIndex)
+		return self.substring(to: remainingIndex)
 		
 	}
 	

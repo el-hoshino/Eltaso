@@ -28,15 +28,15 @@ public func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 	return CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
 }
 
-public func *= (inout lhs: CGSize, rhs: CGFloat) {
+public func *= (lhs: inout CGSize, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
-public func *= (inout lhs: CGPoint, rhs: CGFloat) {
+public func *= (lhs: inout CGPoint, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
-public func += (inout lhs: CGPoint, rhs: CGPoint) {
+public func += (lhs: inout CGPoint, rhs: CGPoint) {
 	lhs = lhs + rhs
 }
 
@@ -55,21 +55,21 @@ infix operator !…= {
 	precedence 130
 }
 
-public func =? <T> (inout lhs: T, rhs: T?) {
+public func =? <T> (lhs: inout T, rhs: T?) {
 	if let rhs = rhs {
 		lhs = rhs
 	}
 }
 
 public func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
-	if lhs.startIndex >= rhs.startIndex && lhs.endIndex <= rhs.endIndex {
+	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
 		return false
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
 	if lhs.start >= rhs.start && lhs.end <= rhs.end {
 		return true
 	} else {
@@ -77,7 +77,7 @@ public func …= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpe
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool {
 	if lhs.start >= rhs.start && lhs.end <= rhs.end {
 		return true
 	} else {
@@ -86,14 +86,14 @@ public func …= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInt
 }
 
 public func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
-	if lhs >= rhs.startIndex && lhs < rhs.endIndex {
+	if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
 		return true
 	} else {
 		return false
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
 	if lhs >= rhs.start && lhs < rhs.end {
 		return true
 	} else {
@@ -101,7 +101,7 @@ public func …= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> B
 	}
 }
 
-public func …= <T where T: Comparable> (lhs: T, rhs: ClosedInterval<T>) -> Bool {
+public func …= <T where T: Comparable> (lhs: T, rhs: ClosedRange<T>) -> Bool {
 	if lhs >= rhs.start && lhs <= rhs.end {
 		return true
 	} else {
@@ -113,11 +113,11 @@ public func !…= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool {
+public func !…= <T where T: Comparable> (lhs: Range<T>, rhs: Range<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool {
+public func !…= <T where T: Comparable> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
@@ -125,10 +125,10 @@ public func !…= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: T, rhs: HalfOpenInterval<T>) -> Bool {
+public func !…= <T where T: Comparable> (lhs: T, rhs: Range<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T where T: Comparable> (lhs: T, rhs: ClosedInterval<T>) -> Bool {
+public func !…= <T where T: Comparable> (lhs: T, rhs: ClosedRange<T>) -> Bool {
 	return !(lhs …= rhs)
 }

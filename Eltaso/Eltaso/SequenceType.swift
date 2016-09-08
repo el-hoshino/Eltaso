@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension SequenceType {
+public extension Sequence {
 	
 	func flatten <T> (in type: T.Type) -> [T] {
 		return self.flatMap { $0 as? T }
@@ -16,9 +16,9 @@ public extension SequenceType {
 	
 }
 
-public extension SequenceType where Generator.Element: OptionalType {
+public extension Sequence where Iterator.Element: OptionalType {
 	
-	var flatten: [Generator.Element.T] {
+	var flatten: [Iterator.Element.T] {
 		return self.flatMap { $0.optionalValue }
 	}
 	

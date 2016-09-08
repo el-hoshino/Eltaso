@@ -20,18 +20,18 @@ public extension Array {
 	
 	public var shuffled: Array<Element> {
 		var array = self
-		for i in array.indices.reverse().dropLast() {
-			let j = Int.createRandom(range: array.indices.startIndex ..< i)
+		for i in array.indices.reversed().dropLast() {
+			let j = Int.createRandom(range: array.indices.lowerBound ..< i)
 			(array[i], array[j]) = (array[j], array[i])
 		}
 		return array
 	}
 	
-	public func appending(element: Element) -> Array<Element> {
+	public func appending(_ element: Element) -> Array<Element> {
 		return self + [element]
 	}
 	
-	public func appending(elements: [Element]) -> Array<Element> {
+	public func appending(_ elements: [Element]) -> Array<Element> {
 		return self + elements
 	}
 	

@@ -9,7 +9,8 @@
 import Foundation
 
 public enum Weekday: Int {
-	case sunday = 1 // According to NSCalendar's weekday property
+	
+	case sunday = 1 // According to Calendar's weekday property
 	case monday
 	case tuesday
 	case wednesday

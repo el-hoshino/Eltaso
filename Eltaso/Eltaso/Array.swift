@@ -8,15 +8,7 @@
 
 import Foundation
 
-public extension Array {
-	
-	public var second: Element? {
-		if self.count > 1 {
-			return self[1]
-		} else {
-			return nil
-		}
-	}
+extension Array {
 	
 	public var shuffled: Array<Element> {
 		var array = self
@@ -27,16 +19,20 @@ public extension Array {
 		return array
 	}
 	
+	public mutating func shuffle() {
+		self = self.shuffled
+	}
+	
+}
+
+extension Array {
+	
 	public func appending(_ element: Element) -> Array<Element> {
 		return self + [element]
 	}
 	
 	public func appending(_ elements: [Element]) -> Array<Element> {
 		return self + elements
-	}
-	
-	public mutating func shuffle() {
-		self = self.shuffled
 	}
 	
 }

@@ -28,7 +28,13 @@ open class IntervalSlider: UISlider {
 	public required init?(coder aDecoder: NSCoder) {
 		self.interval = 1
 		super.init(coder: aDecoder)
+		self.addTarget(self, action: #selector(IntervalSlider.roundValue), for: .valueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.valueChanged(_:)), for: .valueChanged)
 	}
+	
+}
+
+extension IntervalSlider {
 	
 	@objc fileprivate func roundValue() {
 		
@@ -45,8 +51,14 @@ open class IntervalSlider: UISlider {
 		self.onValueChangedAction?(sender, self.value)
 	}
 	
+}
+
+extension IntervalSlider {
+
 	open func setOnValueChangedAction(_ action: ((_ sender: IntervalSlider, _ newValue: Float) -> Void)?) {
+		
 		self.onValueChangedAction = action
+		
 	}
 	
 }

@@ -8,10 +8,20 @@
 
 import Foundation
 
-public extension Double {
+extension Double {
 	
 	public var radianValue: Double {
-		return self / 180 * M_PI
+		
+		if #available(iOS 10.0, *) {
+			let degreeMeasurement = Measurement(value: self, unit: UnitAngle.degrees)
+			let radianMeasurement = degreeMeasurement.converted(to: .radians)
+			return radianMeasurement.value
+			
+		} else {
+			return self / 180 * .pi
+			
+		}
+		
 	}
 	
 }

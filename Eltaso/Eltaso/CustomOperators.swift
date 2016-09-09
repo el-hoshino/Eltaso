@@ -10,8 +10,8 @@ import Foundation
 
 public func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
 	var dictionary = lhs
-	rhs.forEach { (pair) in
-		dictionary[pair.0] = pair.1
+	rhs.forEach { (key, value) in
+		dictionary[key] = value
 	}
 	return dictionary
 }

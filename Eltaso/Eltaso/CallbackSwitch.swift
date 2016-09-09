@@ -25,8 +25,13 @@ open class CallbackSwitch: UISwitch {
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+		self.addTarget(self, action: #selector(CallbackSwitch.valueChanged(_:)), for: .valueChanged)
 	}
+	
+}
+
+extension CallbackSwitch {
 	
 	@objc fileprivate func valueChanged(_ sender: CallbackSwitch) {
 		
@@ -34,9 +39,13 @@ open class CallbackSwitch: UISwitch {
 		
 	}
 	
-	open func setOnValueChangedAction(_ action: (_ sender: CallbackSwitch) -> Void) {
+}
+
+extension CallbackSwitch {
+	
+	open func setOnValueChangedAction(_ action: @escaping (_ sender: CallbackSwitch) -> Void) {
 		
-//		self.onValueChangedAction = action
+		self.onValueChangedAction = action
 		
 	}
 	

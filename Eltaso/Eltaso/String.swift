@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension String {
+extension String {
 	
 	public mutating func keepFirst(_ n: Int = 1) {
 		self = self.keepingFirst(n)
@@ -20,7 +20,7 @@ public extension String {
 	
 }
 
-public extension String {
+extension String {
 	
 	public mutating func dropFirst(_ n: Int = 1) {
 		self = self.droppingFirst(n)
@@ -32,7 +32,7 @@ public extension String {
 	
 }
 
-public extension String {
+extension String {
 	
 	public func keepingFirst(_ n: Int = 1) -> String {
 		
@@ -50,7 +50,7 @@ public extension String {
 	
 }
 
-public extension String {
+extension String {
 
 	public func droppingFirst(_ n: Int = 1) -> String {
 		

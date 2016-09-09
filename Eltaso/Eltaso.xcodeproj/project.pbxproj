@@ -147,6 +147,7 @@
 				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
 				162414D21D2F6CC700141C64 /* OptionalType.swift */,
 				16A530F81D38EA6500041952 /* PropertyListConvertible.swift */,
+				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 				162414D41D2F6D5600141C64 /* Sequence.swift */,
 				169C43E71D82BFA30006B2E2 /* Collection.swift */,
 				16A530FA1D38F5CE00041952 /* Strideable.swift */,
@@ -168,16 +169,15 @@
 				16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */,
 				16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */,
 				168E570A1D6702F000C07A06 /* UIApplication.swift */,
+				162414AF1D2CC3B900141C64 /* Dispatch.swift */,
 				166205851D6EB5D100438DAE /* Weekday.swift */,
 				16C02DBA1D3FA57300288942 /* Weak.swift */,
 				79E14EA81D2BA74F00AF6EE4 /* Console.swift */,
-				162414AF1D2CC3B900141C64 /* Dispatch.swift */,
 				168E571A1D6BEF9B00C07A06 /* Downloader.swift */,
 				168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */,
 				79092CEC1D2C333300E07C8A /* CallbackButton.swift */,
 				79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */,
 				16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */,
-				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 			);
 			path = Eltaso;
 			sourceTree = "<group>";

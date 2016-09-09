@@ -8,9 +8,10 @@
 
 import UIKit
 
-public extension UIColor {
+extension UIColor {
 	
 	public convenience init(hexRGBAValue: UInt) {
+		
 		let hexRed = (hexRGBAValue & 0xFF000000) >> 24
 		let hexGreen = (hexRGBAValue & 0x00FF0000) >> 16
 		let hexBlue = (hexRGBAValue & 0x0000FF00) >> 8
@@ -22,7 +23,7 @@ public extension UIColor {
 		let alpha = CGFloat(hexAlpha) / CGFloat(UInt8.max)
 		
 		self.init(red: red, green: green, blue: blue, alpha: alpha)
+		
 	}
 	
 }
-

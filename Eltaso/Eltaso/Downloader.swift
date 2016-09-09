@@ -8,49 +8,51 @@
 
 import Foundation
 
-public class Downloader {
+open class Downloader {
 	
 	public enum Result {
 		
-		public enum Error: ErrorType {
-			case NSError(error: Foundation.NSError)
-			case InvalidURL(url: NSURL)
-			case InvalidFile
+		public enum Error: Swift.Error {
+			case taskError(Swift.Error)
+			case contentError(Swift.Error)
+			case invalidURL(url: URL)
 		}
 		
-		case Success(data: NSData, response: NSURLResponse)
-		case Failure(error: Error)
+		case success(data: Data, response: URLResponse)
+		case failure(error: Error)
 		
 	}
 	
-	private init() {
+	fileprivate init() {
 		
 	}
 	
 	public static let shared = Downloader()
 	
-	public func downloadData(from url: NSURL, completionHandler: (result: Result) -> Void) {
+	open func downloadData(from url: URL, completionHandler: @escaping (_ result: Result) -> Void) {
 		
-		let session = NSURLSession.sharedSession()
-		let task = session.downloadTaskWithURL(url) { (localURL, response, error) in
+		let session = URLSession.shared
+		let task = session.downloadTask(with: url, completionHandler: { (localURL, response, error) in
 			
-			guard let localURL = localURL, response = response else {
+			guard let localURL = localURL, let response = response else {
 				if let error = error {
-					completionHandler(result: .Failure(error: .NSError(error: error)))
+					completionHandler(.failure(error: .taskError(error)))
 				} else {
-					completionHandler(result: .Failure(error: .InvalidURL(url: url)))
+					completionHandler(.failure(error: .invalidURL(url: url)))
 				}
 				return
 			}
 			
-			guard let data = NSData(contentsOfURL: localURL) else {
-				completionHandler(result: .Failure(error: .InvalidFile))
-				return
+			do {
+				let data = try Data(contentsOf: localURL)
+				completionHandler(.success(data: data, response: response))
+				
+			} catch let error {
+				completionHandler(.failure(error: .contentError(error)))
+				
 			}
 			
-			completionHandler(result: .Success(data: data, response: response))
-			
-		}
+		})
 		
 		task.resume()
 		

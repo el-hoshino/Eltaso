@@ -1,5 +1,5 @@
 //
-//  SequenceType.swift
+//  Sequence.swift
 //  Eltaso
 //
 //  Created by 史　翔新 on 2016/07/08.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-public extension SequenceType {
+extension Sequence {
 	
-	func flatten <T> (in type: T.Type) -> [T] {
+	public func flatten <T> (in type: T.Type) -> [T] {
 		return self.flatMap { $0 as? T }
 	}
 	
 }
 
-public extension SequenceType where Generator.Element: OptionalType {
+extension Sequence where Iterator.Element: OptionalType {
 	
-	var flatten: [Generator.Element.T] {
+	public var flatten: [Iterator.Element.T] {
 		return self.flatMap { $0.optionalValue }
 	}
 	

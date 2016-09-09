@@ -11,19 +11,19 @@ import Foundation
 public extension RandomAccessIndexType {
 	
 	var increased: Self {
-		return self.advancedBy(1)
+		return <#T##RandomAccessCollection corresponding to `self`##RandomAccessCollection#>.index(self, offsetBy: 1)
 	}
 	
 	var decreased: Self {
-		return self.advancedBy(-1)
+		return <#T##RandomAccessCollection corresponding to `self`##RandomAccessCollection#>.index(self, offsetBy: -1)
 	}
 	
 	mutating func increase(by n: Self.Distance = 1) {
-		self = self.advancedBy(n)
+		self = <#T##RandomAccessCollection corresponding to `self`##RandomAccessCollection#>.index(self, offsetBy: n)
 	}
 	
 	mutating func decrease(by n: Self.Distance = 1) {
-		self = self.advancedBy(-n)
+		self = <#T##RandomAccessCollection corresponding to `self`##RandomAccessCollection#>.index(self, offsetBy: -n)
 	}
 	
 }

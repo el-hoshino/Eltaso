@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class IntervalSlider: UISlider {
+open class IntervalSlider: UISlider {
 	
-	public var interval: Float?
+	open var interval: Float?
 	
-	private var onValueChangedAction: ((sender: IntervalSlider, newValue: Float) -> Void)?
+	fileprivate var onValueChangedAction: ((_ sender: IntervalSlider, _ newValue: Float) -> Void)?
 	
 	public init(frame: CGRect = .zero, interval: Float? = 1) {
 		
@@ -20,17 +20,23 @@ public class IntervalSlider: UISlider {
 		
 		super.init(frame: frame)
 		
-		self.addTarget(self, action: #selector(IntervalSlider.roundValue), forControlEvents: .ValueChanged)
-		self.addTarget(self, action: #selector(IntervalSlider.additionalActionOnValueChanged(_:)), forControlEvents: .ValueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.roundValue), for: .valueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.valueChanged(_:)), for: .valueChanged)
 		
 	}
 	
 	public required init?(coder aDecoder: NSCoder) {
 		self.interval = 1
 		super.init(coder: aDecoder)
+		self.addTarget(self, action: #selector(IntervalSlider.roundValue), for: .valueChanged)
+		self.addTarget(self, action: #selector(IntervalSlider.valueChanged(_:)), for: .valueChanged)
 	}
 	
-	@objc private func roundValue() {
+}
+
+extension IntervalSlider {
+	
+	@objc fileprivate func roundValue() {
 		
 		guard let interval = self.interval else {
 			return
@@ -41,12 +47,18 @@ public class IntervalSlider: UISlider {
 		
 	}
 	
-	@objc private func additionalActionOnValueChanged(sender: IntervalSlider) {
-		self.onValueChangedAction?(sender: sender, newValue: self.value)
+	@objc fileprivate func valueChanged(_ sender: IntervalSlider) {
+		self.onValueChangedAction?(sender, self.value)
 	}
 	
-	public func setOnValueChangedAction(action: ((sender: IntervalSlider, newValue: Float) -> Void)?) {
+}
+
+extension IntervalSlider {
+
+	open func setOnValueChangedAction(_ action: ((_ sender: IntervalSlider, _ newValue: Float) -> Void)?) {
+		
 		self.onValueChangedAction = action
+		
 	}
 	
 }

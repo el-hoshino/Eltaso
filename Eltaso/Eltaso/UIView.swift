@@ -8,11 +8,15 @@
 
 import Foundation
 
-public extension UIView {
+extension UIView {
 	
 	public var midPoint: CGPoint {
 		return CGPoint(x: self.bounds.midX, y: self.bounds.midY)
 	}
+	
+}
+
+extension UIView {
 	
 	public func removeAllSubviews() {
 		self.subviews.forEach { (subview) in
@@ -20,28 +24,32 @@ public extension UIView {
 		}
 	}
 	
-	public func addSubviews(subviews: [UIView]) {
+	public func addSubviews(_ subviews: [UIView]) {
 		subviews.forEach { (view) in
 			self.addSubview(view)
 		}
 	}
 	
-	public static func animateJumpViews(views: [UIView], forHeight height: CGFloat, within duration: NSTimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
+}
+
+extension UIView {
+	
+	public static func animateJumpViews(_ views: [UIView], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
 		
 		let initialDuration = duration * 0.2
 		let reversingDuration = duration - initialDuration
-		UIView.animateWithDuration(initialDuration, animations: { 
+		UIView.animate(withDuration: initialDuration, animations: { 
 			views.forEach({ (view) in
 				view.frame.origin.y -= height
 			})
-		}) { (_) in
-			UIView.animateWithDuration(reversingDuration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: [], animations: {
+		}, completion: { (_) in
+			UIView.animate(withDuration: reversingDuration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: [], animations: {
 				views.forEach({ (view) in
 					view.frame.origin.y += height
 					reversing?()
 				})
 			}, completion: completion)
-		}
+		}) 
 		
 	}
 	

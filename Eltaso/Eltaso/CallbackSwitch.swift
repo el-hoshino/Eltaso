@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class CallbackSwitch: UISwitch {
+open class CallbackSwitch: UISwitch {
 	
-	private var onValueChangedAction: ((sender: CallbackSwitch) -> Void)?
+	fileprivate var onValueChangedAction: ((_ sender: CallbackSwitch) -> Void)?
 	
 	public override init(frame: CGRect) {
 		
 		super.init(frame: frame)
 		
-		self.addTarget(self, action: #selector(CallbackSwitch.switchValueChanged(_:)), forControlEvents: .ValueChanged)
+		self.addTarget(self, action: #selector(CallbackSwitch.valueChanged(_:)), for: .valueChanged)
 		
 	}
 	
@@ -25,16 +25,25 @@ public class CallbackSwitch: UISwitch {
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+		self.addTarget(self, action: #selector(CallbackSwitch.valueChanged(_:)), for: .valueChanged)
 	}
 	
-	@objc private func switchValueChanged(sender: CallbackSwitch) {
+}
+
+extension CallbackSwitch {
+	
+	@objc fileprivate func valueChanged(_ sender: CallbackSwitch) {
 		
-		self.onValueChangedAction?(sender: sender)
+		self.onValueChangedAction?(sender)
 		
 	}
 	
-	public func setOnValueChangedAction(action: ((sender: CallbackSwitch) -> Void)) {
+}
+
+extension CallbackSwitch {
+	
+	open func setOnValueChangedAction(_ action: @escaping (_ sender: CallbackSwitch) -> Void) {
 		
 		self.onValueChangedAction = action
 		

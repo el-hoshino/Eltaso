@@ -8,10 +8,10 @@
 
 import UIKit
 
-public extension UIPanGestureRecognizer {
+extension UIPanGestureRecognizer {
 	
-	func resetTranslation(inView view: UIView?) {
-		self.setTranslation(.zero, inView: view)
+	public func resetTranslation(inView view: UIView?) {
+		self.setTranslation(.zero, in: view)
 	}
 	
 }

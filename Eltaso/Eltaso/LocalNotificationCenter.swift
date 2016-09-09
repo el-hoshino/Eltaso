@@ -8,10 +8,11 @@
 
 import UIKit
 
-public class LocalNotificationCenter {
+open class LocalNotificationCenter {
 	
-	private let application = UIApplication.sharedApplication()
-	private var scheduledNotifications: [UILocalNotification] {
+	private let application = UIApplication.shared
+	
+	fileprivate var scheduledNotifications: [UILocalNotification] {
 		didSet {
 			self.scheduledNotifications = self.scheduledNotifications.filter({ (notification) -> Bool in
 				guard let fireDate = notification.fireDate else {
@@ -24,7 +25,7 @@ public class LocalNotificationCenter {
 	}
 	
 	private init() {
-		self.scheduledNotifications = UIApplication.sharedApplication().scheduledLocalNotifications ?? []
+		self.scheduledNotifications = UIApplication.shared.scheduledLocalNotifications ?? []
 	}
 	
 	public static let defaultCenter = LocalNotificationCenter()
@@ -61,13 +62,13 @@ public extension LocalNotificationCenter {
 		
 	}
 	
-	public func scheduleNotification(notification: UILocalNotification) {
+	public func scheduleNotification(_ notification: UILocalNotification) {
 		
 		self.scheduledNotifications.append(notification)
 		
 	}
 	
-	public func scheduleNotifications(notifications: [UILocalNotification]) {
+	public func scheduleNotifications(_ notifications: [UILocalNotification]) {
 		
 		self.scheduledNotifications += notifications
 		

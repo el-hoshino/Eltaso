@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension UIPinchGestureRecognizer {
+extension UIPinchGestureRecognizer {
 	
 	public func resetScale() {
 		self.scale = 1

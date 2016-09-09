@@ -13,9 +13,9 @@ open class Downloader {
 	public enum Result {
 		
 		public enum Error: Swift.Error {
-			case nsError(error: Swift.Error)
+			case taskError(Swift.Error)
+			case contentError(Swift.Error)
 			case invalidURL(url: URL)
-			case invalidFile
 		}
 		
 		case success(data: Data, response: URLResponse)
@@ -27,7 +27,7 @@ open class Downloader {
 		
 	}
 	
-	open static let shared = Downloader()
+	public static let shared = Downloader()
 	
 	open func downloadData(from url: URL, completionHandler: @escaping (_ result: Result) -> Void) {
 		
@@ -36,21 +36,23 @@ open class Downloader {
 			
 			guard let localURL = localURL, let response = response else {
 				if let error = error {
-					completionHandler(.failure(error: .nsError(error: error)))
+					completionHandler(.failure(error: .taskError(error)))
 				} else {
 					completionHandler(.failure(error: .invalidURL(url: url)))
 				}
 				return
 			}
 			
-			guard let data = try? Data(contentsOf: localURL) else {
-				completionHandler(.failure(error: .invalidFile))
-				return
+			do {
+				let data = try Data(contentsOf: localURL)
+				completionHandler(.success(data: data, response: response))
+				
+			} catch let error {
+				completionHandler(.failure(error: .contentError(error)))
+				
 			}
 			
-			completionHandler(.success(data: data, response: response))
-			
-		}) 
+		})
 		
 		task.resume()
 		

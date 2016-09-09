@@ -10,9 +10,13 @@ import Foundation
 
 public struct Console {
 	
-	fileprivate init(){}
+	private init(){}
 	
 	public static let shared = Console()
+	
+}
+
+extension Console {
 	
 	public func info(_ items: Any...) {
 		#if DEBUG

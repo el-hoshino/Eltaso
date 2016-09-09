@@ -8,11 +8,15 @@
 
 import Foundation
 
-public extension UIView {
+extension UIView {
 	
 	public var midPoint: CGPoint {
 		return CGPoint(x: self.bounds.midX, y: self.bounds.midY)
 	}
+	
+}
+
+extension UIView {
 	
 	public func removeAllSubviews() {
 		self.subviews.forEach { (subview) in
@@ -25,6 +29,10 @@ public extension UIView {
 			self.addSubview(view)
 		}
 	}
+	
+}
+
+extension UIView {
 	
 	public static func animateJumpViews(_ views: [UIView], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
 		

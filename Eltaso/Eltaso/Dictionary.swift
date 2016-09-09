@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Dictionary {
+extension Dictionary {
 	
 	public init<S: Sequence> (tuples seq: S) where S.Iterator.Element == Element {
 		self.init()
@@ -17,10 +17,18 @@ public extension Dictionary {
 		}
 	}
 	
+}
+
+extension Dictionary {
+	
 	public func dropping(_ key: Key) -> Dictionary<Key, Value> {
 		var dictionary = self
 		dictionary.removeValue(forKey: key)
 		return dictionary
+	}
+	
+	public mutating func drop(_ key: Key) {
+		self = self.dropping(key)
 	}
 	
 }

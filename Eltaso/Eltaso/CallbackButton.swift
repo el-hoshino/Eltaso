@@ -17,19 +17,24 @@ open class CallbackButton: UIButton {
 		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(CallbackButton.longPressed(_:)))
 		return gesture
 	}()
-	open var longPressEnabled = false {
+	
+	public var longPressEnabled = false {
 		willSet {
 			switch newValue {
 			case true:
-				self.addGestureRecognizer(self.longPressGesture)
+				if let gestures = self.gestureRecognizers, gestures.contains(self.longPressGesture) {
+					self.addGestureRecognizer(self.longPressGesture)
+				}
 				
 			case false:
-				self.removeGestureRecognizer(self.longPressGesture)
+				if let gestures = self.gestureRecognizers, !gestures.contains(self.longPressGesture) {
+					self.removeGestureRecognizer(self.longPressGesture)
+				}
 			}
 		}
 	}
 	
-	open var category: String?
+	public var category: String?
 	
 	public init(image: UIImage, category: String? = nil, tag: Int = 0) {
 		
@@ -55,8 +60,13 @@ open class CallbackButton: UIButton {
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+		self.addTarget(self, action: #selector(CallbackButton.tapped(_:)), for: .touchUpInside)
 	}
+	
+}
+
+extension CallbackButton {
 	
 	@objc fileprivate func tapped(_ sender: CallbackButton) {
 		
@@ -75,6 +85,10 @@ open class CallbackButton: UIButton {
 		}
 		
 	}
+	
+}
+
+extension CallbackButton {
 	
 	open func setOnTappedAction(_ action: @escaping (_ sender: CallbackButton) -> Void) {
 		

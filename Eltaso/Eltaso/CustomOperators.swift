@@ -68,6 +68,14 @@ public func …= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T:
 	}
 }
 
+public func …= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool where T: Comparable {
+	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
+		return true
+	} else {
+		return false
+	}
+}
+
 public func …= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
 	if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
 		return true
@@ -84,6 +92,14 @@ public func …= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
 	}
 }
 
+public func …= <T> (lhs: T, rhs: CountableRange<T>) -> Bool where T: Comparable {
+	if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
+		return true
+	} else {
+		return false
+	}
+}
+
 public func !…= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }
@@ -92,10 +108,18 @@ public func !…= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T
 	return !(lhs …= rhs)
 }
 
+public func !…= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool where T: Comparable {
+	return !(lhs …= rhs)
+}
+
 public func !…= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }
 
 public func !…= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+	return !(lhs …= rhs)
+}
+
+public func !…= <T> (lhs: T, rhs: CountableRange<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }

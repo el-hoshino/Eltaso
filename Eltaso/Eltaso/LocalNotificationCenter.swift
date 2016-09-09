@@ -10,7 +10,8 @@ import UIKit
 
 open class LocalNotificationCenter {
 	
-	fileprivate let application = UIApplication.shared
+	private let application = UIApplication.shared
+	
 	fileprivate var scheduledNotifications: [UILocalNotification] {
 		didSet {
 			self.scheduledNotifications = self.scheduledNotifications.filter({ (notification) -> Bool in
@@ -23,11 +24,11 @@ open class LocalNotificationCenter {
 		}
 	}
 	
-	fileprivate init() {
+	private init() {
 		self.scheduledNotifications = UIApplication.shared.scheduledLocalNotifications ?? []
 	}
 	
-	open static let defaultCenter = LocalNotificationCenter()
+	public static let defaultCenter = LocalNotificationCenter()
 	
 }
 

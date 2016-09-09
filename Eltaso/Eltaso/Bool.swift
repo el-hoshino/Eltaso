@@ -8,18 +8,22 @@
 
 import Foundation
 
-public extension Bool {
+extension Bool {
 	
-	static func createRandom() -> Bool {
+	public static func createRandom() -> Bool {
 		let randomNumber = Int.createRandom(range: 0 ... 1)
-		return Bool(randomNumber)
+		return randomNumber != 0
 	}
 	
-	var negated: Bool {
+}
+
+extension Bool {
+	
+	public var negated: Bool {
 		return !self
 	}
 	
-	mutating public func negate() {
+	public mutating func negate() {
 		self = self.negated
 	}
 	

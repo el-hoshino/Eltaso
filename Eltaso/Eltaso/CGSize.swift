@@ -8,11 +8,15 @@
 
 import Foundation
 
-public extension CGSize {
+extension CGSize {
 	
 	public init(length: CGFloat) {
 		self.init(width: length, height: length)
 	}
+	
+}
+
+extension CGSize {
 	
 	var maxLength: CGFloat {
 		return max(self.width, self.height)
@@ -21,6 +25,10 @@ public extension CGSize {
 	var minLength: CGFloat {
 		return min(self.width, self.height)
 	}
+	
+}
+
+extension CGSize {
 	
 	var aspectRatio: CGFloat {
 		return self.width / self.height
@@ -33,6 +41,10 @@ public extension CGSize {
 	public var isAspectRatioLessThan10by16: Bool {
 		return self.aspectRatio < 10 / 16
 	}
+	
+}
+
+extension CGSize {
 	
 	public func createSize(fromInsets insets: UIEdgeInsets) -> CGSize {
 		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)

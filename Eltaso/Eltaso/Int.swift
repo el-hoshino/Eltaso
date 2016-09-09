@@ -8,12 +8,24 @@
 
 import Foundation
 
-public extension Int {
+extension Int {
 	
-	public static func createRandom(range range: Range<Int>) -> Int {
-		let rangeLength = range.endIndex - range.startIndex
+	public static func createRandom(range: CountableRange<Int>) -> Int {
+		
+		let rangeLength = range.upperBound - range.lowerBound
 		let random = arc4random_uniform(UInt32(rangeLength))
-		return Int(random) + range.startIndex
+		
+		return Int(random) + range.lowerBound
+		
+	}
+	
+	public static func createRandom(range: CountableClosedRange<Int>) -> Int {
+		
+		let rangeLength = range.upperBound.increased - range.lowerBound
+		let random = arc4random_uniform(UInt32(rangeLength))
+		
+		return Int(random) + range.lowerBound
+		
 	}
 	
 }

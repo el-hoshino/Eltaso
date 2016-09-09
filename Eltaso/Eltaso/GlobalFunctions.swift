@@ -8,6 +8,6 @@
 
 import Foundation
 
-public func cot(x: Double) -> Double {
+public func cot(_ x: Double) -> Double {
 	return 1 / tan(x)
 }

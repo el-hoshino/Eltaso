@@ -8,16 +8,18 @@
 
 import UIKit
 
-public extension UIApplication {
+extension UIApplication {
 	
 	public var currentViewController: UIViewController? {
 		
 		guard var controller = self.keyWindow?.rootViewController else {
 			return nil
 		}
+		
 		while let presentedController = controller.presentedViewController {
 			controller = presentedController
 		}
+		
 		return controller
 		
 	}

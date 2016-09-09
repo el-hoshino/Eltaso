@@ -12,7 +12,7 @@
 		162414D51D2F6D5600141C64 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* Sequence.swift */; };
 		166205861D6EB5D100438DAE /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166205851D6EB5D100438DAE /* Weekday.swift */; };
 		168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57041D66DBEE00C07A06 /* UIAlertController.swift */; };
-		168E57071D66E4B900C07A06 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57061D66E4B900C07A06 /* NSDate.swift */; };
+		168E57071D66E4B900C07A06 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57061D66E4B900C07A06 /* Date.swift */; };
 		168E57091D66F04500C07A06 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */; };
 		168E570B1D6702F000C07A06 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E570A1D6702F000C07A06 /* UIApplication.swift */; };
 		168E571B1D6BEF9B00C07A06 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E571A1D6BEF9B00C07A06 /* Downloader.swift */; };
@@ -62,7 +62,7 @@
 		162414D41D2F6D5600141C64 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		166205851D6EB5D100438DAE /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		168E57041D66DBEE00C07A06 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
-		168E57061D66E4B900C07A06 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
+		168E57061D66E4B900C07A06 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		168E570A1D6702F000C07A06 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		168E571A1D6BEF9B00C07A06 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -156,8 +156,8 @@
 				16C02D361D3E114E00288942 /* CGSize.swift */,
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
 				16C02D321D3E109400288942 /* NSData.swift */,
-				168E57061D66E4B900C07A06 /* NSDate.swift */,
 				16C02D341D3E10FA00288942 /* NSMutableData.swift */,
+				168E57061D66E4B900C07A06 /* Date.swift */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
 				79E14E9E1D2B918100AF6EE4 /* UIImage.swift */,
 				79092CE81D2C32AA00E07C8A /* UIView.swift */,
@@ -324,7 +324,7 @@
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				16C02D331D3E109400288942 /* NSData.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,
-				168E57071D66E4B900C07A06 /* NSDate.swift in Sources */,
+				168E57071D66E4B900C07A06 /* Date.swift in Sources */,
 				16C02D311D3E0FE600288942 /* Dictionary.swift in Sources */,
 				168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,

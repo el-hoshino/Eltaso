@@ -1,5 +1,5 @@
 //
-//  NSDate.swift
+//  Date.swift
 //  Eltaso
 //
 //  Created by 史　翔新 on 2016/08/19.
@@ -18,38 +18,60 @@ extension Date {
 		
 		let currentDate = Date()
 		let currentCalendar = Calendar.current
-		var dateComponents = (currentCalendar as NSCalendar).components([.year, .month, .day], from: currentDate)
+		var dateComponents = currentCalendar.dateComponents([.year, .month, .day], from: currentDate)
 		dateComponents.hour = hour
 		dateComponents.minute = minute
 		dateComponents.second = second
 		
-		guard let thisTime = currentCalendar.date(from: dateComponents) else {
+		guard let specifiedTime = currentCalendar.date(from: dateComponents) else {
 			throw Error.failedToGetSpecificDateFromCurrentDate
 		}
 		
-		return thisTime
+		return specifiedTime
 		
 	}
 	
-	public func getDateByAddingInterval(_ interval: Int, toUnit unit: NSCalendar.Unit) throws -> Date {
+	public func getDateByAddingInterval(_ interval: Int, toUnit unit: Calendar.Component) throws -> Date {
 		
 		enum Error: Swift.Error {
 			case failedToGetEdittedDateFromCurrentDate
 		}
 		
 		let calendar = Calendar.current
-		guard let date = (calendar as NSCalendar).date(byAdding: unit, value: interval, to: self, options: []) else {
+		guard let date = calendar.date(byAdding: unit, value: interval, to: self) else {
 			throw Error.failedToGetEdittedDateFromCurrentDate
 		}
+		
 		return date
 		
 	}
+	
+}
+
+extension Date {
 	
 	public func getDateComponents(inTimeZone timeZone: TimeZone = .current) -> DateComponents {
 		
 		let calendar = Calendar.current
 		let components = calendar.dateComponents(in: timeZone, from: self)
+		
 		return components
+		
+	}
+	
+}
+
+extension Date {
+	
+	public var elapsedTime: TimeInterval {
+		
+		return -self.timeIntervalSinceNow
+		
+	}
+	
+	public func elapsedTime(until date: Date) -> TimeInterval {
+		
+		return -self.timeIntervalSince(date)
 		
 	}
 	

@@ -18,11 +18,11 @@ extension CGSize {
 
 extension CGSize {
 	
-	var maxLength: CGFloat {
+	public var maxLength: CGFloat {
 		return max(self.width, self.height)
 	}
 	
-	var minLength: CGFloat {
+	public var minLength: CGFloat {
 		return min(self.width, self.height)
 	}
 	
@@ -30,7 +30,7 @@ extension CGSize {
 
 extension CGSize {
 	
-	var aspectRatio: CGFloat {
+	public var aspectRatio: CGFloat {
 		return self.width / self.height
 	}
 	

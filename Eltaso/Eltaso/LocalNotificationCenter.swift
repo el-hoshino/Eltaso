@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS, deprecated: 10.0, message: "Use UserNotifications Framework's UNUserNotificationCenter")
 open class LocalNotificationCenter {
 	
 	private let application = UIApplication.shared

@@ -36,3 +36,31 @@ extension Array {
 	}
 	
 }
+
+extension Array {
+	
+	public func keepingFirst(_ n: Int = 1) -> Array<Element> {
+		let n = Swift.min(n, self.count)
+		return n > 0 ? Array(self[0 ..< n]) : []
+	}
+	
+	public func keepingLast(_ n: Int = 1) -> Array<Element> {
+		let n = Swift.min(n, self.count)
+		return n > 0 ? Array(self[(self.count - n) ..< self.count]) : []
+	}
+	
+}
+
+extension Array {
+	
+	public func droppingFirst(_ n: Int = 1) -> Array<Element> {
+		let n = Swift.min(n, self.count)
+		return n > 0 ? Array(self[n ..< self.count]) : self
+	}
+	
+	public func droppingLast(_ n: Int = 1) -> Array<Element> {
+		let n = Swift.min(n, self.count)
+		return n > 0 ? Array(self[0 ..< (self.count - n)]) : self
+	}
+	
+}

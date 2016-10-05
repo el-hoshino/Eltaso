@@ -11,7 +11,7 @@ import Foundation
 extension Bool {
 	
 	public static func createRandom() -> Bool {
-		let randomNumber = Int.createRandom(range: 0 ... 1)
+		let randomNumber = Int.createRandom(within: 0 ... 1)
 		return randomNumber != 0
 	}
 	

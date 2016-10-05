@@ -10,7 +10,7 @@ import Foundation
 
 extension Int {
 	
-	public static func createRandom(range: CountableRange<Int>) -> Int {
+	public static func createRandom(within range: Range<Int>) -> Int {
 		
 		let rangeLength = range.upperBound - range.lowerBound
 		let random = arc4random_uniform(UInt32(rangeLength))
@@ -19,13 +19,67 @@ extension Int {
 		
 	}
 	
-	public static func createRandom(range: CountableClosedRange<Int>) -> Int {
+	public static func createRandom(within range: ClosedRange<Int>) -> Int {
 		
 		let rangeLength = range.upperBound.increased - range.lowerBound
 		let random = arc4random_uniform(UInt32(rangeLength))
 		
 		return Int(random) + range.lowerBound
 		
+	}
+	
+	public static func createRandom(within range: CountableRange<Int>) -> Int {
+		let range = Range(range)
+		return Int.createRandom(within: range)
+	}
+	
+	public static func createRandom(within range: CountableClosedRange<Int>) -> Int {
+		let range = ClosedRange(range)
+		return Int.createRandom(within: range)
+	}
+	
+}
+
+extension Int {
+	
+	public func limited(within range: Range<Int>) -> Int {
+		
+		switch self {
+		case Int.min ... range.lowerBound:
+			return range.lowerBound
+			
+		case range.upperBound.decreased ... Int.max:
+			return range.upperBound.decreased
+			
+		default:
+			return self
+		}
+		
+	}
+	
+	public func limited(within range: ClosedRange<Int>) -> Int {
+		
+		switch self {
+		case Int.min ... range.lowerBound:
+			return range.lowerBound
+			
+		case range.upperBound ... Int.max:
+			return range.upperBound
+			
+		default:
+			return self
+		}
+		
+	}
+	
+	public func limited(within range: CountableRange<Int>) -> Int {
+		let range = Range(range)
+		return self.limited(within: range)
+	}
+	
+	public func limited(within range: CountableClosedRange<Int>) -> Int {
+		let range = ClosedRange(range)
+		return self.limited(within: range)
 	}
 	
 }

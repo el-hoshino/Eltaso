@@ -13,7 +13,7 @@ extension Array {
 	public var shuffled: Array<Element> {
 		var array = self
 		for i in array.indices.reversed().dropLast() {
-			let j = Int.createRandom(range: array.indices.lowerBound ..< i)
+			let j = Int.createRandom(within: array.indices.lowerBound ..< i)
 			(array[i], array[j]) = (array[j], array[i])
 		}
 		return array
@@ -40,13 +40,13 @@ extension Array {
 extension Array {
 	
 	public func keepingFirst(_ n: Int = 1) -> Array<Element> {
-		let n = Swift.min(n, self.count)
-		return n > 0 ? Array(self[0 ..< n]) : []
+		let n = n.limited(within: self.indices)
+		return Array(self[0 ..< n])
 	}
 	
 	public func keepingLast(_ n: Int = 1) -> Array<Element> {
-		let n = Swift.min(n, self.count)
-		return n > 0 ? Array(self[(self.count - n) ..< self.count]) : []
+		let n = n.limited(within: self.indices)
+		return Array(self[(self.count - n) ..< self.count])
 	}
 	
 }
@@ -54,13 +54,13 @@ extension Array {
 extension Array {
 	
 	public func droppingFirst(_ n: Int = 1) -> Array<Element> {
-		let n = Swift.min(n, self.count)
-		return n > 0 ? Array(self[n ..< self.count]) : self
+		let n = n.limited(within: self.indices)
+		return Array(self[n ..< self.count])
 	}
 	
 	public func droppingLast(_ n: Int = 1) -> Array<Element> {
-		let n = Swift.min(n, self.count)
-		return n > 0 ? Array(self[0 ..< (self.count - n)]) : self
+		let n = n.limited(within: self.indices)
+		return Array(self[0 ..< (self.count - n)])
 	}
 	
 }

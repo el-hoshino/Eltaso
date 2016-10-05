@@ -39,6 +39,11 @@ extension Array {
 
 extension Array {
 	
+	public func keeping(at n: Int) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return [self[n]]
+	}
+	
 	public func keepingFirst(_ n: Int = 1) -> Array<Element> {
 		let n = n.limited(within: self.indices)
 		return Array(self[0 ..< n])
@@ -53,12 +58,35 @@ extension Array {
 
 extension Array {
 	
-	public func droppingFirst(_ n: Int = 1) -> Array<Element> {
+	public mutating func keep(at n: Int) {
+		self = self.keeping(at: n)
+	}
+	
+	public mutating func keepFirst(_ n: Int = 1) {
+		self = self.keepingFirst(n)
+	}
+	
+	public mutating func keepLast(_ n: Int = 1) {
+		self = self.keepingLast(n)
+	}
+	
+}
+
+extension Array {
+	
+	public func removing(at n: Int) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return self.enumerated().reduce([], { (result, tuple) -> Array<Element> in
+			return tuple.offset == n ? result : result.appending(tuple.element)
+		})
+	}
+	
+	public func removingFirst(_ n: Int = 1) -> Array<Element> {
 		let n = n.limited(within: self.indices)
 		return Array(self[n ..< self.count])
 	}
 	
-	public func droppingLast(_ n: Int = 1) -> Array<Element> {
+	public func removingLast(_ n: Int = 1) -> Array<Element> {
 		let n = n.limited(within: self.indices)
 		return Array(self[0 ..< (self.count - n)])
 	}

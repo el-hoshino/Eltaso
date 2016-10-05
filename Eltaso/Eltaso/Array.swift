@@ -13,7 +13,7 @@ extension Array {
 	public var shuffled: Array<Element> {
 		var array = self
 		for i in array.indices.reversed().dropLast() {
-			let j = Int.createRandom(range: array.indices.lowerBound ..< i)
+			let j = Int.createRandom(within: array.indices.lowerBound ..< i)
 			(array[i], array[j]) = (array[j], array[i])
 		}
 		return array
@@ -33,6 +33,62 @@ extension Array {
 	
 	public func appending(_ elements: [Element]) -> Array<Element> {
 		return self + elements
+	}
+	
+}
+
+extension Array {
+	
+	public func keeping(at n: Int) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return [self[n]]
+	}
+	
+	public func keepingFirst(_ n: Int = 1) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return Array(self[0 ..< n])
+	}
+	
+	public func keepingLast(_ n: Int = 1) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return Array(self[(self.count - n) ..< self.count])
+	}
+	
+}
+
+extension Array {
+	
+	public mutating func keep(at n: Int) {
+		self = self.keeping(at: n)
+	}
+	
+	public mutating func keepFirst(_ n: Int = 1) {
+		self = self.keepingFirst(n)
+	}
+	
+	public mutating func keepLast(_ n: Int = 1) {
+		self = self.keepingLast(n)
+	}
+	
+}
+
+extension Array {
+	
+	public func removing(at n: Int) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return self.enumerated().reduce([], { (result, tuple) -> Array<Element> in
+			return tuple.offset == n ? result : result.appending(tuple.element)
+		})
+	}
+	
+	public func removingFirst(_ n: Int = 1) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return Array(self[n ..< self.count])
+	}
+	
+	public func removingLast(_ n: Int = 1) -> Array<Element> {
+		let n = n.limited(within: self.indices)
+		return Array(self[0 ..< (self.count - n)])
 	}
 	
 }

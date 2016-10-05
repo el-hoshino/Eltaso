@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160DAFAD1DA39FD100EC8770 /* Matrix.swift */; };
 		162414B01D2CC3B900141C64 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414AF1D2CC3B900141C64 /* Dispatch.swift */; };
 		162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D21D2F6CC700141C64 /* OptionalType.swift */; };
 		162414D51D2F6D5600141C64 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* Sequence.swift */; };
@@ -32,6 +33,8 @@
 		16C02D371D3E114E00288942 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D361D3E114E00288942 /* CGSize.swift */; };
 		16C02D3F1D3E1E2600288942 /* IntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */; };
 		16C02DBB1D3FA57300288942 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02DBA1D3FA57300288942 /* Weak.swift */; };
+		16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */; };
+		16C45F941DA4AF0700FDDB38 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C45F931DA4AF0700FDDB38 /* CGPoint.swift */; };
 		79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE41D2C31AF00E07C8A /* CGRect.swift */; };
 		79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE81D2C32AA00E07C8A /* UIView.swift */; };
 		79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */; };
@@ -59,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		160DAFAD1DA39FD100EC8770 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		162414AF1D2CC3B900141C64 /* Dispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		162414D21D2F6CC700141C64 /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
 		162414D41D2F6D5600141C64 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 		16C02D361D3E114E00288942 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSlider.swift; sourceTree = "<group>"; };
 		16C02DBA1D3FA57300288942 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticOperatable.swift; sourceTree = "<group>"; };
+		16C45F931DA4AF0700FDDB38 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		79092CE41D2C31AF00E07C8A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		79092CE81D2C32AA00E07C8A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 				166A3F5E1D88FDAB00695661 /* CVarArg.swift */,
 				162414D21D2F6CC700141C64 /* OptionalType.swift */,
 				16A530F81D38EA6500041952 /* PropertyListConvertible.swift */,
+				16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 				162414D41D2F6D5600141C64 /* Sequence.swift */,
 				169C43E71D82BFA30006B2E2 /* Collection.swift */,
@@ -161,6 +168,7 @@
 				16C02D2E1D3E0AEC00288942 /* String.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
 				16C02D301D3E0FE600288942 /* Dictionary.swift */,
+				16C45F931DA4AF0700FDDB38 /* CGPoint.swift */,
 				16C02D361D3E114E00288942 /* CGSize.swift */,
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
 				16C02D321D3E109400288942 /* Data.swift */,
@@ -173,6 +181,7 @@
 				16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */,
 				168E570A1D6702F000C07A06 /* UIApplication.swift */,
 				162414AF1D2CC3B900141C64 /* Dispatch.swift */,
+				160DAFAD1DA39FD100EC8770 /* Matrix.swift */,
 				166205851D6EB5D100438DAE /* Weekday.swift */,
 				16C02DBA1D3FA57300288942 /* Weak.swift */,
 				79E14EA81D2BA74F00AF6EE4 /* Console.swift */,
@@ -313,11 +322,13 @@
 				168E570B1D6702F000C07A06 /* UIApplication.swift in Sources */,
 				16C02D371D3E114E00288942 /* CGSize.swift in Sources */,
 				166A3F5F1D88FDAB00695661 /* CVarArg.swift in Sources */,
+				16C45F941DA4AF0700FDDB38 /* CGPoint.swift in Sources */,
 				16B5852B1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift in Sources */,
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				16C02DBB1D3FA57300288942 /* Weak.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
+				16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */,
 				168E571B1D6BEF9B00C07A06 /* Downloader.swift in Sources */,
 				162414D51D2F6D5600141C64 /* Sequence.swift in Sources */,
 				16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */,
@@ -338,6 +349,7 @@
 				16C02D311D3E0FE600288942 /* Dictionary.swift in Sources */,
 				168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
+				160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
 				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,
 				79092CED1D2C333300E07C8A /* CallbackButton.swift in Sources */,
@@ -404,7 +416,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -450,7 +462,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

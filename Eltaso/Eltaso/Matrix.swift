@@ -8,16 +8,11 @@
 
 import Foundation
 
-public enum MatrixDimension {
-	case row
-	case column
-}
-
 public enum MatrixInitError: Error {
 	case rowsWithDifferentColumns
 }
 
-enum MatrixMathError: Error {
+public enum MatrixMathError: Error {
 	case sizeMismatch
 }
 
@@ -45,9 +40,7 @@ public struct Matrix <Element> {
 				throw MatrixInitError.rowsWithDifferentColumns
 			}
 		}
-		self._value = array.reduce([], { (result, row) -> [Element] in
-			return result + row
-		})
+		self._value = array.flatMap { $0 }
 		self._columns = columnCount
 		self._rows = rowCount
 	}
@@ -356,10 +349,10 @@ extension Matrix {
 		var matrix = self
 		let rows = Array(self.indices.rows).filter { (row) -> Bool in
 			return row != j
-			}.map { (j) -> [Element] in
-				return self.indices.columns.map({ (i) -> Element in
-					return matrix[(i, j)]
-				})
+		}.map { (j) -> [Element] in
+			return self.indices.columns.map({ (i) -> Element in
+				return matrix[(i, j)]
+			})
 		}
 		matrix._value = rows.flatMap { $0 }
 		matrix._rows.decrease()
@@ -508,8 +501,8 @@ public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	}
 	
 	var matrix = lhs
-	for j in 0 ..< matrix.size.m {
-		for i in 0 ..< matrix.size.n {
+	for j in matrix.indices.rows {
+		for i in matrix.indices.columns {
 			matrix[(i, j)] += rhs[(i, j)]
 		}
 	}
@@ -529,8 +522,8 @@ public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	}
 	
 	var matrix = lhs
-	for j in 0 ..< matrix.size.m {
-		for i in 0 ..< matrix.size.n {
+	for j in matrix.indices.rows {
+		for i in matrix.indices.columns {
 			matrix[(i, j)] -= rhs[(i, j)]
 		}
 	}

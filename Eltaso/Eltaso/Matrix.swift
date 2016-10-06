@@ -40,7 +40,7 @@ public struct Matrix <Element> {
 				throw MatrixInitError.rowsWithDifferentColumns
 			}
 		}
-		self._value = array.flatMap { $0 }
+		self._value = array.flatten
 		self._columns = columnCount
 		self._rows = rowCount
 	}
@@ -237,7 +237,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows = m
 		
 		return matrix
@@ -254,7 +254,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows = m
 		
 		return matrix
@@ -302,7 +302,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns = n
 		
 		return matrix
@@ -319,7 +319,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns = n
 		
 		return matrix
@@ -354,7 +354,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows.decrease()
 		
 		return matrix
@@ -371,7 +371,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows.decrease(by: m)
 		
 		return matrix
@@ -388,7 +388,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows.decrease(by: m)
 		
 		return matrix
@@ -423,7 +423,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns.decrease()
 		
 		return matrix
@@ -440,7 +440,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns.decrease(by: n)
 		
 		return matrix
@@ -457,7 +457,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns.decrease(by: n)
 		
 		return matrix

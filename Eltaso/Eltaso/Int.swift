@@ -82,4 +82,20 @@ extension Int {
 		return self.limited(within: range)
 	}
 	
+	public mutating func limit(within range: Range<Int>) {
+		self = self.limited(within: range)
+	}
+	
+	public mutating func limit(within range: ClosedRange<Int>) {
+		self = self.limited(within: range)
+	}
+	
+	public mutating func limit(within range: CountableRange<Int>) {
+		self = self.limited(within: range)
+	}
+	
+	public mutating func limit(within range: CountableClosedRange<Int>) {
+		self = self.limited(within: range)
+	}
+	
 }

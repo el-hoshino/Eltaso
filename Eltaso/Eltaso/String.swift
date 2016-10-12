@@ -10,6 +10,18 @@ import Foundation
 
 extension String {
 	
+	public var localized: String {
+		return NSLocalizedString(self, comment: "")
+	}
+	
+	public func localized(inTable tableName: String, inBundle bundle: Bundle = .main, defaultValue value: String? = nil, comment: String = "") -> String {
+		return NSLocalizedString(self, tableName: tableName, bundle: bundle, value: value ?? self, comment: comment)
+	}
+	
+}
+
+extension String {
+	
 	public mutating func keepFirst(_ n: Int = 1) {
 		self = self.keepingFirst(n)
 	}

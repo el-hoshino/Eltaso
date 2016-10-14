@@ -23,3 +23,11 @@ extension Sequence where Iterator.Element: OptionalType {
 	}
 	
 }
+
+extension Sequence where Iterator.Element: Sequence {
+	
+	public var flatten: [Iterator.Element.Iterator.Element] {
+		return self.flatMap { $0 }
+	}
+	
+}

@@ -40,7 +40,7 @@ public struct Matrix <Element> {
 				throw MatrixInitError.rowsWithDifferentColumns
 			}
 		}
-		self._value = array.flatMap { $0 }
+		self._value = array.flatten
 		self._columns = columnCount
 		self._rows = rowCount
 	}
@@ -58,11 +58,20 @@ public struct Matrix <Element> {
 	public subscript(index: Index) -> Element {
 		get {
 			let i = index.i, j = index.j
+			return self[i, j]
+		}
+		set {
+			let i = index.i, j = index.j
+			self[i, j] = newValue
+		}
+	}
+	
+	public subscript(i: Int, j: Int) -> Element {
+		get {
 			let index = j * self._columns + i
 			return self._value[index]
 		}
 		set {
-			let i = index.i, j = index.j
 			let index = j * self._columns + i
 			self._value[index] = newValue
 		}
@@ -112,7 +121,7 @@ extension Matrix {
 		
 		for j in transposed.indices.rows {
 			for i in transposed.indices.columns {
-				transposed[(i, j)] = self[(j, i)]
+				transposed[i, j] = self[j, i]
 			}
 		}
 		
@@ -237,7 +246,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows = m
 		
 		return matrix
@@ -254,7 +263,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows = m
 		
 		return matrix
@@ -302,7 +311,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns = n
 		
 		return matrix
@@ -319,7 +328,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns = n
 		
 		return matrix
@@ -354,7 +363,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows.decrease()
 		
 		return matrix
@@ -371,7 +380,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows.decrease(by: m)
 		
 		return matrix
@@ -388,7 +397,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._rows.decrease(by: m)
 		
 		return matrix
@@ -423,7 +432,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns.decrease()
 		
 		return matrix
@@ -440,7 +449,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns.decrease(by: n)
 		
 		return matrix
@@ -457,7 +466,7 @@ extension Matrix {
 				return matrix[(i, j)]
 			})
 		}
-		matrix._value = rows.flatMap { $0 }
+		matrix._value = rows.flatten
 		matrix._columns.decrease(by: n)
 		
 		return matrix
@@ -503,7 +512,7 @@ public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	var matrix = lhs
 	for j in matrix.indices.rows {
 		for i in matrix.indices.columns {
-			matrix[(i, j)] += rhs[(i, j)]
+			matrix[i, j] += rhs[i, j]
 		}
 	}
 	
@@ -524,7 +533,7 @@ public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	var matrix = lhs
 	for j in matrix.indices.rows {
 		for i in matrix.indices.columns {
-			matrix[(i, j)] -= rhs[(i, j)]
+			matrix[i, j] -= rhs[i, j]
 		}
 	}
 	
@@ -548,7 +557,7 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 	func getMultipliedValue(at index: Matrix<T>.Index) -> T {
 		return resultElementFactorIndices.reduce(T.additionOperationInitialValue) { (result, indice) -> T in
-			let factor = lhs[(indice, index.j)] * rhs[(index.i, indice)]
+			let factor = lhs[indice, index.j] * rhs[index.i, indice]
 			return result + factor
 		}
 	}
@@ -568,7 +577,7 @@ public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: MultiplicationO
 	var matrix = rhs
 	for j in matrix.indices.rows {
 		for i in matrix.indices.columns {
-			matrix[(i, j)] *= lhs
+			matrix[i, j] *= lhs
 		}
 	}
 	return matrix
@@ -595,7 +604,7 @@ public func == <T> (lhs: Matrix<T>, rhs: Matrix<T>) -> Bool where T: Equatable {
 	
 	for i in 0 ..< lhs.size.n {
 		for j in 0 ..< lhs.size.m {
-			if lhs[(i, j)] != rhs[(i, j)] {
+			if lhs[i, j] != rhs[i, j] {
 				return false
 			}
 		}

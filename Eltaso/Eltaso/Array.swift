@@ -27,6 +27,15 @@ extension Array {
 
 extension Array {
 	
+	public var randomElement: Element {
+		let randomIndex = Int.createRandom(within: self.indices)
+		return self[randomIndex]
+	}
+	
+}
+
+extension Array {
+	
 	public func appending(_ element: Element) -> Array<Element> {
 		return self + [element]
 	}

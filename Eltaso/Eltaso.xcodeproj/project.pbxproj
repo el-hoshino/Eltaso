@@ -11,8 +11,9 @@
 		162414B01D2CC3B900141C64 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414AF1D2CC3B900141C64 /* Dispatch.swift */; };
 		162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D21D2F6CC700141C64 /* OptionalType.swift */; };
 		162414D51D2F6D5600141C64 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* Sequence.swift */; };
+		1655CD4D1DB0BB4E00C7203D /* TranslatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */; };
+		1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1655CD4E1DB0BC2300C7203D /* ScalableView.swift */; };
 		1656B41B1DAE451900EBC1AE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1656B41A1DAE451900EBC1AE /* UIViewController.swift */; };
-		1656B4201DAF72AE00EBC1AE /* GestureConformedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1656B41F1DAF72AE00EBC1AE /* GestureConformedViewType.swift */; };
 		166205861D6EB5D100438DAE /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166205851D6EB5D100438DAE /* Weekday.swift */; };
 		166A3F5F1D88FDAB00695661 /* CVarArg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A3F5E1D88FDAB00695661 /* CVarArg.swift */; };
 		168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57041D66DBEE00C07A06 /* UIAlertController.swift */; };
@@ -68,8 +69,9 @@
 		162414AF1D2CC3B900141C64 /* Dispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		162414D21D2F6CC700141C64 /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
 		162414D41D2F6D5600141C64 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatableView.swift; sourceTree = "<group>"; };
+		1655CD4E1DB0BC2300C7203D /* ScalableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalableView.swift; sourceTree = "<group>"; };
 		1656B41A1DAE451900EBC1AE /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		1656B41F1DAF72AE00EBC1AE /* GestureConformedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureConformedViewType.swift; sourceTree = "<group>"; };
 		166205851D6EB5D100438DAE /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		166A3F5E1D88FDAB00695661 /* CVarArg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVarArg.swift; sourceTree = "<group>"; };
 		168E57041D66DBEE00C07A06 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,8 @@
 				16A530F81D38EA6500041952 /* PropertyListConvertible.swift */,
 				16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
+				1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */,
+				1655CD4E1DB0BC2300C7203D /* ScalableView.swift */,
 				162414D41D2F6D5600141C64 /* Sequence.swift */,
 				169C43E71D82BFA30006B2E2 /* Collection.swift */,
 				16A530FA1D38F5CE00041952 /* Strideable.swift */,
@@ -185,7 +189,6 @@
 				16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */,
 				16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */,
 				168E570A1D6702F000C07A06 /* UIApplication.swift */,
-				1656B41F1DAF72AE00EBC1AE /* GestureConformedViewType.swift */,
 				162414AF1D2CC3B900141C64 /* Dispatch.swift */,
 				160DAFAD1DA39FD100EC8770 /* Matrix.swift */,
 				166205851D6EB5D100438DAE /* Weekday.swift */,
@@ -332,6 +335,7 @@
 				16B5852B1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift in Sources */,
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
+				1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */,
 				16C02DBB1D3FA57300288942 /* Weak.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
 				16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */,
@@ -348,6 +352,7 @@
 				16C02D291D3E09EC00288942 /* Double.swift in Sources */,
 				162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */,
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
+				1655CD4D1DB0BB4E00C7203D /* TranslatableView.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				16C02D331D3E109400288942 /* Data.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,
@@ -359,7 +364,6 @@
 				160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
 				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,
-				1656B4201DAF72AE00EBC1AE /* GestureConformedViewType.swift in Sources */,
 				79092CED1D2C333300E07C8A /* CallbackButton.swift in Sources */,
 				79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */,
 			);

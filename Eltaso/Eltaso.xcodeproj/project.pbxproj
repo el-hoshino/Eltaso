@@ -11,6 +11,7 @@
 		162414B01D2CC3B900141C64 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414AF1D2CC3B900141C64 /* Dispatch.swift */; };
 		162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D21D2F6CC700141C64 /* OptionalType.swift */; };
 		162414D51D2F6D5600141C64 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* Sequence.swift */; };
+		16470A601DC362CB00EF0E77 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16470A5F1DC362CB00EF0E77 /* CGFloat.swift */; };
 		1655CD4D1DB0BB4E00C7203D /* TranslatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */; };
 		1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1655CD4E1DB0BC2300C7203D /* ScalableView.swift */; };
 		1656B41B1DAE451900EBC1AE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1656B41A1DAE451900EBC1AE /* UIViewController.swift */; };
@@ -69,6 +70,7 @@
 		162414AF1D2CC3B900141C64 /* Dispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		162414D21D2F6CC700141C64 /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
 		162414D41D2F6D5600141C64 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		16470A5F1DC362CB00EF0E77 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatableView.swift; sourceTree = "<group>"; };
 		1655CD4E1DB0BC2300C7203D /* ScalableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalableView.swift; sourceTree = "<group>"; };
 		1656B41A1DAE451900EBC1AE /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				16C02D2E1D3E0AEC00288942 /* String.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
 				16C02D301D3E0FE600288942 /* Dictionary.swift */,
+				16470A5F1DC362CB00EF0E77 /* CGFloat.swift */,
 				16C45F931DA4AF0700FDDB38 /* CGPoint.swift */,
 				16C02D361D3E114E00288942 /* CGSize.swift */,
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
@@ -347,6 +350,7 @@
 				16A530F91D38EA6500041952 /* PropertyListConvertible.swift in Sources */,
 				16C02D2D1D3E0A7F00288942 /* TimeInterval.swift in Sources */,
 				169C43E61D82A92B0006B2E2 /* Int.swift in Sources */,
+				16470A601DC362CB00EF0E77 /* CGFloat.swift in Sources */,
 				16C02D271D3E07B900288942 /* GlobalFunctions.swift in Sources */,
 				16C02D3F1D3E1E2600288942 /* IntervalSlider.swift in Sources */,
 				16C02D291D3E09EC00288942 /* Double.swift in Sources */,

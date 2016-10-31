@@ -25,3 +25,18 @@ public func *= (lhs: inout CGPoint, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
+extension CGPoint {
+	
+	public var verticalInverted: CGPoint {
+		return CGPoint(x: self.x, y: -self.y)
+	}
+	
+	public func anchorPoint(in size: CGSize) -> CGPoint {
+		return CGPoint(x: self.x / size.width, y: self.y / size.height)
+	}
+	
+	public func realPoint(in size: CGSize) -> CGPoint {
+		return CGPoint(x: self.x * size.width, y: self.y * size.height)
+	}
+	
+}

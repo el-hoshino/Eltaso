@@ -18,13 +18,13 @@ extension UIView {
 
 extension UIView {
 	
-	public func removeAllSubviews() {
+	open func removeAllSubviews() {
 		self.subviews.forEach { (subview) in
 			subview.removeFromSuperview()
 		}
 	}
 	
-	public func addSubviews(_ subviews: [UIView]) {
+	open func addSubviews(_ subviews: [UIView]) {
 		subviews.forEach { (view) in
 			self.addSubview(view)
 		}

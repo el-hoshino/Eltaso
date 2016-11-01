@@ -15,9 +15,7 @@ public protocol ScalableView {
 extension ScalableView where Self: UIView {
 	
 	public func scale(by scale: CGFloat) {
-		let currentPosition = self.center
-		self.frame.size *= scale
-		self.center = currentPosition
+		self.transform = self.transform.scaledBy(x: scale, y: scale)
 	}
 	
 }

@@ -27,6 +27,14 @@ public func *= (lhs: inout CGPoint, rhs: CGFloat) {
 
 extension CGPoint {
 	
+	public init(point: CGFloat) {
+		self.init(x: point, y: point)
+	}
+	
+}
+
+extension CGPoint {
+	
 	public var verticalInverted: CGPoint {
 		return CGPoint(x: self.x, y: -self.y)
 	}

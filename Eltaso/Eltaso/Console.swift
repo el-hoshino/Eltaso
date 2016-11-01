@@ -18,13 +18,13 @@ public struct Console {
 
 extension Console {
 	
-	public func info(_ items: Any...) {
+	public func info(_ items: Any?...) {
 		#if DEBUG
 			print(items)
 		#endif
 	}
 	
-	public func warning(_ items: Any...) {
+	public func warning(_ items: Any?...) {
 		#if DEBUG
 			print("---!!!", terminator: "")
 			print(items, terminator: "")

@@ -27,6 +27,9 @@
 		169C43E81D82BFA30006B2E2 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E71D82BFA30006B2E2 /* Collection.swift */; };
 		16A530F91D38EA6500041952 /* PropertyListConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530F81D38EA6500041952 /* PropertyListConvertible.swift */; };
 		16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530FA1D38F5CE00041952 /* Strideable.swift */; };
+		16AA60251DC87349001D6236 /* RotatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60241DC87349001D6236 /* RotatableView.swift */; };
+		16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */; };
+		16AA60341DC8A870001D6236 /* CGContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60331DC8A870001D6236 /* CGContext.swift */; };
 		16B5852B1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */; };
 		16B5852D1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */; };
 		16C02D271D3E07B900288942 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D261D3E07B900288942 /* GlobalFunctions.swift */; };
@@ -87,6 +90,9 @@
 		169C43E71D82BFA30006B2E2 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		16A530F81D38EA6500041952 /* PropertyListConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListConvertible.swift; sourceTree = "<group>"; };
 		16A530FA1D38F5CE00041952 /* Strideable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strideable.swift; sourceTree = "<group>"; };
+		16AA60241DC87349001D6236 /* RotatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatableView.swift; sourceTree = "<group>"; };
+		16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRotationGestureRecognizer.swift; sourceTree = "<group>"; };
+		16AA60331DC8A870001D6236 /* CGContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGContext.swift; sourceTree = "<group>"; };
 		16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPinchGestureRecognizer.swift; sourceTree = "<group>"; };
 		16C02D261D3E07B900288942 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
@@ -170,6 +176,7 @@
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 				1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */,
 				1655CD4E1DB0BC2300C7203D /* ScalableView.swift */,
+				16AA60241DC87349001D6236 /* RotatableView.swift */,
 				162414D41D2F6D5600141C64 /* Sequence.swift */,
 				169C43E71D82BFA30006B2E2 /* Collection.swift */,
 				16A530FA1D38F5CE00041952 /* Strideable.swift */,
@@ -185,6 +192,7 @@
 				16C02D361D3E114E00288942 /* CGSize.swift */,
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
 				166882601DC350F100C67F0C /* CGImage.swift */,
+				16AA60331DC8A870001D6236 /* CGContext.swift */,
 				16C02D321D3E109400288942 /* Data.swift */,
 				168E57061D66E4B900C07A06 /* Date.swift */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
@@ -194,6 +202,7 @@
 				168E57041D66DBEE00C07A06 /* UIAlertController.swift */,
 				16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */,
 				16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */,
+				16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */,
 				168E570A1D6702F000C07A06 /* UIApplication.swift */,
 				162414AF1D2CC3B900141C64 /* Dispatch.swift */,
 				160DAFAD1DA39FD100EC8770 /* Matrix.swift */,
@@ -344,10 +353,13 @@
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */,
 				16C02DBB1D3FA57300288942 /* Weak.swift in Sources */,
+				16AA60341DC8A870001D6236 /* CGContext.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
 				16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */,
+				16AA60251DC87349001D6236 /* RotatableView.swift in Sources */,
 				1656B41B1DAE451900EBC1AE /* UIViewController.swift in Sources */,
 				168E571B1D6BEF9B00C07A06 /* Downloader.swift in Sources */,
+				16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */,
 				162414D51D2F6D5600141C64 /* Sequence.swift in Sources */,
 				16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */,
 				168E57091D66F04500C07A06 /* LocalNotificationCenter.swift in Sources */,

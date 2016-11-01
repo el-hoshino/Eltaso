@@ -10,6 +10,14 @@ import CoreGraphics
 
 extension CGImage {
 	
+	public var size: CGSize {
+		return CGSize(width: self.width, height: self.height)
+	}
+	
+}
+
+extension CGImage {
+	
 	static func createImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> CGImage? {
 		
 		UIGraphicsBeginImageContextWithOptions(size, opaque, scale)

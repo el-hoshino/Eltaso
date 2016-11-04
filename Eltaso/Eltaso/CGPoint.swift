@@ -35,9 +35,44 @@ extension CGPoint {
 
 extension CGPoint {
 	
-	public var verticalInverted: CGPoint {
-		return CGPoint(x: self.x, y: -self.y)
+	public struct DimensionSet: OptionSet {
+		
+		public typealias RawValue = UInt
+		public let rawValue: RawValue
+		public init(rawValue: CGPoint.DimensionSet.RawValue) {
+			self.rawValue = rawValue
+		}
+		
+		public static let horizontal = DimensionSet(rawValue: 1 << 0)
+		public static let vertical = DimensionSet(rawValue: 1 << 1)
+		
+		public static let both: DimensionSet = [.horizontal, .vertical]
+	
 	}
+	
+	public func inverted(in dimensions: DimensionSet) -> CGPoint {
+		
+		var inverted = self
+		
+		if dimensions.contains(.horizontal) {
+			inverted.x.invert()
+		}
+		
+		if dimensions.contains(.vertical) {
+			inverted.y.invert()
+		}
+		
+		return inverted
+		
+	}
+	
+	public mutating func invert(in dimensions: DimensionSet) {
+		self = self.inverted(in: dimensions)
+	}
+	
+}
+
+extension CGPoint {
 	
 	public func anchorPoint(in size: CGSize) -> CGPoint {
 		return CGPoint(x: self.x / size.width, y: self.y / size.height)

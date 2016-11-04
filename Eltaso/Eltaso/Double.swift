@@ -10,6 +10,42 @@ import Foundation
 
 extension Double {
 	
+	public var inverted: Double {
+		return -self
+	}
+	
+	public mutating func invert() {
+		self = self.inverted
+	}
+	
+}
+
+extension Double {
+	
+	public func limited(within range: ClosedRange<Double>) -> Double {
+		
+		switch self {
+		case -.infinity ... range.lowerBound:
+			return range.lowerBound
+			
+		case range.upperBound ... .infinity:
+			return range.upperBound
+			
+		default:
+			return self
+		}
+		
+	}
+	
+	public mutating func limit(within range: ClosedRange<Double>) {
+		self = self.limited(within: range)
+	}
+	
+}
+
+
+extension Double {
+	
 	public var radianValue: Double {
 		
 		if #available(iOS 10.0, *) {

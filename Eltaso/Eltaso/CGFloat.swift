@@ -10,6 +10,18 @@ import Foundation
 
 extension CGFloat {
 	
+	public var inverted: CGFloat {
+		return -self
+	}
+	
+	public mutating func invert() {
+		self = self.inverted
+	}
+	
+}
+
+extension CGFloat {
+	
 	public func limited(within range: ClosedRange<CGFloat>) -> CGFloat {
 		
 		switch self {

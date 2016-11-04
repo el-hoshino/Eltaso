@@ -30,6 +30,29 @@ extension CGSize {
 
 extension CGSize {
 	
+	public enum Orientation {
+		case landscape
+		case portrait
+		case square
+	}
+	
+	public var orientation: Orientation {
+		switch self.width - self.height {
+		case let difference where difference > 0:
+			return .landscape
+			
+		case let difference where difference < 0:
+			return .portrait
+			
+		default:
+			return .square
+		}
+	}
+	
+}
+
+extension CGSize {
+	
 	public var aspectRatio: CGFloat {
 		return self.width / self.height
 	}

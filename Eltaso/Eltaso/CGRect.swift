@@ -27,6 +27,19 @@ extension CGRect {
 
 extension CGRect {
 	
+	public var centerPoint: CGPoint {
+		
+		let x = (self.origin.x + self.size.width) / 2
+		let y = (self.origin.y + self.size.height) / 2
+		
+		return CGPoint(x: x, y: y)
+		
+	}
+	
+}
+
+extension CGRect {
+	
 	public var zeroPositionedFrame: CGRect {
 		return CGRect(origin: .zero, size: self.size)
 	}

@@ -55,11 +55,13 @@ extension CGImage {
 			return self
 		}
 		
+		UIGraphicsEndImageContext()
+		
 		return resizedImage
 		
 	}
 	
-	public func cropped(to rect: CGRect, scale: CGFloat = 0) -> CGImage {
+	public func cropped(in rect: CGRect, scale: CGFloat = 0) -> CGImage {
 		
 		UIGraphicsBeginImageContextWithOptions(rect.size, false, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
@@ -74,6 +76,8 @@ extension CGImage {
 		guard let croppedImage = context.makeImage() else {
 			return self
 		}
+		
+		UIGraphicsEndImageContext()
 		
 		return croppedImage
 		

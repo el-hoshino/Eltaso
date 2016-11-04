@@ -42,6 +42,18 @@ extension Int {
 
 extension Int {
 	
+	public var inverted: Int {
+		return -self
+	}
+	
+	public mutating func invert() {
+		self = self.inverted
+	}
+	
+}
+
+extension Int {
+	
 	public func limited(within range: Range<Int>) -> Int {
 		
 		switch self {

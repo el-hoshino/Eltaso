@@ -18,6 +18,20 @@ extension UIImage {
 
 extension UIImage {
 	
+	open func resized(to size: CGSize) -> UIImage? {
+		
+		UIGraphicsBeginImageContextWithOptions(size, true, self.scale)
+		
+		let drawingRect = CGRect(origin: .zero, size: size)
+		self.draw(in: drawingRect)
+		let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+		
+		UIGraphicsEndImageContext()
+		
+		return resizedImage
+		
+	}
+	
 	open func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
 		
 		let opaque = canvasColor != .clear

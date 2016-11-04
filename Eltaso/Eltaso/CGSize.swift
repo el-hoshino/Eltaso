@@ -69,6 +69,19 @@ extension CGSize {
 
 extension CGSize {
 	
+	public var centerPoint: CGPoint {
+		
+		let x = self.width / 2
+		let y = self.height / 2
+		
+		return CGPoint(x: x, y: y)
+		
+	}
+	
+}
+
+extension CGSize {
+	
 	public func cropped(fromInsets insets: UIEdgeInsets) -> CGSize {
 		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)
 	}

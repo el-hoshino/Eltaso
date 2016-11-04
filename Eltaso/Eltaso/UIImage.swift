@@ -18,17 +18,25 @@ extension UIImage {
 
 extension UIImage {
 	
-	open func getCroppedImage(inRect rect: CGRect) -> UIImage? {
+	open func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
 		
-		UIGraphicsBeginImageContextWithOptions(rect.size, false, self.scale)
+		let opaque = canvasColor != .clear
 		
-		defer {
-			UIGraphicsEndImageContext()
+		UIGraphicsBeginImageContextWithOptions(rect.size, opaque, self.scale)
+		guard let context = UIGraphicsGetCurrentContext() else {
+			return nil
 		}
 		
-		let drawPoint = rect.origin * -1
+		if opaque {
+			context.setFillColor(canvasColor.cgColor)
+			context.fill(rect.zeroPositionedFrame)
+		}
+		
+		let drawPoint = rect.origin.inverted(in: .both)
 		self.draw(at: drawPoint)
 		let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
+		
+		UIGraphicsEndImageContext()
 		
 		return croppedImage
 		

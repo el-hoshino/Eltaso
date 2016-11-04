@@ -61,7 +61,7 @@ extension CGImage {
 		
 	}
 	
-	public func cropped(to rect: CGRect, scale: CGFloat = 0) -> CGImage {
+	public func cropped(in rect: CGRect, scale: CGFloat = 0) -> CGImage {
 		
 		UIGraphicsBeginImageContextWithOptions(rect.size, false, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {

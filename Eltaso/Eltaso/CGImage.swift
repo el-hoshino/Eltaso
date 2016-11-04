@@ -55,6 +55,8 @@ extension CGImage {
 			return self
 		}
 		
+		UIGraphicsEndImageContext()
+		
 		return resizedImage
 		
 	}
@@ -74,6 +76,8 @@ extension CGImage {
 		guard let croppedImage = context.makeImage() else {
 			return self
 		}
+		
+		UIGraphicsEndImageContext()
 		
 		return croppedImage
 		

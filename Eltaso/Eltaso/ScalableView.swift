@@ -9,13 +9,21 @@
 import UIKit
 
 public protocol ScalableView {
-	func scale(by scale: CGFloat)
+	func scale(by scale: CGFloat, from scalingCenter: CGPoint?)
 }
 
 extension ScalableView where Self: UIView {
 	
-	public func scale(by scale: CGFloat) {
-		self.transform = self.transform.scaledBy(x: scale, y: scale)
+	public func scale(by scale: CGFloat, from scalingCenter: CGPoint?) {
+		
+		self.transform.scaleBy(x: scale, y: scale)
+		
+		if let scalingCenter = scalingCenter {
+			let offset = self.midPoint - scalingCenter
+			let translation = offset * (scale - 1)
+			self.transform.translateBy(x: translation.x, y: translation.y)
+		}
+		
 	}
 	
 }

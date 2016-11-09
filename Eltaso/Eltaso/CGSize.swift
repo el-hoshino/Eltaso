@@ -83,11 +83,15 @@ extension CGSize {
 extension CGSize {
 	
 	public func cropped(fromInsets insets: UIEdgeInsets) -> CGSize {
-		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)
+		return CGSize(width: self.width - insets.left - insets.right, height: self.height - insets.top - insets.bottom)
 	}
 	
 	public func cropped(fromMargin margin: CGFloat) -> CGSize {
-		return CGSize(width: self.width + (margin * 2), height: self.height + (margin * 2))
+		return CGSize(width: self.width - (margin * 2), height: self.height - (margin * 2))
+	}
+	
+	public func cropped(fromHorizontalMargin horizontalMargin: CGFloat, verticalMargin: CGFloat) -> CGSize {
+		return CGSize(width: self.width - (horizontalMargin * 2), height: self.height - (verticalMargin * 2))
 	}
 	
 }

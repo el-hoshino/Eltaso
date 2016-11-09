@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160CB2A11DD2DF0A0036784A /* CGAffineTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160CB2A01DD2DF0A0036784A /* CGAffineTransform.swift */; };
 		160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160DAFAD1DA39FD100EC8770 /* Matrix.swift */; };
 		162414B01D2CC3B900141C64 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414AF1D2CC3B900141C64 /* Dispatch.swift */; };
 		162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D21D2F6CC700141C64 /* OptionalType.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		160CB2A01DD2DF0A0036784A /* CGAffineTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGAffineTransform.swift; sourceTree = "<group>"; };
 		160DAFAD1DA39FD100EC8770 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		162414AF1D2CC3B900141C64 /* Dispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		162414D21D2F6CC700141C64 /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				79092CE41D2C31AF00E07C8A /* CGRect.swift */,
 				166882601DC350F100C67F0C /* CGImage.swift */,
 				16AA60331DC8A870001D6236 /* CGContext.swift */,
+				160CB2A01DD2DF0A0036784A /* CGAffineTransform.swift */,
 				16C02D321D3E109400288942 /* Data.swift */,
 				168E57061D66E4B900C07A06 /* Date.swift */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
@@ -372,6 +375,7 @@
 				16C02D291D3E09EC00288942 /* Double.swift in Sources */,
 				162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */,
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
+				160CB2A11DD2DF0A0036784A /* CGAffineTransform.swift in Sources */,
 				1655CD4D1DB0BB4E00C7203D /* TranslatableView.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				16C02D331D3E109400288942 /* Data.swift in Sources */,

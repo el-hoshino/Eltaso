@@ -36,12 +36,22 @@ extension Array {
 
 extension Array {
 	
-	public func appending(_ element: Element) -> Array<Element> {
-		return self + [element]
+	public func appending(_ newElement: Element) -> Array<Element> {
+		return self + [newElement]
 	}
 	
-	public func appending(_ elements: [Element]) -> Array<Element> {
-		return self + elements
+	public func appending(_ newElements: [Element]) -> Array<Element> {
+		return self + newElements
+	}
+	
+}
+
+extension Array {
+	
+	public mutating func append(_ newElements: [Element]) {
+		newElements.forEach { (element) in
+			self.append(element)
+		}
 	}
 	
 }

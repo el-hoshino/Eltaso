@@ -14,4 +14,12 @@ extension UIRotationGestureRecognizer {
 		self.rotation = 0
 	}
 	
+	open func rotatingCenter(in view: UIView?) -> CGPoint {
+		let sumPoint = (0 ..< self.numberOfTouches).reduce(CGPoint.zero, { (sum, touch) -> CGPoint in
+			let point = self.location(ofTouch: touch, in: view)
+			return sum + point
+		})
+		return sumPoint / CGFloat(self.numberOfTouches)
+	}
+	
 }

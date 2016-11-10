@@ -89,6 +89,26 @@ extension CGPoint {
 
 extension CGPoint {
 	
+	public func convertedToOrigin(in size: CGSize) -> CGPoint {
+		
+		let halfSize = size / 2
+		let origin = CGPoint(x: self.x - halfSize.width, y: self.y - halfSize.height)
+		return origin
+		
+	}
+	
+	public func convertedToCenter(in size: CGSize) -> CGPoint {
+		
+		let halfSize = size / 2
+		let center = CGPoint(x: self.x + halfSize.width, y: self.y + halfSize.height)
+		return center
+		
+	}
+	
+}
+
+extension CGPoint {
+	
 	public func rotated(by angle: CGFloat) -> CGPoint {
 		
 		let rotatedX = self.x * cos(angle) + self.y * -sin(angle)

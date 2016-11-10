@@ -56,4 +56,45 @@ extension UIImage {
 		
 	}
 	
+	public enum RotatingMethod {
+		case keepingSize
+		case showWholeImage
+	}
+	
+	open func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, rotatingMethod: RotatingMethod = .showWholeImage) -> UIImage? {
+		
+		let opaque = canvasColor != .clear
+		let canvasSize: CGSize
+		switch rotatingMethod {
+		case .keepingSize:
+			canvasSize = self.size
+			
+		case .showWholeImage:
+			canvasSize = self.size.rotated(by: angle)
+		}
+		
+		UIGraphicsBeginImageContextWithOptions(canvasSize, opaque, self.scale)
+		guard let context = UIGraphicsGetCurrentContext() else {
+			return nil
+		}
+		
+		let canvasOrigin = CGPoint(x: -canvasSize.width / 2, y: -canvasSize.height / 2)
+		let imageOrigin = CGPoint(x: -self.size.width / 2, y: -self.size.height / 2)
+		
+		if opaque {
+			
+		}
+		
+		context.translateBy(x: -canvasOrigin.x, y: -canvasOrigin.y)
+		context.rotate(by: angle)
+		
+		self.draw(at: imageOrigin)
+		let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
+		
+		UIGraphicsEndImageContext()
+		
+		return rotatedImage
+		
+	}
+	
 }

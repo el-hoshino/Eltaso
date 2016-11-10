@@ -42,3 +42,19 @@ extension CGFloat {
 	}
 	
 }
+
+extension CGFloat {
+	
+	public var radianValue: CGFloat {
+		
+		return self / 180 * .pi
+		
+	}
+	
+	public var degreeValue: CGFloat {
+		
+		return self * 180 / .pi
+		
+	}
+	
+}

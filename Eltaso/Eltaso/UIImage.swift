@@ -20,7 +20,7 @@ extension UIImage {
 	
 	open func resized(to size: CGSize) -> UIImage? {
 		
-		UIGraphicsBeginImageContextWithOptions(size, true, self.scale)
+		UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
 		
 		let drawingRect = CGRect(origin: .zero, size: size)
 		self.draw(in: drawingRect)

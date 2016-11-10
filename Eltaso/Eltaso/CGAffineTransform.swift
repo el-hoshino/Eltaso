@@ -11,6 +11,18 @@ import Foundation
 
 extension CGAffineTransform {
 	
+	public var translation: (x: CGFloat, y: CGFloat) {
+		return (self.tx, self.ty)
+	}
+	
+	public var scale: (x: CGFloat, y: CGFloat) {
+		return (sqrt(self.a * self.a + self.c * self.c), sqrt(self.b * self.b + self.d * self.d))
+	}
+	
+	public var rotation: CGFloat {
+		return atan2(self.b, self.a)
+	}
+	
 	public mutating func translateBy(x: CGFloat, y: CGFloat) {
 		self = self.translatedBy(x: x, y: y)
 	}

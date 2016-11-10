@@ -15,7 +15,7 @@ extension UIPinchGestureRecognizer {
 	}
 	
 	open func scalingCenter(in view: UIView?) -> CGPoint {
-		let sumPoint = (0 ..< self.numberOfTouches).reduce(CGPoint.zero, { (sum, touch) -> CGPoint in
+		let sumPoint = (0 ..< self.numberOfTouches).reduce(.zero, { (sum, touch) -> CGPoint in
 			let point = self.location(ofTouch: touch, in: view)
 			return sum + point
 		})

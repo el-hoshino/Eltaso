@@ -9,13 +9,33 @@
 import UIKit
 
 public protocol RotatableView {
-	func rotate(by angle: CGFloat)
+	func rotate(by angle: CGFloat, from rotatingCenter: CGPoint?)
 }
 
 extension RotatableView where Self: UIView {
 	
-	public func rotate(by angle: CGFloat) {
-		self.transform = self.transform.rotated(by: angle)
+	public func rotate(by angle: CGFloat, from rotatingCenter: CGPoint?) {
+		
+		self.transform.rotate(by: angle)
+		
+		if let rotatingCenter = rotatingCenter {
+			do {
+				let midPointFromRotatingCenter = self.midPoint - rotatingCenter
+				let midPointMatrix = try Matrix([[midPointFromRotatingCenter.x], [midPointFromRotatingCenter.y]])
+				let rotatingMatrix = try Matrix([[cos(angle), -sin(angle)],
+				                                 [sin(angle), cos(angle)]])
+				let rotatedMidPointMatrix = try rotatingMatrix * midPointMatrix
+				let rotatedMidPoint = CGPoint(x: rotatedMidPointMatrix[0, 0], y: rotatedMidPointMatrix[0, 1])
+				let offset = rotatedMidPoint - midPointFromRotatingCenter
+				self.transform.translateBy(x: offset.x, y: offset.y)
+				
+			} catch let error {
+				Console.shared.warning(error)
+				return
+			}
+			
+		}
+		
 	}
 	
 }

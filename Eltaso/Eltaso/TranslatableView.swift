@@ -15,7 +15,7 @@ public protocol TranslatableView: class {
 extension TranslatableView where Self: UIView {
 	
 	public func translate(by translation: CGPoint) {
-		self.center += translation
+		self.transform.translateBy(x: translation.x, y: translation.y)
 	}
 	
 }

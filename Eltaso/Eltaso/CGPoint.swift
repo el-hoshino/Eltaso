@@ -16,6 +16,13 @@ public func += (lhs: inout CGPoint, rhs: CGPoint) {
 	lhs = lhs + rhs
 }
 
+public func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+	return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+}
+
+public func -= (lhs: inout CGPoint, rhs: CGPoint) {
+	lhs = lhs - rhs
+}
 
 public func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 	return CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
@@ -23,6 +30,14 @@ public func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 
 public func *= (lhs: inout CGPoint, rhs: CGFloat) {
 	lhs = lhs * rhs
+}
+
+public func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+	return CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
+}
+
+public func /= (lhs: inout CGPoint, rhs: CGFloat) {
+	lhs = lhs / rhs
 }
 
 extension CGPoint {
@@ -68,6 +83,44 @@ extension CGPoint {
 	
 	public mutating func invert(in dimensions: DimensionSet) {
 		self = self.inverted(in: dimensions)
+	}
+	
+}
+
+extension CGPoint {
+	
+	public func convertedToOrigin(in size: CGSize) -> CGPoint {
+		
+		let halfSize = size / 2
+		let origin = CGPoint(x: self.x - halfSize.width, y: self.y - halfSize.height)
+		return origin
+		
+	}
+	
+	public func convertedToCenter(in size: CGSize) -> CGPoint {
+		
+		let halfSize = size / 2
+		let center = CGPoint(x: self.x + halfSize.width, y: self.y + halfSize.height)
+		return center
+		
+	}
+	
+}
+
+extension CGPoint {
+	
+	public func rotated(by angle: CGFloat) -> CGPoint {
+		
+		let rotatedX = self.x * cos(angle) + self.y * -sin(angle)
+		let rotatedY = self.x * sin(angle) + self.y * cos(angle)
+		let rotatedPoint = CGPoint(x: rotatedX, y: rotatedY)
+		
+		return rotatedPoint
+		
+	}
+	
+	public mutating func rotate(by angle: CGFloat) {
+		self = self.rotated(by: angle)
 	}
 	
 }

@@ -23,13 +23,13 @@ public struct Matrix <Element> {
 	fileprivate var _rows: Int
 	
 	public typealias Index = (i: Int, j: Int)
-	public typealias Size = (n: Int, m: Int)
-	public typealias Indices = (columns: CountableRange<Int>, rows: CountableRange<Int>)
+	public typealias Size = (m: Int, n: Int)
+	public typealias Indices = (rows: CountableRange<Int>, columns: CountableRange<Int>)
 	public var size: Size {
-		return (self._columns, self._rows)
+		return (self._rows, self._columns)
 	}
 	public var indices: Indices {
-		return (0 ..< self._columns, 0 ..< self._rows)
+		return (0 ..< self._rows, 0 ..< self._columns)
 	}
 	
 	public init(_ array: [[Element]]) throws {
@@ -68,23 +68,23 @@ public struct Matrix <Element> {
 	
 	public subscript(i: Int, j: Int) -> Element {
 		get {
-			let index = j * self._columns + i
+			let index = i * self._columns + j
 			return self._value[index]
 		}
 		set {
-			let index = j * self._columns + i
+			let index = i * self._columns + j
 			self._value[index] = newValue
 		}
 	}
 	
-	public subscript(row j: Int) -> [Element] {
-		return self.indices.columns.map({ (i) -> Element in
+	public subscript(row i: Int) -> [Element] {
+		return self.indices.columns.map({ (j) -> Element in
 			return self[(i, j)]
 		})
 	}
 	
-	public subscript(column i: Int) -> [Element] {
-		return self.indices.rows.map({ (j) -> Element in
+	public subscript(column j: Int) -> [Element] {
+		return self.indices.rows.map({ (i) -> Element in
 			return self[(i, j)]
 		})
 	}
@@ -119,8 +119,8 @@ extension Matrix {
 		transposed._columns = self._rows
 		transposed._rows = self._columns
 		
-		for j in transposed.indices.rows {
-			for i in transposed.indices.columns {
+		for i in transposed.indices.rows {
+			for j in transposed.indices.columns {
 				transposed[i, j] = self[j, i]
 			}
 		}
@@ -150,16 +150,16 @@ extension Matrix {
 		
 	}
 	
-	public func insertingRow(_ row: [Element], at j: Int) throws -> Matrix<Element> {
+	public func insertingRow(_ row: [Element], at i: Int) throws -> Matrix<Element> {
 		
 		guard row.count == self.size.n else {
 			throw MatrixMathError.sizeMismatch
 		}
 		
 		var matrix = self
-		let initialInsertingIndex = j * self._columns
-		row.enumerated().forEach { (i, element) in
-			matrix._value.insert(element, at: initialInsertingIndex + i)
+		let initialInsertingIndex = i * self._columns
+		row.enumerated().forEach { (j, element) in
+			matrix._value.insert(element, at: initialInsertingIndex + j)
 		}
 		matrix._rows.increase()
 		return matrix
@@ -170,8 +170,8 @@ extension Matrix {
 		self = try self.appendingRow(row)
 	}
 	
-	public mutating func insertRow(_ row: [Element], at j: Int) throws {
-		self = try self.insertingRow(row, at: j)
+	public mutating func insertRow(_ row: [Element], at i: Int) throws {
+		self = try self.insertingRow(row, at: i)
 	}
 	
 }
@@ -185,8 +185,8 @@ extension Matrix {
 		}
 		
 		var matrix = self
-		column.enumerated().reversed().forEach { (j, element) in
-			matrix._value.insert(element, at: j * self._columns + self._columns)
+		column.enumerated().reversed().forEach { (i, element) in
+			matrix._value.insert(element, at: i * self._columns + self._columns)
 		}
 		matrix._columns.increase()
 		
@@ -194,15 +194,15 @@ extension Matrix {
 		
 	}
 	
-	public func insertingColumn(_ column: [Element], at i: Int) throws -> Matrix<Element> {
+	public func insertingColumn(_ column: [Element], at j: Int) throws -> Matrix<Element> {
 		
 		guard column.count == self.size.m else {
 			throw MatrixMathError.sizeMismatch
 		}
 		
 		var matrix = self
-		column.enumerated().reversed().forEach { (j, element) in
-			matrix._value.insert(element, at: j * self._columns + i)
+		column.enumerated().reversed().forEach { (i, element) in
+			matrix._value.insert(element, at: i * self._columns + j)
 		}
 		matrix._columns.increase()
 		return matrix
@@ -213,8 +213,8 @@ extension Matrix {
 		self = try self.appendingColumn(column)
 	}
 	
-	public mutating func insertColumn(_ column: [Element], at i: Int) throws {
-		self = try self.insertingColumn(column, at: i)
+	public mutating func insertColumn(_ column: [Element], at j: Int) throws {
+		self = try self.insertingColumn(column, at: j)
 	}
 	
 }
@@ -223,10 +223,10 @@ extension Matrix {
 	
 	public func keepingRow(at m: Int) -> Matrix<Element> {
 		
-		let j = m.limited(within: self.indices.rows)
+		let i = m.limited(within: self.indices.rows)
 		
 		var matrix = self
-		let row = matrix.indices.columns.map({ (i) -> Element in
+		let row = matrix.indices.columns.map({ (j) -> Element in
 			return matrix[(i, j)]
 		})
 		matrix._value = row
@@ -241,8 +241,8 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (0 ..< m).map { (j) -> [Element] in
-			return self.indices.columns.map({ (i) -> Element in
+		let rows = (0 ..< m).map { (i) -> [Element] in
+			return self.indices.columns.map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -258,8 +258,8 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (self._rows - m ..< self._rows).map { (j) -> [Element] in
-			return self.indices.columns.map({ (i) -> Element in
+		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
+			return self.indices.columns.map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -288,10 +288,10 @@ extension Matrix {
 	
 	public func keepingColumn(at n: Int) -> Matrix<Element> {
 		
-		let i = n.limited(within: self.indices.columns)
+		let j = n.limited(within: self.indices.columns)
 		
 		var matrix = self
-		let column = self.indices.rows.map { (j) -> Element in
+		let column = self.indices.rows.map { (i) -> Element in
 			return matrix[(i, j)]
 		}
 		matrix._value = column
@@ -306,8 +306,8 @@ extension Matrix {
 		let n = n.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
-		let rows = self.indices.rows.map { (j) -> [Element] in
-			return (0 ..< n).map({ (i) -> Element in
+		let rows = self.indices.rows.map { (i) -> [Element] in
+			return (0 ..< n).map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -323,8 +323,8 @@ extension Matrix {
 		let n = n.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
-		let rows = self.indices.rows.map { (j) -> [Element] in
-			return (self._columns - n ..< self._columns).map({ (i) -> Element in
+		let rows = self.indices.rows.map { (i) -> [Element] in
+			return (self._columns - n ..< self._columns).map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -353,13 +353,13 @@ extension Matrix {
 	
 	public func removingRow(at m: Int) -> Matrix<Element> {
 		
-		let j = m.limited(within: self.indices.rows)
+		let i = m.limited(within: self.indices.rows)
 		
 		var matrix = self
 		let rows = Array(self.indices.rows).filter { (row) -> Bool in
-			return row != j
-		}.map { (j) -> [Element] in
-			return self.indices.columns.map({ (i) -> Element in
+			return row != i
+		}.map { (i) -> [Element] in
+			return self.indices.columns.map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -375,8 +375,8 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (self._rows - m ..< self._rows).map { (j) -> [Element] in
-			return self.indices.columns.map({ (i) -> Element in
+		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
+			return self.indices.columns.map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -392,8 +392,8 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (0 ..< m).map { (j) -> [Element] in
-			return self.indices.columns.map({ (i) -> Element in
+		let rows = (0 ..< m).map { (i) -> [Element] in
+			return self.indices.columns.map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -422,12 +422,12 @@ extension Matrix {
 	
 	public func removingColumn(at n: Int) -> Matrix<Element> {
 		
-		let i = n.limited(within: self.indices.columns)
+		let j = n.limited(within: self.indices.columns)
 		
 		var matrix = self
-		let rows = self.indices.rows.map { (j) -> [Element] in
+		let rows = self.indices.rows.map { (i) -> [Element] in
 			return Array(self.indices.columns).filter({ (column) -> Bool in
-				return column != i
+				return column != j
 			}).map({ (i) -> Element in
 				return matrix[(i, j)]
 			})
@@ -444,8 +444,8 @@ extension Matrix {
 		let n = n.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
-		let rows = self.indices.rows.map { (j) -> [Element] in
-			return (n ..< self._columns).map({ (i) -> Element in
+		let rows = self.indices.rows.map { (i) -> [Element] in
+			return (n ..< self._columns).map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -461,8 +461,8 @@ extension Matrix {
 		let n = n.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
-		let rows = self.indices.rows.map { (j) -> [Element] in
-			return (0 ..< self._columns - n).map({ (i) -> Element in
+		let rows = self.indices.rows.map { (i) -> [Element] in
+			return (0 ..< self._columns - n).map({ (j) -> Element in
 				return matrix[(i, j)]
 			})
 		}
@@ -490,9 +490,9 @@ extension Matrix {
 extension Matrix: CustomStringConvertible {
 	
 	public var description: String {
-		let sizeText = "n: \(self.size.n), m: \(self.size.m)"
-		let rows = self.indices.rows.map { (j) -> String in
-			return self.indices.columns.reduce("", { (result, i) -> String in
+		let sizeText = "m: \(self.size.m), n: \(self.size.n)"
+		let rows = self.indices.rows.map { (i) -> String in
+			return self.indices.columns.reduce("", { (result, j) -> String in
 				return result + "\(self[(i, j)])" + ", "
 			})
 		}
@@ -510,8 +510,8 @@ public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	}
 	
 	var matrix = lhs
-	for j in matrix.indices.rows {
-		for i in matrix.indices.columns {
+	for i in matrix.indices.rows {
+		for j in matrix.indices.columns {
 			matrix[i, j] += rhs[i, j]
 		}
 	}
@@ -531,8 +531,8 @@ public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	}
 	
 	var matrix = lhs
-	for j in matrix.indices.rows {
-		for i in matrix.indices.columns {
+	for i in matrix.indices.rows {
+		for j in matrix.indices.columns {
 			matrix[i, j] -= rhs[i, j]
 		}
 	}
@@ -547,23 +547,23 @@ public func -= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Subtra
 
 public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: AdditionOperatable, T: MultiplicationOperatable {
 	
-	guard lhs.size.m == rhs.size.n && lhs.size.n == rhs.size.m else {
+	guard lhs.size.n == rhs.size.m else {
 		throw MatrixMathError.sizeMismatch
 	}
 	
 	let resultSize: Matrix<T>.Size = (lhs.size.m, rhs.size.n)
 	let resultIndices: Matrix<T>.Indices = (lhs.indices.rows, rhs.indices.columns)
-	let resultElementFactorIndices = lhs.indices.columns
+	let resultElementFactorIndices: CountableRange<Int> = lhs.indices.columns
 	
 	func getMultipliedValue(at index: Matrix<T>.Index) -> T {
 		return resultElementFactorIndices.reduce(T.additionOperationInitialValue) { (result, indice) -> T in
-			let factor = lhs[indice, index.j] * rhs[index.i, indice]
+			let factor = lhs[index.i, indice] * rhs[indice, index.j]
 			return result + factor
 		}
 	}
 	
-	let value = resultIndices.rows.map { (j) -> [T] in
-		return resultIndices.columns.map({ (i) -> T in
+	let value = resultIndices.rows.map { (i) -> [T] in
+		return resultIndices.columns.map({ (j) -> T in
 			return getMultipliedValue(at: (i, j))
 		})
 	}

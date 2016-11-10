@@ -8,6 +8,39 @@
 
 import Foundation
 
+public func + (lhs: CGSize, rhs: CGSize) -> CGSize {
+	return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+}
+
+public func += (lhs: inout CGSize, rhs: CGSize) {
+	lhs = lhs + rhs
+}
+
+public func - (lhs: CGSize, rhs: CGSize) -> CGSize {
+	return CGSize(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
+}
+
+public func -= (lhs: inout CGSize, rhs: CGSize) {
+	lhs = lhs - rhs
+}
+
+public func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
+	return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
+}
+
+public func *= (lhs: inout CGSize, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
+public func / (lhs: CGSize, rhs: CGFloat) -> CGSize {
+	return CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
+}
+
+public func /= (lhs: inout CGSize, rhs: CGFloat) {
+	lhs = lhs / rhs
+}
+
+
 extension CGSize {
 	
 	public init(length: CGFloat) {
@@ -82,20 +115,34 @@ extension CGSize {
 
 extension CGSize {
 	
+	public func rotated(by angle: CGFloat) -> CGSize {
+		
+		let rotatedWidth = abs(self.width * cos(angle)) + abs(self.height * -sin(angle))
+		let rotatedHeight = abs(self.width * sin(angle)) + abs(self.height * cos(angle))
+		let rotatedSize = CGSize(width: rotatedWidth, height: rotatedHeight)
+		
+		return rotatedSize
+		
+	}
+	
+	public mutating func rotate(by angle: CGFloat) {
+		self = self.rotated(by: angle)
+	}
+	
+}
+
+extension CGSize {
+	
 	public func cropped(fromInsets insets: UIEdgeInsets) -> CGSize {
-		return CGSize(width: self.width + insets.left + insets.right, height: self.height + insets.top + insets.bottom)
+		return CGSize(width: self.width - insets.left - insets.right, height: self.height - insets.top - insets.bottom)
 	}
 	
 	public func cropped(fromMargin margin: CGFloat) -> CGSize {
-		return CGSize(width: self.width + (margin * 2), height: self.height + (margin * 2))
+		return CGSize(width: self.width - (margin * 2), height: self.height - (margin * 2))
 	}
 	
-}
-
-public func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
-	return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
-}
-
-public func *= (lhs: inout CGSize, rhs: CGFloat) {
-	lhs = lhs * rhs
+	public func cropped(fromHorizontalMargin horizontalMargin: CGFloat, verticalMargin: CGFloat) -> CGSize {
+		return CGSize(width: self.width - (horizontalMargin * 2), height: self.height - (verticalMargin * 2))
+	}
+	
 }

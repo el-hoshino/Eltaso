@@ -32,7 +32,7 @@ public protocol DivisionOperatable {
 	static var divisionOperationInitialValue: Self { get }
 }
 
-extension Int:	AdditionOperatable {
+extension Int: AdditionOperatable {
 	public static var additionOperationInitialValue: Int {
 		return 0
 	}
@@ -52,6 +52,30 @@ extension Int: MultiplicationOperatable {
 
 extension Int: DivisionOperatable {
 	public static var divisionOperationInitialValue: Int {
+		return 1
+	}
+}
+
+extension CGFloat: AdditionOperatable {
+	public static var additionOperationInitialValue: CGFloat {
+		return 0
+	}
+}
+
+extension CGFloat: SubtractionOperatable {
+	public static var substractionOperationInitialValue: CGFloat {
+		return 0
+	}
+}
+
+extension CGFloat: MultiplicationOperatable {
+	public static var multiplicationOperationInitialValue: CGFloat {
+		return 1
+	}
+}
+
+extension CGFloat: DivisionOperatable {
+	public static var divisionOperationInitialValue: CGFloat {
 		return 1
 	}
 }

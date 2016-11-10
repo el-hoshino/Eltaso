@@ -89,6 +89,24 @@ extension CGPoint {
 
 extension CGPoint {
 	
+	public func rotated(by angle: CGFloat) -> CGPoint {
+		
+		let rotatedX = self.x * cos(angle) + self.y * -sin(angle)
+		let rotatedY = self.x * sin(angle) + self.y * cos(angle)
+		let rotatedPoint = CGPoint(x: rotatedX, y: rotatedY)
+		
+		return rotatedPoint
+		
+	}
+	
+	public mutating func rotate(by angle: CGFloat) {
+		self = self.rotated(by: angle)
+	}
+	
+}
+
+extension CGPoint {
+	
 	public func anchorPoint(in size: CGSize) -> CGPoint {
 		return CGPoint(x: self.x / size.width, y: self.y / size.height)
 	}

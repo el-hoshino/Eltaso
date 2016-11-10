@@ -82,6 +82,24 @@ extension CGSize {
 
 extension CGSize {
 	
+	public func rotated(by angle: CGFloat) -> CGSize {
+		
+		let rotatedWidth = abs(self.width * cos(angle)) + abs(self.height * -sin(angle))
+		let rotatedHeight = abs(self.width * sin(angle)) + abs(self.height * cos(angle))
+		let rotatedSize = CGSize(width: rotatedWidth, height: rotatedHeight)
+		
+		return rotatedSize
+		
+	}
+	
+	public mutating func rotate(by angle: CGFloat) {
+		self = self.rotated(by: angle)
+	}
+	
+}
+
+extension CGSize {
+	
 	public func cropped(fromInsets insets: UIEdgeInsets) -> CGSize {
 		return CGSize(width: self.width - insets.left - insets.right, height: self.height - insets.top - insets.bottom)
 	}

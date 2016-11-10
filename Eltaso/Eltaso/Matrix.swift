@@ -555,10 +555,6 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	let resultIndices: Matrix<T>.Indices = (lhs.indices.rows, rhs.indices.columns)
 	let resultElementFactorIndices: CountableRange<Int> = lhs.indices.columns
 	
-	print(resultSize)
-	print(resultIndices)
-	print(resultElementFactorIndices)
-	
 	func getMultipliedValue(at index: Matrix<T>.Index) -> T {
 		return resultElementFactorIndices.reduce(T.additionOperationInitialValue) { (result, indice) -> T in
 			let factor = lhs[index.i, indice] * rhs[indice, index.j]

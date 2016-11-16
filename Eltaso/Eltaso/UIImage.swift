@@ -56,16 +56,16 @@ extension UIImage {
 		
 	}
 	
-	public enum RotatingMethod {
+	public enum RotatingMode {
 		case keepingSize
 		case showWholeImage
 	}
 	
-	open func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, rotatingMethod: RotatingMethod = .showWholeImage) -> UIImage? {
+	open func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: RotatingMode = .showWholeImage) -> UIImage? {
 		
 		let opaque = canvasColor != .clear
 		let canvasSize: CGSize
-		switch rotatingMethod {
+		switch mode {
 		case .keepingSize:
 			canvasSize = self.size
 			
@@ -82,7 +82,8 @@ extension UIImage {
 		let imageOrigin = CGPoint(x: -self.size.width / 2, y: -self.size.height / 2)
 		
 		if opaque {
-			
+			context.setFillColor(canvasColor.cgColor)
+			context.fill(CGRect(origin: .zero, size: canvasSize))
 		}
 		
 		context.translateBy(x: -canvasOrigin.x, y: -canvasOrigin.y)

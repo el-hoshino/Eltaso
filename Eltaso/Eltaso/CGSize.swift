@@ -115,18 +115,14 @@ extension CGSize {
 
 extension CGSize {
 	
-	public func rotated(by angle: CGFloat) -> CGSize {
+	public func boundSizeAfterRotation(by angle: CGFloat) -> CGSize {
 		
-		let rotatedWidth = abs(self.width * cos(angle)) + abs(self.height * -sin(angle))
-		let rotatedHeight = abs(self.width * sin(angle)) + abs(self.height * cos(angle))
-		let rotatedSize = CGSize(width: rotatedWidth, height: rotatedHeight)
+		let rotatedBoundWidth = abs(self.width * cos(angle)) + abs(self.height * -sin(angle))
+		let rotatedBoundHeight = abs(self.width * sin(angle)) + abs(self.height * cos(angle))
+		let rotatedBoundSize = CGSize(width: rotatedBoundWidth, height: rotatedBoundHeight)
 		
-		return rotatedSize
+		return rotatedBoundSize
 		
-	}
-	
-	public mutating func rotate(by angle: CGFloat) {
-		self = self.rotated(by: angle)
 	}
 	
 }

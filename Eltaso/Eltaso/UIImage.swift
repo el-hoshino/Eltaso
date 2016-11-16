@@ -70,7 +70,7 @@ extension UIImage {
 			canvasSize = self.size
 			
 		case .showWholeImage:
-			canvasSize = self.size.rotated(by: angle)
+			canvasSize = self.size.boundSizeAfterRotation(by: angle)
 		}
 		
 		UIGraphicsBeginImageContextWithOptions(canvasSize, opaque, self.scale)

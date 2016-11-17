@@ -227,7 +227,7 @@ extension Matrix {
 		
 		var matrix = self
 		let row = matrix.indices.columns.map({ (j) -> Element in
-			return matrix[(i, j)]
+			return matrix[i, j]
 		})
 		matrix._value = row
 		matrix._rows = 1
@@ -243,7 +243,7 @@ extension Matrix {
 		var matrix = self
 		let rows = (0 ..< m).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -260,7 +260,7 @@ extension Matrix {
 		var matrix = self
 		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -292,7 +292,7 @@ extension Matrix {
 		
 		var matrix = self
 		let column = self.indices.rows.map { (i) -> Element in
-			return matrix[(i, j)]
+			return matrix[i, j]
 		}
 		matrix._value = column
 		matrix._columns = 1
@@ -308,7 +308,7 @@ extension Matrix {
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
 			return (0 ..< n).map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -325,7 +325,7 @@ extension Matrix {
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
 			return (self._columns - n ..< self._columns).map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -360,7 +360,7 @@ extension Matrix {
 			return row != i
 		}.map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -377,7 +377,7 @@ extension Matrix {
 		var matrix = self
 		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -394,7 +394,7 @@ extension Matrix {
 		var matrix = self
 		let rows = (0 ..< m).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -429,7 +429,7 @@ extension Matrix {
 			return Array(self.indices.columns).filter({ (column) -> Bool in
 				return column != j
 			}).map({ (i) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -446,7 +446,7 @@ extension Matrix {
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
 			return (n ..< self._columns).map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -463,7 +463,7 @@ extension Matrix {
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
 			return (0 ..< self._columns - n).map({ (j) -> Element in
-				return matrix[(i, j)]
+				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
@@ -575,8 +575,8 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: MultiplicationOperatable {
 	
 	var matrix = rhs
-	for j in matrix.indices.rows {
-		for i in matrix.indices.columns {
+	for i in matrix.indices.rows {
+		for j in matrix.indices.columns {
 			matrix[i, j] *= lhs
 		}
 	}
@@ -602,8 +602,8 @@ public func == <T> (lhs: Matrix<T>, rhs: Matrix<T>) -> Bool where T: Equatable {
 		return false
 	}
 	
-	for i in 0 ..< lhs.size.n {
-		for j in 0 ..< lhs.size.m {
+	for i in 0 ..< lhs.size.m {
+		for j in 0 ..< lhs.size.n {
 			if lhs[i, j] != rhs[i, j] {
 				return false
 			}

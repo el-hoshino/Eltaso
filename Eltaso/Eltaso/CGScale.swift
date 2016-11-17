@@ -14,6 +14,11 @@ public struct CGScale {
 	
 	public var vertical: CGFloat
 	
+	public init(horizontal: CGFloat, vertical: CGFloat) {
+		self.horizontal = horizontal
+		self.vertical = vertical
+	}
+	
 }
 
 extension CGScale {
@@ -23,10 +28,57 @@ extension CGScale {
 		self.vertical = 0
 	}
 	
+}
+
+extension CGScale {
+	
+	public init(scale: CGFloat) {
+		self.horizontal = scale
+		self.vertical = scale
+	}
+	
+}
+
+extension CGScale {
+
 	public static let zero: CGScale = CGScale()
 	
 	public static let identity = CGScale(horizontal: 1, vertical: 1)
 	
+}
+
+
+public func * (lhs: CGScale, rhs: CGFloat) -> CGScale {
+	return CGScale(horizontal: lhs.horizontal * rhs, vertical: lhs.vertical * rhs)
+}
+
+public func *= (lhs: inout CGScale, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
+public func / (lhs: CGScale, rhs: CGFloat) -> CGScale {
+	return CGScale(horizontal: lhs.horizontal / rhs, vertical: lhs.vertical / rhs)
+}
+
+public func /= (lhs: inout CGScale, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
+
+public func * (lhs: CGScale, rhs: CGScale) -> CGScale {
+	return CGScale(horizontal: lhs.horizontal * rhs.horizontal, vertical: lhs.vertical * rhs.vertical)
+}
+
+public func *= (lhs: inout CGScale, rhs: CGScale) {
+	lhs = lhs * rhs
+}
+
+public func / (lhs: CGScale, rhs: CGScale) -> CGScale {
+	return CGScale(horizontal: lhs.horizontal / rhs.horizontal, vertical: lhs.vertical / rhs.vertical)
+}
+
+public func /= (lhs: inout CGScale, rhs: CGScale) {
+	lhs = lhs * rhs
 }
 
 

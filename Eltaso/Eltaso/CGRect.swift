@@ -8,6 +8,23 @@
 
 import Foundation
 
+public func * (lhs: CGRect, rhs: CGFloat) -> CGRect {
+	return CGRect(x: lhs.origin.x * rhs, y: lhs.origin.y * rhs, width: lhs.width * rhs, height: lhs.height * rhs)
+}
+
+public func *= (lhs: inout CGRect, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
+public func / (lhs: CGRect, rhs: CGFloat) -> CGRect {
+	return CGRect(x: lhs.origin.x / rhs, y: lhs.origin.y / rhs, width: lhs.width / rhs, height: lhs.height / rhs)
+}
+
+public func /= (lhs: inout CGRect, rhs: CGFloat) {
+	lhs = lhs / rhs
+}
+
+
 extension CGRect {
 	
 	public static func createAspectFillFrame(fromContentSize contentSize: CGSize, andCanvasSize canvasSize: CGSize) -> CGRect {

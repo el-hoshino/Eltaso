@@ -25,6 +25,7 @@
 		168E57091D66F04500C07A06 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */; };
 		168E570B1D6702F000C07A06 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E570A1D6702F000C07A06 /* UIApplication.swift */; };
 		168E571B1D6BEF9B00C07A06 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E571A1D6BEF9B00C07A06 /* Downloader.swift */; };
+		169AE5DD1DD9799600B383EF /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */; };
 		169C43E61D82A92B0006B2E2 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E51D82A92B0006B2E2 /* Int.swift */; };
 		169C43E81D82BFA30006B2E2 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E71D82BFA30006B2E2 /* Collection.swift */; };
 		16A530F91D38EA6500041952 /* PropertyListConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530F81D38EA6500041952 /* PropertyListConvertible.swift */; };
@@ -90,6 +91,7 @@
 		168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		168E570A1D6702F000C07A06 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		168E571A1D6BEF9B00C07A06 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		169C43E51D82A92B0006B2E2 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		169C43E71D82BFA30006B2E2 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		16A530F81D38EA6500041952 /* PropertyListConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListConvertible.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				79092CE81D2C32AA00E07C8A /* UIView.swift */,
 				1656B41A1DAE451900EBC1AE /* UIViewController.swift */,
 				168E57041D66DBEE00C07A06 /* UIAlertController.swift */,
+				169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */,
 				16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */,
 				16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */,
 				16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */,
@@ -297,7 +300,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = KC8N9BMQJY;
 						DevelopmentTeamName = "XIANGXIN SHI";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					79E14E8B1D2B90DA00AF6EE4 = {
@@ -358,6 +361,7 @@
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */,
+				169AE5DD1DD9799600B383EF /* UIGestureRecognizer.swift in Sources */,
 				16C02DBB1D3FA57300288942 /* Weak.swift in Sources */,
 				16AA60341DC8A870001D6236 /* CGContext.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,

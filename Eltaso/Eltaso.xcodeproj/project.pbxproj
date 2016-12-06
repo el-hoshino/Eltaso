@@ -45,6 +45,7 @@
 		16C02DBB1D3FA57300288942 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02DBA1D3FA57300288942 /* Weak.swift */; };
 		16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */; };
 		16C45F941DA4AF0700FDDB38 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C45F931DA4AF0700FDDB38 /* CGPoint.swift */; };
+		16D355671DEEF71500444561 /* UIViewAutoresizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D355661DEEF71500444561 /* UIViewAutoresizing.swift */; };
 		79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE41D2C31AF00E07C8A /* CGRect.swift */; };
 		79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE81D2C32AA00E07C8A /* UIView.swift */; };
 		79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */; };
@@ -110,6 +111,7 @@
 		16C02DBA1D3FA57300288942 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticOperatable.swift; sourceTree = "<group>"; };
 		16C45F931DA4AF0700FDDB38 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		16D355661DEEF71500444561 /* UIViewAutoresizing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAutoresizing.swift; sourceTree = "<group>"; };
 		79092CE41D2C31AF00E07C8A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		79092CE81D2C32AA00E07C8A /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				79092CEC1D2C333300E07C8A /* CallbackButton.swift */,
 				79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */,
 				16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */,
+				16D355661DEEF71500444561 /* UIViewAutoresizing.swift */,
 			);
 			path = Eltaso;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */,
 				164F86511DD49A7F00230707 /* CGScale.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
+				16D355671DEEF71500444561 /* UIViewAutoresizing.swift in Sources */,
 				160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
 				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,

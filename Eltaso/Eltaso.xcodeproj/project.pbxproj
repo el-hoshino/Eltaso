@@ -22,7 +22,6 @@
 		166A3F5F1D88FDAB00695661 /* CVarArg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A3F5E1D88FDAB00695661 /* CVarArg.swift */; };
 		168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57041D66DBEE00C07A06 /* UIAlertController.swift */; };
 		168E57071D66E4B900C07A06 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57061D66E4B900C07A06 /* Date.swift */; };
-		168E57091D66F04500C07A06 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */; };
 		168E570B1D6702F000C07A06 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E570A1D6702F000C07A06 /* UIApplication.swift */; };
 		168E571B1D6BEF9B00C07A06 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E571A1D6BEF9B00C07A06 /* Downloader.swift */; };
 		169AE5DD1DD9799600B383EF /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */; };
@@ -88,7 +87,6 @@
 		166A3F5E1D88FDAB00695661 /* CVarArg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVarArg.swift; sourceTree = "<group>"; };
 		168E57041D66DBEE00C07A06 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		168E57061D66E4B900C07A06 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		168E570A1D6702F000C07A06 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		168E571A1D6BEF9B00C07A06 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 				16C02DBA1D3FA57300288942 /* Weak.swift */,
 				79E14EA81D2BA74F00AF6EE4 /* Console.swift */,
 				168E571A1D6BEF9B00C07A06 /* Downloader.swift */,
-				168E57081D66F04500C07A06 /* LocalNotificationCenter.swift */,
 				79092CEC1D2C333300E07C8A /* CallbackButton.swift */,
 				79092CEE1D2C335B00E07C8A /* CallbackSwitch.swift */,
 				16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */,
@@ -372,7 +369,6 @@
 				16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */,
 				162414D51D2F6D5600141C64 /* Sequence.swift in Sources */,
 				16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */,
-				168E57091D66F04500C07A06 /* LocalNotificationCenter.swift in Sources */,
 				16A530F91D38EA6500041952 /* PropertyListConvertible.swift in Sources */,
 				16C02D2D1D3E0A7F00288942 /* TimeInterval.swift in Sources */,
 				169C43E61D82A92B0006B2E2 /* Int.swift in Sources */,
@@ -520,6 +516,7 @@
 		79E14E971D2B90DA00AF6EE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -541,6 +538,7 @@
 		79E14E981D2B90DA00AF6EE4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;

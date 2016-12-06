@@ -34,6 +34,7 @@
 		16AA60341DC8A870001D6236 /* CGContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60331DC8A870001D6236 /* CGContext.swift */; };
 		16B5852B1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */; };
 		16B5852D1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */; };
+		16BA72671DF6825E007B9E92 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA72661DF6825E007B9E92 /* URLComponents.swift */; };
 		16C02D271D3E07B900288942 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D261D3E07B900288942 /* GlobalFunctions.swift */; };
 		16C02D291D3E09EC00288942 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D281D3E09EC00288942 /* Double.swift */; };
 		16C02D2D1D3E0A7F00288942 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D2C1D3E0A7F00288942 /* TimeInterval.swift */; };
@@ -100,6 +101,7 @@
 		16AA60331DC8A870001D6236 /* CGContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGContext.swift; sourceTree = "<group>"; };
 		16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		16B5852C1D4A350200A34DD0 /* UIPinchGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPinchGestureRecognizer.swift; sourceTree = "<group>"; };
+		16BA72661DF6825E007B9E92 /* URLComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		16C02D261D3E07B900288942 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		16C02D281D3E09EC00288942 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		16C02D2C1D3E0A7F00288942 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				160CB2A01DD2DF0A0036784A /* CGAffineTransform.swift */,
 				16C02D321D3E109400288942 /* Data.swift */,
 				168E57061D66E4B900C07A06 /* Date.swift */,
+				16BA72661DF6825E007B9E92 /* URLComponents.swift */,
 				79E14E9C1D2B911A00AF6EE4 /* UIColor.swift */,
 				79E14E9E1D2B918100AF6EE4 /* UIImage.swift */,
 				79092CE81D2C32AA00E07C8A /* UIView.swift */,
@@ -390,6 +393,7 @@
 				169C43E81D82BFA30006B2E2 /* Collection.swift in Sources */,
 				16C02D311D3E0FE600288942 /* Dictionary.swift in Sources */,
 				168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */,
+				16BA72671DF6825E007B9E92 /* URLComponents.swift in Sources */,
 				164F86511DD49A7F00230707 /* CGScale.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 				16D355671DEEF71500444561 /* UIViewAutoresizing.swift in Sources */,

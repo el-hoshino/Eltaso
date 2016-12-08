@@ -102,3 +102,27 @@ extension CGRect {
 	}
 	
 }
+
+extension CGRect {
+	
+	public var horizontalRange: ClosedRange<CGFloat> {
+		return self.left ... self.right
+	}
+	
+	public var verticalRange: ClosedRange<CGFloat> {
+		return self.top ... self.bottom
+	}
+	
+}
+
+extension CGRect {
+	
+	public func isIncluded(in anotherRect: CGRect) -> Bool {
+		return self.horizontalRange …= anotherRect.horizontalRange && self.verticalRange …= anotherRect.verticalRange
+	}
+	
+	public func isPartiallyIncluded(in anotherRect: CGRect) -> Bool {
+		return self.horizontalRange ^ anotherRect.horizontalRange != nil && self.verticalRange ^ anotherRect.verticalRange != nil
+	}
+	
+}

@@ -50,6 +50,14 @@ extension CGPoint {
 
 extension CGPoint {
 	
+	public func isIncluded(in rect: CGRect) -> Bool {
+		return self.x …= rect.horizontalRange && self.y …= rect.verticalRange
+	}
+	
+}
+
+extension CGPoint {
+	
 	public struct DimensionSet: OptionSet {
 		
 		public typealias RawValue = UInt

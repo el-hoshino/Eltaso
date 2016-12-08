@@ -105,6 +105,26 @@ extension CGRect {
 
 extension CGRect {
 	
+	public var topLeft: CGPoint {
+		return CGPoint(x: self.top, y: self.left)
+	}
+	
+	public var topRight: CGPoint {
+		return CGPoint(x: self.top, y: self.right)
+	}
+	
+	public var bottomLeft: CGPoint {
+		return CGPoint(x: self.bottom, y: self.left)
+	}
+	
+	public var bottomRight: CGPoint {
+		return CGPoint(x: self.bottom, y: self.right)
+	}
+	
+}
+
+extension CGRect {
+	
 	public var horizontalRange: ClosedRange<CGFloat> {
 		return self.left ... self.right
 	}

@@ -108,3 +108,37 @@ public func !…= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable 
 public func !…= <T> (lhs: T, rhs: CountableRange<T>) -> Bool where T: Comparable {
 	return !(lhs …= rhs)
 }
+
+precedencegroup ExponentiationPrecedence {
+	associativity: left
+	higherThan: MultiplicationPrecedence
+}
+
+infix operator ^ : ExponentiationPrecedence
+
+public func ^ <T> (lhs: Range<T>, rhs: Range<T>) -> Range<T>? where T: Comparable {
+	
+	let lowerBound = lhs.lowerBound > rhs.lowerBound ? lhs.lowerBound : rhs.lowerBound
+	let upperBound = lhs.upperBound < rhs.upperBound ? lhs.upperBound : rhs.upperBound
+	
+	guard lowerBound <= upperBound else {
+		return nil
+	}
+	
+	return lowerBound ..< upperBound
+	
+}
+
+public func ^ <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> ClosedRange<T>? where T: Comparable {
+	
+	let lowerBound = lhs.lowerBound > rhs.lowerBound ? lhs.lowerBound : rhs.lowerBound
+	let upperBound = lhs.upperBound < rhs.upperBound ? lhs.upperBound : rhs.upperBound
+	
+	guard lowerBound <= upperBound else {
+		return nil
+	}
+	
+	return lowerBound ... upperBound
+	
+}
+

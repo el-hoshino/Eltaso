@@ -58,3 +58,15 @@ extension CGFloat {
 	}
 	
 }
+
+extension CGFloat {
+	
+	public func vector(atAngle angle: CGFloat) -> CGVector {
+		
+		let dx = self * cos(angle)
+		let dy = self * sin(angle)
+		return CGVector(dx: dx, dy: dy)
+		
+	}
+	
+}

@@ -42,6 +42,18 @@ public func /= (lhs: inout CGPoint, rhs: CGFloat) {
 
 extension CGPoint {
 	
+	public static func reflected(byAdding vector: CGVector, to point: CGPoint = .zero) -> CGPoint {
+		return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
+	}
+	
+	public static func reflected(bySubtracting vector: CGVector, from point: CGPoint) -> CGPoint {
+		return CGPoint(x: point.x - vector.dx , y: point.y - vector.dy)
+	}
+	
+}
+
+extension CGPoint {
+	
 	public init(point: CGFloat) {
 		self.init(x: point, y: point)
 	}
@@ -111,24 +123,6 @@ extension CGPoint {
 		let center = CGPoint(x: self.x + halfSize.width, y: self.y + halfSize.height)
 		return center
 		
-	}
-	
-}
-
-extension CGPoint {
-	
-	public func rotated(by angle: CGFloat) -> CGPoint {
-		
-		let rotatedX = self.x * cos(angle) + self.y * -sin(angle)
-		let rotatedY = self.x * sin(angle) + self.y * cos(angle)
-		let rotatedPoint = CGPoint(x: rotatedX, y: rotatedY)
-		
-		return rotatedPoint
-		
-	}
-	
-	public mutating func rotate(by angle: CGFloat) {
-		self = self.rotated(by: angle)
 	}
 	
 }

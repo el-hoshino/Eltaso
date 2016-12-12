@@ -8,6 +8,38 @@
 
 import Foundation
 
+public func + (lhs: CGVector, rhs: CGVector) -> CGVector {
+	return CGVector(dx: lhs.dx + rhs.dx, dy: lhs.dy + rhs.dy)
+}
+
+public func += (lhs: inout CGVector, rhs: CGVector) {
+	lhs = lhs + rhs
+}
+
+public func - (lhs: CGVector, rhs: CGVector) -> CGVector {
+	return CGVector(dx: lhs.dx - rhs.dx, dy: lhs.dy - rhs.dy)
+}
+
+public func -= (lhs: inout CGVector, rhs: CGVector) {
+	lhs = lhs - rhs
+}
+
+public func * (lhs: CGVector, rhs: CGFloat) -> CGVector {
+	return CGVector(dx: lhs.dx * rhs, dy: lhs.dy * rhs)
+}
+
+public func *= (lhs: inout CGVector, rhs: CGFloat) {
+	lhs = lhs * rhs
+}
+
+public func / (lhs: CGVector, rhs: CGFloat) -> CGVector {
+	return CGVector(dx: lhs.dx / rhs, dy: lhs.dy / rhs)
+}
+
+public func /= (lhs: inout CGVector, rhs: CGFloat) {
+	lhs = lhs / rhs
+}
+
 extension CGVector {
 	
 	public static func reflected(from point: CGPoint, addedBy anotherPoint: CGPoint) -> CGVector {

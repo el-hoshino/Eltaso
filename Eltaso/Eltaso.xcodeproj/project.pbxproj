@@ -16,6 +16,7 @@
 		162D38421E02B12200CA9D7A /* ClosedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38411E02B12200CA9D7A /* ClosedRange.swift */; };
 		162D38441E02B30600CA9D7A /* CountableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38431E02B30600CA9D7A /* CountableRange.swift */; };
 		162D38461E02B3F200CA9D7A /* CountableClosedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38451E02B3F200CA9D7A /* CountableClosedRange.swift */; };
+		162D38481E02B6E500CA9D7A /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38471E02B6E500CA9D7A /* Float.swift */; };
 		1644AAAD1DFAAE7F00253721 /* CGVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1644AAAC1DFAAE7F00253721 /* CGVector.swift */; };
 		16470A601DC362CB00EF0E77 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16470A5F1DC362CB00EF0E77 /* CGFloat.swift */; };
 		164F86511DD49A7F00230707 /* CGScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164F86501DD49A7F00230707 /* CGScale.swift */; };
@@ -89,6 +90,7 @@
 		162D38411E02B12200CA9D7A /* ClosedRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosedRange.swift; sourceTree = "<group>"; };
 		162D38431E02B30600CA9D7A /* CountableRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountableRange.swift; sourceTree = "<group>"; };
 		162D38451E02B3F200CA9D7A /* CountableClosedRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountableClosedRange.swift; sourceTree = "<group>"; };
+		162D38471E02B6E500CA9D7A /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		1644AAAC1DFAAE7F00253721 /* CGVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVector.swift; sourceTree = "<group>"; };
 		16470A5F1DC362CB00EF0E77 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		164F86501DD49A7F00230707 /* CGScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGScale.swift; sourceTree = "<group>"; };
@@ -208,8 +210,9 @@
 				162D38431E02B30600CA9D7A /* CountableRange.swift */,
 				162D38451E02B3F200CA9D7A /* CountableClosedRange.swift */,
 				169C43E51D82A92B0006B2E2 /* Int.swift */,
-				16C02D281D3E09EC00288942 /* Double.swift */,
 				79E14EA01D2B93AB00AF6EE4 /* Bool.swift */,
+				162D38471E02B6E500CA9D7A /* Float.swift */,
+				16C02D281D3E09EC00288942 /* Double.swift */,
 				16C02D2C1D3E0A7F00288942 /* TimeInterval.swift */,
 				16C02D2E1D3E0AEC00288942 /* String.swift */,
 				16470A5F1DC362CB00EF0E77 /* CGFloat.swift */,
@@ -421,6 +424,7 @@
 				164F86511DD49A7F00230707 /* CGScale.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 				16D355671DEEF71500444561 /* UIViewAutoresizing.swift in Sources */,
+				162D38481E02B6E500CA9D7A /* Float.swift in Sources */,
 				160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
 				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,

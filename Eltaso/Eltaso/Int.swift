@@ -12,30 +12,30 @@ extension Int {
 	
 	public static func createRandom(within range: Range<Int>) -> Int {
 		
-		let rangeLength = range.upperBound - range.lowerBound
-		let random = arc4random_uniform(UInt32(rangeLength))
-		
+		let random = arc4random_uniform(UInt32(range.width))
 		return Int(random) + range.lowerBound
 		
 	}
 	
 	public static func createRandom(within range: ClosedRange<Int>) -> Int {
 		
-		let rangeLength = range.upperBound.increased - range.lowerBound
-		let random = arc4random_uniform(UInt32(rangeLength))
-		
+		let random = arc4random_uniform(UInt32(range.width.increased))
 		return Int(random) + range.lowerBound
 		
 	}
 	
 	public static func createRandom(within range: CountableRange<Int>) -> Int {
-		let range = Range(range)
-		return Int.createRandom(within: range)
+		
+		let random = arc4random_uniform(UInt32(range.width))
+		return Int(random) + range.lowerBound
+		
 	}
 	
 	public static func createRandom(within range: CountableClosedRange<Int>) -> Int {
-		let range = ClosedRange(range)
-		return Int.createRandom(within: range)
+		
+		let random = arc4random_uniform(UInt32(range.width.increased))
+		return Int(random) + range.lowerBound
+		
 	}
 	
 }

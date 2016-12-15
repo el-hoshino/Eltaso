@@ -10,6 +10,28 @@ import Foundation
 
 extension CGFloat {
 	
+	public static func createRndom(within range: Range<CGFloat>) -> CGFloat {
+		
+		let ratio = range.width / CGFloat(UInt32.max)
+		let random = CGFloat(arc4random_uniform(.max)) * ratio
+		
+		return random + range.lowerBound
+		
+	}
+	
+	public static func createRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
+		
+		let ratio = range.width / CGFloat(UInt32.max)
+		let random = CGFloat(arc4random()) * ratio
+		
+		return random + range.lowerBound
+		
+	}
+	
+}
+
+extension CGFloat {
+	
 	public var inverted: CGFloat {
 		return -self
 	}

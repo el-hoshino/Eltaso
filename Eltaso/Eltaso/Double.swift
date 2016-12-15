@@ -10,6 +10,28 @@ import Foundation
 
 extension Double {
 	
+	public static func createRndom(within range: Range<Double>) -> Double {
+		
+		let ratio = range.width / Double(UInt32.max)
+		let random = Double(arc4random_uniform(.max)) * ratio
+		
+		return random + range.lowerBound
+		
+	}
+	
+	public static func createRandom(within range: ClosedRange<Double>) -> Double {
+		
+		let ratio = range.width / Double(UInt32.max)
+		let random = Double(arc4random()) * ratio
+		
+		return random + range.lowerBound
+		
+	}
+	
+}
+
+extension Double {
+	
 	public var inverted: Double {
 		return -self
 	}
@@ -42,7 +64,6 @@ extension Double {
 	}
 	
 }
-
 
 extension Double {
 	

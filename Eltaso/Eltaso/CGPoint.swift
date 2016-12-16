@@ -42,6 +42,30 @@ public func /= (lhs: inout CGPoint, rhs: CGFloat) {
 
 extension CGPoint {
 	
+	public enum Dimension {
+		case horizontal
+		case vertical
+	}
+	
+	public struct DimensionSet: OptionSet {
+		
+		public typealias RawValue = UInt
+		public let rawValue: RawValue
+		public init(rawValue: CGPoint.DimensionSet.RawValue) {
+			self.rawValue = rawValue
+		}
+		
+		public static let horizontal = DimensionSet(rawValue: 1 << 0)
+		public static let vertical = DimensionSet(rawValue: 1 << 1)
+		
+		public static let both: DimensionSet = [.horizontal, .vertical]
+		
+	}
+	
+}
+
+extension CGPoint {
+	
 	public static func reflected(byAdding vector: CGVector, to point: CGPoint = .zero) -> CGPoint {
 		return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
 	}
@@ -69,21 +93,6 @@ extension CGPoint {
 }
 
 extension CGPoint {
-	
-	public struct DimensionSet: OptionSet {
-		
-		public typealias RawValue = UInt
-		public let rawValue: RawValue
-		public init(rawValue: CGPoint.DimensionSet.RawValue) {
-			self.rawValue = rawValue
-		}
-		
-		public static let horizontal = DimensionSet(rawValue: 1 << 0)
-		public static let vertical = DimensionSet(rawValue: 1 << 1)
-		
-		public static let both: DimensionSet = [.horizontal, .vertical]
-	
-	}
 	
 	public func inverted(in dimensions: DimensionSet) -> CGPoint {
 		

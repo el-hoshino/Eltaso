@@ -21,8 +21,8 @@ extension Double {
 	
 	public static func createRandom(within range: ClosedRange<Double>) -> Double {
 		
-		let ratio = range.width / Double(UInt32.max)
-		let random = Double(arc4random()) * ratio
+		let ratio = range.width / Double(UInt32.max.decreased)
+		let random = Double(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		

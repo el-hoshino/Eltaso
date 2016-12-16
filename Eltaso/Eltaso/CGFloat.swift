@@ -21,8 +21,8 @@ extension CGFloat {
 	
 	public static func createRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
 		
-		let ratio = range.width / CGFloat(UInt32.max)
-		let random = CGFloat(arc4random()) * ratio
+		let ratio = range.width / CGFloat(UInt32.max.decreased)
+		let random = CGFloat(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		

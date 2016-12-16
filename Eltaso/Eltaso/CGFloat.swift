@@ -10,6 +10,28 @@ import Foundation
 
 extension CGFloat {
 	
+	public static func createRndom(within range: Range<CGFloat>) -> CGFloat {
+		
+		let ratio = range.width / CGFloat(UInt32.max)
+		let random = CGFloat(arc4random_uniform(.max)) * ratio
+		
+		return random + range.lowerBound
+		
+	}
+	
+	public static func createRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
+		
+		let ratio = range.width / CGFloat(UInt32.max.decreased)
+		let random = CGFloat(arc4random_uniform(.max)) * ratio
+		
+		return random + range.lowerBound
+		
+	}
+	
+}
+
+extension CGFloat {
+	
 	public var inverted: CGFloat {
 		return -self
 	}
@@ -54,6 +76,18 @@ extension CGFloat {
 	public var degreeValue: CGFloat {
 		
 		return self * 180 / .pi
+		
+	}
+	
+}
+
+extension CGFloat {
+	
+	public func vector(atAngle angle: CGFloat) -> CGVector {
+		
+		let dx = self * cos(angle)
+		let dy = self * sin(angle)
+		return CGVector(dx: dx, dy: dy)
 		
 	}
 	

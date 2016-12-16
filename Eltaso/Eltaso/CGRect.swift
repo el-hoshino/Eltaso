@@ -102,3 +102,98 @@ extension CGRect {
 	}
 	
 }
+
+extension CGRect {
+	
+	public var topLeft: CGPoint {
+		return CGPoint(x: self.top, y: self.left)
+	}
+	
+	public var topRight: CGPoint {
+		return CGPoint(x: self.top, y: self.right)
+	}
+	
+	public var bottomLeft: CGPoint {
+		return CGPoint(x: self.bottom, y: self.left)
+	}
+	
+	public var bottomRight: CGPoint {
+		return CGPoint(x: self.bottom, y: self.right)
+	}
+	
+}
+
+extension CGRect {
+	
+	public var horizontalRange: ClosedRange<CGFloat> {
+		return self.left ... self.right
+	}
+	
+	public var verticalRange: ClosedRange<CGFloat> {
+		return self.top ... self.bottom
+	}
+	
+}
+
+extension CGRect {
+	
+	public func isIncluded(in anotherRect: CGRect) -> Bool {
+		return self.horizontalRange …= anotherRect.horizontalRange && self.verticalRange …= anotherRect.verticalRange
+	}
+	
+	public func isPartiallyIncluded(in anotherRect: CGRect) -> Bool {
+		return self.horizontalRange ^ anotherRect.horizontalRange != nil && self.verticalRange ^ anotherRect.verticalRange != nil
+	}
+	
+}
+
+extension CGRect {
+	
+	public func horizontalExtensionRange(movingBy vector: CGVector) -> ClosedRange<CGFloat>? {
+		return self.horizontalExtensionRange(movingBy: vector.dx)
+	}
+	
+	public func horizontalExtensionRange(movingBy point: CGPoint) -> ClosedRange<CGFloat>? {
+		return self.horizontalExtensionRange(movingBy: point.x)
+	}
+	
+	public func horizontalExtensionRange(movingBy dx: CGFloat) -> ClosedRange<CGFloat>? {
+		
+		switch dx {
+		case let dx where dx < 0:
+			return self.left + dx ... self.left
+			
+		case let dx where dx > 0:
+			return self.right ... self.right + dx
+			
+		case _:
+			return nil
+		}
+		
+	}
+	
+	
+	public func verticalExtensionRange(movingBy vector: CGVector) -> ClosedRange<CGFloat>? {
+		return self.verticalExtensionRange(movingBy: vector.dy)
+	}
+	
+	public func verticalExtensionRange(movingBy point: CGPoint) -> ClosedRange<CGFloat>? {
+		return self.verticalExtensionRange(movingBy: point.y)
+	}
+	
+	public func verticalExtensionRange(movingBy dy: CGFloat) -> ClosedRange<CGFloat>? {
+		
+		switch dy {
+		case let dy where dy < 0:
+			return self.top + dy ... self.top
+			
+		case let dy where dy > 0:
+			return self.bottom ... self.bottom + dy
+			
+		case _:
+			return nil
+		}
+		
+	}
+	
+}

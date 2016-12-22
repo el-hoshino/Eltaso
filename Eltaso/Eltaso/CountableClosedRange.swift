@@ -14,4 +14,16 @@ extension CountableClosedRange {
 		return self.lowerBound.distance(to: self.upperBound)
 	}
 	
+	public func offset(by n: Bound.Stride) -> CountableClosedRange {
+		return self.lowerBound.advanced(by: n) ... self.upperBound.advanced(by: n)
+	}
+	
+	public func appendingUpperBound(by n: Bound.Stride) -> CountableClosedRange {
+		return self.lowerBound ... self.upperBound.advanced(by: n)
+	}
+	
+	public func appendingLowerBound(by n: Bound.Stride) -> CountableClosedRange {
+		return self.lowerBound.advanced(by: -n) ... self.upperBound
+	}
+	
 }

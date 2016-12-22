@@ -14,4 +14,16 @@ extension Range where Bound: Strideable {
 		return self.lowerBound.distance(to: self.upperBound)
 	}
 	
+	public func offset(by n: Bound.Stride) -> Range {
+		return self.lowerBound.increased(by: n) ..< self.upperBound.increased(by: n)
+	}
+	
+	public func appendingUpperBound(by n: Bound.Stride) -> Range {
+		return self.lowerBound ..< self.upperBound.increased(by: n)
+	}
+	
+	public func appendingLowerBound(by n: Bound.Stride) -> Range {
+		return self.lowerBound.decreased(by: n) ..< self.upperBound
+	}
+	
 }

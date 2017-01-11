@@ -35,13 +35,6 @@ extension Collection {
 		return self.startIndex
 	}
 	
-	public var lastIndex: Index {
-		guard self.count > 0 else {
-			fatalError("Index out of range")
-		}
-		return self.index(self.endIndex, offsetBy: -1)
-	}
-	
 }
 
 extension Collection {
@@ -52,9 +45,50 @@ extension Collection {
 		}
 	}
 	
+}
+
+extension Collection where Self: MutableCollection {
+	
+	public var firstElement: Iterator.Element {
+		get {
+			return self[firstIndex]
+		}
+		set {
+			self[firstIndex] = newValue
+		}
+	}
+	
+}
+
+extension Collection where Self: BidirectionalCollection {
+	
+	public var lastIndex: Index {
+		guard self.count > 0 else {
+			fatalError("Index out of range")
+		}
+		return self.index(before: self.endIndex)
+	}
+	
+}
+
+extension Collection where Self: BidirectionalCollection {
+	
 	public var lastElement: Iterator.Element {
 		get {
 			return self[lastIndex]
+		}
+	}
+	
+}
+
+extension Collection where Self: BidirectionalCollection, Self: MutableCollection {
+	
+	public var lastElement: Iterator.Element {
+		get {
+			return self[lastIndex]
+		}
+		set {
+			self[lastIndex] = newValue
 		}
 	}
 	

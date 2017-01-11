@@ -25,3 +25,37 @@ extension Collection {
 	}
 	
 }
+
+extension Collection {
+	
+	public var firstIndex: Index {
+		guard self.count > 0 else {
+			fatalError("Index out of range")
+		}
+		return self.startIndex
+	}
+	
+	public var lastIndex: Index {
+		guard self.count > 0 else {
+			fatalError("Index out of range")
+		}
+		return self.index(self.endIndex, offsetBy: -1)
+	}
+	
+}
+
+extension Collection {
+	
+	public var firstElement: Iterator.Element {
+		get {
+			return self[firstIndex]
+		}
+	}
+	
+	public var lastElement: Iterator.Element {
+		get {
+			return self[lastIndex]
+		}
+	}
+	
+}

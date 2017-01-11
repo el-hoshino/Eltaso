@@ -12,6 +12,7 @@
 		162414B01D2CC3B900141C64 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414AF1D2CC3B900141C64 /* Dispatch.swift */; };
 		162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D21D2F6CC700141C64 /* OptionalType.swift */; };
 		162414D51D2F6D5600141C64 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162414D41D2F6D5600141C64 /* Sequence.swift */; };
+		162A2B901E263CEF00F304CF /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A2B8F1E263CEF00F304CF /* MutableCollection.swift */; };
 		162D38401E02AF2800CA9D7A /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D383F1E02AF2800CA9D7A /* Range.swift */; };
 		162D38421E02B12200CA9D7A /* ClosedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38411E02B12200CA9D7A /* ClosedRange.swift */; };
 		162D38441E02B30600CA9D7A /* CountableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38431E02B30600CA9D7A /* CountableRange.swift */; };
@@ -86,6 +87,7 @@
 		162414AF1D2CC3B900141C64 /* Dispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		162414D21D2F6CC700141C64 /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
 		162414D41D2F6D5600141C64 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		162A2B8F1E263CEF00F304CF /* MutableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
 		162D383F1E02AF2800CA9D7A /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		162D38411E02B12200CA9D7A /* ClosedRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosedRange.swift; sourceTree = "<group>"; };
 		162D38431E02B30600CA9D7A /* CountableRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountableRange.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				162414D41D2F6D5600141C64 /* Sequence.swift */,
 				169C43E71D82BFA30006B2E2 /* Collection.swift */,
 				16A530FA1D38F5CE00041952 /* Strideable.swift */,
+				162A2B8F1E263CEF00F304CF /* MutableCollection.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
 				16C02D301D3E0FE600288942 /* Dictionary.swift */,
 				162D383F1E02AF2800CA9D7A /* Range.swift */,
@@ -409,6 +412,7 @@
 				16C02D3F1D3E1E2600288942 /* IntervalSlider.swift in Sources */,
 				16C02D291D3E09EC00288942 /* Double.swift in Sources */,
 				162414D31D2F6CC800141C64 /* OptionalType.swift in Sources */,
+				162A2B901E263CEF00F304CF /* MutableCollection.swift in Sources */,
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
 				16991FD81DF9708C00FC4A8A /* CopyableObject.swift in Sources */,
 				160CB2A11DD2DF0A0036784A /* CGAffineTransform.swift in Sources */,

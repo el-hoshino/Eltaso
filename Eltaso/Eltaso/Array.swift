@@ -111,3 +111,40 @@ extension Array {
 	}
 	
 }
+
+extension Array {
+	
+	private var lastElement: Element {
+		get {
+			return self[self.index(before: self.endIndex)]
+		}
+		set {
+			self[self.index(before: self.endIndex)] = newValue
+		}
+	}
+	
+	public func group(condition: (_ previous: Element, _ next: Element) throws -> Bool) rethrows -> [[Element]] {
+		
+		guard let first = self.first else {
+			return [[]]
+		}
+		
+		var groupedArray: [[Element]] = [[first]]
+		
+		for next in self.dropFirst() {
+			let previous = groupedArray.lastElement.lastElement
+			
+			if try condition(previous, next) == true {
+				groupedArray.lastElement.append(next)
+				
+			} else {
+				groupedArray.append([next])
+			}
+			
+		}
+		
+		return groupedArray
+		
+	}
+	
+}

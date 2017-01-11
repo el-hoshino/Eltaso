@@ -114,12 +114,16 @@ extension Array {
 
 extension Array {
 	
+	private var lastIndex: Index {
+		return self.index(before: self.endIndex)
+	}
+	
 	private var lastElement: Element {
 		get {
-			return self[self.index(before: self.endIndex)]
+			return self[lastIndex]
 		}
 		set {
-			self[self.index(before: self.endIndex)] = newValue
+			self[lastIndex] = newValue
 		}
 	}
 	

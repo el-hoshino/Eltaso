@@ -118,8 +118,8 @@ infix operator ^ : ExponentiationPrecedence
 
 public func ^ <T> (lhs: Range<T>, rhs: Range<T>) -> Range<T>? where T: Comparable {
 	
-	let lowerBound = lhs.lowerBound > rhs.lowerBound ? lhs.lowerBound : rhs.lowerBound
-	let upperBound = lhs.upperBound < rhs.upperBound ? lhs.upperBound : rhs.upperBound
+	let lowerBound = max(lhs.lowerBound, rhs.lowerBound)
+	let upperBound = min(lhs.upperBound, rhs.upperBound)
 	
 	guard lowerBound <= upperBound else {
 		return nil
@@ -131,8 +131,8 @@ public func ^ <T> (lhs: Range<T>, rhs: Range<T>) -> Range<T>? where T: Comparabl
 
 public func ^ <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> ClosedRange<T>? where T: Comparable {
 	
-	let lowerBound = lhs.lowerBound > rhs.lowerBound ? lhs.lowerBound : rhs.lowerBound
-	let upperBound = lhs.upperBound < rhs.upperBound ? lhs.upperBound : rhs.upperBound
+	let lowerBound = max(lhs.lowerBound, rhs.lowerBound)
+	let upperBound = min(lhs.upperBound, rhs.upperBound)
 	
 	guard lowerBound <= upperBound else {
 		return nil

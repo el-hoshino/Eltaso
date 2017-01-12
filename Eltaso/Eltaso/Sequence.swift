@@ -31,3 +31,52 @@ extension Sequence where Iterator.Element: Sequence {
 	}
 	
 }
+
+extension Sequence {
+	
+	public func group(condition: (_ previous: Iterator.Element, _ next: Iterator.Element) throws -> Bool) rethrows -> [[Iterator.Element]] {
+		
+		var iterator = self.makeIterator()
+		guard let first = iterator.next() else {
+			return [[]]
+		}
+		
+		var groupedArray: [[Iterator.Element]] = [[first]]
+		
+		while let next = iterator.next() {
+			let previous = groupedArray.lastElement.lastElement
+			
+			if try condition(previous, next) == true {
+				groupedArray.lastElement.append(next)
+				
+			} else {
+				groupedArray.append([next])
+			}
+			
+		}
+		
+		return groupedArray
+		
+	}
+	
+}
+
+extension Sequence {
+	
+	public func reduce(_ nextPartialResult: (_ previous: Iterator.Element, _ next: Iterator.Element) throws -> Iterator.Element) rethrows -> Iterator.Element? {
+		
+		var iterator = self.makeIterator()
+		guard let first = iterator.next() else {
+			return nil
+		}
+		
+		var result = first
+		while let next = iterator.next() {
+			result = try nextPartialResult(result, next)
+		}
+		
+		return result
+		
+	}
+	
+}

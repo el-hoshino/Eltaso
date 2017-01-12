@@ -60,3 +60,23 @@ extension Sequence {
 	}
 	
 }
+
+extension Sequence {
+	
+	public func reduce(_ nextPartialResult: (_ previous: Iterator.Element, _ next: Iterator.Element) throws -> Iterator.Element) rethrows -> Iterator.Element? {
+		
+		var iterator = self.makeIterator()
+		guard let first = iterator.next() else {
+			return nil
+		}
+		
+		var result = first
+		while let next = iterator.next() {
+			result = try nextPartialResult(result, next)
+		}
+		
+		return result
+		
+	}
+	
+}

@@ -10,15 +10,10 @@ import Foundation
 
 extension Data {
 	
-	public func getSingleByte(at offset: Int = 0) -> UInt8? {
+	public func getSingleByte() -> UInt8 {
 		
-		guard let startIndex = self.index(self.startIndex, offsetBy: offset, limitedBy: self.endIndex) else {
-			return nil
-		}
-		guard let endIndex = self.index(startIndex, offsetBy: 1, limitedBy: self.endIndex) else {
-			return nil
-		}
-		let subdata = self.subdata(in: startIndex ..< endIndex)
+		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 1)
+		let subdata = self.subdata(in: subdataRange)
 		
 		let result: UInt8 = subdata.withUnsafeBytes { $0.pointee }
 		
@@ -26,15 +21,10 @@ extension Data {
 		
 	}
 	
-	public func getDualByte(at offset: Int = 0) -> UInt16? {
+	public func getDualByte() -> UInt16 {
 		
-		guard let startIndex = self.index(self.startIndex, offsetBy: offset, limitedBy: self.endIndex) else {
-			return nil
-		}
-		guard let endIndex = self.index(startIndex, offsetBy: 2, limitedBy: self.endIndex) else {
-			return nil
-		}
-		let subdata = self.subdata(in: startIndex ..< endIndex)
+		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 2)
+		let subdata = self.subdata(in: subdataRange)
 		
 		let result: UInt16 = subdata.withUnsafeBytes { $0.pointee }
 		
@@ -42,15 +32,10 @@ extension Data {
 		
 	}
 	
-	public func getQuadByte(at offset: Int = 0) -> UInt32? {
+	public func getQuadByte() -> UInt32 {
 		
-		guard let startIndex = self.index(self.startIndex, offsetBy: offset, limitedBy: self.endIndex) else {
-			return nil
-		}
-		guard let endIndex = self.index(startIndex, offsetBy: 4, limitedBy: self.endIndex) else {
-			return nil
-		}
-		let subdata = self.subdata(in: startIndex ..< endIndex)
+		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 4)
+		let subdata = self.subdata(in: subdataRange)
 		
 		let result: UInt32 = subdata.withUnsafeBytes { $0.pointee }
 		

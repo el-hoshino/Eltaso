@@ -36,8 +36,7 @@ extension Data {
 			return nil
 		}
 		
-		let subdata = self.subdata(in: startIndex ..< endIndex)
-		let result: T = subdata.withUnsafeBytes { $0.pointee }
+		let result: T = self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: startIndex).assumingMemoryBound(to: T.self).pointee }
 		
 		return result
 		

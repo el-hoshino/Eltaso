@@ -22,20 +22,18 @@ extension Data {
 		
 		switch advanceSizeType {
 		case .byteSize:
-			guard let start = self.index(self.startIndex, offsetBy: offset, limitedBy: self.endIndex), let end = self.index(start, offsetBy: MemoryLayout<T>.size, limitedBy: self.endIndex) else {
-				return nil
-			}
-			startIndex = start
-			endIndex = end
+			startIndex = self.index(self.startIndex, offsetBy: offset)
+			endIndex = self.index(startIndex, offsetBy: MemoryLayout<T>.size)
 			
 		case .resultTypeSize:
 			let advanceSize = MemoryLayout<T>.size
-			guard let start = self.index(self.startIndex, offsetBy: offset * advanceSize, limitedBy: self.endIndex), let end = self.index(start, offsetBy: advanceSize, limitedBy: self.endIndex) else {
-				return nil
-			}
-			startIndex = start
-			endIndex = end
+			startIndex = self.index(self.startIndex, offsetBy: offset * advanceSize)
+			endIndex = self.index(startIndex, offsetBy: advanceSize)
 			
+		}
+		
+		guard self.indices.contains(startIndex) && self.indices.contains(endIndex) else {
+			return nil
 		}
 		
 		let subdata = self.subdata(in: startIndex ..< endIndex)

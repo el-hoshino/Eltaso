@@ -10,6 +10,51 @@ import Foundation
 
 extension Data {
 	
+	public enum PointerAdvanceSizeType {
+		case byteSize
+		case resultTypeSize
+	}
+	
+	public func getValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T? {
+		
+		let startIndex: Data.Index
+		let endIndex: Data.Index
+		
+		switch advanceSizeType {
+		case .byteSize:
+			startIndex = self.index(self.startIndex, offsetBy: offset)
+			endIndex = self.index(startIndex, offsetBy: MemoryLayout<T>.size)
+			
+		case .resultTypeSize:
+			let advanceSize = MemoryLayout<T>.size
+			startIndex = self.index(self.startIndex, offsetBy: offset * advanceSize)
+			endIndex = self.index(startIndex, offsetBy: advanceSize)
+			
+		}
+		
+		guard self.indices.contains(startIndex) && self.indices.contains(endIndex) else {
+			return nil
+		}
+		
+		let result: T = self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: startIndex).assumingMemoryBound(to: T.self).pointee }
+		
+		return result
+		
+	}
+	
+	public func getUnsafeValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T {
+		
+		switch advanceSizeType {
+		case .byteSize:
+			return self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: offset).assumingMemoryBound(to: T.self).pointee }
+			
+		case .resultTypeSize:
+			return self.withUnsafeBytes { $0.advanced(by: offset).pointee }
+		}
+		
+	}
+	
+	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
 	public func getSingleByte() -> UInt8 {
 		
 		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 1)
@@ -21,6 +66,7 @@ extension Data {
 		
 	}
 	
+	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
 	public func getDualByte() -> UInt16 {
 		
 		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 2)
@@ -32,6 +78,7 @@ extension Data {
 		
 	}
 	
+	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
 	public func getQuadByte() -> UInt32 {
 		
 		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 4)

@@ -15,7 +15,7 @@ extension Data {
 		case resultTypeSize
 	}
 	
-	public func getValue <T> (at offset: Data.Index = 0, in advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T? {
+	public func getValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T? {
 		
 		let startIndex: Data.Index
 		let endIndex: Data.Index
@@ -42,7 +42,7 @@ extension Data {
 		
 	}
 	
-	public func getUnsafeValue <T> (at offset: Data.Index = 0, in advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T {
+	public func getUnsafeValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T {
 		
 		switch advanceSizeType {
 		case .byteSize:
@@ -54,7 +54,7 @@ extension Data {
 		
 	}
 	
-	@available(*, deprecated: 3.0.5, message: "Use getValue(at:) -> T? or getUnsafeValue(at:) -> T instead")
+	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
 	public func getSingleByte() -> UInt8 {
 		
 		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 1)
@@ -66,7 +66,7 @@ extension Data {
 		
 	}
 	
-	@available(*, deprecated: 3.0.5, message: "Use getValue(at:) -> T? or getUnsafeValue(at:) -> T instead")
+	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
 	public func getDualByte() -> UInt16 {
 		
 		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 2)
@@ -78,7 +78,7 @@ extension Data {
 		
 	}
 	
-	@available(*, deprecated: 3.0.5, message: "Use getValue(at:) -> T? or getUnsafeValue(at:) -> T instead")
+	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
 	public func getQuadByte() -> UInt32 {
 		
 		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 4)

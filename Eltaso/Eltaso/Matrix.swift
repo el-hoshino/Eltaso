@@ -121,6 +121,22 @@ extension Matrix {
 
 extension Matrix {
 	
+	public var rows: [[Element]] {
+		return self.indices.rows.map({ (i) -> [Element] in
+			return self[row: i]
+		})
+	}
+	
+	public var columns: [[Element]] {
+		return self.indices.columns.map({ (j) -> [Element] in
+			return self[column: j]
+		})
+	}
+	
+}
+
+extension Matrix {
+	
 	public var transposed: Matrix {
 		
 		var transposed = self

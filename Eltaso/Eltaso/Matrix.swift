@@ -137,6 +137,22 @@ extension Matrix {
 
 extension Matrix {
 	
+	public func enumerated() -> [(index: Index, element: Element)] {
+		
+		let enumeratedMatrix = self.indices.rows.map { (i) -> [(index: Index, element: Element)] in
+			return self.indices.columns.map({ (j) -> (index: Index, element: Element) in
+				return ((i, j), self[i, j])
+			})
+		}
+		
+		return enumeratedMatrix.reduce(+) ?? []
+		
+	}
+	
+}
+
+extension Matrix {
+	
 	public func appendingRow(_ row: [Element]) throws -> Matrix<Element> {
 		
 		guard row.count == self.size.n else {

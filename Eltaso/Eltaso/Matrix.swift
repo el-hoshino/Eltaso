@@ -45,6 +45,14 @@ public struct Matrix <Element> {
 		self._rowCount = rowCount
 	}
 	
+	public init(rows: [[Element]]) throws {
+		self = try Matrix(rows)
+	}
+	
+	public init(columns: [[Element]]) throws {
+		self = try Matrix(columns).transposed
+	}
+	
 	public init(size: Size, repeatedValue: Element) {
 		let elementCount = size.m * size.n
 		let elements = (0 ..< elementCount).map { (_) -> Element in

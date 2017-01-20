@@ -19,17 +19,17 @@ public enum MatrixMathError: Error {
 public struct Matrix <Element> {
 	
 	fileprivate var _value: [Element]
-	fileprivate var _columns: Int
-	fileprivate var _rows: Int
+	fileprivate var _columnCount: Int
+	fileprivate var _rowCount: Int
 	
 	public typealias Index = (i: Int, j: Int)
 	public typealias Size = (m: Int, n: Int)
 	public typealias Indices = (rows: CountableRange<Int>, columns: CountableRange<Int>)
 	public var size: Size {
-		return (self._rows, self._columns)
+		return (self._rowCount, self._columnCount)
 	}
 	public var indices: Indices {
-		return (0 ..< self._rows, 0 ..< self._columns)
+		return (0 ..< self._rowCount, 0 ..< self._columnCount)
 	}
 	
 	public init(_ array: [[Element]]) throws {
@@ -41,8 +41,8 @@ public struct Matrix <Element> {
 			}
 		}
 		self._value = array.flatten
-		self._columns = columnCount
-		self._rows = rowCount
+		self._columnCount = columnCount
+		self._rowCount = rowCount
 	}
 	
 	public init(size: Size, repeatedValue: Element) {
@@ -51,8 +51,8 @@ public struct Matrix <Element> {
 			return repeatedValue
 		}
 		self._value = elements
-		self._columns = size.n
-		self._rows = size.m
+		self._columnCount = size.n
+		self._rowCount = size.m
 	}
 	
 	public subscript(index: Index) -> Element {
@@ -68,11 +68,11 @@ public struct Matrix <Element> {
 	
 	public subscript(i: Int, j: Int) -> Element {
 		get {
-			let index = i * self._columns + j
+			let index = i * self._columnCount + j
 			return self._value[index]
 		}
 		set {
-			let index = i * self._columns + j
+			let index = i * self._columnCount + j
 			self._value[index] = newValue
 		}
 	}
@@ -116,8 +116,8 @@ extension Matrix {
 	public var transposed: Matrix {
 		
 		var transposed = self
-		transposed._columns = self._rows
-		transposed._rows = self._columns
+		transposed._columnCount = self._rowCount
+		transposed._rowCount = self._columnCount
 		
 		for i in transposed.indices.rows {
 			for j in transposed.indices.columns {
@@ -161,7 +161,7 @@ extension Matrix {
 		
 		var matrix = self
 		matrix._value += row
-		matrix._rows.increase()
+		matrix._rowCount.increase()
 		return matrix
 		
 	}
@@ -173,11 +173,11 @@ extension Matrix {
 		}
 		
 		var matrix = self
-		let initialInsertingIndex = i * self._columns
+		let initialInsertingIndex = i * self._columnCount
 		row.enumerated().forEach { (j, element) in
 			matrix._value.insert(element, at: initialInsertingIndex + j)
 		}
-		matrix._rows.increase()
+		matrix._rowCount.increase()
 		return matrix
 		
 	}
@@ -202,9 +202,9 @@ extension Matrix {
 		
 		var matrix = self
 		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columns + self._columns)
+			matrix._value.insert(element, at: i * self._columnCount + self._columnCount)
 		}
-		matrix._columns.increase()
+		matrix._columnCount.increase()
 		
 		return matrix
 		
@@ -218,9 +218,9 @@ extension Matrix {
 		
 		var matrix = self
 		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columns + j)
+			matrix._value.insert(element, at: i * self._columnCount + j)
 		}
-		matrix._columns.increase()
+		matrix._columnCount.increase()
 		return matrix
 		
 	}
@@ -246,7 +246,7 @@ extension Matrix {
 			return matrix[i, j]
 		})
 		matrix._value = row
-		matrix._rows = 1
+		matrix._rowCount = 1
 		
 		return matrix
 		
@@ -263,7 +263,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows = m
+		matrix._rowCount = m
 		
 		return matrix
 		
@@ -274,13 +274,13 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
+		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows = m
+		matrix._rowCount = m
 		
 		return matrix
 		
@@ -311,7 +311,7 @@ extension Matrix {
 			return matrix[i, j]
 		}
 		matrix._value = column
-		matrix._columns = 1
+		matrix._columnCount = 1
 		
 		return matrix
 		
@@ -328,7 +328,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns = n
+		matrix._columnCount = n
 		
 		return matrix
 		
@@ -340,12 +340,12 @@ extension Matrix {
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
-			return (self._columns - n ..< self._columns).map({ (j) -> Element in
+			return (self._columnCount - n ..< self._columnCount).map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns = n
+		matrix._columnCount = n
 		
 		return matrix
 		
@@ -380,7 +380,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows.decrease()
+		matrix._rowCount.decrease()
 		
 		return matrix
 		
@@ -391,13 +391,13 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
+		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows.decrease(by: m)
+		matrix._rowCount.decrease(by: m)
 		
 		return matrix
 		
@@ -414,7 +414,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows.decrease(by: m)
+		matrix._rowCount.decrease(by: m)
 		
 		return matrix
 		
@@ -449,7 +449,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns.decrease()
+		matrix._columnCount.decrease()
 		
 		return matrix
 		
@@ -461,12 +461,12 @@ extension Matrix {
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
-			return (n ..< self._columns).map({ (j) -> Element in
+			return (n ..< self._columnCount).map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns.decrease(by: n)
+		matrix._columnCount.decrease(by: n)
 		
 		return matrix
 		
@@ -478,12 +478,12 @@ extension Matrix {
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
-			return (0 ..< self._columns - n).map({ (j) -> Element in
+			return (0 ..< self._columnCount - n).map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns.decrease(by: n)
+		matrix._columnCount.decrease(by: n)
 		
 		return matrix
 		

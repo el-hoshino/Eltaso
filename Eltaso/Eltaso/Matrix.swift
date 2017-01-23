@@ -175,13 +175,9 @@ extension Matrix {
 	
 }
 
-extension Matrix {
+private extension Matrix {
 	
-	public func appendingRow(_ row: [Element]) throws -> Matrix<Element> {
-		
-		guard row.count == self.size.n else {
-			throw MatrixMathError.sizeMismatch
-		}
+	func unsafeAppendingRow(_ row: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
 		matrix._value += row
@@ -190,11 +186,7 @@ extension Matrix {
 		
 	}
 	
-	public func insertingRow(_ row: [Element], at i: Int) throws -> Matrix<Element> {
-		
-		guard row.count == self.size.n else {
-			throw MatrixMathError.sizeMismatch
-		}
+	func unsafeInsertingRow(_ row: [Element], at i: Int) -> Matrix<Element> {
 		
 		var matrix = self
 		let initialInsertingIndex = i * self._columnCount
@@ -204,6 +196,26 @@ extension Matrix {
 		matrix._rowCount.increase()
 		return matrix
 		
+	}
+	
+}
+
+extension Matrix {
+	
+	private func checkRowSize(of row: [Element]) throws {
+		guard row.count == self.size.n else {
+			throw MatrixMathError.sizeMismatch
+		}
+	}
+	
+	public func appendingRow(_ row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeAppendingRow(row)
+	}
+	
+	public func insertingRow(_ row: [Element], at i: Int) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeInsertingRow(row, at: i)
 	}
 	
 	public mutating func appendRow(_ row: [Element]) throws {
@@ -216,13 +228,46 @@ extension Matrix {
 	
 }
 
-extension Matrix {
+extension Matrix where Element: ExpressibleByIntegerLiteral {
 	
-	public func appendingColumn(_ column: [Element]) throws -> Matrix<Element> {
+	private func countAdjustedRow(from row: [Element]) -> [Element] {
 		
-		guard column.count == self.size.m else {
-			throw MatrixMathError.sizeMismatch
+		var row = row
+		
+		while row.count < self.size.n {
+			row.append(0)
 		}
+		while row.count > self.size.n {
+			row.removeLast()
+		}
+		
+		return row
+		
+	}
+	
+	public func autoAppendingRow(_ row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeAppendingRow(row)
+	}
+	
+	public func autoInsertingRow(_ row: [Element], at i: Int) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeInsertingRow(row, at: i)
+	}
+	
+	public mutating func autoAppendRow(_ row: [Element]) {
+		self = self.autoAppendingRow(row)
+	}
+	
+	public mutating func autoInsertRow(_ row: [Element], at i: Int) {
+		self = self.autoInsertingRow(row, at: i)
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeAppendingColumn(_ column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
 		column.enumerated().reversed().forEach { (i, element) in
@@ -234,19 +279,36 @@ extension Matrix {
 		
 	}
 	
-	public func insertingColumn(_ column: [Element], at j: Int) throws -> Matrix<Element> {
-		
-		guard column.count == self.size.m else {
-			throw MatrixMathError.sizeMismatch
-		}
+	func unsafeInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
 		
 		var matrix = self
 		column.enumerated().reversed().forEach { (i, element) in
 			matrix._value.insert(element, at: i * self._columnCount + j)
 		}
 		matrix._columnCount.increase()
+		
 		return matrix
 		
+	}
+	
+}
+
+extension Matrix {
+	
+	private func checkColumnSize(of column: [Element]) throws {
+		guard column.count == self.size.m else {
+			throw MatrixMathError.sizeMismatch
+		}
+	}
+	
+	public func appendingColumn(_ column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeAppendingColumn(column)
+	}
+	
+	public func insertingColumn(_ column: [Element], at j: Int) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeInsertingColumn(column, at: j)
 	}
 	
 	public mutating func appendColumn(_ column: [Element]) throws {
@@ -255,6 +317,43 @@ extension Matrix {
 	
 	public mutating func insertColumn(_ column: [Element], at j: Int) throws {
 		self = try self.insertingColumn(column, at: j)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	private func countAdjustedColumn(from column: [Element]) -> [Element] {
+		
+		var column = column
+		
+		while column.count < self.size.n {
+			column.append(0)
+		}
+		while column.count > self.size.n {
+			column.removeLast()
+		}
+		
+		return column
+		
+	}
+	
+	public func autoAppendingColumn(_ column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeAppendingColumn(column)
+	}
+	
+	public func autoInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeInsertingColumn(column, at: j)
+	}
+	
+	public mutating func autoAppendColumn(_ column: [Element]) {
+		self = self.autoAppendingColumn(column)
+	}
+	
+	public mutating func autoInsertColumn(_ column: [Element], at j: Int) {
+		self = self.autoInsertingColumn(column, at: j)
 	}
 	
 }

@@ -177,6 +177,56 @@ extension Matrix {
 
 private extension Matrix {
 	
+	func checkRowSize(of row: [Element]) throws {
+		guard row.count == self.size.n else {
+			throw MatrixMathError.sizeMismatch
+		}
+	}
+	
+	func checkColumnSize(of column: [Element]) throws {
+		guard column.count == self.size.m else {
+			throw MatrixMathError.sizeMismatch
+		}
+	}
+	
+}
+
+private extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	func countAdjustedRow(from row: [Element]) -> [Element] {
+		
+		var row = row
+		
+		while row.count < self.size.n {
+			row.append(0)
+		}
+		while row.count > self.size.n {
+			row.removeLast()
+		}
+		
+		return row
+		
+	}
+	
+	func countAdjustedColumn(from column: [Element]) -> [Element] {
+		
+		var column = column
+		
+		while column.count < self.size.n {
+			column.append(0)
+		}
+		while column.count > self.size.n {
+			column.removeLast()
+		}
+		
+		return column
+		
+	}
+	
+}
+
+private extension Matrix {
+	
 	func unsafeAppendingRow(_ row: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
@@ -202,12 +252,6 @@ private extension Matrix {
 
 extension Matrix {
 	
-	private func checkRowSize(of row: [Element]) throws {
-		guard row.count == self.size.n else {
-			throw MatrixMathError.sizeMismatch
-		}
-	}
-	
 	public func appendingRow(_ row: [Element]) throws -> Matrix<Element> {
 		try self.checkRowSize(of: row)
 		return self.unsafeAppendingRow(row)
@@ -229,21 +273,6 @@ extension Matrix {
 }
 
 extension Matrix where Element: ExpressibleByIntegerLiteral {
-	
-	private func countAdjustedRow(from row: [Element]) -> [Element] {
-		
-		var row = row
-		
-		while row.count < self.size.n {
-			row.append(0)
-		}
-		while row.count > self.size.n {
-			row.removeLast()
-		}
-		
-		return row
-		
-	}
 	
 	public func autoAppendingRow(_ row: [Element]) -> Matrix<Element> {
 		let row = self.countAdjustedRow(from: row)
@@ -295,12 +324,6 @@ private extension Matrix {
 
 extension Matrix {
 	
-	private func checkColumnSize(of column: [Element]) throws {
-		guard column.count == self.size.m else {
-			throw MatrixMathError.sizeMismatch
-		}
-	}
-	
 	public func appendingColumn(_ column: [Element]) throws -> Matrix<Element> {
 		try self.checkColumnSize(of: column)
 		return self.unsafeAppendingColumn(column)
@@ -323,21 +346,6 @@ extension Matrix {
 
 extension Matrix where Element: ExpressibleByIntegerLiteral {
 	
-	private func countAdjustedColumn(from column: [Element]) -> [Element] {
-		
-		var column = column
-		
-		while column.count < self.size.n {
-			column.append(0)
-		}
-		while column.count > self.size.n {
-			column.removeLast()
-		}
-		
-		return column
-		
-	}
-	
 	public func autoAppendingColumn(_ column: [Element]) -> Matrix<Element> {
 		let column = self.countAdjustedColumn(from: column)
 		return self.unsafeAppendingColumn(column)
@@ -354,6 +362,200 @@ extension Matrix where Element: ExpressibleByIntegerLiteral {
 	
 	public mutating func autoInsertColumn(_ column: [Element], at j: Int) {
 		self = self.autoInsertingColumn(column, at: j)
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeReplacingRow(at i: Int, with row: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		let initialInsertingIndex = i * self._columnCount
+		row.enumerated().forEach { (j, element) in
+			matrix._value[initialInsertingIndex + j] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		row.enumerated().forEach { (j, element) in
+			matrix._value[j] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingLastRow(with row: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		let initialInsertingIndex = self._rowCount.decreased * self._columnCount
+		row.enumerated().forEach { (j, element) in
+			matrix._value[initialInsertingIndex + j] = element
+		}
+		return matrix
+		
+	}
+	
+}
+
+extension Matrix {
+	
+	public func replacingRow(at i: Int, with row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeReplacingRow(at: i, with: row)
+	}
+	
+	public func replacingFirstRow(with row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeReplacingFirstRow(with: row)
+	}
+	
+	public func replacingLastRow(with row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeReplacingLastRow(with: row)
+	}
+	
+	public mutating func replaceRow(at i: Int, with row: [Element]) throws {
+		self = try self.replacingRow(at: i, with: row)
+	}
+	
+	public mutating func replaceFirstRow(with row: [Element]) throws {
+		self = try self.replacingFirstRow(with: row)
+	}
+	
+	public mutating func replaceLastRow(with row: [Element]) throws {
+		self = try self.replacingLastRow(with: row)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoReplacingRow(at i: Int, with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingRow(at: i, with: row)
+	}
+	
+	public func autoReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingFirstRow(with: row)
+	}
+	
+	public func autoReplacingLastRow(with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingLastRow(with: row)
+	}
+	
+	public mutating func autoReplaceRow(at i: Int, with row: [Element]) {
+		self = self.autoReplacingRow(at: i, with: row)
+	}
+	
+	public mutating func autoReplaceFirstRow(with row: [Element]) {
+		self = self.autoReplacingFirstRow(with: row)
+	}
+	
+	public mutating func autoReplaceLastRow(with row: [Element]) {
+		self = self.autoReplacingLastRow(with: row)
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		column.enumerated().forEach { (i, element) in
+			matrix._value[i * self._columnCount + j] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		column.enumerated().forEach { (i, element) in
+			matrix._value[i * self._columnCount] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		column.enumerated().forEach { (i, element) in
+			matrix._value[i * self._columnCount + self._rowCount.decreased] = element
+		}
+		return matrix
+		
+	}
+	
+}
+
+extension Matrix {
+	
+	public func replacingColumn(at j: Int, with column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeReplacingColumn(at: j, with: column)
+	}
+	
+	public func replacingFirstColumn(with column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeReplacingFirstColumn(with: column)
+	}
+	
+	public func replacingLastColumn(with column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeReplacingLastColumn(with: column)
+	}
+	
+	public mutating func replaceColumn(at j: Int, with column: [Element]) throws {
+		self = try self.replacingColumn(at: j, with: column)
+	}
+	
+	public mutating func replaceFirstColumn(with column: [Element]) throws {
+		self = try self.replacingFirstColumn(with: column)
+	}
+	
+	public mutating func replaceLastColumn(with column: [Element]) throws {
+		self = try self.replacingLastColumn(with: column)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingColumn(at: j, with: column)
+	}
+	
+	public func autoReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingFirstColumn(with: column)
+	}
+	
+	public func autoReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingLastColumn(with: column)
+	}
+	
+	public mutating func autoReplaceColumn(at j: Int, with column: [Element]) {
+		self = self.autoReplacingColumn(at: j, with: column)
+	}
+	
+	public mutating func autoReplaceFirstColumn(with column: [Element]) {
+		self = self.autoReplacingFirstColumn(with: column)
+	}
+	
+	public mutating func autoReplaceLastColumn(with column: [Element]) {
+		self = self.autoReplacingLastColumn(with: column)
 	}
 	
 }

@@ -19,17 +19,17 @@ public enum MatrixMathError: Error {
 public struct Matrix <Element> {
 	
 	fileprivate var _value: [Element]
-	fileprivate var _columns: Int
-	fileprivate var _rows: Int
+	fileprivate var _columnCount: Int
+	fileprivate var _rowCount: Int
 	
 	public typealias Index = (i: Int, j: Int)
 	public typealias Size = (m: Int, n: Int)
 	public typealias Indices = (rows: CountableRange<Int>, columns: CountableRange<Int>)
 	public var size: Size {
-		return (self._rows, self._columns)
+		return (self._rowCount, self._columnCount)
 	}
 	public var indices: Indices {
-		return (0 ..< self._rows, 0 ..< self._columns)
+		return (0 ..< self._rowCount, 0 ..< self._columnCount)
 	}
 	
 	public init(_ array: [[Element]]) throws {
@@ -41,8 +41,16 @@ public struct Matrix <Element> {
 			}
 		}
 		self._value = array.flatten
-		self._columns = columnCount
-		self._rows = rowCount
+		self._columnCount = columnCount
+		self._rowCount = rowCount
+	}
+	
+	public init(rows: [[Element]]) throws {
+		self = try Matrix(rows)
+	}
+	
+	public init(columns: [[Element]]) throws {
+		self = try Matrix(columns).transposed
 	}
 	
 	public init(size: Size, repeatedValue: Element) {
@@ -51,8 +59,8 @@ public struct Matrix <Element> {
 			return repeatedValue
 		}
 		self._value = elements
-		self._columns = size.n
-		self._rows = size.m
+		self._columnCount = size.n
+		self._rowCount = size.m
 	}
 	
 	public subscript(index: Index) -> Element {
@@ -68,11 +76,11 @@ public struct Matrix <Element> {
 	
 	public subscript(i: Int, j: Int) -> Element {
 		get {
-			let index = i * self._columns + j
+			let index = i * self._columnCount + j
 			return self._value[index]
 		}
 		set {
-			let index = i * self._columns + j
+			let index = i * self._columnCount + j
 			self._value[index] = newValue
 		}
 	}
@@ -113,11 +121,27 @@ extension Matrix {
 
 extension Matrix {
 	
+	public var rows: [[Element]] {
+		return self.indices.rows.map({ (i) -> [Element] in
+			return self[row: i]
+		})
+	}
+	
+	public var columns: [[Element]] {
+		return self.indices.columns.map({ (j) -> [Element] in
+			return self[column: j]
+		})
+	}
+	
+}
+
+extension Matrix {
+	
 	public var transposed: Matrix {
 		
 		var transposed = self
-		transposed._columns = self._rows
-		transposed._rows = self._columns
+		transposed._columnCount = self._rowCount
+		transposed._rowCount = self._columnCount
 		
 		for i in transposed.indices.rows {
 			for j in transposed.indices.columns {
@@ -137,33 +161,105 @@ extension Matrix {
 
 extension Matrix {
 	
-	public func appendingRow(_ row: [Element]) throws -> Matrix<Element> {
+	public func enumerated() -> [(index: Index, element: Element)] {
 		
+		let enumeratedMatrix = self.indices.rows.map { (i) -> [(index: Index, element: Element)] in
+			return self.indices.columns.map({ (j) -> (index: Index, element: Element) in
+				return ((i, j), self[i, j])
+			})
+		}
+		
+		return enumeratedMatrix.reduce(+) ?? []
+		
+	}
+	
+}
+
+private extension Matrix {
+	
+	func checkRowSize(of row: [Element]) throws {
 		guard row.count == self.size.n else {
 			throw MatrixMathError.sizeMismatch
 		}
+	}
+	
+	func checkColumnSize(of column: [Element]) throws {
+		guard column.count == self.size.m else {
+			throw MatrixMathError.sizeMismatch
+		}
+	}
+	
+}
+
+private extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	func countAdjustedRow(from row: [Element]) -> [Element] {
+		
+		var row = row
+		
+		while row.count < self.size.n {
+			row.append(0)
+		}
+		while row.count > self.size.n {
+			row.removeLast()
+		}
+		
+		return row
+		
+	}
+	
+	func countAdjustedColumn(from column: [Element]) -> [Element] {
+		
+		var column = column
+		
+		while column.count < self.size.n {
+			column.append(0)
+		}
+		while column.count > self.size.n {
+			column.removeLast()
+		}
+		
+		return column
+		
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeAppendingRow(_ row: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
 		matrix._value += row
-		matrix._rows.increase()
+		matrix._rowCount.increase()
 		return matrix
 		
 	}
 	
-	public func insertingRow(_ row: [Element], at i: Int) throws -> Matrix<Element> {
-		
-		guard row.count == self.size.n else {
-			throw MatrixMathError.sizeMismatch
-		}
+	func unsafeInsertingRow(_ row: [Element], at i: Int) -> Matrix<Element> {
 		
 		var matrix = self
-		let initialInsertingIndex = i * self._columns
+		let initialInsertingIndex = i * self._columnCount
 		row.enumerated().forEach { (j, element) in
 			matrix._value.insert(element, at: initialInsertingIndex + j)
 		}
-		matrix._rows.increase()
+		matrix._rowCount.increase()
 		return matrix
 		
+	}
+	
+}
+
+extension Matrix {
+	
+	public func appendingRow(_ row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeAppendingRow(row)
+	}
+	
+	public func insertingRow(_ row: [Element], at i: Int) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeInsertingRow(row, at: i)
 	}
 	
 	public mutating func appendRow(_ row: [Element]) throws {
@@ -176,37 +272,66 @@ extension Matrix {
 	
 }
 
-extension Matrix {
+extension Matrix where Element: ExpressibleByIntegerLiteral {
 	
-	public func appendingColumn(_ column: [Element]) throws -> Matrix<Element> {
-		
-		guard column.count == self.size.m else {
-			throw MatrixMathError.sizeMismatch
-		}
+	public func autoAppendingRow(_ row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeAppendingRow(row)
+	}
+	
+	public func autoInsertingRow(_ row: [Element], at i: Int) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeInsertingRow(row, at: i)
+	}
+	
+	public mutating func autoAppendRow(_ row: [Element]) {
+		self = self.autoAppendingRow(row)
+	}
+	
+	public mutating func autoInsertRow(_ row: [Element], at i: Int) {
+		self = self.autoInsertingRow(row, at: i)
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeAppendingColumn(_ column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
 		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columns + self._columns)
+			matrix._value.insert(element, at: i * self._columnCount + self._columnCount)
 		}
-		matrix._columns.increase()
+		matrix._columnCount.increase()
 		
 		return matrix
 		
 	}
 	
-	public func insertingColumn(_ column: [Element], at j: Int) throws -> Matrix<Element> {
-		
-		guard column.count == self.size.m else {
-			throw MatrixMathError.sizeMismatch
-		}
+	func unsafeInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
 		
 		var matrix = self
 		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columns + j)
+			matrix._value.insert(element, at: i * self._columnCount + j)
 		}
-		matrix._columns.increase()
+		matrix._columnCount.increase()
+		
 		return matrix
 		
+	}
+	
+}
+
+extension Matrix {
+	
+	public func appendingColumn(_ column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeAppendingColumn(column)
+	}
+	
+	public func insertingColumn(_ column: [Element], at j: Int) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeInsertingColumn(column, at: j)
 	}
 	
 	public mutating func appendColumn(_ column: [Element]) throws {
@@ -215,6 +340,222 @@ extension Matrix {
 	
 	public mutating func insertColumn(_ column: [Element], at j: Int) throws {
 		self = try self.insertingColumn(column, at: j)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoAppendingColumn(_ column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeAppendingColumn(column)
+	}
+	
+	public func autoInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeInsertingColumn(column, at: j)
+	}
+	
+	public mutating func autoAppendColumn(_ column: [Element]) {
+		self = self.autoAppendingColumn(column)
+	}
+	
+	public mutating func autoInsertColumn(_ column: [Element], at j: Int) {
+		self = self.autoInsertingColumn(column, at: j)
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeReplacingRow(at i: Int, with row: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		let initialInsertingIndex = i * self._columnCount
+		row.enumerated().forEach { (j, element) in
+			matrix._value[initialInsertingIndex + j] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		row.enumerated().forEach { (j, element) in
+			matrix._value[j] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingLastRow(with row: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		let initialInsertingIndex = self._rowCount.decreased * self._columnCount
+		row.enumerated().forEach { (j, element) in
+			matrix._value[initialInsertingIndex + j] = element
+		}
+		return matrix
+		
+	}
+	
+}
+
+extension Matrix {
+	
+	public func replacingRow(at i: Int, with row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeReplacingRow(at: i, with: row)
+	}
+	
+	public func replacingFirstRow(with row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeReplacingFirstRow(with: row)
+	}
+	
+	public func replacingLastRow(with row: [Element]) throws -> Matrix<Element> {
+		try self.checkRowSize(of: row)
+		return self.unsafeReplacingLastRow(with: row)
+	}
+	
+	public mutating func replaceRow(at i: Int, with row: [Element]) throws {
+		self = try self.replacingRow(at: i, with: row)
+	}
+	
+	public mutating func replaceFirstRow(with row: [Element]) throws {
+		self = try self.replacingFirstRow(with: row)
+	}
+	
+	public mutating func replaceLastRow(with row: [Element]) throws {
+		self = try self.replacingLastRow(with: row)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoReplacingRow(at i: Int, with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingRow(at: i, with: row)
+	}
+	
+	public func autoReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingFirstRow(with: row)
+	}
+	
+	public func autoReplacingLastRow(with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingLastRow(with: row)
+	}
+	
+	public mutating func autoReplaceRow(at i: Int, with row: [Element]) {
+		self = self.autoReplacingRow(at: i, with: row)
+	}
+	
+	public mutating func autoReplaceFirstRow(with row: [Element]) {
+		self = self.autoReplacingFirstRow(with: row)
+	}
+	
+	public mutating func autoReplaceLastRow(with row: [Element]) {
+		self = self.autoReplacingLastRow(with: row)
+	}
+	
+}
+
+private extension Matrix {
+	
+	func unsafeReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		column.enumerated().forEach { (i, element) in
+			matrix._value[i * self._columnCount + j] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		column.enumerated().forEach { (i, element) in
+			matrix._value[i * self._columnCount] = element
+		}
+		return matrix
+		
+	}
+	
+	func unsafeReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
+		
+		var matrix = self
+		column.enumerated().forEach { (i, element) in
+			matrix._value[i * self._columnCount + self._rowCount.decreased] = element
+		}
+		return matrix
+		
+	}
+	
+}
+
+extension Matrix {
+	
+	public func replacingColumn(at j: Int, with column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeReplacingColumn(at: j, with: column)
+	}
+	
+	public func replacingFirstColumn(with column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeReplacingFirstColumn(with: column)
+	}
+	
+	public func replacingLastColumn(with column: [Element]) throws -> Matrix<Element> {
+		try self.checkColumnSize(of: column)
+		return self.unsafeReplacingLastColumn(with: column)
+	}
+	
+	public mutating func replaceColumn(at j: Int, with column: [Element]) throws {
+		self = try self.replacingColumn(at: j, with: column)
+	}
+	
+	public mutating func replaceFirstColumn(with column: [Element]) throws {
+		self = try self.replacingFirstColumn(with: column)
+	}
+	
+	public mutating func replaceLastColumn(with column: [Element]) throws {
+		self = try self.replacingLastColumn(with: column)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingColumn(at: j, with: column)
+	}
+	
+	public func autoReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingFirstColumn(with: column)
+	}
+	
+	public func autoReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingLastColumn(with: column)
+	}
+	
+	public mutating func autoReplaceColumn(at j: Int, with column: [Element]) {
+		self = self.autoReplacingColumn(at: j, with: column)
+	}
+	
+	public mutating func autoReplaceFirstColumn(with column: [Element]) {
+		self = self.autoReplacingFirstColumn(with: column)
+	}
+	
+	public mutating func autoReplaceLastColumn(with column: [Element]) {
+		self = self.autoReplacingLastColumn(with: column)
 	}
 	
 }
@@ -230,7 +571,7 @@ extension Matrix {
 			return matrix[i, j]
 		})
 		matrix._value = row
-		matrix._rows = 1
+		matrix._rowCount = 1
 		
 		return matrix
 		
@@ -247,7 +588,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows = m
+		matrix._rowCount = m
 		
 		return matrix
 		
@@ -258,13 +599,13 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
+		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows = m
+		matrix._rowCount = m
 		
 		return matrix
 		
@@ -295,7 +636,7 @@ extension Matrix {
 			return matrix[i, j]
 		}
 		matrix._value = column
-		matrix._columns = 1
+		matrix._columnCount = 1
 		
 		return matrix
 		
@@ -312,7 +653,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns = n
+		matrix._columnCount = n
 		
 		return matrix
 		
@@ -324,12 +665,12 @@ extension Matrix {
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
-			return (self._columns - n ..< self._columns).map({ (j) -> Element in
+			return (self._columnCount - n ..< self._columnCount).map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns = n
+		matrix._columnCount = n
 		
 		return matrix
 		
@@ -364,7 +705,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows.decrease()
+		matrix._rowCount.decrease()
 		
 		return matrix
 		
@@ -375,13 +716,13 @@ extension Matrix {
 		let m = m.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
-		let rows = (self._rows - m ..< self._rows).map { (i) -> [Element] in
+		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
 			return self.indices.columns.map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows.decrease(by: m)
+		matrix._rowCount.decrease(by: m)
 		
 		return matrix
 		
@@ -398,7 +739,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._rows.decrease(by: m)
+		matrix._rowCount.decrease(by: m)
 		
 		return matrix
 		
@@ -433,7 +774,7 @@ extension Matrix {
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns.decrease()
+		matrix._columnCount.decrease()
 		
 		return matrix
 		
@@ -445,12 +786,12 @@ extension Matrix {
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
-			return (n ..< self._columns).map({ (j) -> Element in
+			return (n ..< self._columnCount).map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns.decrease(by: n)
+		matrix._columnCount.decrease(by: n)
 		
 		return matrix
 		
@@ -462,12 +803,12 @@ extension Matrix {
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
-			return (0 ..< self._columns - n).map({ (j) -> Element in
+			return (0 ..< self._columnCount - n).map({ (j) -> Element in
 				return matrix[i, j]
 			})
 		}
 		matrix._value = rows.flatten
-		matrix._columns.decrease(by: n)
+		matrix._columnCount.decrease(by: n)
 		
 		return matrix
 		

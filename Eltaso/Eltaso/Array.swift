@@ -27,7 +27,10 @@ extension Array {
 
 extension Array {
 	
-	public var randomElement: Element {
+	public var randomElement: Element? {
+		guard self.count > 0 else {
+			return nil
+		}
 		let randomIndex = Int.createRandom(within: self.indices)
 		return self[randomIndex]
 	}

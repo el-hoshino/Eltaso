@@ -78,4 +78,28 @@ extension String {
 		
 	}
 	
+	public func components(separatedBy separator: String, allowEmptyComponent: Bool) -> [String] {
+		
+		return self.components(separatedBy: separator).filter({ (component) -> Bool in
+			if allowEmptyComponent {
+				return true
+			} else {
+				return !component.isEmpty
+			}
+		})
+		
+	}
+	
+	public func components(separatedBy separator: CharacterSet, allowEmptyComponent: Bool) -> [String] {
+		
+		return self.components(separatedBy: separator).filter({ (component) -> Bool in
+			if allowEmptyComponent {
+				return true
+			} else {
+				return !component.isEmpty
+			}
+		})
+		
+	}
+	
 }

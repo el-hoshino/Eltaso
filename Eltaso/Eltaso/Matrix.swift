@@ -121,6 +121,14 @@ extension Matrix {
 
 extension Matrix {
 	
+	public var elements: [Element] {
+		return self._value
+	}
+	
+}
+
+extension Matrix {
+	
 	public var rows: [[Element]] {
 		return self.indices.rows.map({ (i) -> [Element] in
 			return self[row: i]

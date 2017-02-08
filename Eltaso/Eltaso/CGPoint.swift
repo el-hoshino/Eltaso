@@ -16,11 +16,27 @@ public func += (lhs: inout CGPoint, rhs: CGPoint) {
 	lhs = lhs + rhs
 }
 
+public func + (lhs: CGPoint, rhs: CGVector) -> CGPoint {
+	return CGPoint(x: lhs.x + rhs.dx, y: lhs.y + rhs.dy)
+}
+
+public func += (lhs: inout CGPoint, rhs: CGVector) {
+	lhs = lhs + rhs
+}
+
 public func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
 	return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
 public func -= (lhs: inout CGPoint, rhs: CGPoint) {
+	lhs = lhs - rhs
+}
+
+public func - (lhs: CGPoint, rhs: CGVector) -> CGPoint {
+	return CGPoint(x: lhs.x - rhs.dx, y: lhs.y - rhs.dy)
+}
+
+public func -= (lhs: inout CGPoint, rhs: CGVector) {
 	lhs = lhs - rhs
 }
 

@@ -32,11 +32,27 @@ public func *= (lhs: inout CGVector, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
+public func * (lhs: CGVector, rhs: CGScale) -> CGVector {
+	return CGVector(dx: lhs.dx * rhs.horizontal, dy: lhs.dy * rhs.vertical)
+}
+
+public func *= (lhs: inout CGVector, rhs: CGScale) {
+	lhs = lhs * rhs
+}
+
 public func / (lhs: CGVector, rhs: CGFloat) -> CGVector {
 	return CGVector(dx: lhs.dx / rhs, dy: lhs.dy / rhs)
 }
 
 public func /= (lhs: inout CGVector, rhs: CGFloat) {
+	lhs = lhs / rhs
+}
+
+public func / (lhs: CGVector, rhs: CGScale) -> CGVector {
+	return CGVector(dx: lhs.dx / rhs.horizontal, dy: lhs.dy / rhs.vertical)
+}
+
+public func /= (lhs: inout CGVector, rhs: CGScale) {
 	lhs = lhs / rhs
 }
 

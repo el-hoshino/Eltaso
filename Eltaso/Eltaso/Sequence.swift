@@ -34,12 +34,12 @@ extension Sequence where Iterator.Element: Sequence {
 
 extension Sequence {
 	
-	public func retrieve (_ condition: (Iterator.Element) -> Bool) -> Iterator.Element? {
+	public func retrieve (_ condition: (Iterator.Element) throws -> Bool) rethrows -> Iterator.Element? {
 		
 		var iterator = self.makeIterator()
 		
 		while let element = iterator.next() {
-			if condition(element) == true {
+			if try condition(element) == true {
 				return element
 			}
 		}

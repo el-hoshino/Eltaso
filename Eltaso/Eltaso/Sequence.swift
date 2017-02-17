@@ -34,6 +34,24 @@ extension Sequence where Iterator.Element: Sequence {
 
 extension Sequence {
 	
+	public func retrieve (_ condition: (Iterator.Element) -> Bool) -> Iterator.Element? {
+		
+		var iterator = self.makeIterator()
+		
+		while let element = iterator.next() {
+			if condition(element) == true {
+				return element
+			}
+		}
+		
+		return nil
+		
+	}
+	
+}
+
+extension Sequence {
+	
 	public func group(condition: (_ previous: Iterator.Element, _ next: Iterator.Element) throws -> Bool) rethrows -> [[Iterator.Element]] {
 		
 		var iterator = self.makeIterator()

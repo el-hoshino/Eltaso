@@ -169,6 +169,18 @@ extension Matrix {
 
 extension Matrix {
 	
+	public func arrayedByRow() -> [Element] {
+		return self._value
+	}
+	
+	public func arrayedByColumn() -> [Element] {
+		return self.transposed._value
+	}
+	
+}
+
+extension Matrix {
+	
 	public func enumeratedByRow() -> [(index: Index, element: Element)] {
 		
 		let enumeratedMatrix = self.indices.rows.map { (i) -> [(index: Index, element: Element)] in

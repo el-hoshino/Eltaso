@@ -169,7 +169,19 @@ extension Matrix {
 
 extension Matrix {
 	
-	public func enumerated() -> [(index: Index, element: Element)] {
+	public func arrayedByRow() -> [Element] {
+		return self._value
+	}
+	
+	public func arrayedByColumn() -> [Element] {
+		return self.transposed._value
+	}
+	
+}
+
+extension Matrix {
+	
+	public func enumeratedByRow() -> [(index: Index, element: Element)] {
 		
 		let enumeratedMatrix = self.indices.rows.map { (i) -> [(index: Index, element: Element)] in
 			return self.indices.columns.map({ (j) -> (index: Index, element: Element) in
@@ -179,6 +191,23 @@ extension Matrix {
 		
 		return enumeratedMatrix.reduce(+) ?? []
 		
+	}
+	
+	public func enumeratedByColumn() -> [(index: Index, element: Element)] {
+		
+		let enumeratedMatrix = self.indices.columns.map { (j) -> [(index: Index, element: Element)] in
+			return self.indices.rows.map({ (i) -> (index: Index, element: Element) in
+				return ((i, j), self[i, j])
+			})
+		}
+		
+		return enumeratedMatrix.reduce(+) ?? []
+		
+	}
+	
+	@available(*, deprecated: 3.3, message: "Use Matrix#enumeratedByRow() or Matrix#enumeratedByColumn() instead")
+	public func enumerated() -> [(index: Index, element: Element)] {
+		return self.enumeratedByRow()
 	}
 	
 }
@@ -336,6 +365,28 @@ extension Matrix where Element: ExpressibleByIntegerLiteral {
 	
 }
 
+extension Matrix where Element: ExpressibleByNilLiteral {
+	
+	public func autoAppendingRow(_ row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeAppendingRow(row)
+	}
+	
+	public func autoInsertingRow(_ row: [Element], at i: Int) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeInsertingRow(row, at: i)
+	}
+	
+	public mutating func autoAppendRow(_ row: [Element]) {
+		self = self.autoAppendingRow(row)
+	}
+	
+	public mutating func autoInsertRow(_ row: [Element], at i: Int) {
+		self = self.autoInsertingRow(row, at: i)
+	}
+	
+}
+
 private extension Matrix {
 	
 	func unsafeAppendingColumn(_ column: [Element]) -> Matrix<Element> {
@@ -387,6 +438,28 @@ extension Matrix {
 }
 
 extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoAppendingColumn(_ column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeAppendingColumn(column)
+	}
+	
+	public func autoInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeInsertingColumn(column, at: j)
+	}
+	
+	public mutating func autoAppendColumn(_ column: [Element]) {
+		self = self.autoAppendingColumn(column)
+	}
+	
+	public mutating func autoInsertColumn(_ column: [Element], at j: Int) {
+		self = self.autoInsertingColumn(column, at: j)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByNilLiteral {
 	
 	public func autoAppendingColumn(_ column: [Element]) -> Matrix<Element> {
 		let column = self.countAdjustedColumn(from: column)
@@ -476,6 +549,37 @@ extension Matrix {
 }
 
 extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoReplacingRow(at i: Int, with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingRow(at: i, with: row)
+	}
+	
+	public func autoReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingFirstRow(with: row)
+	}
+	
+	public func autoReplacingLastRow(with row: [Element]) -> Matrix<Element> {
+		let row = self.countAdjustedRow(from: row)
+		return self.unsafeReplacingLastRow(with: row)
+	}
+	
+	public mutating func autoReplaceRow(at i: Int, with row: [Element]) {
+		self = self.autoReplacingRow(at: i, with: row)
+	}
+	
+	public mutating func autoReplaceFirstRow(with row: [Element]) {
+		self = self.autoReplacingFirstRow(with: row)
+	}
+	
+	public mutating func autoReplaceLastRow(with row: [Element]) {
+		self = self.autoReplacingLastRow(with: row)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByNilLiteral {
 	
 	public func autoReplacingRow(at i: Int, with row: [Element]) -> Matrix<Element> {
 		let row = self.countAdjustedRow(from: row)

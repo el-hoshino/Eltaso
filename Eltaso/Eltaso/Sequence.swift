@@ -34,6 +34,7 @@ extension Sequence where Iterator.Element: Sequence {
 
 extension Sequence {
 	
+	@available(*, deprecated: 3.2, message: "Use Sequence#first(where:) instead")
 	public func retrieve (_ condition: (Iterator.Element) throws -> Bool) rethrows -> Iterator.Element? {
 		
 		var iterator = self.makeIterator()

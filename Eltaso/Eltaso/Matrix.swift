@@ -233,6 +233,40 @@ private extension Matrix where Element: ExpressibleByIntegerLiteral {
 	
 }
 
+private extension Matrix where Element: ExpressibleByNilLiteral {
+	
+	func countAdjustedRow(from row: [Element]) -> [Element] {
+		
+		var row = row
+		
+		while row.count < self.size.n {
+			row.append(nil)
+		}
+		while row.count > self.size.n {
+			row.removeLast()
+		}
+		
+		return row
+		
+	}
+	
+	func countAdjustedColumn(from column: [Element]) -> [Element] {
+		
+		var column = column
+		
+		while column.count < self.size.n {
+			column.append(nil)
+		}
+		while column.count > self.size.n {
+			column.removeLast()
+		}
+		
+		return column
+		
+	}
+	
+}
+
 private extension Matrix {
 	
 	func unsafeAppendingRow(_ row: [Element]) -> Matrix<Element> {
@@ -538,6 +572,37 @@ extension Matrix {
 }
 
 extension Matrix where Element: ExpressibleByIntegerLiteral {
+	
+	public func autoReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingColumn(at: j, with: column)
+	}
+	
+	public func autoReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingFirstColumn(with: column)
+	}
+	
+	public func autoReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
+		let column = self.countAdjustedColumn(from: column)
+		return self.unsafeReplacingLastColumn(with: column)
+	}
+	
+	public mutating func autoReplaceColumn(at j: Int, with column: [Element]) {
+		self = self.autoReplacingColumn(at: j, with: column)
+	}
+	
+	public mutating func autoReplaceFirstColumn(with column: [Element]) {
+		self = self.autoReplacingFirstColumn(with: column)
+	}
+	
+	public mutating func autoReplaceLastColumn(with column: [Element]) {
+		self = self.autoReplacingLastColumn(with: column)
+	}
+	
+}
+
+extension Matrix where Element: ExpressibleByNilLiteral {
 	
 	public func autoReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
 		let column = self.countAdjustedColumn(from: column)

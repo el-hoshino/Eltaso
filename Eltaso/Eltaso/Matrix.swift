@@ -169,7 +169,7 @@ extension Matrix {
 
 extension Matrix {
 	
-	public func enumerated() -> [(index: Index, element: Element)] {
+	public func enumeratedByRow() -> [(index: Index, element: Element)] {
 		
 		let enumeratedMatrix = self.indices.rows.map { (i) -> [(index: Index, element: Element)] in
 			return self.indices.columns.map({ (j) -> (index: Index, element: Element) in
@@ -179,6 +179,23 @@ extension Matrix {
 		
 		return enumeratedMatrix.reduce(+) ?? []
 		
+	}
+	
+	public func enumeratedByColumn() -> [(index: Index, element: Element)] {
+		
+		let enumeratedMatrix = self.indices.columns.map { (j) -> [(index: Index, element: Element)] in
+			return self.indices.rows.map({ (i) -> (index: Index, element: Element) in
+				return ((i, j), self[i, j])
+			})
+		}
+		
+		return enumeratedMatrix.reduce(+) ?? []
+		
+	}
+	
+	@available(*, deprecated: 3.3, message: "Use Matrix#enumeratedByRow() or Matrix#enumeratedByColumn() instead")
+	public func enumerated() -> [(index: Index, element: Element)] {
+		return self.enumeratedByRow()
 	}
 	
 }

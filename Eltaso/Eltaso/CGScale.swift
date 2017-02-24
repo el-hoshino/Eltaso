@@ -95,14 +95,6 @@ public func / (lhs: CGPoint, rhs: CGPoint) -> CGScale {
 }
 
 
-public func * (lhs: CGSize, rhs: CGScale) -> CGSize {
-	return CGSize(width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
-}
-
-public func *= (lhs: inout CGSize, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
 public func / (lhs: CGSize, rhs: CGSize) -> CGScale {
 	return CGScale(horizontal: lhs.width / rhs.width, vertical: lhs.height / rhs.height)
 }

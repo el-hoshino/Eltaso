@@ -82,14 +82,6 @@ public func /= (lhs: inout CGScale, rhs: CGScale) {
 }
 
 
-public func * (lhs: CGPoint, rhs: CGScale) -> CGPoint {
-	return CGPoint(x: lhs.x * rhs.horizontal, y: lhs.y * rhs.vertical)
-}
-
-public func *= (lhs: inout CGPoint, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
 public func / (lhs: CGPoint, rhs: CGPoint) -> CGScale {
 	return CGScale(horizontal: lhs.x / rhs.x, vertical: lhs.y / rhs.y)
 }

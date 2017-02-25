@@ -47,6 +47,18 @@ extension CGScale {
 	
 }
 
+extension CGScale {
+	
+	public var aspectFitScale: CGFloat {
+		return min(self.horizontal, self.vertical)
+	}
+	
+	public var aspectFillScale: CGFloat {
+		return max(self.horizontal, self.vertical)
+	}
+	
+}
+
 
 public func * (lhs: CGScale, rhs: CGFloat) -> CGScale {
 	return CGScale(horizontal: lhs.horizontal * rhs, vertical: lhs.vertical * rhs)
@@ -82,26 +94,10 @@ public func /= (lhs: inout CGScale, rhs: CGScale) {
 }
 
 
-public func * (lhs: CGPoint, rhs: CGScale) -> CGPoint {
-	return CGPoint(x: lhs.x * rhs.horizontal, y: lhs.y * rhs.vertical)
-}
-
-public func *= (lhs: inout CGPoint, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
 public func / (lhs: CGPoint, rhs: CGPoint) -> CGScale {
 	return CGScale(horizontal: lhs.x / rhs.x, vertical: lhs.y / rhs.y)
 }
 
-
-public func * (lhs: CGSize, rhs: CGScale) -> CGSize {
-	return CGSize(width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
-}
-
-public func *= (lhs: inout CGSize, rhs: CGScale) {
-	lhs = lhs * rhs
-}
 
 public func / (lhs: CGSize, rhs: CGSize) -> CGScale {
 	return CGScale(horizontal: lhs.width / rhs.width, vertical: lhs.height / rhs.height)

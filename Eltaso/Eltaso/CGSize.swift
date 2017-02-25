@@ -32,11 +32,27 @@ public func *= (lhs: inout CGSize, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
+public func * (lhs: CGSize, rhs: CGScale) -> CGSize {
+	return CGSize(width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
+}
+
+public func *= (lhs: inout CGSize, rhs: CGScale) {
+	lhs = lhs * rhs
+}
+
 public func / (lhs: CGSize, rhs: CGFloat) -> CGSize {
 	return CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
 }
 
 public func /= (lhs: inout CGSize, rhs: CGFloat) {
+	lhs = lhs / rhs
+}
+
+public func / (lhs: CGSize, rhs: CGScale) -> CGSize {
+	return CGSize(width: lhs.width / rhs.horizontal, height: lhs.height / rhs.vertical)
+}
+
+public func /= (lhs: inout CGSize, rhs: CGScale) {
 	lhs = lhs / rhs
 }
 
@@ -58,6 +74,12 @@ extension CGSize {
 	public var minLength: CGFloat {
 		return min(self.width, self.height)
 	}
+	
+}
+
+extension CGSize {
+	
+	public static let identity = CGSize(width: 1, height: 1)
 	
 }
 

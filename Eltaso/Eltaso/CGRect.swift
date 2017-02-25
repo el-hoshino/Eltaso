@@ -16,6 +16,14 @@ public func *= (lhs: inout CGRect, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
+public func * (lhs: CGRect, rhs: CGScale) -> CGRect {
+	return CGRect(x: lhs.origin.x * rhs.horizontal, y: lhs.origin.y * rhs.vertical, width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
+}
+
+public func *= (lhs: inout CGRect, rhs: CGScale) {
+	lhs = lhs * rhs
+}
+
 public func / (lhs: CGRect, rhs: CGFloat) -> CGRect {
 	return CGRect(x: lhs.origin.x / rhs, y: lhs.origin.y / rhs, width: lhs.width / rhs, height: lhs.height / rhs)
 }
@@ -24,6 +32,20 @@ public func /= (lhs: inout CGRect, rhs: CGFloat) {
 	lhs = lhs / rhs
 }
 
+public func / (lhs: CGRect, rhs: CGScale) -> CGRect {
+	return CGRect(x: lhs.origin.x / rhs.horizontal, y: lhs.origin.y / rhs.vertical, width: lhs.width / rhs.horizontal, height: lhs.height / rhs.vertical)
+}
+
+public func /= (lhs: inout CGRect, rhs: CGScale) {
+	lhs = lhs / rhs
+}
+
+
+extension CGRect {
+	
+	public static let identity = CGRect(origin: .zero, size: .identity)
+	
+}
 
 extension CGRect {
 	

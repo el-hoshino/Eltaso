@@ -48,6 +48,14 @@ public func *= (lhs: inout CGPoint, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
+public func * (lhs: CGPoint, rhs: CGScale) -> CGPoint {
+	return CGPoint(x: lhs.x * rhs.horizontal, y: lhs.y * rhs.vertical)
+}
+
+public func *= (lhs: inout CGPoint, rhs: CGScale) {
+	lhs = lhs * rhs
+}
+
 public func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 	return CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
 }
@@ -55,6 +63,15 @@ public func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 public func /= (lhs: inout CGPoint, rhs: CGFloat) {
 	lhs = lhs / rhs
 }
+
+public func / (lhs: CGPoint, rhs: CGScale) -> CGPoint {
+	return CGPoint(x: lhs.x / rhs.horizontal, y: lhs.y / rhs.vertical)
+}
+
+public func /= (lhs: inout CGPoint, rhs: CGScale) {
+	lhs = lhs / rhs
+}
+
 
 extension CGPoint {
 	

@@ -58,6 +58,12 @@ public func /= (lhs: inout CGVector, rhs: CGScale) {
 
 extension CGVector {
 	
+	public static let identity = CGVector(dx: 1, dy: 1)
+	
+}
+
+extension CGVector {
+	
 	public static func reflected(from point: CGPoint, addedBy anotherPoint: CGPoint) -> CGVector {
 		return CGVector(dx: point.x + anotherPoint.x, dy: point.y + anotherPoint.y)
 	}

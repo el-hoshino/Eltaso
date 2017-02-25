@@ -47,6 +47,18 @@ extension CGScale {
 	
 }
 
+extension CGScale {
+	
+	var aspectFitScale: CGFloat {
+		return min(self.horizontal, self.vertical)
+	}
+	
+	var aspectFillScale: CGFloat {
+		return max(self.horizontal, self.vertical)
+	}
+	
+}
+
 
 public func * (lhs: CGScale, rhs: CGFloat) -> CGScale {
 	return CGScale(horizontal: lhs.horizontal * rhs, vertical: lhs.vertical * rhs)

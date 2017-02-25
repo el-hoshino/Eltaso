@@ -43,6 +43,12 @@ public func /= (lhs: inout CGRect, rhs: CGScale) {
 
 extension CGRect {
 	
+	public static let identity = CGRect(origin: .zero, size: .identity)
+	
+}
+
+extension CGRect {
+	
 	public static func createAspectFillFrame(fromContentSize contentSize: CGSize, andCanvasSize canvasSize: CGSize) -> CGRect {
 		
 		let scale = max(canvasSize.width / contentSize.width, canvasSize.height / contentSize.height)

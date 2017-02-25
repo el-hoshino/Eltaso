@@ -79,6 +79,12 @@ extension CGSize {
 
 extension CGSize {
 	
+	public static let identity = CGSize(width: 1, height: 1)
+	
+}
+
+extension CGSize {
+	
 	public enum Orientation {
 		case landscape
 		case portrait

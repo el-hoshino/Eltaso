@@ -49,11 +49,11 @@ extension CGScale {
 
 extension CGScale {
 	
-	var aspectFitScale: CGFloat {
+	public var aspectFitScale: CGFloat {
 		return min(self.horizontal, self.vertical)
 	}
 	
-	var aspectFillScale: CGFloat {
+	public var aspectFillScale: CGFloat {
 		return max(self.horizontal, self.vertical)
 	}
 	

@@ -21,6 +21,25 @@ extension Dictionary {
 
 extension Dictionary {
 	
+	public func map <T> (_ transform: (Value) throws -> T) rethrows -> Dictionary<Key, T> {
+		
+		var iterator = self.makeIterator()
+		
+		var dictionary: [Key: T] = [:]
+		
+		while let next = iterator.next() {
+			dictionary[next.key] = try transform(next.value)
+		}
+		
+		return dictionary
+		
+	}
+	
+}
+
+extension Dictionary {
+	
+	@available(*, deprecated: 3.3, message: "Use Dictionary#map instead")
 	public func dictionaryMap <T> (_ transform: (Value) throws -> T) rethrows -> Dictionary<Key, T> {
 		
 		var iterator = self.makeIterator()

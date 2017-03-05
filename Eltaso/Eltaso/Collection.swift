@@ -8,19 +8,15 @@
 
 import Foundation
 
-extension Collection {
+extension Collection where Self: RandomAccessCollection {
 	
 	public var second: Self.Iterator.Element? {
 		
-		let secondIndex = self.index(self.startIndex, offsetBy: 1)
-		
-		if self.distance(from: secondIndex, to: self.endIndex) > 0 {
-			return self[secondIndex]
-			
-		} else {
+		guard let secondIndex = self.index(self.startIndex, offsetBy: 1, limitedBy: self.index(before: self.endIndex)) else {
 			return nil
-			
 		}
+		
+		return self[secondIndex]
 		
 	}
 	

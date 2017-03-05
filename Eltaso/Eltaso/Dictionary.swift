@@ -21,6 +21,24 @@ extension Dictionary {
 
 extension Dictionary {
 	
+	public func dictionaryMap <T> (_ transform: (Value) throws -> T) rethrows -> Dictionary<Key, T> {
+		
+		var iterator = self.makeIterator()
+		
+		var dictionary: [Key: T] = [:]
+		
+		while let next = iterator.next() {
+			dictionary[next.key] = try transform(next.value)
+		}
+		
+		return dictionary
+		
+	}
+	
+}
+
+extension Dictionary {
+	
 	public func dropping(_ key: Key) -> Dictionary<Key, Value> {
 		var dictionary = self
 		dictionary.removeValue(forKey: key)

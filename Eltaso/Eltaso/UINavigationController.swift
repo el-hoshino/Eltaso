@@ -28,14 +28,14 @@ extension UINavigationController {
 		
 	}
 	
-	@discardableResult
-	public func popViewController(animated: Bool, completion: ((Bool) -> Void)?) -> UIViewController? {
+	// FIXME: Here's a bug in Swift 3.x that @discardableResult doesn't work for optional returning values, so currently this method returns nothing. In the future when this bug is fixed, this method should return UINavigationController#popViewController(animated:)'s return value, which is poppedViewController here in the code.
+	public func popViewController(animated: Bool, completion: ((Bool) -> Void)?) {
 		
 		let poppedViewController = self.popViewController(animated: animated)
 		
 		guard poppedViewController != nil else {
 			completion?(false)
-			return poppedViewController
+			return
 		}
 		
 		if animated, let coordinator = self.transitionCoordinator {
@@ -45,7 +45,7 @@ extension UINavigationController {
 			completion?(true)
 		}
 		
-		return poppedViewController
+		return
 		
 	}
 	

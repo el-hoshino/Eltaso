@@ -23,6 +23,7 @@
 		1655CD4D1DB0BB4E00C7203D /* TranslatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */; };
 		1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1655CD4E1DB0BC2300C7203D /* ScalableView.swift */; };
 		1656B41B1DAE451900EBC1AE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1656B41A1DAE451900EBC1AE /* UIViewController.swift */; };
+		1657BBE61E794FB3009B3D0F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657BBE51E794FB3009B3D0F /* UINavigationController.swift */; };
 		166205861D6EB5D100438DAE /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166205851D6EB5D100438DAE /* Weekday.swift */; };
 		166882611DC350F100C67F0C /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166882601DC350F100C67F0C /* CGImage.swift */; };
 		166A3F5F1D88FDAB00695661 /* CVarArg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A3F5E1D88FDAB00695661 /* CVarArg.swift */; };
@@ -97,6 +98,7 @@
 		1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatableView.swift; sourceTree = "<group>"; };
 		1655CD4E1DB0BC2300C7203D /* ScalableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalableView.swift; sourceTree = "<group>"; };
 		1656B41A1DAE451900EBC1AE /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		1657BBE51E794FB3009B3D0F /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		166205851D6EB5D100438DAE /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		166882601DC350F100C67F0C /* CGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
 		166A3F5E1D88FDAB00695661 /* CVarArg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVarArg.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				79E14E9E1D2B918100AF6EE4 /* UIImage.swift */,
 				79092CE81D2C32AA00E07C8A /* UIView.swift */,
 				1656B41A1DAE451900EBC1AE /* UIViewController.swift */,
+				1657BBE51E794FB3009B3D0F /* UINavigationController.swift */,
 				168E57041D66DBEE00C07A06 /* UIAlertController.swift */,
 				169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */,
 				16B5852A1D4A34C700A34DD0 /* UIPanGestureRecognizer.swift */,
@@ -387,6 +390,7 @@
 				79092CE91D2C32AA00E07C8A /* UIView.swift in Sources */,
 				79092CF11D2C338F00E07C8A /* ElementExchangableView.swift in Sources */,
 				1644AAAD1DFAAE7F00253721 /* CGVector.swift in Sources */,
+				1657BBE61E794FB3009B3D0F /* UINavigationController.swift in Sources */,
 				162D38461E02B3F200CA9D7A /* CountableClosedRange.swift in Sources */,
 				1655CD4F1DB0BC2300C7203D /* ScalableView.swift in Sources */,
 				169AE5DD1DD9799600B383EF /* UIGestureRecognizer.swift in Sources */,

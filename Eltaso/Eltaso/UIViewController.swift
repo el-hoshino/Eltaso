@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
 	
+	@available(*, deprecated: 3.3, message: "Use pushViewController(_: animated: completion) in UINavigationController extension instead")
 	public func push(_ viewController: UIViewController, animated: Bool = true, completion: ((_ finished: Bool) -> Void)? = nil) {
 		
 		viewController.willMove(toParentViewController: self)
@@ -42,6 +43,7 @@ extension UIViewController {
 		
 	}
 	
+	@available(*, deprecated: 3.3, message: "Use popViewController(animated: completion:) in UINavigationController extension instead")
 	public func pop(animated: Bool = true, completion: ((_ finished: Bool) -> Void)? = nil) {
 		
 		guard let parent = self.parent else {

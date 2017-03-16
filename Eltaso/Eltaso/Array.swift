@@ -112,3 +112,21 @@ extension Array {
 	}
 	
 }
+
+extension Array {
+	
+	public mutating func applyForEach(_ transform: (Element) throws -> Element) rethrows {
+		
+		var result: [Element] = []
+		var iterator = self.makeIterator()
+		
+		while let element = iterator.next() {
+			let transformed = try transform(element)
+			result.append(transformed)
+		}
+		
+		self = result
+		
+	}
+	
+}

@@ -1005,6 +1005,16 @@ extension Matrix {
 	
 }
 
+extension Matrix {
+	
+	public mutating func applyForEach(_ transform: (Element) throws -> Element) rethrows {
+		
+		try self._value.applyForEach(transform)
+		
+	}
+	
+}
+
 extension Matrix: CustomStringConvertible {
 	
 	public var description: String {

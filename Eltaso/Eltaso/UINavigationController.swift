@@ -10,6 +10,7 @@ import UIKit
 
 extension UINavigationController {
 	
+	// FIXME: Because push(_: animated: completion:) and pop(animated: completion:) is currently used in UIViewController extension, so here it's using pushViewController(_: animated: completion:) and popViewController(animated: completion:) as the method name. In Eltaso 4 those methods in UIViewController will be removed, and these methods will be renamed to push(_: animated: completion:) and pop(animated: completion:)
 	public func pushViewController(_ viewController: UIViewController, animated: Bool, completion: ((Bool) -> Void)?) {
 		
 		guard !self.viewControllers.contains(viewController) else {

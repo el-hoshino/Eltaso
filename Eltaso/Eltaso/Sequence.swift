@@ -53,6 +53,24 @@ extension Sequence {
 
 extension Sequence {
 	
+	public func firstFlatMap <T> (_ transform: (Iterator.Element) throws -> T?) rethrows -> T? {
+		
+		var iterator = self.makeIterator()
+		
+		while let next = iterator.next() {
+			if let transformed = try transform(next) {
+				return transformed
+			}
+		}
+		
+		return nil
+		
+	}
+	
+}
+
+extension Sequence {
+	
 	public func group(condition: (_ previous: Iterator.Element, _ next: Iterator.Element) throws -> Bool) rethrows -> [[Iterator.Element]] {
 		
 		var iterator = self.makeIterator()

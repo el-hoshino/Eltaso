@@ -61,9 +61,11 @@ extension CGImage {
 		
 	}
 	
-	public func cropped(in rect: CGRect, scale: CGFloat = 0) -> CGImage {
+	public func cropped(in rect: CGRect, onColor canvasColor: CGColor = UIColor.clear.cgColor, scale: CGFloat = 0) -> CGImage {
 		
-		UIGraphicsBeginImageContextWithOptions(rect.size, false, scale)
+		let opaque = canvasColor.alpha > 0
+		
+		UIGraphicsBeginImageContextWithOptions(rect.size, opaque, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
 			return self
 		}
@@ -71,7 +73,12 @@ extension CGImage {
 		context.translateBy(x: 0, y: rect.size.height)
 		context.scaleBy(x: 1, y: -1)
 		
-		context.draw(self, at: rect.origin)
+		if opaque {
+			context.setFillColor(canvasColor)
+			context.fill(rect.zeroPositionedFrame)
+		}
+		
+		context.draw(self, at: rect.origin.inverted(in: .both))
 		
 		guard let croppedImage = context.makeImage() else {
 			return self

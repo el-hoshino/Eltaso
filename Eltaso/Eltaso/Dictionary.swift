@@ -58,6 +58,16 @@ extension Dictionary {
 
 extension Dictionary {
 	
+	public func containsKey(_ key: Key) -> Bool {
+		
+		return self[key] != nil
+		
+	}
+	
+}
+
+extension Dictionary {
+	
 	public func dropping(_ key: Key) -> Dictionary<Key, Value> {
 		var dictionary = self
 		dictionary.removeValue(forKey: key)

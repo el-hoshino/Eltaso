@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ScalableView {
+public protocol ScalableView: class {
 	func scale(by scale: CGFloat, from scalingCenter: CGPoint?)
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol RotatableView {
+public protocol RotatableView: class {
 	func rotate(by angle: CGFloat, from rotatingCenter: CGPoint?)
 }
 

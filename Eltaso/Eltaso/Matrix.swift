@@ -1145,3 +1145,7 @@ public func == <T> (lhs: Matrix<T>, rhs: Matrix<T>) -> Bool where T: Equatable {
 public func != <T> (lhs: Matrix<T>, rhs: Matrix<T>) -> Bool where T: Equatable {
 	return !(lhs == rhs)
 }
+
+public func …= (lhs: Matrix<Any>.Index, rhs: Matrix<Any>.Indices) -> Bool {
+	return lhs.i …= rhs.rows && lhs.j …= rhs.columns
+}

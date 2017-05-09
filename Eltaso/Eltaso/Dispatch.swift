@@ -28,6 +28,10 @@ extension DispatchQueue {
 		
 	}
 	
+}
+
+extension DispatchQueue {
+	
 	public var isRunning: Bool {
 		
 		guard Thread.current != self else {
@@ -41,6 +45,30 @@ extension DispatchQueue {
 		}
 		
 		return semaphore.wait(timeout: .now() + .microseconds(1)) == .success
+		
+	}
+	
+}
+
+extension DispatchQueue {
+	
+	public func syncRepeat(while condition: () -> Bool, loop: () -> Void) {
+		
+		self.sync {
+			while condition() == true {
+				loop()
+			}
+		}
+		
+	}
+	
+	public func asyncRepeat(while condition: @escaping () -> Bool, loop: @escaping () -> Void) {
+		
+		self.async {
+			while condition() == true {
+				loop()
+			}
+		}
 		
 	}
 	

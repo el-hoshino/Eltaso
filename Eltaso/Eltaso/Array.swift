@@ -14,7 +14,7 @@ extension Array {
 		var array = self
 		for i in array.indices.reversed().dropLast() {
 			let j = Int.createRandom(within: array.indices.lowerBound ..< i)
-			swap(&array[i], &array[j])
+			array.swapAt(i, j)
 		}
 		return array
 	}

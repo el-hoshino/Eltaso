@@ -311,8 +311,9 @@ private extension Matrix {
 		
 		var matrix = self
 		let initialInsertingIndex = i * self._columnCount
-		row.enumerated().forEach { (j, element) in
-			matrix._value.insert(element, at: initialInsertingIndex + j)
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value.insert(cell.element, at: initialInsertingIndex + j)
 		}
 		matrix._rowCount.increase()
 		return matrix
@@ -392,8 +393,9 @@ private extension Matrix {
 	func unsafeAppendingColumn(_ column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columnCount + self._columnCount)
+		column.enumerated().reversed().forEach { (cell) in
+			let i = cell.offset
+			matrix._value.insert(cell.element, at: i * self._columnCount + self._columnCount)
 		}
 		matrix._columnCount.increase()
 		
@@ -404,8 +406,9 @@ private extension Matrix {
 	func unsafeInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columnCount + j)
+		column.enumerated().reversed().forEach { (cell) in
+			let i = cell.offset
+			matrix._value.insert(cell.element, at: i * self._columnCount + j)
 		}
 		matrix._columnCount.increase()
 		
@@ -487,8 +490,9 @@ private extension Matrix {
 		
 		var matrix = self
 		let initialInsertingIndex = i * self._columnCount
-		row.enumerated().forEach { (j, element) in
-			matrix._value[initialInsertingIndex + j] = element
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value[initialInsertingIndex + j] = cell.element
 		}
 		return matrix
 		
@@ -497,8 +501,9 @@ private extension Matrix {
 	func unsafeReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		row.enumerated().forEach { (j, element) in
-			matrix._value[j] = element
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value[j] = cell.element
 		}
 		return matrix
 		
@@ -508,8 +513,9 @@ private extension Matrix {
 		
 		var matrix = self
 		let initialInsertingIndex = self._rowCount.decreased * self._columnCount
-		row.enumerated().forEach { (j, element) in
-			matrix._value[initialInsertingIndex + j] = element
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value[initialInsertingIndex + j] = cell.element
 		}
 		return matrix
 		
@@ -615,8 +621,9 @@ private extension Matrix {
 	func unsafeReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().forEach { (i, element) in
-			matrix._value[i * self._columnCount + j] = element
+		column.enumerated().forEach { (cell) in
+			let i = cell.offset
+			matrix._value[i * self._columnCount + j] = cell.element
 		}
 		return matrix
 		
@@ -625,8 +632,9 @@ private extension Matrix {
 	func unsafeReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().forEach { (i, element) in
-			matrix._value[i * self._columnCount] = element
+		column.enumerated().forEach { (cell) in
+			let i = cell.offset
+			matrix._value[i * self._columnCount] = cell.element
 		}
 		return matrix
 		
@@ -635,8 +643,9 @@ private extension Matrix {
 	func unsafeReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().forEach { (i, element) in
-			matrix._value[i * self._columnCount + self._rowCount.decreased] = element
+		column.enumerated().forEach { (cell) in
+			let i = cell.offset
+			matrix._value[i * self._columnCount + self._rowCount.decreased] = cell.element
 		}
 		return matrix
 		

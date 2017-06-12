@@ -16,17 +16,17 @@ extension Sequence {
 	
 }
 
-extension Sequence where Iterator.Element: OptionalType {
+extension Sequence where Iterator.Element == Optional<Any> {
 	
-	public var flatten: [Iterator.Element.T] {
-		return self.flatMap { $0.optionalValue }
+	public var flatten: [Element] {
+		return self.flatMap { $0 }
 	}
 	
 }
 
 extension Sequence where Iterator.Element: Sequence {
 	
-	public var flatten: [Iterator.Element.Iterator.Element] {
+	public var flatten: [Element.Element] {
 		return self.flatMap { $0 }
 	}
 	

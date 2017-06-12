@@ -33,7 +33,6 @@
 		169AE5DD1DD9799600B383EF /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */; };
 		169C43E61D82A92B0006B2E2 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E51D82A92B0006B2E2 /* Int.swift */; };
 		169C43E81D82BFA30006B2E2 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E71D82BFA30006B2E2 /* Collection.swift */; };
-		16A530F91D38EA6500041952 /* PropertyListConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530F81D38EA6500041952 /* PropertyListConvertible.swift */; };
 		16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530FA1D38F5CE00041952 /* Strideable.swift */; };
 		16AA60251DC87349001D6236 /* RotatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60241DC87349001D6236 /* RotatableView.swift */; };
 		16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */; };
@@ -106,7 +105,6 @@
 		169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		169C43E51D82A92B0006B2E2 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		169C43E71D82BFA30006B2E2 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		16A530F81D38EA6500041952 /* PropertyListConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListConvertible.swift; sourceTree = "<group>"; };
 		16A530FA1D38F5CE00041952 /* Strideable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strideable.swift; sourceTree = "<group>"; };
 		16AA60241DC87349001D6236 /* RotatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatableView.swift; sourceTree = "<group>"; };
 		16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRotationGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
 				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
-				16A530F81D38EA6500041952 /* PropertyListConvertible.swift */,
 				16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */,
 				16991FD71DF9708C00FC4A8A /* CopyableObject.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
@@ -398,7 +395,6 @@
 				16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */,
 				162414D51D2F6D5600141C64 /* Sequence.swift in Sources */,
 				16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */,
-				16A530F91D38EA6500041952 /* PropertyListConvertible.swift in Sources */,
 				16C02D2D1D3E0A7F00288942 /* TimeInterval.swift in Sources */,
 				162D38421E02B12200CA9D7A /* ClosedRange.swift in Sources */,
 				169C43E61D82A92B0006B2E2 /* Int.swift in Sources */,

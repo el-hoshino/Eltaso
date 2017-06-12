@@ -49,7 +49,6 @@
 		16C02D371D3E114E00288942 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D361D3E114E00288942 /* CGSize.swift */; };
 		16C02D3F1D3E1E2600288942 /* IntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */; };
 		16C02DBB1D3FA57300288942 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C02DBA1D3FA57300288942 /* Weak.swift */; };
-		16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */; };
 		16C45F941DA4AF0700FDDB38 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C45F931DA4AF0700FDDB38 /* CGPoint.swift */; };
 		16D355671DEEF71500444561 /* UIViewAutoresizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D355661DEEF71500444561 /* UIViewAutoresizing.swift */; };
 		79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79092CE41D2C31AF00E07C8A /* CGRect.swift */; };
@@ -121,7 +120,6 @@
 		16C02D361D3E114E00288942 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		16C02D3E1D3E1E2600288942 /* IntervalSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSlider.swift; sourceTree = "<group>"; };
 		16C02DBA1D3FA57300288942 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
-		16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticOperatable.swift; sourceTree = "<group>"; };
 		16C45F931DA4AF0700FDDB38 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		16D355661DEEF71500444561 /* UIViewAutoresizing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAutoresizing.swift; sourceTree = "<group>"; };
 		79092CE41D2C31AF00E07C8A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
 				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
-				16C45F911DA3C62E00FDDB38 /* ArithmeticOperatable.swift */,
 				16991FD71DF9708C00FC4A8A /* CopyableObject.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 				1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */,
@@ -387,7 +384,6 @@
 				16C02DBB1D3FA57300288942 /* Weak.swift in Sources */,
 				16AA60341DC8A870001D6236 /* CGContext.swift in Sources */,
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
-				16C45F921DA3C62E00FDDB38 /* ArithmeticOperatable.swift in Sources */,
 				16AA60251DC87349001D6236 /* RotatableView.swift in Sources */,
 				1656B41B1DAE451900EBC1AE /* UIViewController.swift in Sources */,
 				162D38401E02AF2800CA9D7A /* Range.swift in Sources */,

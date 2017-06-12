@@ -1040,7 +1040,7 @@ extension Matrix: CustomStringConvertible {
 	
 }
 
-public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: AdditionOperatable {
+public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: Numeric {
 	
 	guard lhs.size == rhs.size else {
 		throw MatrixMathError.sizeMismatch
@@ -1057,11 +1057,11 @@ public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 }
 
-public func += <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: AdditionOperatable {
+public func += <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Numeric {
 	lhs = try lhs + rhs
 }
 
-public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: SubtractionOperatable {
+public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: Numeric {
 	
 	guard lhs.size == rhs.size else {
 		throw MatrixMathError.sizeMismatch
@@ -1078,11 +1078,11 @@ public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 }
 
-public func -= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: SubtractionOperatable {
+public func -= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Numeric {
 	lhs = try lhs - rhs
 }
 
-public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: AdditionOperatable, T: MultiplicationOperatable {
+public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: Numeric {
 	
 	guard lhs.size.n == rhs.size.m else {
 		throw MatrixMathError.sizeMismatch
@@ -1093,10 +1093,15 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	let resultElementFactorIndices: CountableRange<Int> = lhs.indices.columns
 	
 	func getMultipliedValue(at index: Matrix<T>.Index) -> T {
-		return resultElementFactorIndices.reduce(T.additionOperationInitialValue) { (result, indice) -> T in
-			let factor = lhs[index.i, indice] * rhs[indice, index.j]
-			return result + factor
+		let resultElementFactors = resultElementFactorIndices.map { (factorIndex) -> T in
+			let factor = lhs[index.i, factorIndex] * rhs[factorIndex, index.j]
+			return factor
 		}
+		let result = resultElementFactors.reduce { (result, next) -> T in
+			let result = result + next
+			return result
+		}
+		return result ?? 0
 	}
 	
 	let value = resultIndices.rows.map { (i) -> [T] in
@@ -1109,7 +1114,7 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 }
 
-public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: MultiplicationOperatable {
+public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: Numeric {
 	
 	var matrix = rhs
 	for i in matrix.indices.rows {
@@ -1121,15 +1126,15 @@ public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: MultiplicationO
 	
 }
 
-public func * <T> (lhs: Matrix<T>, rhs: T) -> Matrix<T> where T: MultiplicationOperatable {
+public func * <T> (lhs: Matrix<T>, rhs: T) -> Matrix<T> where T: Numeric {
 	return rhs * lhs
 }
 
-public func *= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: AdditionOperatable, T: MultiplicationOperatable {
+public func *= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Numeric {
 	lhs = try lhs * rhs
 }
 
-public func *= <T> (lhs: inout Matrix<T>, rhs: T) where T: MultiplicationOperatable {
+public func *= <T> (lhs: inout Matrix<T>, rhs: T) where T: Numeric {
 	lhs = lhs * rhs
 }
 

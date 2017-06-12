@@ -21,7 +21,7 @@ public func =? <T> (lhs: inout T, rhs: T?) {
 infix operator …= : ComparisonPrecedence
 infix operator !…= : ComparisonPrecedence
 
-public func …= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool {
 	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
@@ -29,7 +29,7 @@ public func …= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool where T: Comparable 
 	}
 }
 
-public func …= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool {
 	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
@@ -37,7 +37,7 @@ public func …= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T:
 	}
 }
 
-public func …= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool {
 	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
@@ -45,7 +45,7 @@ public func …= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool wh
 	}
 }
 
-public func …= <T> (lhs: CountableClosedRange<T>, rhs: CountableClosedRange<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: CountableClosedRange<T>, rhs: CountableClosedRange<T>) -> Bool {
 	if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
 		return true
 	} else {
@@ -53,7 +53,7 @@ public func …= <T> (lhs: CountableClosedRange<T>, rhs: CountableClosedRange<T>
 	}
 }
 
-public func …= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: T, rhs: Range<T>) -> Bool {
 	if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
 		return true
 	} else {
@@ -61,7 +61,7 @@ public func …= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
 	}
 }
 
-public func …= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool {
 	if lhs >= rhs.lowerBound && lhs <= rhs.upperBound {
 		return true
 	} else {
@@ -69,7 +69,7 @@ public func …= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
 	}
 }
 
-public func …= <T> (lhs: T, rhs: CountableRange<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: T, rhs: CountableRange<T>) -> Bool {
 	if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
 		return true
 	} else {
@@ -77,7 +77,7 @@ public func …= <T> (lhs: T, rhs: CountableRange<T>) -> Bool where T: Comparabl
 	}
 }
 
-public func …= <T> (lhs: T, rhs: CountableClosedRange<T>) -> Bool where T: Comparable {
+public func …= <T> (lhs: T, rhs: CountableClosedRange<T>) -> Bool {
 	if lhs >= rhs.lowerBound && lhs <= rhs.upperBound {
 		return true
 	} else {
@@ -85,27 +85,27 @@ public func …= <T> (lhs: T, rhs: CountableClosedRange<T>) -> Bool where T: Com
 	}
 }
 
-public func !…= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool where T: Comparable {
+public func !…= <T> (lhs: Range<T>, rhs: Range<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+public func !…= <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool where T: Comparable {
+public func !…= <T> (lhs: CountableRange<T>, rhs: CountableRange<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T> (lhs: T, rhs: Range<T>) -> Bool where T: Comparable {
+public func !…= <T> (lhs: T, rhs: Range<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool where T: Comparable {
+public func !…= <T> (lhs: T, rhs: ClosedRange<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
-public func !…= <T> (lhs: T, rhs: CountableRange<T>) -> Bool where T: Comparable {
+public func !…= <T> (lhs: T, rhs: CountableRange<T>) -> Bool {
 	return !(lhs …= rhs)
 }
 
@@ -116,7 +116,7 @@ precedencegroup ExponentiationPrecedence {
 
 infix operator ^ : ExponentiationPrecedence
 
-public func ^ <T> (lhs: Range<T>, rhs: Range<T>) -> Range<T>? where T: Comparable {
+public func ^ <T> (lhs: Range<T>, rhs: Range<T>) -> Range<T>? {
 	
 	let lowerBound = max(lhs.lowerBound, rhs.lowerBound)
 	let upperBound = min(lhs.upperBound, rhs.upperBound)
@@ -129,7 +129,7 @@ public func ^ <T> (lhs: Range<T>, rhs: Range<T>) -> Range<T>? where T: Comparabl
 	
 }
 
-public func ^ <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> ClosedRange<T>? where T: Comparable {
+public func ^ <T> (lhs: ClosedRange<T>, rhs: ClosedRange<T>) -> ClosedRange<T>? {
 	
 	let lowerBound = max(lhs.lowerBound, rhs.lowerBound)
 	let upperBound = min(lhs.upperBound, rhs.upperBound)

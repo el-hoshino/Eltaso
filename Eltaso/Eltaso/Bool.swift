@@ -8,23 +8,25 @@
 
 import Foundation
 
-extension Bool {
+extension Bool: EltasoCompatible { }
+
+extension EltasoContainer where Containee == Bool {
 	
-	public static func createRandom() -> Bool {
-		let randomNumber = Int.createRandom(within: 0 ... 1)
+	public static func makeRandom() -> Bool {
+		let randomNumber = Int.Eltaso.makeRandom(within: 0 ... 1)
 		return randomNumber != 0
 	}
 	
 }
 
-extension Bool {
+extension EltasoContainer where Containee == Bool {
 	
 	public var negated: Bool {
-		return !self
+		return !self.body
 	}
 	
-	public mutating func negate() {
-		self = self.negated
+	public static func nagate(_ target: inout Bool) {
+		target = target.eltaso.negated
 	}
 	
 }

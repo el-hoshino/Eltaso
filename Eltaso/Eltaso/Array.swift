@@ -13,7 +13,7 @@ extension Array {
 	public var shuffled: Array<Element> {
 		var array = self
 		for i in array.indices.reversed().dropLast() {
-			let j = Int.createRandom(within: array.indices.lowerBound ..< i)
+			let j = Int.Eltaso.makeRandom(within: array.indices.lowerBound ..< i)
 			array.swapAt(i, j)
 		}
 		return array
@@ -31,7 +31,7 @@ extension Array {
 		guard self.count > 0 else {
 			return nil
 		}
-		let randomIndex = Int.createRandom(within: self.indices)
+		let randomIndex = Int.Eltaso.makeRandom(within: self.indices)
 		return self[randomIndex]
 	}
 	
@@ -60,17 +60,17 @@ extension Array {
 extension Array {
 	
 	public func keeping(at n: Int) -> Array<Element> {
-		let n = n.limited(within: self.indices)
+		let n = n.eltaso.limited(within: self.indices)
 		return [self[n]]
 	}
 	
 	public func keepingFirst(_ n: Int = 1) -> Array<Element> {
-		let n = n.limited(within: self.indices)
+		let n = n.eltaso.limited(within: self.indices)
 		return Array(self[0 ..< n])
 	}
 	
 	public func keepingLast(_ n: Int = 1) -> Array<Element> {
-		let n = n.limited(within: self.indices)
+		let n = n.eltaso.limited(within: self.indices)
 		return Array(self[(self.count - n) ..< self.count])
 	}
 	
@@ -95,19 +95,19 @@ extension Array {
 extension Array {
 	
 	public func removing(at n: Int) -> Array<Element> {
-		let n = n.limited(within: self.indices)
+		let n = n.eltaso.limited(within: self.indices)
 		return self.enumerated().reduce([], { (result, tuple) -> Array<Element> in
 			return tuple.offset == n ? result : result.appending(tuple.element)
 		})
 	}
 	
 	public func removingFirst(_ n: Int = 1) -> Array<Element> {
-		let n = n.limited(within: self.indices)
+		let n = n.eltaso.limited(within: self.indices)
 		return Array(self[n ..< self.count])
 	}
 	
 	public func removingLast(_ n: Int = 1) -> Array<Element> {
-		let n = n.limited(within: self.indices)
+		let n = n.eltaso.limited(within: self.indices)
 		return Array(self[0 ..< (self.count - n)])
 	}
 	

@@ -8,9 +8,11 @@
 
 import Foundation
 
-extension Float {
+extension Float: EltasoCompatible { }
+
+extension EltasoContainer where Containee == Float {
 	
-	public static func createRndom(within range: Range<Float>) -> Float {
+	public static func makeRndom(within range: Range<Float>) -> Float {
 		
 		let ratio = range.width / Float(UInt32.max)
 		let random = Float(arc4random_uniform(.max)) * ratio
@@ -19,7 +21,7 @@ extension Float {
 		
 	}
 	
-	public static func createRandom(within range: ClosedRange<Float>) -> Float {
+	public static func makeRandom(within range: ClosedRange<Float>) -> Float {
 		
 		let ratio = range.width / Float(UInt32.max.decreased)
 		let random = Float(arc4random_uniform(.max)) * ratio
@@ -30,23 +32,23 @@ extension Float {
 	
 }
 
-extension Float {
+extension EltasoContainer where Containee == Float {
 	
-	public var inverted: Float {
-		return -self
+	public var negated: Float {
+		return -self.body
 	}
 	
-	public mutating func invert() {
-		self = self.inverted
+	public static func nagate(_ target: inout Float) {
+		target = target.eltaso.negated
 	}
 	
 }
 
-extension Float {
+extension EltasoContainer where Containee == Float {
 	
 	public func limited(within range: ClosedRange<Float>) -> Float {
 		
-		switch self {
+		switch self.body {
 		case -.infinity ... range.lowerBound:
 			return range.lowerBound
 			
@@ -54,22 +56,22 @@ extension Float {
 			return range.upperBound
 			
 		default:
-			return self
+			return self.body
 		}
 		
 	}
 	
-	public mutating func limit(within range: ClosedRange<Float>) {
-		self = self.limited(within: range)
+	public static func limit(_ target: inout Float, within range: ClosedRange<Float>) {
+		target = target.eltaso.limited(within: range)
 	}
 	
 }
 
-extension Float {
+extension EltasoContainer where Containee == Float {
 	
 	public var radianValue: Float {
 		
-		return self / 180 * .pi
+		return self.body / 180 * .pi
 		
 	}
 	

@@ -8,9 +8,11 @@
 
 import Foundation
 
-extension Double {
+extension Double: EltasoCompatible { }
+
+extension EltasoContainer where Containee == Double {
 	
-	public static func createRndom(within range: Range<Double>) -> Double {
+	public static func makeRndom(within range: Range<Double>) -> Double {
 		
 		let ratio = range.width / Double(UInt32.max)
 		let random = Double(arc4random_uniform(.max)) * ratio
@@ -19,7 +21,7 @@ extension Double {
 		
 	}
 	
-	public static func createRandom(within range: ClosedRange<Double>) -> Double {
+	public static func makeRandom(within range: ClosedRange<Double>) -> Double {
 		
 		let ratio = range.width / Double(UInt32.max.decreased)
 		let random = Double(arc4random_uniform(.max)) * ratio
@@ -30,23 +32,23 @@ extension Double {
 	
 }
 
-extension Double {
+extension EltasoContainer where Containee == Double {
 	
-	public var inverted: Double {
-		return -self
+	public var negated: Double {
+		return -self.body
 	}
 	
-	public mutating func invert() {
-		self = self.inverted
+	public static func negate(_ target: inout Double) {
+		target = target.eltaso.negated
 	}
 	
 }
 
-extension Double {
+extension EltasoContainer where Containee == Double {
 	
 	public func limited(within range: ClosedRange<Double>) -> Double {
 		
-		switch self {
+		switch self.body {
 		case -.infinity ... range.lowerBound:
 			return range.lowerBound
 			
@@ -54,28 +56,28 @@ extension Double {
 			return range.upperBound
 			
 		default:
-			return self
+			return self.body
 		}
 		
 	}
 	
-	public mutating func limit(within range: ClosedRange<Double>) {
-		self = self.limited(within: range)
+	public static func limit(_ target: inout Double, within range: ClosedRange<Double>) {
+		target = target.eltaso.limited(within: range)
 	}
 	
 }
 
-extension Double {
+extension EltasoContainer where Containee == Double {
 	
 	public var radianValue: Double {
 		
 		if #available(iOS 10.0, *) {
-			let degreeMeasurement = Measurement(value: self, unit: UnitAngle.degrees)
+			let degreeMeasurement = Measurement(value: self.body, unit: UnitAngle.degrees)
 			let radianMeasurement = degreeMeasurement.converted(to: .radians)
 			return radianMeasurement.value
 			
 		} else {
-			return self / 180 * .pi
+			return self.body / 180 * .pi
 			
 		}
 		

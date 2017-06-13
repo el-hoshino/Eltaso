@@ -750,7 +750,7 @@ extension Matrix {
 	
 	public func keepingRow(at m: Int) -> Matrix<Element> {
 		
-		let i = m.limited(within: self.indices.rows)
+		let i = m.eltaso.limited(within: self.indices.rows)
 		
 		var matrix = self
 		let row = matrix.indices.columns.map({ (j) -> Element in
@@ -765,7 +765,7 @@ extension Matrix {
 	
 	public func keepingFirstRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (0 ..< m).map { (i) -> [Element] in
@@ -782,7 +782,7 @@ extension Matrix {
 	
 	public func keepingLastRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
@@ -815,7 +815,7 @@ extension Matrix {
 	
 	public func keepingColumn(at n: Int) -> Matrix<Element> {
 		
-		let j = n.limited(within: self.indices.columns)
+		let j = n.eltaso.limited(within: self.indices.columns)
 		
 		var matrix = self
 		let column = self.indices.rows.map { (i) -> Element in
@@ -830,7 +830,7 @@ extension Matrix {
 	
 	public func keepingFirstColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -847,7 +847,7 @@ extension Matrix {
 	
 	public func keepingLastColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -880,7 +880,7 @@ extension Matrix {
 	
 	public func removingRow(at m: Int) -> Matrix<Element> {
 		
-		let i = m.limited(within: self.indices.rows)
+		let i = m.eltaso.limited(within: self.indices.rows)
 		
 		var matrix = self
 		let rows = Array(self.indices.rows).filter { (row) -> Bool in
@@ -899,7 +899,7 @@ extension Matrix {
 	
 	public func removingFirstRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
@@ -916,7 +916,7 @@ extension Matrix {
 	
 	public func removingLastRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (0 ..< m).map { (i) -> [Element] in
@@ -949,7 +949,7 @@ extension Matrix {
 	
 	public func removingColumn(at n: Int) -> Matrix<Element> {
 		
-		let j = n.limited(within: self.indices.columns)
+		let j = n.eltaso.limited(within: self.indices.columns)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -968,7 +968,7 @@ extension Matrix {
 	
 	public func removingFirstColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -985,7 +985,7 @@ extension Matrix {
 	
 	public func removingLastColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in

@@ -10,17 +10,6 @@ import Foundation
 
 extension Dictionary {
 	
-	public init<S: Sequence> (tuples seq: S) where S.Iterator.Element == Element {
-		self.init()
-		for (k,v) in seq {
-			self[k] = v
-		}
-	}
-	
-}
-
-extension Dictionary {
-	
 	public func containsKey(_ key: Key) -> Bool {
 		
 		return self[key] != nil

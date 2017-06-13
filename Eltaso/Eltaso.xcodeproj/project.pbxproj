@@ -25,6 +25,7 @@
 		1657BBE61E794FB3009B3D0F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657BBE51E794FB3009B3D0F /* UINavigationController.swift */; };
 		166205861D6EB5D100438DAE /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166205851D6EB5D100438DAE /* Weekday.swift */; };
 		166882611DC350F100C67F0C /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166882601DC350F100C67F0C /* CGImage.swift */; };
+		1685B04F1EEE5BD000CD6056 /* EltasoCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */; };
 		168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57041D66DBEE00C07A06 /* UIAlertController.swift */; };
 		168E57071D66E4B900C07A06 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57061D66E4B900C07A06 /* Date.swift */; };
 		168E570B1D6702F000C07A06 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E570A1D6702F000C07A06 /* UIApplication.swift */; };
@@ -96,6 +97,7 @@
 		1657BBE51E794FB3009B3D0F /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		166205851D6EB5D100438DAE /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		166882601DC350F100C67F0C /* CGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
+		1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EltasoCompatible.swift; sourceTree = "<group>"; };
 		168E57041D66DBEE00C07A06 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		168E57061D66E4B900C07A06 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		168E570A1D6702F000C07A06 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				79E14E871D2B90DA00AF6EE4 /* Info.plist */,
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
 				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
+				1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */,
 				16991FD71DF9708C00FC4A8A /* CopyableObject.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 				1655CD4C1DB0BB4E00C7203D /* TranslatableView.swift */,
@@ -413,6 +416,7 @@
 				164F86511DD49A7F00230707 /* CGScale.swift in Sources */,
 				79E14E9F1D2B918100AF6EE4 /* UIImage.swift in Sources */,
 				16D355671DEEF71500444561 /* UIViewAutoresizing.swift in Sources */,
+				1685B04F1EEE5BD000CD6056 /* EltasoCompatible.swift in Sources */,
 				162D38481E02B6E500CA9D7A /* Float.swift in Sources */,
 				160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,

@@ -1018,7 +1018,7 @@ extension Matrix {
 	
 	public mutating func applyForEach(_ transform: (Element) throws -> Element) rethrows {
 		
-		try self._value.applyForEach(transform)
+		self._value = try self._value.map(transform)
 		
 	}
 	

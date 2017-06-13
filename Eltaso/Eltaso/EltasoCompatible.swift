@@ -26,3 +26,24 @@ public struct EltasoContainer<Containee: EltasoCompatible> {
 	public let body: Containee
 	
 }
+
+public protocol SequencedEltasoCompatible {
+	
+	associatedtype Eltaso
+	var eltaso: Eltaso { get }
+	
+}
+
+extension SequencedEltasoCompatible where Self: Sequence {
+	
+	public var eltaso: SequencedEltasoContainer<Self, Self.Element> {
+		return SequencedEltasoContainer(body: self)
+	}
+	
+}
+
+public struct SequencedEltasoContainer<Containee: SequencedEltasoCompatible, Element> {
+	
+	public let body: Containee
+	
+}

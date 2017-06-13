@@ -8,10 +8,12 @@
 
 import Foundation
 
-extension Array {
+extension Array: SequencedEltasoCompatible { }
+
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
 	public var shuffled: Array<Element> {
-		var array = self
+		var array = self.body
 		for i in array.indices.reversed().dropLast() {
 			let j = Int.Eltaso.makeRandom(within: array.indices.lowerBound ..< i)
 			array.swapAt(i, j)
@@ -19,114 +21,98 @@ extension Array {
 		return array
 	}
 	
-	public mutating func shuffle() {
-		self = self.shuffled
+	public static func shuffle(_ target: inout Array<Element>) {
+		target = target.eltaso.shuffled
 	}
 	
 }
 
-extension Array {
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
 	public var randomElement: Element? {
-		guard self.count > 0 else {
+		guard self.body.count > 0 else {
 			return nil
 		}
-		let randomIndex = Int.Eltaso.makeRandom(within: self.indices)
-		return self[randomIndex]
+		let randomIndex = Int.Eltaso.makeRandom(within: self.body.indices)
+		return self.body[randomIndex]
 	}
 	
 }
 
-extension Array {
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
 	public func appending(_ newElement: Element) -> Array<Element> {
-		return self + [newElement]
+		return self.body + [newElement]
 	}
 	
 	public func appending(_ newElements: [Element]) -> Array<Element> {
-		return self + newElements
+		return self.body + newElements
 	}
 	
 }
 
-extension Array {
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
-	public mutating func append(_ newElements: [Element]) {
-		self += newElements
+	public static func append(_ newElements: [Element], to target: inout Array<Element>) {
+		target += newElements
 	}
 	
 }
 
-extension Array {
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
 	public func keeping(at n: Int) -> Array<Element> {
-		let n = n.eltaso.limited(within: self.indices)
-		return [self[n]]
+		let n = n.eltaso.limited(within: self.body.indices)
+		return [self.body[n]]
 	}
 	
 	public func keepingFirst(_ n: Int = 1) -> Array<Element> {
-		let n = n.eltaso.limited(within: self.indices)
-		return Array(self[0 ..< n])
+		let n = n.eltaso.limited(within: self.body.indices)
+		return Array(self.body[0 ..< n])
 	}
 	
 	public func keepingLast(_ n: Int = 1) -> Array<Element> {
-		let n = n.eltaso.limited(within: self.indices)
-		return Array(self[(self.count - n) ..< self.count])
+		let n = n.eltaso.limited(within: self.body.indices)
+		return Array(self.body[(self.body.count - n) ..< self.body.count])
 	}
 	
 }
 
-extension Array {
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
-	public mutating func keep(at n: Int) {
-		self = self.keeping(at: n)
+	public static func keep(at n: Int, in target: inout Array<Element>) {
+		target = target.eltaso.keeping(at: n)
 	}
 	
-	public mutating func keepFirst(_ n: Int = 1) {
-		self = self.keepingFirst(n)
+	public static func keepFirst(_ n: Int = 1, in target: inout Array<Element>) {
+		target = target.eltaso.keepingFirst(n)
 	}
 	
-	public mutating func keepLast(_ n: Int = 1) {
-		self = self.keepingLast(n)
+	public static func keepLast(_ n: Int = 1, in target: inout Array<Element>) {
+		target = target.eltaso.keepingLast(n)
 	}
 	
 }
 
-extension Array {
+extension SequencedEltasoContainer where Containee == Array<Element> {
 	
 	public func removing(at n: Int) -> Array<Element> {
-		let n = n.eltaso.limited(within: self.indices)
-		return self.enumerated().reduce([], { (result, tuple) -> Array<Element> in
-			return tuple.offset == n ? result : result.appending(tuple.element)
-		})
+		let n = n.eltaso.limited(within: self.body.indices)
+		let result = self.body.enumerated().reduce([]) { (result, tuple) -> Array<Element> in
+			return tuple.offset == n ? result : result.eltaso.appending(tuple.element)
+		}
+		return result
 	}
 	
 	public func removingFirst(_ n: Int = 1) -> Array<Element> {
-		let n = n.eltaso.limited(within: self.indices)
-		return Array(self[n ..< self.count])
+		let n = n.eltaso.limited(within: self.body.indices)
+		return Array(self.body[n ..< self.body.count])
 	}
 	
 	public func removingLast(_ n: Int = 1) -> Array<Element> {
-		let n = n.eltaso.limited(within: self.indices)
-		return Array(self[0 ..< (self.count - n)])
+		let n = n.eltaso.limited(within: self.body.indices)
+		return Array(self.body[0 ..< (self.body.count - n)])
 	}
 	
 }
 
-extension Array {
-	
-	public mutating func applyForEach(_ transform: (Element) throws -> Element) rethrows {
-		
-		var result: [Element] = []
-		var iterator = self.makeIterator()
-		
-		while let element = iterator.next() {
-			let transformed = try transform(element)
-			result.append(transformed)
-		}
-		
-		self = result
-		
-	}
-	
-}

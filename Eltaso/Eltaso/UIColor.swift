@@ -12,7 +12,7 @@ extension UIColor: EltasoCompatible { }
 
 extension EltasoContainer where Containee == UIColor {
 	
-	public static func `init`(hexRGBAValue: UInt) -> UIColor {
+	public static func `init`(hexRGBAValue: UInt) -> Containee {
 		
 		let hexRed = (hexRGBAValue & 0xFF000000) >> 24
 		let hexGreen = (hexRGBAValue & 0x00FF0000) >> 16
@@ -24,7 +24,7 @@ extension EltasoContainer where Containee == UIColor {
 		let blue = CGFloat(hexBlue) / CGFloat(UInt8.max)
 		let alpha = CGFloat(hexAlpha) / CGFloat(UInt8.max)
 		
-		let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+		let color = Containee(red: red, green: green, blue: blue, alpha: alpha)
 		return color
 		
 	}

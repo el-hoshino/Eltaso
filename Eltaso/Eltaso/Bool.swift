@@ -12,7 +12,7 @@ extension Bool: EltasoCompatible { }
 
 extension EltasoContainer where Containee == Bool {
 	
-	public static func makeRandom() -> Bool {
+	public static func makeRandom() -> Containee {
 		let randomNumber = Int.Eltaso.makeRandom(within: 0 ... 1)
 		return randomNumber != 0
 	}
@@ -21,11 +21,11 @@ extension EltasoContainer where Containee == Bool {
 
 extension EltasoContainer where Containee == Bool {
 	
-	public var negated: Bool {
+	public var negated: Containee {
 		return !self.body
 	}
 	
-	public static func nagate(_ target: inout Bool) {
+	public static func nagate(_ target: inout Containee) {
 		target = target.eltaso.negated
 	}
 	

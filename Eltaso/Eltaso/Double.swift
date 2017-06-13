@@ -12,19 +12,19 @@ extension Double: EltasoCompatible { }
 
 extension EltasoContainer where Containee == Double {
 	
-	public static func makeRndom(within range: Range<Double>) -> Double {
+	public static func makeRndom(within range: Range<Containee>) -> Containee {
 		
-		let ratio = range.width / Double(UInt32.max)
-		let random = Double(arc4random_uniform(.max)) * ratio
+		let ratio = range.width / Containee(UInt32.max)
+		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		
 	}
 	
-	public static func makeRandom(within range: ClosedRange<Double>) -> Double {
+	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
 		
-		let ratio = range.width / Double(UInt32.max.decreased)
-		let random = Double(arc4random_uniform(.max)) * ratio
+		let ratio = range.width / Containee(UInt32.max.decreased)
+		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		
@@ -34,11 +34,11 @@ extension EltasoContainer where Containee == Double {
 
 extension EltasoContainer where Containee == Double {
 	
-	public var negated: Double {
+	public var negated: Containee {
 		return -self.body
 	}
 	
-	public static func negate(_ target: inout Double) {
+	public static func negate(_ target: inout Containee) {
 		target = target.eltaso.negated
 	}
 	
@@ -46,7 +46,7 @@ extension EltasoContainer where Containee == Double {
 
 extension EltasoContainer where Containee == Double {
 	
-	public func limited(within range: ClosedRange<Double>) -> Double {
+	public func limited(within range: ClosedRange<Containee>) -> Containee {
 		
 		switch self.body {
 		case -.infinity ... range.lowerBound:
@@ -61,7 +61,7 @@ extension EltasoContainer where Containee == Double {
 		
 	}
 	
-	public static func limit(_ target: inout Double, within range: ClosedRange<Double>) {
+	public static func limit(_ target: inout Containee, within range: ClosedRange<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	
@@ -69,7 +69,7 @@ extension EltasoContainer where Containee == Double {
 
 extension EltasoContainer where Containee == Double {
 	
-	public var radianValue: Double {
+	public var radianValue: Containee {
 		
 		if #available(iOS 10.0, *) {
 			let degreeMeasurement = Measurement(value: self.body, unit: UnitAngle.degrees)

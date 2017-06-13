@@ -10,10 +10,10 @@ import Foundation
 
 extension EltasoContainer where Containee == TimeInterval {
 	
-	public static let minuteLength: TimeInterval = 60
-	public static let hourLength: TimeInterval = EltasoContainer<TimeInterval>.minuteLength * 60
-	public static let dayLength: TimeInterval = EltasoContainer<TimeInterval>.hourLength * 24
-	public static let weekLength: TimeInterval = EltasoContainer<TimeInterval>.dayLength * 7
+	public static let minuteLength: Containee = 60
+	public static let hourLength: Containee = EltasoContainer<Containee>.minuteLength * 60
+	public static let dayLength: Containee = EltasoContainer<Containee>.hourLength * 24
+	public static let weekLength: Containee = EltasoContainer<Containee>.dayLength * 7
 	
 }
 

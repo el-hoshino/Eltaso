@@ -20,7 +20,7 @@ extension EltasoContainer where Containee == CGImage {
 
 extension EltasoContainer where Containee == CGImage {
 	
-	public static func createImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> CGImage? {
+	public static func createImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> Containee? {
 		
 		UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
@@ -41,7 +41,7 @@ extension EltasoContainer where Containee == CGImage {
 
 extension EltasoContainer where Containee == CGImage {
 	
-	public func resized(to size: CGSize, scale: CGFloat = 0) -> CGImage {
+	public func resized(to size: CGSize, scale: CGFloat = 0) -> Containee {
 		
 		UIGraphicsBeginImageContextWithOptions(size, false, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
@@ -63,7 +63,7 @@ extension EltasoContainer where Containee == CGImage {
 		
 	}
 	
-	public func cropped(in rect: CGRect, onColor canvasColor: CGColor = UIColor.clear.cgColor, scale: CGFloat = 0) -> CGImage {
+	public func cropped(in rect: CGRect, onColor canvasColor: CGColor = UIColor.clear.cgColor, scale: CGFloat = 0) -> Containee {
 		
 		let opaque = canvasColor.alpha > 0
 		

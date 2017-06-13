@@ -12,19 +12,19 @@ extension Float: EltasoCompatible { }
 
 extension EltasoContainer where Containee == Float {
 	
-	public static func makeRndom(within range: Range<Float>) -> Float {
+	public static func makeRndom(within range: Range<Containee>) -> Containee {
 		
-		let ratio = range.width / Float(UInt32.max)
-		let random = Float(arc4random_uniform(.max)) * ratio
+		let ratio = range.width / Containee(UInt32.max)
+		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		
 	}
 	
-	public static func makeRandom(within range: ClosedRange<Float>) -> Float {
+	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
 		
-		let ratio = range.width / Float(UInt32.max.decreased)
-		let random = Float(arc4random_uniform(.max)) * ratio
+		let ratio = range.width / Containee(UInt32.max.decreased)
+		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		
@@ -34,11 +34,11 @@ extension EltasoContainer where Containee == Float {
 
 extension EltasoContainer where Containee == Float {
 	
-	public var negated: Float {
+	public var negated: Containee {
 		return -self.body
 	}
 	
-	public static func nagate(_ target: inout Float) {
+	public static func nagate(_ target: inout Containee) {
 		target = target.eltaso.negated
 	}
 	
@@ -46,7 +46,7 @@ extension EltasoContainer where Containee == Float {
 
 extension EltasoContainer where Containee == Float {
 	
-	public func limited(within range: ClosedRange<Float>) -> Float {
+	public func limited(within range: ClosedRange<Containee>) -> Containee {
 		
 		switch self.body {
 		case -.infinity ... range.lowerBound:
@@ -61,7 +61,7 @@ extension EltasoContainer where Containee == Float {
 		
 	}
 	
-	public static func limit(_ target: inout Float, within range: ClosedRange<Float>) {
+	public static func limit(_ target: inout Containee, within range: ClosedRange<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	
@@ -69,7 +69,7 @@ extension EltasoContainer where Containee == Float {
 
 extension EltasoContainer where Containee == Float {
 	
-	public var radianValue: Float {
+	public var radianValue: Containee {
 		
 		return self.body / 180 * .pi
 		

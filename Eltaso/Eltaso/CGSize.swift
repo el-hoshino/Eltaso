@@ -68,8 +68,8 @@ extension CGSize: EltasoCompatible { }
 
 extension EltasoContainer where Containee == CGSize {
 	
-	public static func `init`(length: CGFloat) -> CGSize {
-		return CGSize(width: length, height: length)
+	public static func `init`(length: CGFloat) -> Containee {
+		return Containee(width: length, height: length)
 	}
 	
 }
@@ -88,7 +88,7 @@ extension EltasoContainer where Containee == CGSize {
 
 extension EltasoContainer where Containee == CGSize {
 	
-	public static let identity = CGSize(width: 1, height: 1)
+	public static let identity = Containee(width: 1, height: 1)
 	
 }
 
@@ -150,11 +150,11 @@ extension EltasoContainer where Containee == CGSize {
 
 extension EltasoContainer where Containee == CGSize {
 	
-	public func boundSizeAfterRotation(by angle: CGFloat) -> CGSize {
+	public func boundSizeAfterRotation(by angle: CGFloat) -> Containee {
 		
 		let rotatedBoundWidth = abs(self.body.width * cos(angle)) + abs(self.body.height * -sin(angle))
 		let rotatedBoundHeight = abs(self.body.width * sin(angle)) + abs(self.body.height * cos(angle))
-		let rotatedBoundSize = CGSize(width: rotatedBoundWidth, height: rotatedBoundHeight)
+		let rotatedBoundSize = Containee(width: rotatedBoundWidth, height: rotatedBoundHeight)
 		
 		return rotatedBoundSize
 		
@@ -164,18 +164,18 @@ extension EltasoContainer where Containee == CGSize {
 
 extension EltasoContainer where Containee == CGSize {
 	
-	public func cropped(fromInsets insets: UIEdgeInsets) -> CGSize {
-		return CGSize(width: self.body.width - insets.left - insets.right,
+	public func cropped(fromInsets insets: UIEdgeInsets) -> Containee {
+		return Containee(width: self.body.width - insets.left - insets.right,
 		              height: self.body.height - insets.top - insets.bottom)
 	}
 	
-	public func cropped(fromMargin margin: CGFloat) -> CGSize {
-		return CGSize(width: self.body.width - (margin * 2),
+	public func cropped(fromMargin margin: CGFloat) -> Containee {
+		return Containee(width: self.body.width - (margin * 2),
 		              height: self.body.height - (margin * 2))
 	}
 	
-	public func cropped(fromHorizontalMargin horizontalMargin: CGFloat, verticalMargin: CGFloat) -> CGSize {
-		return CGSize(width: self.body.width - (horizontalMargin * 2),
+	public func cropped(fromHorizontalMargin horizontalMargin: CGFloat, verticalMargin: CGFloat) -> Containee {
+		return Containee(width: self.body.width - (horizontalMargin * 2),
 		              height: self.body.height - (verticalMargin * 2))
 	}
 	

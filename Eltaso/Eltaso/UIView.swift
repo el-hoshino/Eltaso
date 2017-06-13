@@ -36,7 +36,7 @@ extension EltasoContainer where Containee == UIView {
 
 extension EltasoContainer where Containee == UIView {
 	
-	public static func animateJumpViews(_ views: [UIView], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
+	public static func animateJumpViews(_ views: [Containee], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
 		
 		let initialDuration = duration * 0.2
 		let reversingDuration = duration - initialDuration

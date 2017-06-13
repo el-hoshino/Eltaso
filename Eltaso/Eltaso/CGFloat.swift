@@ -12,19 +12,19 @@ extension CGFloat: EltasoCompatible { }
 
 extension EltasoContainer where Containee == CGFloat {
 	
-	public static func makeRndom(within range: Range<CGFloat>) -> CGFloat {
+	public static func makeRndom(within range: Range<Containee>) -> Containee {
 		
-		let ratio = range.width / CGFloat(UInt32.max)
-		let random = CGFloat(arc4random_uniform(.max)) * ratio
+		let ratio = range.width / Containee(UInt32.max)
+		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		
 	}
 	
-	public static func makeRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
+	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
 		
-		let ratio = range.width / CGFloat(UInt32.max.decreased)
-		let random = CGFloat(arc4random_uniform(.max)) * ratio
+		let ratio = range.width / Containee(UInt32.max.decreased)
+		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
 		
@@ -34,11 +34,11 @@ extension EltasoContainer where Containee == CGFloat {
 
 extension EltasoContainer where Containee == CGFloat {
 	
-	public var negated: CGFloat {
+	public var negated: Containee {
 		return -self.body
 	}
 	
-	public static func negate(_ target: inout CGFloat) {
+	public static func negate(_ target: inout Containee) {
 		target = target.eltaso.negated
 	}
 	
@@ -46,7 +46,7 @@ extension EltasoContainer where Containee == CGFloat {
 
 extension EltasoContainer where Containee == CGFloat {
 	
-	public func limited(within range: ClosedRange<CGFloat>) -> CGFloat {
+	public func limited(within range: ClosedRange<Containee>) -> Containee {
 		
 		switch self.body {
 		case -.infinity ... range.lowerBound:
@@ -61,7 +61,7 @@ extension EltasoContainer where Containee == CGFloat {
 		
 	}
 	
-	public static func limit(_ target: inout CGFloat, within range: ClosedRange<CGFloat>) {
+	public static func limit(_ target: inout Containee, within range: ClosedRange<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	
@@ -69,13 +69,13 @@ extension EltasoContainer where Containee == CGFloat {
 
 extension EltasoContainer where Containee == CGFloat {
 	
-	public var radianValue: CGFloat {
+	public var radianValue: Containee {
 		
 		return self.body / 180 * .pi
 		
 	}
 	
-	public var degreeValue: CGFloat {
+	public var degreeValue: Containee {
 		
 		return self.body * 180 / .pi
 		
@@ -85,7 +85,7 @@ extension EltasoContainer where Containee == CGFloat {
 
 extension EltasoContainer where Containee == CGFloat {
 	
-	public func vector(atAngle angle: CGFloat) -> CGVector {
+	public func vector(atAngle angle: Containee) -> CGVector {
 		
 		let dx = self.body * cos(angle)
 		let dy = self.body * sin(angle)

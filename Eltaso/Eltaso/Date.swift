@@ -17,9 +17,9 @@ extension EltasoContainer where Containee == Date {
 		case failedToGetEdittedDateFromCurrentDate
 	}
 	
-	public static func getDateAtSpecificTime(hour: Int = 0, minute: Int = 0, second: Int = 0) throws -> Date {
+	public static func getDateAtSpecificTime(hour: Int = 0, minute: Int = 0, second: Int = 0) throws -> Containee {
 		
-		let currentDate = Date()
+		let currentDate = Containee()
 		let currentCalendar = Calendar.current
 		var dateComponents = currentCalendar.dateComponents([.year, .month, .day], from: currentDate)
 		dateComponents.hour = hour
@@ -34,7 +34,7 @@ extension EltasoContainer where Containee == Date {
 		
 	}
 	
-	public func getDateByAddingInterval(_ interval: Int, toUnit unit: Calendar.Component) throws -> Date {
+	public func getDateByAddingInterval(_ interval: Int, toUnit unit: Calendar.Component) throws -> Containee {
 		
 		let calendar = Calendar.current
 		guard let date = calendar.date(byAdding: unit, value: interval, to: self.body) else {
@@ -68,7 +68,7 @@ extension EltasoContainer where Containee == Date {
 		
 	}
 	
-	public func elapsedTime(until date: Date) -> TimeInterval {
+	public func elapsedTime(until date: Containee) -> TimeInterval {
 		
 		return -self.body.timeIntervalSince(date)
 		

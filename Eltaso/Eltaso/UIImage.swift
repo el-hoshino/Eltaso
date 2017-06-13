@@ -12,8 +12,8 @@ extension UIImage: EltasoCompatible { }
 
 extension EltasoContainer where Containee == UIImage {
 	
-	public static func `init`(named name: String, inBundle bundle: Bundle?) -> UIImage? {
-		let image = UIImage(named: name, in: bundle, compatibleWith: nil)
+	public static func `init`(named name: String, inBundle bundle: Bundle?) -> Containee? {
+		let image = Containee(named: name, in: bundle, compatibleWith: nil)
 		return image
 	}
 	
@@ -21,7 +21,7 @@ extension EltasoContainer where Containee == UIImage {
 
 extension EltasoContainer where Containee == UIImage {
 	
-	public func resized(to size: CGSize) -> UIImage? {
+	public func resized(to size: CGSize) -> Containee? {
 		
 		UIGraphicsBeginImageContextWithOptions(size, false, self.body.scale)
 		
@@ -35,7 +35,7 @@ extension EltasoContainer where Containee == UIImage {
 		
 	}
 	
-	public func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
+	public func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> Containee? {
 		
 		let opaque = canvasColor != .clear
 		
@@ -64,7 +64,7 @@ extension EltasoContainer where Containee == UIImage {
 		case showWholeImage
 	}
 	
-	public func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: RotatingMode = .showWholeImage) -> UIImage? {
+	public func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: RotatingMode = .showWholeImage) -> Containee? {
 		
 		let opaque = canvasColor != .clear
 		let canvasSize: CGSize

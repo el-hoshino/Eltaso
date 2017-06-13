@@ -12,31 +12,31 @@ extension Int: EltasoCompatible { }
 
 extension EltasoContainer where Containee == Int {
 	
-	public static func makeRandom(within range: Range<Int>) -> Int {
+	public static func makeRandom(within range: Range<Containee>) -> Containee {
 		
 		let random = arc4random_uniform(UInt32(range.width))
-		return Int(random) + range.lowerBound
+		return Containee(random) + range.lowerBound
 		
 	}
 	
-	public static func makeRandom(within range: ClosedRange<Int>) -> Int {
+	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
 		
 		let random = arc4random_uniform(UInt32(range.width.increased))
-		return Int(random) + range.lowerBound
+		return Containee(random) + range.lowerBound
 		
 	}
 	
-	public static func makeRandom(within range: CountableRange<Int>) -> Int {
+	public static func makeRandom(within range: CountableRange<Containee>) -> Containee {
 		
 		let random = arc4random_uniform(UInt32(range.width))
-		return Int(random) + range.lowerBound
+		return Containee(random) + range.lowerBound
 		
 	}
 	
-	public static func makeRandom(within range: CountableClosedRange<Int>) -> Int {
+	public static func makeRandom(within range: CountableClosedRange<Containee>) -> Containee {
 		
 		let random = arc4random_uniform(UInt32(range.width.increased))
-		return Int(random) + range.lowerBound
+		return Containee(random) + range.lowerBound
 		
 	}
 	
@@ -44,11 +44,11 @@ extension EltasoContainer where Containee == Int {
 
 extension EltasoContainer where Containee == Int {
 	
-	public var negated: Int {
+	public var negated: Containee {
 		return -self.body
 	}
 	
-	public static func negate(_ target: inout Int) {
+	public static func negate(_ target: inout Containee) {
 		target = target.eltaso.negated
 	}
 	
@@ -56,13 +56,13 @@ extension EltasoContainer where Containee == Int {
 
 extension EltasoContainer where Containee == Int {
 	
-	public func limited(within range: Range<Int>) -> Int {
+	public func limited(within range: Range<Containee>) -> Containee {
 		
 		switch self.body {
-		case Int.min ... range.lowerBound:
+		case Containee.min ... range.lowerBound:
 			return range.lowerBound
 			
-		case range.upperBound.decreased ... Int.max:
+		case range.upperBound.decreased ... Containee.max:
 			return range.upperBound.decreased
 			
 		default:
@@ -71,13 +71,13 @@ extension EltasoContainer where Containee == Int {
 		
 	}
 	
-	public func limited(within range: ClosedRange<Int>) -> Int {
+	public func limited(within range: ClosedRange<Containee>) -> Containee {
 		
 		switch self.body {
-		case Int.min ... range.lowerBound:
+		case Containee.min ... range.lowerBound:
 			return range.lowerBound
 			
-		case range.upperBound ... Int.max:
+		case range.upperBound ... Containee.max:
 			return range.upperBound
 			
 		default:
@@ -86,29 +86,29 @@ extension EltasoContainer where Containee == Int {
 		
 	}
 	
-	public func limited(within range: CountableRange<Int>) -> Int {
+	public func limited(within range: CountableRange<Containee>) -> Containee {
 		let range = Range(range)
 		return self.limited(within: range)
 	}
 	
-	public func limited(within range: CountableClosedRange<Int>) -> Int {
+	public func limited(within range: CountableClosedRange<Containee>) -> Containee {
 		let range = ClosedRange(range)
 		return self.limited(within: range)
 	}
 	
-	public static func limit(_ target: inout Int, within range: Range<Int>) {
+	public static func limit(_ target: inout Containee, within range: Range<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	
-	public static func limit(_ target: inout Int, within range: ClosedRange<Int>) {
+	public static func limit(_ target: inout Containee, within range: ClosedRange<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	
-	public static func limit(_ target: inout Int, within range: CountableRange<Int>) {
+	public static func limit(_ target: inout Containee, within range: CountableRange<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	
-	public static func limit(_ target: inout Int, within range: CountableClosedRange<Int>) {
+	public static func limit(_ target: inout Containee, within range: CountableClosedRange<Containee>) {
 		target = target.eltaso.limited(within: range)
 	}
 	

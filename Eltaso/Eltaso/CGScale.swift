@@ -79,8 +79,8 @@ extension CGScale: EltasoCompatible { }
 
 extension EltasoContainer where Containee == CGScale {
 	
-	public static func `init`(scale: CGFloat) -> CGScale {
-		return CGScale(horizontal: scale, vertical: scale)
+	public static func `init`(scale: CGFloat) -> Containee {
+		return Containee(horizontal: scale, vertical: scale)
 	}
 	
 }

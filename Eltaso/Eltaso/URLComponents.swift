@@ -12,8 +12,8 @@ extension URLComponents: EltasoCompatible { }
 
 extension EltasoContainer where Containee == URLComponents {
 	
-	public static func `init`(queryItems: [URLQueryItem]) -> URLComponents {
-		var components = URLComponents()
+	public static func `init`(queryItems: [URLQueryItem]) -> Containee {
+		var components = Containee()
 		components.queryItems = queryItems
 		return components
 	}

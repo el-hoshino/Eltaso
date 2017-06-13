@@ -19,8 +19,8 @@ extension EltasoContainer where Containee == Data {
 	
 	public func getValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T? {
 		
-		let startIndex: Data.Index
-		let endIndex: Data.Index
+		let startIndex: Containee.Index
+		let endIndex: Containee.Index
 		
 		switch advanceSizeType {
 		case .byteSize:
@@ -60,31 +60,31 @@ extension EltasoContainer where Containee == Data {
 
 extension EltasoContainer where Containee == Data {
 	
-	public static func append(_ byte: UInt8, to target: inout Data) {
+	public static func append(_ byte: UInt8, to target: inout Containee) {
 		
 		var byte = byte
 		let pointer = UnsafeBufferPointer(start: &byte, count: 1)
-		let data = Data(buffer: pointer)
+		let data = Containee(buffer: pointer)
 		
 		target.append(data)
 		
 	}
 	
-	public static func append(_ dualByte: UInt16, to target: inout Data) {
+	public static func append(_ dualByte: UInt16, to target: inout Containee) {
 		
 		var dualByte = dualByte
 		let pointer = UnsafeBufferPointer(start: &dualByte, count: 1)
-		let data = Data(buffer: pointer)
+		let data = Containee(buffer: pointer)
 		
 		target.append(data)
 		
 	}
 	
-	public static func append(_ quadByte: UInt32, to target: inout Data) {
+	public static func append(_ quadByte: UInt32, to target: inout Containee) {
 		
 		var quadByte = quadByte
 		let pointer = UnsafeBufferPointer(start: &quadByte, count: 1)
-		let data = Data(buffer: pointer)
+		let data = Containee(buffer: pointer)
 		
 		target.append(data)
 		

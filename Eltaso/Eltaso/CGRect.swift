@@ -48,20 +48,20 @@ extension CGRect: EltasoCompatible { }
 
 extension EltasoContainer where Containee == CGRect {
 	
-	public static let identity = CGRect(x: 0, y: 0, width: 1, height: 1)
+	public static let identity = Containee(x: 0, y: 0, width: 1, height: 1)
 	
 }
 
 extension EltasoContainer where Containee == CGRect {
 	
-	public static func createAspectFillFrame(fromContentSize contentSize: CGSize, andCanvasSize canvasSize: CGSize) -> CGRect {
+	public static func createAspectFillFrame(fromContentSize contentSize: CGSize, andCanvasSize canvasSize: CGSize) -> Containee {
 		
 		let scale = max(canvasSize.width / contentSize.width, canvasSize.height / contentSize.height)
 		let scaledContentSize = contentSize * scale
 		let scaledContentX = (canvasSize.width - scaledContentSize.width) / 2
 		let scaledContentY = (canvasSize.height - scaledContentSize.height) / 2
 		let scaledContentOrigin = CGPoint(x: scaledContentX, y: scaledContentY)
-		let scaledContentFrame = CGRect(origin: scaledContentOrigin, size: scaledContentSize)
+		let scaledContentFrame = Containee(origin: scaledContentOrigin, size: scaledContentSize)
 		
 		return scaledContentFrame
 		
@@ -84,8 +84,8 @@ extension EltasoContainer where Containee == CGRect {
 
 extension EltasoContainer where Containee == CGRect {
 	
-	public var zeroPositionedFrame: CGRect {
-		return CGRect(origin: .zero, size: self.body.size)
+	public var zeroPositionedFrame: Containee {
+		return Containee(origin: .zero, size: self.body.size)
 	}
 	
 }
@@ -184,12 +184,12 @@ extension EltasoContainer where Containee == CGRect {
 
 extension EltasoContainer where Containee == CGRect {
 	
-	public func isIncluded(in anotherRect: CGRect) -> Bool {
+	public func isIncluded(in anotherRect: Containee) -> Bool {
 		return self.horizontalRange …= anotherRect.eltaso.horizontalRange
 			&& self.verticalRange …= anotherRect.eltaso.verticalRange
 	}
 	
-	public func isPartiallyIncluded(in anotherRect: CGRect) -> Bool {
+	public func isPartiallyIncluded(in anotherRect: Containee) -> Bool {
 		return self.horizontalRange ^ anotherRect.eltaso.horizontalRange != nil
 			&& self.verticalRange ^ anotherRect.eltaso.verticalRange != nil
 	}

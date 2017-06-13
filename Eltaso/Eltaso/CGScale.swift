@@ -23,18 +23,46 @@ public struct CGScale {
 
 extension CGScale {
 	
-	public init() {
-		self.horizontal = 0
-		self.vertical = 0
+	public static func * (lhs: CGScale, rhs: CGFloat) -> CGScale {
+		return CGScale(horizontal: lhs.horizontal * rhs, vertical: lhs.vertical * rhs)
+	}
+	
+	public static func *= (lhs: inout CGScale, rhs: CGFloat) {
+		lhs = lhs * rhs
+	}
+	
+	public static func / (lhs: CGScale, rhs: CGFloat) -> CGScale {
+		return CGScale(horizontal: lhs.horizontal / rhs, vertical: lhs.vertical / rhs)
+	}
+	
+	public static func /= (lhs: inout CGScale, rhs: CGFloat) {
+		lhs = lhs * rhs
+	}
+	
+	
+	public static func * (lhs: CGScale, rhs: CGScale) -> CGScale {
+		return CGScale(horizontal: lhs.horizontal * rhs.horizontal, vertical: lhs.vertical * rhs.vertical)
+	}
+	
+	public static func *= (lhs: inout CGScale, rhs: CGScale) {
+		lhs = lhs * rhs
+	}
+	
+	public static func / (lhs: CGScale, rhs: CGScale) -> CGScale {
+		return CGScale(horizontal: lhs.horizontal / rhs.horizontal, vertical: lhs.vertical / rhs.vertical)
+	}
+	
+	public static func /= (lhs: inout CGScale, rhs: CGScale) {
+		lhs = lhs * rhs
 	}
 	
 }
 
 extension CGScale {
 	
-	public init(scale: CGFloat) {
-		self.horizontal = scale
-		self.vertical = scale
+	public init() {
+		self.horizontal = 0
+		self.vertical = 0
 	}
 	
 }
@@ -47,58 +75,26 @@ extension CGScale {
 	
 }
 
-extension CGScale {
+extension CGScale: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGScale {
+	
+	public static func `init`(scale: CGFloat) -> CGScale {
+		return CGScale(horizontal: scale, vertical: scale)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGScale {
 	
 	public var aspectFitScale: CGFloat {
-		return min(self.horizontal, self.vertical)
+		return min(self.body.horizontal, self.body.vertical)
 	}
 	
 	public var aspectFillScale: CGFloat {
-		return max(self.horizontal, self.vertical)
+		return max(self.body.horizontal, self.body.vertical)
 	}
 	
 }
 
 
-public func * (lhs: CGScale, rhs: CGFloat) -> CGScale {
-	return CGScale(horizontal: lhs.horizontal * rhs, vertical: lhs.vertical * rhs)
-}
-
-public func *= (lhs: inout CGScale, rhs: CGFloat) {
-	lhs = lhs * rhs
-}
-
-public func / (lhs: CGScale, rhs: CGFloat) -> CGScale {
-	return CGScale(horizontal: lhs.horizontal / rhs, vertical: lhs.vertical / rhs)
-}
-
-public func /= (lhs: inout CGScale, rhs: CGFloat) {
-	lhs = lhs * rhs
-}
-
-
-public func * (lhs: CGScale, rhs: CGScale) -> CGScale {
-	return CGScale(horizontal: lhs.horizontal * rhs.horizontal, vertical: lhs.vertical * rhs.vertical)
-}
-
-public func *= (lhs: inout CGScale, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
-public func / (lhs: CGScale, rhs: CGScale) -> CGScale {
-	return CGScale(horizontal: lhs.horizontal / rhs.horizontal, vertical: lhs.vertical / rhs.vertical)
-}
-
-public func /= (lhs: inout CGScale, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
-
-public func / (lhs: CGPoint, rhs: CGPoint) -> CGScale {
-	return CGScale(horizontal: lhs.x / rhs.x, vertical: lhs.y / rhs.y)
-}
-
-
-public func / (lhs: CGSize, rhs: CGSize) -> CGScale {
-	return CGScale(horizontal: lhs.width / rhs.width, vertical: lhs.height / rhs.height)
-}

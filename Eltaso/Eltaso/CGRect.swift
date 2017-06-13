@@ -8,46 +8,51 @@
 
 import Foundation
 
-public func * (lhs: CGRect, rhs: CGFloat) -> CGRect {
-	return CGRect(x: lhs.origin.x * rhs, y: lhs.origin.y * rhs, width: lhs.width * rhs, height: lhs.height * rhs)
-}
-
-public func *= (lhs: inout CGRect, rhs: CGFloat) {
-	lhs = lhs * rhs
-}
-
-public func * (lhs: CGRect, rhs: CGScale) -> CGRect {
-	return CGRect(x: lhs.origin.x * rhs.horizontal, y: lhs.origin.y * rhs.vertical, width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
-}
-
-public func *= (lhs: inout CGRect, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
-public func / (lhs: CGRect, rhs: CGFloat) -> CGRect {
-	return CGRect(x: lhs.origin.x / rhs, y: lhs.origin.y / rhs, width: lhs.width / rhs, height: lhs.height / rhs)
-}
-
-public func /= (lhs: inout CGRect, rhs: CGFloat) {
-	lhs = lhs / rhs
-}
-
-public func / (lhs: CGRect, rhs: CGScale) -> CGRect {
-	return CGRect(x: lhs.origin.x / rhs.horizontal, y: lhs.origin.y / rhs.vertical, width: lhs.width / rhs.horizontal, height: lhs.height / rhs.vertical)
-}
-
-public func /= (lhs: inout CGRect, rhs: CGScale) {
-	lhs = lhs / rhs
-}
-
-
 extension CGRect {
 	
-	public static let identity = CGRect(origin: .zero, size: .identity)
+	public static func * (lhs: CGRect, rhs: CGFloat) -> CGRect {
+		return CGRect(x: lhs.origin.x * rhs, y: lhs.origin.y * rhs, width: lhs.width * rhs, height: lhs.height * rhs)
+	}
+	
+	public static func *= (lhs: inout CGRect, rhs: CGFloat) {
+		lhs = lhs * rhs
+	}
+	
+	public static func * (lhs: CGRect, rhs: CGScale) -> CGRect {
+		return CGRect(x: lhs.origin.x * rhs.horizontal, y: lhs.origin.y * rhs.vertical, width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
+	}
+	
+	public static func *= (lhs: inout CGRect, rhs: CGScale) {
+		lhs = lhs * rhs
+	}
+	
+	public static func / (lhs: CGRect, rhs: CGFloat) -> CGRect {
+		return CGRect(x: lhs.origin.x / rhs, y: lhs.origin.y / rhs, width: lhs.width / rhs, height: lhs.height / rhs)
+	}
+	
+	public static func /= (lhs: inout CGRect, rhs: CGFloat) {
+		lhs = lhs / rhs
+	}
+	
+	public static func / (lhs: CGRect, rhs: CGScale) -> CGRect {
+		return CGRect(x: lhs.origin.x / rhs.horizontal, y: lhs.origin.y / rhs.vertical, width: lhs.width / rhs.horizontal, height: lhs.height / rhs.vertical)
+	}
+	
+	public static func /= (lhs: inout CGRect, rhs: CGScale) {
+		lhs = lhs / rhs
+	}
 	
 }
 
-extension CGRect {
+extension CGRect: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGRect {
+	
+	public static let identity = CGRect(x: 0, y: 0, width: 1, height: 1)
+	
+}
+
+extension EltasoContainer where Containee == CGRect {
 	
 	public static func createAspectFillFrame(fromContentSize contentSize: CGSize, andCanvasSize canvasSize: CGSize) -> CGRect {
 		
@@ -64,12 +69,12 @@ extension CGRect {
 	
 }
 
-extension CGRect {
+extension EltasoContainer where Containee == CGRect {
 	
 	public var centerPoint: CGPoint {
 		
-		let x = (self.origin.x + self.size.width) / 2
-		let y = (self.origin.y + self.size.height) / 2
+		let x = (self.body.origin.x + self.body.size.width) / 2
+		let y = (self.body.origin.y + self.body.size.height) / 2
 		
 		return CGPoint(x: x, y: y)
 		
@@ -77,10 +82,10 @@ extension CGRect {
 	
 }
 
-extension CGRect {
+extension EltasoContainer where Containee == CGRect {
 	
 	public var zeroPositionedFrame: CGRect {
-		return CGRect(origin: .zero, size: self.size)
+		return CGRect(origin: .zero, size: self.body.size)
 	}
 	
 }
@@ -125,7 +130,27 @@ extension CGRect {
 	
 }
 
-extension CGRect {
+extension EltasoContainer where Containee == CGRect {
+	
+	public var top: CGFloat {
+		return self.body.top
+	}
+	
+	public var bottom: CGFloat {
+		return self.body.bottom
+	}
+	
+	public var left: CGFloat {
+		return self.body.left
+	}
+	
+	public var right: CGFloat {
+		return self.body.right
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGRect {
 	
 	public var topLeft: CGPoint {
 		return CGPoint(x: self.top, y: self.left)
@@ -145,7 +170,7 @@ extension CGRect {
 	
 }
 
-extension CGRect {
+extension EltasoContainer where Containee == CGRect {
 	
 	public var horizontalRange: ClosedRange<CGFloat> {
 		return self.left ... self.right
@@ -157,19 +182,21 @@ extension CGRect {
 	
 }
 
-extension CGRect {
+extension EltasoContainer where Containee == CGRect {
 	
 	public func isIncluded(in anotherRect: CGRect) -> Bool {
-		return self.horizontalRange …= anotherRect.horizontalRange && self.verticalRange …= anotherRect.verticalRange
+		return self.horizontalRange …= anotherRect.eltaso.horizontalRange
+			&& self.verticalRange …= anotherRect.eltaso.verticalRange
 	}
 	
 	public func isPartiallyIncluded(in anotherRect: CGRect) -> Bool {
-		return self.horizontalRange ^ anotherRect.horizontalRange != nil && self.verticalRange ^ anotherRect.verticalRange != nil
+		return self.horizontalRange ^ anotherRect.eltaso.horizontalRange != nil
+			&& self.verticalRange ^ anotherRect.eltaso.verticalRange != nil
 	}
 	
 }
 
-extension CGRect {
+extension EltasoContainer where Containee == CGRect {
 	
 	public func horizontalExtensionRange(movingBy vector: CGVector) -> ClosedRange<CGFloat>? {
 		return self.horizontalExtensionRange(movingBy: vector.dx)
@@ -182,13 +209,17 @@ extension CGRect {
 	public func horizontalExtensionRange(movingBy dx: CGFloat) -> ClosedRange<CGFloat>? {
 		
 		switch dx {
-		case let dx where dx < 0:
+		case -.infinity ..< 0:
 			return self.left + dx ... self.left
 			
-		case let dx where dx > 0:
+		case 0:
+			return nil
+			
+		case 0 ... .infinity:
 			return self.right ... self.right + dx
 			
-		case _:
+		case let dx:
+			assertionFailure("Logically impossible range found in number \(dx)")
 			return nil
 		}
 		
@@ -206,13 +237,17 @@ extension CGRect {
 	public func verticalExtensionRange(movingBy dy: CGFloat) -> ClosedRange<CGFloat>? {
 		
 		switch dy {
-		case let dy where dy < 0:
+		case -.infinity ..< 0:
 			return self.top + dy ... self.top
 			
-		case let dy where dy > 0:
+		case 0:
+			return nil
+			
+		case 0 ... .infinity:
 			return self.bottom ... self.bottom + dy
 			
-		case _:
+		case let dy:
+			assertionFailure("Logically impossible range found in number \(dy)")
 			return nil
 		}
 		

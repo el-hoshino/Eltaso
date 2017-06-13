@@ -8,22 +8,25 @@
 
 import UIKit
 
-extension UIImage {
+extension UIImage: EltasoCompatible { }
+
+extension EltasoContainer where Containee == UIImage {
 	
-	public convenience init?(named name: String, inBundle bundle: Bundle?) {
-		self.init(named: name, in: bundle, compatibleWith: nil)
+	public static func `init`(named name: String, inBundle bundle: Bundle?) -> UIImage? {
+		let image = UIImage(named: name, in: bundle, compatibleWith: nil)
+		return image
 	}
 	
 }
 
-extension UIImage {
+extension EltasoContainer where Containee == UIImage {
 	
-	open func resized(to size: CGSize) -> UIImage? {
+	public func resized(to size: CGSize) -> UIImage? {
 		
-		UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+		UIGraphicsBeginImageContextWithOptions(size, false, self.body.scale)
 		
 		let drawingRect = CGRect(origin: .zero, size: size)
-		self.draw(in: drawingRect)
+		self.body.draw(in: drawingRect)
 		let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
 		
 		UIGraphicsEndImageContext()
@@ -32,22 +35,22 @@ extension UIImage {
 		
 	}
 	
-	open func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
+	public func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
 		
 		let opaque = canvasColor != .clear
 		
-		UIGraphicsBeginImageContextWithOptions(rect.size, opaque, self.scale)
+		UIGraphicsBeginImageContextWithOptions(rect.size, opaque, self.body.scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
 			return nil
 		}
 		
 		if opaque {
 			context.setFillColor(canvasColor.cgColor)
-			context.fill(rect.zeroPositionedFrame)
+			context.fill(rect.eltaso.zeroPositionedFrame)
 		}
 		
-		let drawPoint = rect.origin.inverted(in: .both)
-		self.draw(at: drawPoint)
+		let drawPoint = rect.origin.eltaso.negated(in: .both)
+		self.body.draw(at: drawPoint)
 		let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
 		
 		UIGraphicsEndImageContext()
@@ -61,25 +64,25 @@ extension UIImage {
 		case showWholeImage
 	}
 	
-	open func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: RotatingMode = .showWholeImage) -> UIImage? {
+	public func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: RotatingMode = .showWholeImage) -> UIImage? {
 		
 		let opaque = canvasColor != .clear
 		let canvasSize: CGSize
 		switch mode {
 		case .keepingSize:
-			canvasSize = self.size
+			canvasSize = self.body.size
 			
 		case .showWholeImage:
-			canvasSize = self.size.boundSizeAfterRotation(by: angle)
+			canvasSize = self.body.size.eltaso.boundSizeAfterRotation(by: angle)
 		}
 		
-		UIGraphicsBeginImageContextWithOptions(canvasSize, opaque, self.scale)
+		UIGraphicsBeginImageContextWithOptions(canvasSize, opaque, self.body.scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
 			return nil
 		}
 		
-		let canvasOrigin = CGPoint(x: -canvasSize.width / 2, y: -canvasSize.height / 2)
-		let imageOrigin = CGPoint(x: -self.size.width / 2, y: -self.size.height / 2)
+		let canvasOrigin = canvasSize.eltaso.centerPoint.eltaso.negated
+		let imageOrigin = self.body.size.eltaso.centerPoint.eltaso.negated
 		
 		if opaque {
 			context.setFillColor(canvasColor.cgColor)
@@ -89,7 +92,7 @@ extension UIImage {
 		context.translateBy(x: -canvasOrigin.x, y: -canvasOrigin.y)
 		context.rotate(by: angle)
 		
-		self.draw(at: imageOrigin)
+		self.body.draw(at: imageOrigin)
 		let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
 		
 		UIGraphicsEndImageContext()

@@ -9,34 +9,21 @@
 
 import Foundation
 
-extension CGAffineTransform {
+extension CGAffineTransform: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGAffineTransform {
 	
-	public var translation: (x: CGFloat, y: CGFloat) {
-		return (self.tx, self.ty)
+	public var possibleTranslation: CGVector {
+		return CGVector(dx: self.body.tx, dy: self.body.ty)
 	}
 	
-	public var scale: (x: CGFloat, y: CGFloat) {
-		return (sqrt(self.a * self.a + self.c * self.c), sqrt(self.b * self.b + self.d * self.d))
+	public var possibleScale: CGScale {
+		return CGScale(horizontal: sqrt(self.body.a * self.body.a + self.body.c * self.body.c),
+		               vertical: sqrt(self.body.b * self.body.b + self.body.d * self.body.d))
 	}
 	
-	public var rotation: CGFloat {
-		return atan2(self.b, self.a)
-	}
-	
-	public mutating func translateBy(x: CGFloat, y: CGFloat) {
-		self = self.translatedBy(x: x, y: y)
-	}
-	
-	public mutating func scaleBy(x: CGFloat, y: CGFloat) {
-		self = self.scaledBy(x: x, y: y)
-	}
-	
-	public mutating func rotate(by angle: CGFloat) {
-		self = self.rotated(by: angle)
-	}
-	
-	public mutating func invert() {
-		self = self.inverted()
+	public var possibleRotation: CGFloat {
+		return atan2(self.body.b, self.body.a)
 	}
 	
 }

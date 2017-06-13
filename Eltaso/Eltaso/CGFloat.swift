@@ -8,9 +8,11 @@
 
 import Foundation
 
-extension CGFloat {
+extension CGFloat: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGFloat {
 	
-	public static func createRndom(within range: Range<CGFloat>) -> CGFloat {
+	public static func makeRndom(within range: Range<CGFloat>) -> CGFloat {
 		
 		let ratio = range.width / CGFloat(UInt32.max)
 		let random = CGFloat(arc4random_uniform(.max)) * ratio
@@ -19,7 +21,7 @@ extension CGFloat {
 		
 	}
 	
-	public static func createRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
+	public static func makeRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
 		
 		let ratio = range.width / CGFloat(UInt32.max.decreased)
 		let random = CGFloat(arc4random_uniform(.max)) * ratio
@@ -30,23 +32,23 @@ extension CGFloat {
 	
 }
 
-extension CGFloat {
+extension EltasoContainer where Containee == CGFloat {
 	
-	public var inverted: CGFloat {
-		return -self
+	public var negated: CGFloat {
+		return -self.body
 	}
 	
-	public mutating func invert() {
-		self = self.inverted
+	public static func negate(_ target: inout CGFloat) {
+		target = target.eltaso.negated
 	}
 	
 }
 
-extension CGFloat {
+extension EltasoContainer where Containee == CGFloat {
 	
 	public func limited(within range: ClosedRange<CGFloat>) -> CGFloat {
 		
-		switch self {
+		switch self.body {
 		case -.infinity ... range.lowerBound:
 			return range.lowerBound
 			
@@ -54,39 +56,39 @@ extension CGFloat {
 			return range.upperBound
 			
 		default:
-			return self
+			return self.body
 		}
 		
 	}
 	
-	public mutating func limit(within range: ClosedRange<CGFloat>) {
-		self = self.limited(within: range)
+	public static func limit(_ target: inout CGFloat, within range: ClosedRange<CGFloat>) {
+		target = target.eltaso.limited(within: range)
 	}
 	
 }
 
-extension CGFloat {
+extension EltasoContainer where Containee == CGFloat {
 	
 	public var radianValue: CGFloat {
 		
-		return self / 180 * .pi
+		return self.body / 180 * .pi
 		
 	}
 	
 	public var degreeValue: CGFloat {
 		
-		return self * 180 / .pi
+		return self.body * 180 / .pi
 		
 	}
 	
 }
 
-extension CGFloat {
+extension EltasoContainer where Containee == CGFloat {
 	
 	public func vector(atAngle angle: CGFloat) -> CGVector {
 		
-		let dx = self * cos(angle)
-		let dy = self * sin(angle)
+		let dx = self.body * cos(angle)
+		let dy = self.body * sin(angle)
 		return CGVector(dx: dx, dy: dy)
 		
 	}

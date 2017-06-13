@@ -8,82 +8,91 @@
 
 import Foundation
 
-public func + (lhs: CGSize, rhs: CGSize) -> CGSize {
-	return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
-}
-
-public func += (lhs: inout CGSize, rhs: CGSize) {
-	lhs = lhs + rhs
-}
-
-public func - (lhs: CGSize, rhs: CGSize) -> CGSize {
-	return CGSize(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
-}
-
-public func -= (lhs: inout CGSize, rhs: CGSize) {
-	lhs = lhs - rhs
-}
-
-public func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
-	return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
-}
-
-public func *= (lhs: inout CGSize, rhs: CGFloat) {
-	lhs = lhs * rhs
-}
-
-public func * (lhs: CGSize, rhs: CGScale) -> CGSize {
-	return CGSize(width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
-}
-
-public func *= (lhs: inout CGSize, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
-public func / (lhs: CGSize, rhs: CGFloat) -> CGSize {
-	return CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
-}
-
-public func /= (lhs: inout CGSize, rhs: CGFloat) {
-	lhs = lhs / rhs
-}
-
-public func / (lhs: CGSize, rhs: CGScale) -> CGSize {
-	return CGSize(width: lhs.width / rhs.horizontal, height: lhs.height / rhs.vertical)
-}
-
-public func /= (lhs: inout CGSize, rhs: CGScale) {
-	lhs = lhs / rhs
-}
-
-
 extension CGSize {
 	
-	public init(length: CGFloat) {
-		self.init(width: length, height: length)
+	public static func + (lhs: CGSize, rhs: CGSize) -> CGSize {
+		return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+	}
+	
+	public static func += (lhs: inout CGSize, rhs: CGSize) {
+		lhs = lhs + rhs
+	}
+	
+	public static func - (lhs: CGSize, rhs: CGSize) -> CGSize {
+		return CGSize(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
+	}
+	
+	public static func -= (lhs: inout CGSize, rhs: CGSize) {
+		lhs = lhs - rhs
+	}
+	
+	public static func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
+		return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
+	}
+	
+	public static func *= (lhs: inout CGSize, rhs: CGFloat) {
+		lhs = lhs * rhs
+	}
+	
+	public static func * (lhs: CGSize, rhs: CGScale) -> CGSize {
+		return CGSize(width: lhs.width * rhs.horizontal, height: lhs.height * rhs.vertical)
+	}
+	
+	public static func *= (lhs: inout CGSize, rhs: CGScale) {
+		lhs = lhs * rhs
+	}
+	
+	public static func / (lhs: CGSize, rhs: CGFloat) -> CGSize {
+		return CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
+	}
+	
+	public static func /= (lhs: inout CGSize, rhs: CGFloat) {
+		lhs = lhs / rhs
+	}
+	
+	public static func / (lhs: CGSize, rhs: CGScale) -> CGSize {
+		return CGSize(width: lhs.width / rhs.horizontal, height: lhs.height / rhs.vertical)
+	}
+	
+	public static func /= (lhs: inout CGSize, rhs: CGScale) {
+		lhs = lhs / rhs
+	}
+	
+	public static func / (lhs: CGSize, rhs: CGSize) -> CGScale {
+		return CGScale(horizontal: lhs.width / rhs.width, vertical: lhs.height / rhs.height)
 	}
 	
 }
 
-extension CGSize {
+extension CGSize: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGSize {
+	
+	public static func `init`(length: CGFloat) -> CGSize {
+		return CGSize(width: length, height: length)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGSize {
 	
 	public var maxLength: CGFloat {
-		return max(self.width, self.height)
+		return max(self.body.width, self.body.height)
 	}
 	
 	public var minLength: CGFloat {
-		return min(self.width, self.height)
+		return min(self.body.width, self.body.height)
 	}
 	
 }
 
-extension CGSize {
+extension EltasoContainer where Containee == CGSize {
 	
 	public static let identity = CGSize(width: 1, height: 1)
 	
 }
 
-extension CGSize {
+extension EltasoContainer where Containee == CGSize {
 	
 	public enum Orientation {
 		case landscape
@@ -92,24 +101,28 @@ extension CGSize {
 	}
 	
 	public var orientation: Orientation {
-		switch self.width - self.height {
-		case let difference where difference > 0:
-			return .landscape
-			
-		case let difference where difference < 0:
+		switch self.body.width - self.body.height {
+		case -.infinity ..< 0:
 			return .portrait
 			
-		default:
+		case 0:
+			return .square
+			
+		case 0 ... .infinity:
+			return .landscape
+			
+		case let x:
+			assertionFailure("Logically impossible range found in number \(x)")
 			return .square
 		}
 	}
 	
 }
 
-extension CGSize {
+extension EltasoContainer where Containee == CGSize {
 	
 	public var aspectRatio: CGFloat {
-		return self.width / self.height
+		return self.body.width / self.body.height
 	}
 	
 	public var isAspectRatioGreaterThan16by10: Bool {
@@ -122,12 +135,12 @@ extension CGSize {
 	
 }
 
-extension CGSize {
+extension EltasoContainer where Containee == CGSize {
 	
 	public var centerPoint: CGPoint {
 		
-		let x = self.width / 2
-		let y = self.height / 2
+		let x = self.body.width / 2
+		let y = self.body.height / 2
 		
 		return CGPoint(x: x, y: y)
 		
@@ -135,12 +148,12 @@ extension CGSize {
 	
 }
 
-extension CGSize {
+extension EltasoContainer where Containee == CGSize {
 	
 	public func boundSizeAfterRotation(by angle: CGFloat) -> CGSize {
 		
-		let rotatedBoundWidth = abs(self.width * cos(angle)) + abs(self.height * -sin(angle))
-		let rotatedBoundHeight = abs(self.width * sin(angle)) + abs(self.height * cos(angle))
+		let rotatedBoundWidth = abs(self.body.width * cos(angle)) + abs(self.body.height * -sin(angle))
+		let rotatedBoundHeight = abs(self.body.width * sin(angle)) + abs(self.body.height * cos(angle))
 		let rotatedBoundSize = CGSize(width: rotatedBoundWidth, height: rotatedBoundHeight)
 		
 		return rotatedBoundSize
@@ -149,18 +162,21 @@ extension CGSize {
 	
 }
 
-extension CGSize {
+extension EltasoContainer where Containee == CGSize {
 	
 	public func cropped(fromInsets insets: UIEdgeInsets) -> CGSize {
-		return CGSize(width: self.width - insets.left - insets.right, height: self.height - insets.top - insets.bottom)
+		return CGSize(width: self.body.width - insets.left - insets.right,
+		              height: self.body.height - insets.top - insets.bottom)
 	}
 	
 	public func cropped(fromMargin margin: CGFloat) -> CGSize {
-		return CGSize(width: self.width - (margin * 2), height: self.height - (margin * 2))
+		return CGSize(width: self.body.width - (margin * 2),
+		              height: self.body.height - (margin * 2))
 	}
 	
 	public func cropped(fromHorizontalMargin horizontalMargin: CGFloat, verticalMargin: CGFloat) -> CGSize {
-		return CGSize(width: self.width - (horizontalMargin * 2), height: self.height - (verticalMargin * 2))
+		return CGSize(width: self.body.width - (horizontalMargin * 2),
+		              height: self.body.height - (verticalMargin * 2))
 	}
 	
 }

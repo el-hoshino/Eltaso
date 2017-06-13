@@ -8,12 +8,14 @@
 
 import CoreGraphics
 
-extension CGContext {
+extension CGContext: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGContext {
 	
 	func draw(_ image: CGImage, at point: CGPoint) {
 		
-		let drawingRect = CGRect(origin: point, size: image.size)
-		self.draw(image, in: drawingRect)
+		let drawingRect = CGRect(origin: point, size: image.eltaso.size)
+		self.body.draw(image, in: drawingRect)
 		
 	}
 	

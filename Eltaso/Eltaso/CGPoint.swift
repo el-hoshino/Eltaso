@@ -8,72 +8,81 @@
 
 import Foundation
 
-public func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-	return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
-}
-
-public func += (lhs: inout CGPoint, rhs: CGPoint) {
-	lhs = lhs + rhs
-}
-
-public func + (lhs: CGPoint, rhs: CGVector) -> CGPoint {
-	return CGPoint(x: lhs.x + rhs.dx, y: lhs.y + rhs.dy)
-}
-
-public func += (lhs: inout CGPoint, rhs: CGVector) {
-	lhs = lhs + rhs
-}
-
-public func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-	return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
-}
-
-public func -= (lhs: inout CGPoint, rhs: CGPoint) {
-	lhs = lhs - rhs
-}
-
-public func - (lhs: CGPoint, rhs: CGVector) -> CGPoint {
-	return CGPoint(x: lhs.x - rhs.dx, y: lhs.y - rhs.dy)
-}
-
-public func -= (lhs: inout CGPoint, rhs: CGVector) {
-	lhs = lhs - rhs
-}
-
-public func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-	return CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
-}
-
-public func *= (lhs: inout CGPoint, rhs: CGFloat) {
-	lhs = lhs * rhs
-}
-
-public func * (lhs: CGPoint, rhs: CGScale) -> CGPoint {
-	return CGPoint(x: lhs.x * rhs.horizontal, y: lhs.y * rhs.vertical)
-}
-
-public func *= (lhs: inout CGPoint, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
-public func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-	return CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
-}
-
-public func /= (lhs: inout CGPoint, rhs: CGFloat) {
-	lhs = lhs / rhs
-}
-
-public func / (lhs: CGPoint, rhs: CGScale) -> CGPoint {
-	return CGPoint(x: lhs.x / rhs.horizontal, y: lhs.y / rhs.vertical)
-}
-
-public func /= (lhs: inout CGPoint, rhs: CGScale) {
-	lhs = lhs / rhs
-}
-
-
 extension CGPoint {
+	
+	public static func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+		return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+	}
+	
+	public static func += (lhs: inout CGPoint, rhs: CGPoint) {
+		lhs = lhs + rhs
+	}
+	
+	public static func + (lhs: CGPoint, rhs: CGVector) -> CGPoint {
+		return CGPoint(x: lhs.x + rhs.dx, y: lhs.y + rhs.dy)
+	}
+	
+	public static func += (lhs: inout CGPoint, rhs: CGVector) {
+		lhs = lhs + rhs
+	}
+	
+	public static func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+		return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+	}
+	
+	public static func -= (lhs: inout CGPoint, rhs: CGPoint) {
+		lhs = lhs - rhs
+	}
+	
+	public static func - (lhs: CGPoint, rhs: CGVector) -> CGPoint {
+		return CGPoint(x: lhs.x - rhs.dx, y: lhs.y - rhs.dy)
+	}
+	
+	public static func -= (lhs: inout CGPoint, rhs: CGVector) {
+		lhs = lhs - rhs
+	}
+	
+	public static func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+		return CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
+	}
+	
+	public static func *= (lhs: inout CGPoint, rhs: CGFloat) {
+		lhs = lhs * rhs
+	}
+	
+	public static func * (lhs: CGPoint, rhs: CGScale) -> CGPoint {
+		return CGPoint(x: lhs.x * rhs.horizontal, y: lhs.y * rhs.vertical)
+	}
+	
+	public static func *= (lhs: inout CGPoint, rhs: CGScale) {
+		lhs = lhs * rhs
+	}
+	
+	public static func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+		return CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
+	}
+	
+	public static func /= (lhs: inout CGPoint, rhs: CGFloat) {
+		lhs = lhs / rhs
+	}
+	
+	public static func / (lhs: CGPoint, rhs: CGScale) -> CGPoint {
+		return CGPoint(x: lhs.x / rhs.horizontal, y: lhs.y / rhs.vertical)
+	}
+	
+	public static func /= (lhs: inout CGPoint, rhs: CGScale) {
+		lhs = lhs / rhs
+	}
+	
+	public static func / (lhs: CGPoint, rhs: CGPoint) -> CGScale {
+		return CGScale(horizontal: lhs.x / rhs.x, vertical: lhs.y / rhs.y)
+	}
+	
+}
+
+extension CGPoint: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGPoint {
 	
 	public enum Dimension {
 		case horizontal
@@ -84,7 +93,7 @@ extension CGPoint {
 		
 		public typealias RawValue = UInt
 		public let rawValue: RawValue
-		public init(rawValue: CGPoint.DimensionSet.RawValue) {
+		public init(rawValue: CGPoint.Eltaso.DimensionSet.RawValue) {
 			self.rawValue = rawValue
 		}
 		
@@ -97,7 +106,7 @@ extension CGPoint {
 	
 }
 
-extension CGPoint {
+extension EltasoContainer where Containee == CGPoint {
 	
 	public static func reflected(byAdding vector: CGVector, to point: CGPoint = .zero) -> CGPoint {
 		return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
@@ -109,52 +118,59 @@ extension CGPoint {
 	
 }
 
-extension CGPoint {
+extension EltasoContainer where Containee == CGPoint {
 	
-	public init(point: CGFloat) {
-		self.init(x: point, y: point)
+	public static func `init`(point: CGFloat) -> CGPoint {
+		return CGPoint(x: point, y: point)
 	}
 	
 }
 
-extension CGPoint {
+extension EltasoContainer where Containee == CGPoint {
 	
 	public func isIncluded(in rect: CGRect) -> Bool {
-		return self.x …= rect.horizontalRange && self.y …= rect.verticalRange
+		return self.body.x …= rect.eltaso.horizontalRange
+			&& self.body.y …= rect.eltaso.verticalRange
 	}
 	
 }
 
-extension CGPoint {
+extension EltasoContainer where Containee == CGPoint {
 	
-	public func inverted(in dimensions: DimensionSet) -> CGPoint {
+	public var negated: CGPoint {
 		
-		var inverted = self
+		return self.negated(in: .both)
+		
+	}
+	
+	public func negated(in dimensions: DimensionSet) -> CGPoint {
+		
+		var negated = self.body
 		
 		if dimensions.contains(.horizontal) {
-			inverted.x.invert()
+			negated.x.negate()
 		}
 		
 		if dimensions.contains(.vertical) {
-			inverted.y.invert()
+			negated.y.negate()
 		}
 		
-		return inverted
+		return negated
 		
 	}
 	
-	public mutating func invert(in dimensions: DimensionSet) {
-		self = self.inverted(in: dimensions)
+	public static func negate(_ target: inout CGPoint, in dimensions: DimensionSet) {
+		target = target.eltaso.negated(in: dimensions)
 	}
 	
 }
 
-extension CGPoint {
+extension EltasoContainer where Containee == CGPoint {
 	
 	public func convertedToOrigin(in size: CGSize) -> CGPoint {
 		
 		let halfSize = size / 2
-		let origin = CGPoint(x: self.x - halfSize.width, y: self.y - halfSize.height)
+		let origin = CGPoint(x: self.body.x - halfSize.width, y: self.body.y - halfSize.height)
 		return origin
 		
 	}
@@ -162,21 +178,21 @@ extension CGPoint {
 	public func convertedToCenter(in size: CGSize) -> CGPoint {
 		
 		let halfSize = size / 2
-		let center = CGPoint(x: self.x + halfSize.width, y: self.y + halfSize.height)
+		let center = CGPoint(x: self.body.x + halfSize.width, y: self.body.y + halfSize.height)
 		return center
 		
 	}
 	
 }
 
-extension CGPoint {
+extension EltasoContainer where Containee == CGPoint {
 	
 	public func anchorPoint(in size: CGSize) -> CGPoint {
-		return CGPoint(x: self.x / size.width, y: self.y / size.height)
+		return CGPoint(x: self.body.x / size.width, y: self.body.y / size.height)
 	}
 	
 	public func realPoint(in size: CGSize) -> CGPoint {
-		return CGPoint(x: self.x * size.width, y: self.y * size.height)
+		return CGPoint(x: self.body.x * size.width, y: self.body.y * size.height)
 	}
 	
 }

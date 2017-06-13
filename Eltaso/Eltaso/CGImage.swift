@@ -8,17 +8,19 @@
 
 import CoreGraphics
 
-extension CGImage {
+extension CGImage: EltasoCompatible { }
+
+extension EltasoContainer where Containee == CGImage {
 	
 	public var size: CGSize {
-		return CGSize(width: self.width, height: self.height)
+		return CGSize(width: self.body.width, height: self.body.height)
 	}
 	
 }
 
-extension CGImage {
+extension EltasoContainer where Containee == CGImage {
 	
-	static func createImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> CGImage? {
+	public static func createImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> CGImage? {
 		
 		UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
@@ -37,22 +39,22 @@ extension CGImage {
 	
 }
 
-extension CGImage {
+extension EltasoContainer where Containee == CGImage {
 	
 	public func resized(to size: CGSize, scale: CGFloat = 0) -> CGImage {
 		
 		UIGraphicsBeginImageContextWithOptions(size, false, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
-			return self
+			return self.body
 		}
 		
 		context.translateBy(x: 0, y: size.height)
 		context.scaleBy(x: 1, y: -1)
 		
-		context.draw(self, in: CGRect(origin: .zero, size: size))
+		context.draw(self.body, in: CGRect(origin: .zero, size: size))
 		
 		guard let resizedImage = context.makeImage() else {
-			return self
+			return self.body
 		}
 		
 		UIGraphicsEndImageContext()
@@ -67,7 +69,7 @@ extension CGImage {
 		
 		UIGraphicsBeginImageContextWithOptions(rect.size, opaque, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
-			return self
+			return self.body
 		}
 		
 		context.translateBy(x: 0, y: rect.size.height)
@@ -75,13 +77,13 @@ extension CGImage {
 		
 		if opaque {
 			context.setFillColor(canvasColor)
-			context.fill(rect.zeroPositionedFrame)
+			context.fill(rect.eltaso.zeroPositionedFrame)
 		}
 		
-		context.draw(self, at: rect.origin.inverted(in: .both))
+		context.eltaso.draw(self.body, at: rect.origin.eltaso.negated(in: .both))
 		
 		guard let croppedImage = context.makeImage() else {
-			return self
+			return self.body
 		}
 		
 		UIGraphicsEndImageContext()

@@ -8,13 +8,16 @@
 
 import Foundation
 
-extension Date {
+extension Date: EltasoCompatible { }
+
+extension EltasoContainer where Containee == Date {
+	
+	public enum DateGenerationError: Error {
+		case failedToGetSpecificDateFromCurrentDate
+		case failedToGetEdittedDateFromCurrentDate
+	}
 	
 	public static func getDateAtSpecificTime(hour: Int = 0, minute: Int = 0, second: Int = 0) throws -> Date {
-		
-		enum Error: Swift.Error {
-			case failedToGetSpecificDateFromCurrentDate
-		}
 		
 		let currentDate = Date()
 		let currentCalendar = Calendar.current
@@ -24,7 +27,7 @@ extension Date {
 		dateComponents.second = second
 		
 		guard let specifiedTime = currentCalendar.date(from: dateComponents) else {
-			throw Error.failedToGetSpecificDateFromCurrentDate
+			throw DateGenerationError.failedToGetSpecificDateFromCurrentDate
 		}
 		
 		return specifiedTime
@@ -33,13 +36,9 @@ extension Date {
 	
 	public func getDateByAddingInterval(_ interval: Int, toUnit unit: Calendar.Component) throws -> Date {
 		
-		enum Error: Swift.Error {
-			case failedToGetEdittedDateFromCurrentDate
-		}
-		
 		let calendar = Calendar.current
-		guard let date = calendar.date(byAdding: unit, value: interval, to: self) else {
-			throw Error.failedToGetEdittedDateFromCurrentDate
+		guard let date = calendar.date(byAdding: unit, value: interval, to: self.body) else {
+			throw DateGenerationError.failedToGetEdittedDateFromCurrentDate
 		}
 		
 		return date
@@ -48,12 +47,12 @@ extension Date {
 	
 }
 
-extension Date {
+extension EltasoContainer where Containee == Date {
 	
 	public func getDateComponents(inTimeZone timeZone: TimeZone = .current) -> DateComponents {
 		
 		let calendar = Calendar.current
-		let components = calendar.dateComponents(in: timeZone, from: self)
+		let components = calendar.dateComponents(in: timeZone, from: self.body)
 		
 		return components
 		
@@ -61,17 +60,17 @@ extension Date {
 	
 }
 
-extension Date {
+extension EltasoContainer where Containee == Date {
 	
 	public var elapsedTime: TimeInterval {
 		
-		return -self.timeIntervalSinceNow
+		return -self.body.timeIntervalSinceNow
 		
 	}
 	
 	public func elapsedTime(until date: Date) -> TimeInterval {
 		
-		return -self.timeIntervalSince(date)
+		return -self.body.timeIntervalSince(date)
 		
 	}
 	

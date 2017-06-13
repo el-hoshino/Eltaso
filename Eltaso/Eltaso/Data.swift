@@ -8,7 +8,9 @@
 
 import Foundation
 
-extension Data {
+extension Data: EltasoCompatible { }
+
+extension EltasoContainer where Containee == Data {
 	
 	public enum PointerAdvanceSizeType {
 		case byteSize
@@ -22,21 +24,21 @@ extension Data {
 		
 		switch advanceSizeType {
 		case .byteSize:
-			startIndex = self.index(self.startIndex, offsetBy: offset)
-			endIndex = self.index(startIndex, offsetBy: MemoryLayout<T>.size)
+			startIndex = self.body.index(self.body.startIndex, offsetBy: offset)
+			endIndex = self.body.index(startIndex, offsetBy: MemoryLayout<T>.size)
 			
 		case .resultTypeSize:
 			let advanceSize = MemoryLayout<T>.size
-			startIndex = self.index(self.startIndex, offsetBy: offset * advanceSize)
-			endIndex = self.index(startIndex, offsetBy: advanceSize)
+			startIndex = self.body.index(self.body.startIndex, offsetBy: offset * advanceSize)
+			endIndex = self.body.index(startIndex, offsetBy: advanceSize)
 			
 		}
 		
-		guard self.indices.contains(startIndex) && self.indices.contains(endIndex) else {
+		guard self.body.indices.contains(startIndex) && self.body.indices.contains(endIndex) else {
 			return nil
 		}
 		
-		let result: T = self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: startIndex).assumingMemoryBound(to: T.self).pointee }
+		let result: T = self.body.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: startIndex).assumingMemoryBound(to: T.self).pointee }
 		
 		return result
 		
@@ -46,81 +48,45 @@ extension Data {
 		
 		switch advanceSizeType {
 		case .byteSize:
-			return self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: offset).assumingMemoryBound(to: T.self).pointee }
+			return self.body.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: offset).assumingMemoryBound(to: T.self).pointee }
 			
 		case .resultTypeSize:
-			return self.withUnsafeBytes { $0.advanced(by: offset).pointee }
+			return self.body.withUnsafeBytes { $0.advanced(by: offset).pointee }
 		}
-		
-	}
-	
-	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
-	public func getSingleByte() -> UInt8 {
-		
-		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 1)
-		let subdata = self.subdata(in: subdataRange)
-		
-		let result: UInt8 = subdata.withUnsafeBytes { $0.pointee }
-		
-		return result
-		
-	}
-	
-	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
-	public func getDualByte() -> UInt16 {
-		
-		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 2)
-		let subdata = self.subdata(in: subdataRange)
-		
-		let result: UInt16 = subdata.withUnsafeBytes { $0.pointee }
-		
-		return result
-		
-	}
-	
-	@available(*, deprecated: 3.0.5, message: "Use getValue(at: by:) -> T? or getUnsafeValue(at: by:) -> T instead")
-	public func getQuadByte() -> UInt32 {
-		
-		let subdataRange: Range = self.startIndex ..< self.startIndex.increased(by: 4)
-		let subdata = self.subdata(in: subdataRange)
-		
-		let result: UInt32 = subdata.withUnsafeBytes { $0.pointee }
-		
-		return result
 		
 	}
 	
 }
 
-extension Data {
+extension EltasoContainer where Containee == Data {
 	
-	public mutating func appendSingleByte(_ byte: UInt8) {
+	public static func append(_ byte: UInt8, to target: inout Data) {
 		
 		var byte = byte
 		let pointer = UnsafeBufferPointer(start: &byte, count: 1)
 		let data = Data(buffer: pointer)
 		
-		self.append(data)
+		target.append(data)
 		
 	}
 	
-	public mutating func appendDualByte(_ dualByte: UInt16) {
+	public static func append(_ dualByte: UInt16, to target: inout Data) {
 		
 		var dualByte = dualByte
 		let pointer = UnsafeBufferPointer(start: &dualByte, count: 1)
 		let data = Data(buffer: pointer)
 		
-		self.append(data)
+		target.append(data)
 		
 	}
 	
-	public mutating func appendQuadByte(_ quadByte: UInt32) {
+	public static func append(_ quadByte: UInt32, to target: inout Data) {
 		
 		var quadByte = quadByte
 		let pointer = UnsafeBufferPointer(start: &quadByte, count: 1)
 		let data = Data(buffer: pointer)
 		
-		self.append(data)
+		target.append(data)
 		
 	}
 	

@@ -8,11 +8,14 @@
 
 import Foundation
 
-extension URLComponents {
+extension URLComponents: EltasoCompatible { }
+
+extension EltasoContainer where Containee == URLComponents {
 	
-	public init(queryItems: [URLQueryItem]) {
-		self = URLComponents()
-		self.queryItems = queryItems
+	public static func `init`(queryItems: [URLQueryItem]) -> URLComponents {
+		var components = URLComponents()
+		components.queryItems = queryItems
+		return components
 	}
 	
 }

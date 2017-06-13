@@ -8,20 +8,20 @@
 
 import Foundation
 
-extension TimeInterval {
+extension EltasoContainer where Containee == TimeInterval {
 	
 	public static let minuteLength: TimeInterval = 60
-	public static let hourLength: TimeInterval = .minuteLength * 60
-	public static let dayLength: TimeInterval = .hourLength * 24
-	public static let weekLength: TimeInterval = .dayLength * 7
+	public static let hourLength: TimeInterval = EltasoContainer<TimeInterval>.minuteLength * 60
+	public static let dayLength: TimeInterval = EltasoContainer<TimeInterval>.hourLength * 24
+	public static let weekLength: TimeInterval = EltasoContainer<TimeInterval>.dayLength * 7
 	
 }
 
-extension TimeInterval {
+extension EltasoContainer where Containee == TimeInterval {
 	
 	public var timeFormattedDescription: String {
 		
-		var seconds = Int(self)
+		var seconds = Int(self.body)
 		
 		var minutes = seconds / 60
 		seconds %= 60

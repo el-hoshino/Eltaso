@@ -8,18 +8,20 @@
 
 import UIKit
 
-extension UIGestureRecognizer {
+extension UIGestureRecognizer: EltasoCompatible { }
+
+extension EltasoContainer where Containee == UIGestureRecognizer {
 	
-	open func touchCenter(in view: UIView?) -> CGPoint {
-		let sumPoint = (0 ..< self.numberOfTouches).reduce(.zero, { (sum, touch) -> CGPoint in
-			let point = self.location(ofTouch: touch, in: view)
+	public func touchCenter(in view: UIView?) -> CGPoint {
+		let sumPoint = (0 ..< self.body.numberOfTouches).reduce(.zero, { (sum, touch) -> CGPoint in
+			let point = self.body.location(ofTouch: touch, in: view)
 			return sum + point
 		})
-		return sumPoint / CGFloat(self.numberOfTouches)
+		return sumPoint / CGFloat(self.body.numberOfTouches)
 	}
 	
-	open var touchCenter: CGPoint {
-		return self.touchCenter(in: self.view)
+	public var touchCenter: CGPoint {
+		return self.touchCenter(in: self.body.view)
 	}
 	
 }

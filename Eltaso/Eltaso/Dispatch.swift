@@ -8,9 +8,11 @@
 
 import Foundation
 
-extension DispatchQueue {
+extension DispatchQueue: EltasoCompatible { }
+
+extension EltasoContainer where Containee == DispatchQueue {
 	
-	open class func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
+	public static func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
 		
 		if Thread.isMainThread {
 			work()
@@ -30,17 +32,17 @@ extension DispatchQueue {
 	
 }
 
-extension DispatchQueue {
+extension EltasoContainer where Containee == DispatchQueue {
 	
-	public var isRunning: Bool {
+	public var isAvailable: Bool {
 		
-		guard Thread.current != self else {
-			return false
+		guard Thread.current != self.body else {
+			return true
 		}
 		
 		let semaphore = DispatchSemaphore(value: 0)
 		
-		self.async {
+		self.body.async {
 			semaphore.signal()
 		}
 		
@@ -50,11 +52,11 @@ extension DispatchQueue {
 	
 }
 
-extension DispatchQueue {
+extension EltasoContainer where Containee == DispatchQueue {
 	
-	public func syncRepeat(while condition: () -> Bool, loop: () -> Void) {
+	public func syncRepeat(while condition: @autoclosure () -> Bool, loop: () -> Void) {
 		
-		self.sync {
+		self.body.sync {
 			while condition() == true {
 				loop()
 			}
@@ -62,9 +64,9 @@ extension DispatchQueue {
 		
 	}
 	
-	public func asyncRepeat(while condition: @escaping () -> Bool, loop: @escaping () -> Void) {
+	public func asyncRepeat(while condition: @autoclosure @escaping () -> Bool, loop: @escaping () -> Void) {
 		
-		self.async {
+		self.body.async {
 			while condition() == true {
 				loop()
 			}

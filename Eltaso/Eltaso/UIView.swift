@@ -8,31 +8,33 @@
 
 import Foundation
 
-extension UIView {
+extension UIView: EltasoCompatible { }
+
+extension EltasoContainer where Containee == UIView {
 	
 	public var midPoint: CGPoint {
-		return CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+		return CGPoint(x: self.body.bounds.midX, y: self.body.bounds.midY)
 	}
 	
 }
 
-extension UIView {
+extension EltasoContainer where Containee == UIView {
 	
-	open func removeAllSubviews() {
-		self.subviews.forEach { (subview) in
+	public func removeAllSubviews() {
+		self.body.subviews.forEach { (subview) in
 			subview.removeFromSuperview()
 		}
 	}
 	
-	open func addSubviews(_ subviews: [UIView]) {
+	public func addSubviews(_ subviews: [UIView]) {
 		subviews.forEach { (view) in
-			self.addSubview(view)
+			self.body.addSubview(view)
 		}
 	}
 	
 }
 
-extension UIView {
+extension EltasoContainer where Containee == UIView {
 	
 	public static func animateJumpViews(_ views: [UIView], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
 		

@@ -8,10 +8,10 @@
 
 import UIKit
 
-extension UIPinchGestureRecognizer {
+extension EltasoContainer where Containee == UIPinchGestureRecognizer {
 	
 	public func resetScale() {
-		self.scale = 1
+		self.body.scale = 1
 	}
 	
 }

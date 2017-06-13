@@ -8,10 +8,10 @@
 
 import UIKit
 
-extension UIRotationGestureRecognizer {
+extension EltasoContainer where Containee == UIRotationGestureRecognizer {
 	
 	public func resetRotation() {
-		self.rotation = 0
+		self.body.rotation = 0
 	}
 	
 }

@@ -34,25 +34,6 @@ extension Sequence where Iterator.Element: Sequence {
 
 extension Sequence {
 	
-	@available(*, deprecated: 3.2, message: "Use Sequence#first(where:) instead")
-	public func retrieve (_ condition: (Iterator.Element) throws -> Bool) rethrows -> Iterator.Element? {
-		
-		var iterator = self.makeIterator()
-		
-		while let element = iterator.next() {
-			if try condition(element) == true {
-				return element
-			}
-		}
-		
-		return nil
-		
-	}
-	
-}
-
-extension Sequence {
-	
 	public func firstFlatMap <T> (_ transform: (Iterator.Element) throws -> T?) rethrows -> T? {
 		
 		var iterator = self.makeIterator()

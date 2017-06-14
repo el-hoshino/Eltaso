@@ -205,11 +205,6 @@ extension Matrix {
 		
 	}
 	
-	@available(*, deprecated: 3.3, message: "Use Matrix#enumeratedByRow() or Matrix#enumeratedByColumn() instead")
-	public func enumerated() -> [(index: Index, element: Element)] {
-		return self.enumeratedByRow()
-	}
-	
 }
 
 private extension Matrix {

@@ -34,3 +34,24 @@ extension EltasoContainer where Containee == Bool {
 	}
 	
 }
+
+extension EltasoContainerChain where Containee == Bool {
+	
+	public static func makeRandom() -> EltasoContainerChain<Bool> {
+		return EltasoContainerChain(body: Bool.Eltaso.makeRandom())
+	}
+	
+}
+
+extension EltasoContainerChain where Containee == Bool {
+	
+	public var negated: EltasoContainerChain<Bool> {
+		return EltasoContainerChain(body: self.body.eltaso.negated)
+	}
+	
+	public var numbered: EltasoContainerChain<Int> {
+		let number = self.body == true ? 1 : 0
+		return EltasoContainerChain<Int>(body: number)
+	}
+	
+}

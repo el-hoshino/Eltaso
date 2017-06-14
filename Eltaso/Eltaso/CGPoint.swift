@@ -80,7 +80,11 @@ extension CGPoint {
 	
 }
 
-extension CGPoint: EltasoCompatible { }
+extension CGPoint: EltasoCompatible {
+	public var eltaso: EltasoContainer<CGPoint> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == CGPoint {
 	

@@ -33,27 +33,3 @@ public struct EltasoDualAssociatedTypeContainer<Containee: EltasoCompatible, Ass
 	public let body: Containee
 	
 }
-
-extension EltasoCompatible {
-	
-	public var eltaso: EltasoContainer<Self> {
-		return EltasoContainer(body: self)
-	}
-	
-}
-
-extension EltasoCompatible where Self: Sequence {
-	
-	public var eltaso: EltasoSingleAssociatedTypeContainer<Self, Self.Element> {
-		return EltasoSingleAssociatedTypeContainer(body: self)
-	}
-	
-}
-
-extension EltasoCompatible where Self: RangeExpression {
-	
-	public var eltaso: EltasoSingleAssociatedTypeContainer<Self, Self.Bound> {
-		return EltasoSingleAssociatedTypeContainer(body: self)
-	}
-	
-}

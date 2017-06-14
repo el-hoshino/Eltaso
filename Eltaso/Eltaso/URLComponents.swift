@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension URLComponents: EltasoCompatible { }
+extension URLComponents: EltasoCompatible {
+	public var eltaso: EltasoContainer<URLComponents> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == URLComponents {
 	

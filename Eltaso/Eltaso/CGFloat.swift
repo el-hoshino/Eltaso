@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension CGFloat: EltasoCompatible { }
+extension CGFloat: EltasoCompatible {
+	public var eltaso: EltasoContainer<CGFloat> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == CGFloat {
 	

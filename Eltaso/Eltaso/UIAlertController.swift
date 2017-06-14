@@ -8,7 +8,11 @@
 
 import UIKit
 
-extension UIAlertController: EltasoCompatible { }
+extension UIAlertController: EltasoCompatible {
+	public var eltaso: EltasoContainer<UIAlertController> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == UIAlertController {
 	

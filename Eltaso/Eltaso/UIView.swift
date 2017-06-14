@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension UIView: EltasoCompatible { }
+extension UIView: EltasoCompatible {
+	public var eltaso: EltasoContainer<UIView> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == UIView {
 	

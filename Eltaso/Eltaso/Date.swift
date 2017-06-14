@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension Date: EltasoCompatible { }
+extension Date: EltasoCompatible {
+	public var eltaso: EltasoContainer<Date> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == Date {
 	

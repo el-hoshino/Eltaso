@@ -8,7 +8,11 @@
 
 import CoreGraphics
 
-extension CGImage: EltasoCompatible { }
+extension CGImage: EltasoCompatible {
+	public var eltaso: EltasoContainer<CGImage> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == CGImage {
 	

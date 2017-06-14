@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension DispatchQueue: EltasoCompatible { }
+extension DispatchQueue: EltasoCompatible {
+	public var eltaso: EltasoContainer<DispatchQueue> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == DispatchQueue {
 	

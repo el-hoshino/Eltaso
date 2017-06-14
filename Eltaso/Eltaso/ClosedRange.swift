@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension ClosedRange: EltasoCompatible { }
+extension ClosedRange: EltasoCompatible {
+	public var eltaso: EltasoSingleAssociatedTypeContainer<ClosedRange<Bound>, Bound> {
+		return EltasoSingleAssociatedTypeContainer(body: self)
+	}
+}
 
 extension EltasoSingleAssociatedTypeContainer where Containee == ClosedRange<AssociatedType>, AssociatedType: Strideable {
 	

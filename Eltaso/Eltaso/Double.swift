@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension Double: EltasoCompatible { }
+extension Double: EltasoCompatible {
+	public var eltaso: EltasoContainer<Double> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == Double {
 	

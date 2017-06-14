@@ -8,7 +8,11 @@
 
 import UIKit
 
-extension UIImage: EltasoCompatible { }
+extension UIImage: EltasoCompatible {
+	public var eltaso: EltasoContainer<UIImage> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == UIImage {
 	

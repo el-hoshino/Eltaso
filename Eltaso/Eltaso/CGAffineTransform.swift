@@ -9,7 +9,11 @@
 
 import Foundation
 
-extension CGAffineTransform: EltasoCompatible { }
+extension CGAffineTransform: EltasoCompatible {
+	public var eltaso: EltasoContainer<CGAffineTransform> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == CGAffineTransform {
 	

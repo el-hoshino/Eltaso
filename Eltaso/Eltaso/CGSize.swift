@@ -64,7 +64,11 @@ extension CGSize {
 	
 }
 
-extension CGSize: EltasoCompatible { }
+extension CGSize: EltasoCompatible {
+	public var eltaso: EltasoContainer<CGSize> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == CGSize {
 	

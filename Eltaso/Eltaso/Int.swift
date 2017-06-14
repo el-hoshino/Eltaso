@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension Int: EltasoCompatible { }
+extension Int: EltasoCompatible {
+	public var eltaso: EltasoContainer<Int> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == Int {
 	

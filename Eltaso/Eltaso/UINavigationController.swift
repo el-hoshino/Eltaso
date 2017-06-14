@@ -8,7 +8,11 @@
 
 import UIKit
 
-extension UINavigationController: EltasoCompatible { }
+extension UINavigationController: EltasoCompatible {
+	public var eltaso: EltasoContainer<UINavigationController> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == UINavigationController {
 	

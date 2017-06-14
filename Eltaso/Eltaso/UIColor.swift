@@ -8,7 +8,11 @@
 
 import UIKit
 
-extension UIColor: EltasoCompatible { }
+extension UIColor: EltasoCompatible {
+	public var eltaso: EltasoContainer<UIColor> {
+		return EltasoContainer(body: self)
+	}
+}
 
 extension EltasoContainer where Containee == UIColor {
 	

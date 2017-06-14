@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension Array: EltasoCompatible { }
+extension Array: EltasoCompatible {
+	public var eltaso: EltasoSingleAssociatedTypeContainer<Array<Element>, Element> {
+		return EltasoSingleAssociatedTypeContainer(body: self)
+	}
+}
 
 extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
 	

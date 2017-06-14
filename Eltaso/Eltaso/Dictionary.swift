@@ -8,34 +8,45 @@
 
 import Foundation
 
+extension Dictionary: EltasoCompatible {
+	public var eltaso: EltasoDualAssociatedTypeContainer<Dictionary<Key, Value>, Key, Value> {
+		return EltasoDualAssociatedTypeContainer(body: self)
+	}
+}
+
 extension Dictionary {
 	
-	public func containsKey(_ key: Key) -> Bool {
+	public static func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
+		var dictionary = lhs
+		rhs.forEach { pair in
+			dictionary[pair.key] = pair.value
+		}
+		return dictionary
+	}
+	
+}
+
+extension EltasoDualAssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+	
+	public func containsKey(_ key: AssociatedType1) -> Bool {
 		
-		return self[key] != nil
+		return self.body[key] != nil
 		
 	}
 	
 }
 
-extension Dictionary {
+extension EltasoDualAssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
 	
-	public func dropping(_ key: Key) -> Dictionary<Key, Value> {
-		var dictionary = self
+	public func dropping(_ key: AssociatedType1) -> Dictionary<AssociatedType1, AssociatedType2> {
+		var dictionary = self.body
 		dictionary.removeValue(forKey: key)
 		return dictionary
 	}
 	
-	public mutating func drop(_ key: Key) {
-		self = self.dropping(key)
+	public static func drop(_ key: AssociatedType1, in target: inout Dictionary<AssociatedType1, AssociatedType2>) {
+		target = target.eltaso.dropping(key)
 	}
 	
 }
 
-public func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
-	var dictionary = lhs
-	rhs.forEach { pair in
-		dictionary[pair.key] = pair.value
-	}
-	return dictionary
-}

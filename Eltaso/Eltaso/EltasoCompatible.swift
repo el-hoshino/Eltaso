@@ -13,6 +13,27 @@ public protocol EltasoCompatible {
 	
 }
 
+public struct EltasoContainer<Containee: EltasoCompatible> {
+	
+	public let body: Containee
+	
+}
+
+
+public struct EltasoSingleAssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType> {
+	
+	public let body: Containee
+	
+}
+
+
+
+public struct EltasoDualAssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType1, AssociatedType2> {
+	
+	public let body: Containee
+	
+}
+
 extension EltasoCompatible {
 	
 	public var eltaso: EltasoContainer<Self> {
@@ -21,29 +42,18 @@ extension EltasoCompatible {
 	
 }
 
-public struct EltasoContainer<Containee: EltasoCompatible> {
+extension EltasoCompatible where Self: Sequence {
 	
-	public let body: Containee
-	
-}
-
-public protocol SequencedEltasoCompatible {
-	
-	associatedtype Eltaso
-	var eltaso: Eltaso { get }
-	
-}
-
-extension SequencedEltasoCompatible where Self: Sequence {
-	
-	public var eltaso: SequencedEltasoContainer<Self, Self.Element> {
-		return SequencedEltasoContainer(body: self)
+	public var eltaso: EltasoSingleAssociatedTypeContainer<Self, Self.Element> {
+		return EltasoSingleAssociatedTypeContainer(body: self)
 	}
 	
 }
 
-public struct SequencedEltasoContainer<Containee: SequencedEltasoCompatible, Element> {
+extension EltasoCompatible where Self: RangeExpression {
 	
-	public let body: Containee
+	public var eltaso: EltasoSingleAssociatedTypeContainer<Self, Self.Bound> {
+		return EltasoSingleAssociatedTypeContainer(body: self)
+	}
 	
 }

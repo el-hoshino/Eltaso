@@ -16,6 +16,7 @@
 		162D38441E02B30600CA9D7A /* CountableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38431E02B30600CA9D7A /* CountableRange.swift */; };
 		162D38461E02B3F200CA9D7A /* CountableClosedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38451E02B3F200CA9D7A /* CountableClosedRange.swift */; };
 		162D38481E02B6E500CA9D7A /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D38471E02B6E500CA9D7A /* Float.swift */; };
+		1635E7FA1EF101EC008AD476 /* EltasoChainCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1635E7F91EF101EC008AD476 /* EltasoChainCompatible.swift */; };
 		1644AAAD1DFAAE7F00253721 /* CGVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1644AAAC1DFAAE7F00253721 /* CGVector.swift */; };
 		16470A601DC362CB00EF0E77 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16470A5F1DC362CB00EF0E77 /* CGFloat.swift */; };
 		164F86511DD49A7F00230707 /* CGScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164F86501DD49A7F00230707 /* CGScale.swift */; };
@@ -83,6 +84,7 @@
 		162D38431E02B30600CA9D7A /* CountableRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountableRange.swift; sourceTree = "<group>"; };
 		162D38451E02B3F200CA9D7A /* CountableClosedRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountableClosedRange.swift; sourceTree = "<group>"; };
 		162D38471E02B6E500CA9D7A /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		1635E7F91EF101EC008AD476 /* EltasoChainCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EltasoChainCompatible.swift; sourceTree = "<group>"; };
 		1644AAAC1DFAAE7F00253721 /* CGVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVector.swift; sourceTree = "<group>"; };
 		16470A5F1DC362CB00EF0E77 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		164F86501DD49A7F00230707 /* CGScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGScale.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				79092CEA1D2C32ED00E07C8A /* CustomOperators.swift */,
 				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
 				1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */,
+				1635E7F91EF101EC008AD476 /* EltasoChainCompatible.swift */,
 				16991FD71DF9708C00FC4A8A /* CopyableObject.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
 				169C43E71D82BFA30006B2E2 /* Collection.swift */,
@@ -385,6 +388,7 @@
 				79092CEB1D2C32ED00E07C8A /* CustomOperators.swift in Sources */,
 				16991FD81DF9708C00FC4A8A /* CopyableObject.swift in Sources */,
 				160CB2A11DD2DF0A0036784A /* CGAffineTransform.swift in Sources */,
+				1635E7FA1EF101EC008AD476 /* EltasoChainCompatible.swift in Sources */,
 				79E14EA91D2BA74F00AF6EE4 /* Console.swift in Sources */,
 				16C02D331D3E109400288942 /* Data.swift in Sources */,
 				79E14EA71D2B989A00AF6EE4 /* Array.swift in Sources */,

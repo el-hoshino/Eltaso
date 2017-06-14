@@ -19,14 +19,11 @@ public struct EltasoContainer<Containee: EltasoCompatible> {
 	
 }
 
-
 public struct EltasoSingleAssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType> {
 	
 	public let body: Containee
 	
 }
-
-
 
 public struct EltasoDualAssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType1, AssociatedType2> {
 	

@@ -8,22 +8,24 @@
 
 import Foundation
 
-extension ClosedRange where Bound: Strideable {
+extension ClosedRange: EltasoCompatible { }
+
+extension EltasoSingleAssociatedTypeContainer where Containee == ClosedRange<AssociatedType>, AssociatedType: Strideable {
 	
-	public var width: Bound.Stride {
-		return self.lowerBound.distance(to: self.upperBound)
+	public var width: AssociatedType.Stride {
+		return self.body.lowerBound.distance(to: self.body.upperBound)
 	}
 	
-	public func offset(by n: Bound.Stride) -> ClosedRange {
-		return self.lowerBound.advanced(by: n) ... self.upperBound.advanced(by: n)
+	public func offset(by n: AssociatedType.Stride) -> ClosedRange<AssociatedType> {
+		return self.body.lowerBound.advanced(by: n) ... self.body.upperBound.advanced(by: n)
 	}
 	
-	public func appendingUpperBound(by n: Bound.Stride) -> ClosedRange {
-		return self.lowerBound ... self.upperBound.increased(by: n)
+	public func appendingUpperBound(by n: AssociatedType.Stride) -> ClosedRange<AssociatedType> {
+		return self.body.lowerBound ... self.body.upperBound.increased(by: n)
 	}
 	
-	public func appendingLowerBound(by n: Bound.Stride) -> ClosedRange {
-		return self.lowerBound.decreased(by: n) ... self.upperBound
+	public func appendingLowerBound(by n: AssociatedType.Stride) -> ClosedRange<AssociatedType> {
+		return self.body.lowerBound.decreased(by: n) ... self.body.upperBound
 	}
 	
 }

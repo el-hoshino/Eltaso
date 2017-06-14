@@ -14,7 +14,7 @@ extension EltasoContainer where Containee == CGFloat {
 	
 	public static func makeRndom(within range: Range<Containee>) -> Containee {
 		
-		let ratio = range.width / Containee(UInt32.max)
+		let ratio = range.eltaso.width / Containee(UInt32.max)
 		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound
@@ -23,7 +23,7 @@ extension EltasoContainer where Containee == CGFloat {
 	
 	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
 		
-		let ratio = range.width / Containee(UInt32.max.decreased)
+		let ratio = range.eltaso.width / Containee(UInt32.max.decreased)
 		let random = Containee(arc4random_uniform(.max)) * ratio
 		
 		return random + range.lowerBound

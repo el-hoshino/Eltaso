@@ -8,22 +8,28 @@
 
 import Foundation
 
-extension CountableRange {
+extension CountableRange: EltasoCompatible {
+	public var eltaso: EltasoSingleAssociatedTypeContainer<CountableRange<Bound>, Bound> {
+		return EltasoSingleAssociatedTypeContainer(body: self)
+	}
+}
+
+extension EltasoSingleAssociatedTypeContainer where Containee == CountableRange<AssociatedType>, AssociatedType: Strideable {
 	
-	public var width: Bound.Stride {
-		return self.lowerBound.distance(to: self.upperBound)
+	public var width: AssociatedType.Stride {
+		return self.body.lowerBound.distance(to: self.body.upperBound)
 	}
 	
-	public func offset(by n: Bound.Stride) -> CountableRange {
-		return self.lowerBound.advanced(by: n) ..< self.upperBound.advanced(by: n)
+	public func offset(by n: AssociatedType.Stride) -> CountableRange<AssociatedType> {
+		return self.body.lowerBound.advanced(by: n) ..< self.body.upperBound.advanced(by: n)
 	}
 	
-	public func appendingUpperBound(by n: Bound.Stride) -> CountableRange {
-		return self.lowerBound ..< self.upperBound.advanced(by: n)
+	public func appendingUpperBound(by n: AssociatedType.Stride) -> CountableRange<AssociatedType> {
+		return self.body.lowerBound ..< self.body.upperBound.advanced(by: n)
 	}
 	
-	public func appendingLowerBound(by n: Bound.Stride) -> CountableRange {
-		return self.lowerBound.advanced(by: -n) ..< self.upperBound
+	public func appendingLowerBound(by n: AssociatedType.Stride) -> CountableRange<AssociatedType> {
+		return self.body.lowerBound.advanced(by: -n) ..< self.body.upperBound
 	}
 	
 }

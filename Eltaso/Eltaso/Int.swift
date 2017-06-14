@@ -14,28 +14,28 @@ extension EltasoContainer where Containee == Int {
 	
 	public static func makeRandom(within range: Range<Containee>) -> Containee {
 		
-		let random = arc4random_uniform(UInt32(range.width))
+		let random = arc4random_uniform(UInt32(range.eltaso.width))
 		return Containee(random) + range.lowerBound
 		
 	}
 	
 	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
 		
-		let random = arc4random_uniform(UInt32(range.width.increased))
+		let random = arc4random_uniform(UInt32(range.eltaso.width.increased))
 		return Containee(random) + range.lowerBound
 		
 	}
 	
 	public static func makeRandom(within range: CountableRange<Containee>) -> Containee {
 		
-		let random = arc4random_uniform(UInt32(range.width))
+		let random = arc4random_uniform(UInt32(range.eltaso.width))
 		return Containee(random) + range.lowerBound
 		
 	}
 	
 	public static func makeRandom(within range: CountableClosedRange<Containee>) -> Containee {
 		
-		let random = arc4random_uniform(UInt32(range.width.increased))
+		let random = arc4random_uniform(UInt32(range.eltaso.width.increased))
 		return Containee(random) + range.lowerBound
 		
 	}

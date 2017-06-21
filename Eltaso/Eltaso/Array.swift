@@ -45,6 +45,16 @@ extension EltasoSingleAssociatedTypeContainer where Containee == Array<Associate
 
 extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
+	public subscript (optional offset: Int) -> AssociatedType? {
+		
+		return self.body.suffix(from: offset).first
+		
+	}
+	
+}
+
+extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+	
 	public func appending(_ newElement: AssociatedType) -> Array<AssociatedType> {
 		return self.body + [newElement]
 	}

@@ -95,3 +95,13 @@ extension EltasoContainer where Containee == Data {
 	}
 	
 }
+
+extension EltasoContainer where Containee == Data {
+	
+	public static func append(_ data: Data, to target: inout Containee) {
+		
+		target.append(data)
+		
+	}
+	
+}

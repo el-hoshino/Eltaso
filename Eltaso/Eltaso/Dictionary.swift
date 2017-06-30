@@ -14,14 +14,12 @@ extension Dictionary: EltasoCompatible {
 	}
 }
 
-extension Dictionary {
+extension EltasoDualAssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
 	
-	public static func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
-		var dictionary = lhs
-		rhs.forEach { pair in
-			dictionary[pair.key] = pair.value
-		}
-		return dictionary
+	public static func combine(_ a: Containee, with b: Containee, uniquingKeyWith combine: ((AssociatedType2, AssociatedType2) -> AssociatedType2) = { $1 }) -> Containee {
+		
+		return a.merging(b.map { $0 }, uniquingKeysWith: combine)
+		
 	}
 	
 }

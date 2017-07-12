@@ -75,10 +75,10 @@ extension EltasoContainer where Containee == CGRect {
 
 extension EltasoContainer where Containee == CGRect {
 	
-	public var centerPoint: CGPoint {
+	public var midPoint: CGPoint {
 		
-		let x = (self.body.origin.x + self.body.size.width) / 2
-		let y = (self.body.origin.y + self.body.size.height) / 2
+		let x = self.body.midX
+		let y = self.body.midY
 		
 		return CGPoint(x: x, y: y)
 		

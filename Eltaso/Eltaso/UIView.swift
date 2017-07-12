@@ -17,7 +17,7 @@ extension UIView: EltasoCompatible {
 extension EltasoContainer where Containee == UIView {
 	
 	public var midPoint: CGPoint {
-		return CGPoint(x: self.body.bounds.midX, y: self.body.bounds.midY)
+		return self.body.bounds.eltaso.midPoint
 	}
 	
 }

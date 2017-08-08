@@ -31,7 +31,7 @@ extension EltasoContainer where Containee == String {
 	public func keepingFirst(_ n: Int = 1) -> Containee {
 		
 		let remainingIndex = self.body.index(self.body.startIndex, offsetBy: n, limitedBy: self.body.endIndex) ?? self.body.endIndex
-		let remainedText = self.body.substring(to: remainingIndex)
+		let remainedText = String(self.body[..<remainingIndex])
 		return remainedText
 		
 	}
@@ -39,7 +39,7 @@ extension EltasoContainer where Containee == String {
 	public func keepingLast(_ n: Int = 1) -> Containee {
 		
 		let remainingIndex = self.body.index(self.body.endIndex, offsetBy: -n, limitedBy: self.body.startIndex) ?? self.body.startIndex
-		let remainedText = self.body.substring(from: remainingIndex)
+		let remainedText = String(self.body[remainingIndex...])
 		return remainedText
 		
 	}
@@ -59,7 +59,7 @@ extension EltasoContainer where Containee == String {
 	public func droppingFirst(_ n: Int = 1) -> Containee {
 		
 		let remainingIndex = self.body.index(self.body.startIndex, offsetBy: n, limitedBy: self.body.endIndex) ?? self.body.endIndex
-		let remainedText = self.body.substring(from: remainingIndex)
+		let remainedText = String(self.body[remainingIndex...])
 		return remainedText
 		
 	}
@@ -67,7 +67,7 @@ extension EltasoContainer where Containee == String {
 	public func droppingLast(_ n: Int = 1) -> Containee {
 		
 		let remainingIndex = self.body.index(self.body.endIndex, offsetBy: -n, limitedBy: self.body.startIndex) ?? self.body.startIndex
-		let remainedText = self.body.substring(to: remainingIndex)
+		let remainedText = String(self.body[..<remainingIndex])
 		return remainedText
 		
 	}

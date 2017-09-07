@@ -16,7 +16,7 @@ extension Double: EltasoCompatible {
 
 extension EltasoContainer where Containee == Double {
 	
-	public static func makeRndom(within range: Range<Containee>) -> Containee {
+	public static func makeRandom(within range: Range<Containee>) -> Containee {
 		
 		let ratio = range.eltaso.width / Containee(UInt32.max)
 		let random = Containee(arc4random_uniform(.max)) * ratio

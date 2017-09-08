@@ -8,43 +8,83 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension Dictionary: EltasoCompatible {
-	public var eltaso: EltasoDualAssociatedTypeContainer<Dictionary<Key, Value>, Key, Value> {
-		return EltasoDualAssociatedTypeContainer(body: self)
-	}
+	
 }
 
-extension EltasoDualAssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
 	
 	public static func combine(_ a: Containee, with b: Containee, uniquingKeyWith combine: ((AssociatedType2, AssociatedType2) -> AssociatedType2) = { $1 }) -> Containee {
 		
-		return a.merging(b.map { $0 }, uniquingKeysWith: combine)
+		return Containee.combine(a, with: b, uniquingKeyWith: combine)
 		
 	}
 	
 }
 
-extension EltasoDualAssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
 	
 	public func containsKey(_ key: AssociatedType1) -> Bool {
 		
-		return self.body[key] != nil
+		return self.body.containsKey(key)
 		
 	}
 	
 }
 
-extension EltasoDualAssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
 	
 	public func dropping(_ key: AssociatedType1) -> Dictionary<AssociatedType1, AssociatedType2> {
-		var dictionary = self.body
-		dictionary.removeValue(forKey: key)
-		return dictionary
+		
+		return self.body.dropping(key)
+		
 	}
 	
-	public static func drop(_ key: AssociatedType1, in target: inout Dictionary<AssociatedType1, AssociatedType2>) {
-		target = target.eltaso.dropping(key)
+	public static func drop(_ target: inout Dictionary<AssociatedType1, AssociatedType2>, with key: AssociatedType1) {
+		
+		target.drop(key: key)
+		
 	}
 	
 }
 
+// MARK: - Internal methods
+extension Dictionary {
+	
+	static func combine(_ a: Dictionary, with b: Dictionary, uniquingKeyWith combine: ((Value, Value) -> Value) = { $1 }) -> Dictionary {
+		
+		return a.merging(b, uniquingKeysWith: combine)
+		
+	}
+	
+}
+
+extension Dictionary {
+	
+	func containsKey(_ key: Key) -> Bool {
+		
+		return self[key] != nil
+		
+	}
+	
+}
+
+extension Dictionary {
+	
+	func dropping(_ key: Key) -> Dictionary {
+		
+		var dictionary = self
+		dictionary.removeValue(forKey: key)
+		
+		return dictionary
+		
+	}
+	
+	mutating func drop(key: Key) {
+		
+		self = self.dropping(key)
+		
+	}
+	
+}

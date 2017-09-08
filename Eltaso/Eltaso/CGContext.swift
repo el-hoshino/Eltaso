@@ -8,18 +8,26 @@
 
 import CoreGraphics
 
+// MARK: - Public methods
 extension CGContext: EltasoCompatible {
-	public var eltaso: EltasoContainer<CGContext> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
 extension EltasoContainer where Containee == CGContext {
 	
 	func draw(_ image: CGImage, at point: CGPoint) {
+		return self.body.draw(image, at: point)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension CGContext {
+	
+	func draw(_ image: CGImage, at point: CGPoint) {
 		
-		let drawingRect = CGRect(origin: point, size: image.eltaso.size)
-		self.body.draw(image, in: drawingRect)
+		let drawingRect = CGRect(origin: point, size: image.size)
+		self.draw(image, in: drawingRect)
 		
 	}
 	

@@ -23,6 +23,7 @@
 		1657BBE61E794FB3009B3D0F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657BBE51E794FB3009B3D0F /* UINavigationController.swift */; };
 		166205861D6EB5D100438DAE /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166205851D6EB5D100438DAE /* Weekday.swift */; };
 		166882611DC350F100C67F0C /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166882601DC350F100C67F0C /* CGImage.swift */; };
+		167B3F341F613CC100EE997C /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167B3F331F613CC100EE997C /* Numeric.swift */; };
 		1685B04F1EEE5BD000CD6056 /* EltasoCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */; };
 		168E57051D66DBEE00C07A06 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57041D66DBEE00C07A06 /* UIAlertController.swift */; };
 		168E57071D66E4B900C07A06 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E57061D66E4B900C07A06 /* Date.swift */; };
@@ -32,6 +33,7 @@
 		169AE5DD1DD9799600B383EF /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */; };
 		169C43E61D82A92B0006B2E2 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E51D82A92B0006B2E2 /* Int.swift */; };
 		169C43E81D82BFA30006B2E2 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C43E71D82BFA30006B2E2 /* Collection.swift */; };
+		16A17E151F610ED1001D58C8 /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A17E141F610ED1001D58C8 /* OptionalType.swift */; };
 		16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A530FA1D38F5CE00041952 /* Strideable.swift */; };
 		16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */; };
 		16AA60341DC8A870001D6236 /* CGContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA60331DC8A870001D6236 /* CGContext.swift */; };
@@ -90,6 +92,7 @@
 		1657BBE51E794FB3009B3D0F /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		166205851D6EB5D100438DAE /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		166882601DC350F100C67F0C /* CGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
+		167B3F331F613CC100EE997C /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EltasoCompatible.swift; sourceTree = "<group>"; };
 		168E57041D66DBEE00C07A06 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		168E57061D66E4B900C07A06 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 		169AE5DC1DD9799600B383EF /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		169C43E51D82A92B0006B2E2 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		169C43E71D82BFA30006B2E2 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		16A17E141F610ED1001D58C8 /* OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
 		16A530FA1D38F5CE00041952 /* Strideable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strideable.swift; sourceTree = "<group>"; };
 		16AA60261DC87432001D6236 /* UIRotationGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRotationGestureRecognizer.swift; sourceTree = "<group>"; };
 		16AA60331DC8A870001D6236 /* CGContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGContext.swift; sourceTree = "<group>"; };
@@ -179,10 +183,12 @@
 				16C02D261D3E07B900288942 /* GlobalFunctions.swift */,
 				1685B04E1EEE5BD000CD6056 /* EltasoCompatible.swift */,
 				1635E7F91EF101EC008AD476 /* EltasoChainCompatible.swift */,
+				16A17E141F610ED1001D58C8 /* OptionalType.swift */,
 				16991FD71DF9708C00FC4A8A /* CopyableObject.swift */,
 				79092CF01D2C338F00E07C8A /* ElementExchangableView.swift */,
-				169C43E71D82BFA30006B2E2 /* Collection.swift */,
+				167B3F331F613CC100EE997C /* Numeric.swift */,
 				162414D41D2F6D5600141C64 /* Sequence.swift */,
+				169C43E71D82BFA30006B2E2 /* Collection.swift */,
 				16A530FA1D38F5CE00041952 /* Strideable.swift */,
 				79E14EA61D2B989A00AF6EE4 /* Array.swift */,
 				16C02D301D3E0FE600288942 /* Dictionary.swift */,
@@ -372,6 +378,7 @@
 				79E14E9D1D2B911A00AF6EE4 /* UIColor.swift in Sources */,
 				162D38401E02AF2800CA9D7A /* Range.swift in Sources */,
 				168E571B1D6BEF9B00C07A06 /* Downloader.swift in Sources */,
+				167B3F341F613CC100EE997C /* Numeric.swift in Sources */,
 				16AA60271DC87432001D6236 /* UIRotationGestureRecognizer.swift in Sources */,
 				162414D51D2F6D5600141C64 /* Sequence.swift in Sources */,
 				16A530FB1D38F5CE00041952 /* Strideable.swift in Sources */,
@@ -401,6 +408,7 @@
 				160DAFAE1DA39FD100EC8770 /* Matrix.swift in Sources */,
 				79E14EA11D2B93AB00AF6EE4 /* Bool.swift in Sources */,
 				16C02D2F1D3E0AEC00288942 /* String.swift in Sources */,
+				16A17E151F610ED1001D58C8 /* OptionalType.swift in Sources */,
 				79092CED1D2C333300E07C8A /* CallbackButton.swift in Sources */,
 				79092CE51D2C31AF00E07C8A /* CGRect.swift in Sources */,
 			);

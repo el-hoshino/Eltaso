@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension CGPoint {
 	
 	public static func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
@@ -81,9 +82,7 @@ extension CGPoint {
 }
 
 extension CGPoint: EltasoCompatible {
-	public var eltaso: EltasoContainer<CGPoint> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
 extension EltasoContainer where Containee == CGPoint {
@@ -113,11 +112,11 @@ extension EltasoContainer where Containee == CGPoint {
 extension EltasoContainer where Containee == CGPoint {
 	
 	public static func reflected(byAdding vector: CGVector, to point: Containee = .zero) -> Containee {
-		return Containee(x: point.x + vector.dx, y: point.y + vector.dy)
+		return Containee.reflected(byAdding: vector, to: point)
 	}
 	
-	public static func reflected(bySubtracting vector: CGVector, from point: Containee) -> Containee {
-		return Containee(x: point.x - vector.dx , y: point.y - vector.dy)
+	public static func reflected(bySubtracting vector: CGVector, from point: Containee = .zero) -> Containee {
+		return Containee.reflected(bySubtracting: vector, from: point)
 	}
 	
 }
@@ -125,7 +124,7 @@ extension EltasoContainer where Containee == CGPoint {
 extension EltasoContainer where Containee == CGPoint {
 	
 	public static func `init`(point: CGFloat) -> Containee {
-		return Containee(x: point, y: point)
+		return Containee(point: point)
 	}
 	
 }
@@ -133,8 +132,7 @@ extension EltasoContainer where Containee == CGPoint {
 extension EltasoContainer where Containee == CGPoint {
 	
 	public func isIncluded(in rect: CGRect) -> Bool {
-		return self.body.x …= rect.eltaso.horizontalRange
-			&& self.body.y …= rect.eltaso.verticalRange
+		return self.body.isIncluded(in: rect)
 	}
 	
 }
@@ -142,14 +140,84 @@ extension EltasoContainer where Containee == CGPoint {
 extension EltasoContainer where Containee == CGPoint {
 	
 	public var negated: Containee {
+		return self.body.negated
+	}
+	
+	public func negated(in dimensions: DimensionSet) -> Containee {
+		return self.body.negated(in: dimensions)
+	}
+	
+	public static func negate(_ target: inout Containee, in dimensions: DimensionSet) {
+		target.negate(in: dimensions)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGPoint {
+	
+	public func convertedToOrigin(in size: CGSize) -> Containee {
+		return self.convertedToOrigin(in: size)
+	}
+	
+	public func convertedToCenter(in size: CGSize) -> Containee {
+		return self.convertedToCenter(in: size)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGPoint {
+	
+	public func anchorPoint(in size: CGSize) -> Containee {
+		return self.body.anchorPoint(in: size)
+	}
+	
+	public func realPoint(in size: CGSize) -> Containee {
+		return self.body.realPoint(in: size)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension CGPoint {
+	
+	static func reflected(byAdding vector: CGVector, to point: CGPoint = .zero) -> CGPoint {
+		return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
+	}
+	
+	static func reflected(bySubtracting vector: CGVector, from point: CGPoint = .zero) -> CGPoint {
+		return CGPoint(x: point.x - vector.dx , y: point.y - vector.dy)
+	}
+	
+}
+
+extension CGPoint {
+	
+	static func `init`(point: CGFloat) -> CGPoint {
+		return CGPoint(x: point, y: point)
+	}
+	
+}
+
+extension CGPoint {
+	
+	func isIncluded(in rect: CGRect) -> Bool {
+		return self.x …= rect.horizontalRange
+			&& self.y …= rect.verticalRange
+	}
+	
+}
+
+extension CGPoint {
+	
+	var negated: CGPoint {
 		
 		return self.negated(in: .both)
 		
 	}
 	
-	public func negated(in dimensions: DimensionSet) -> Containee {
+	func negated(in dimensions: EltasoContainer<CGPoint>.DimensionSet) -> CGPoint {
 		
-		var negated = self.body
+		var negated = self
 		
 		if dimensions.contains(.horizontal) {
 			negated.x.negate()
@@ -163,40 +231,40 @@ extension EltasoContainer where Containee == CGPoint {
 		
 	}
 	
-	public static func negate(_ target: inout Containee, in dimensions: DimensionSet) {
-		target = target.eltaso.negated(in: dimensions)
+	mutating func negate(in dimensions: EltasoContainer<CGPoint>.DimensionSet) {
+		self = self.negated(in: dimensions)
 	}
 	
 }
 
-extension EltasoContainer where Containee == CGPoint {
+extension CGPoint {
 	
-	public func convertedToOrigin(in size: CGSize) -> Containee {
+	func convertedToOrigin(in size: CGSize) -> CGPoint {
 		
 		let halfSize = size / 2
-		let origin = Containee(x: self.body.x - halfSize.width, y: self.body.y - halfSize.height)
+		let origin = CGPoint(x: self.x - halfSize.width, y: self.y - halfSize.height)
 		return origin
 		
 	}
 	
-	public func convertedToCenter(in size: CGSize) -> Containee {
+	func convertedToCenter(in size: CGSize) -> CGPoint {
 		
 		let halfSize = size / 2
-		let center = Containee(x: self.body.x + halfSize.width, y: self.body.y + halfSize.height)
+		let center = CGPoint(x: self.x + halfSize.width, y: self.y + halfSize.height)
 		return center
 		
 	}
 	
 }
 
-extension EltasoContainer where Containee == CGPoint {
+extension CGPoint {
 	
-	public func anchorPoint(in size: CGSize) -> Containee {
-		return Containee(x: self.body.x / size.width, y: self.body.y / size.height)
+	public func anchorPoint(in size: CGSize) -> CGPoint {
+		return CGPoint(x: self.x / size.width, y: self.y / size.height)
 	}
 	
-	public func realPoint(in size: CGSize) -> Containee {
-		return Containee(x: self.body.x * size.width, y: self.body.y * size.height)
+	public func realPoint(in size: CGSize) -> CGPoint {
+		return CGPoint(x: self.x * size.width, y: self.y * size.height)
 	}
 	
 }

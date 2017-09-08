@@ -10,7 +10,7 @@ import Foundation
 
 open class CallbackSwitch: UISwitch {
 	
-	fileprivate var onValueChangedAction: ((_ sender: CallbackSwitch) -> Void)?
+	private var onValueChangedAction: ((_ sender: CallbackSwitch) -> Void)?
 	
 	public override init(frame: CGRect) {
 		
@@ -33,7 +33,7 @@ open class CallbackSwitch: UISwitch {
 
 extension CallbackSwitch {
 	
-	@objc fileprivate func valueChanged(_ sender: CallbackSwitch) {
+	@objc private func valueChanged(_ sender: CallbackSwitch) {
 		
 		self.onValueChangedAction?(sender)
 		

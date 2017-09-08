@@ -8,15 +8,43 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension DispatchQueue: EltasoCompatible {
-	public var eltaso: EltasoContainer<DispatchQueue> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
-extension EltasoContainer where Containee == DispatchQueue {
+extension EltasoContainer where Containee: DispatchQueue {
 	
 	public static func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
+		return Containee.runMainQueueWork(forcedSync: shouldUseSync, execute: work)
+	}
+	
+}
+
+extension EltasoContainer where Containee: DispatchQueue {
+	
+	public var isAvailable: Bool {
+		return self.body.isAvailable
+	}
+	
+}
+
+extension EltasoContainer where Containee: DispatchQueue {
+	
+	public func syncRepeat(while condition: @autoclosure () -> Bool, loop: () -> Void) {
+		return self.body.syncRepeat(while: condition, loop: loop)
+	}
+	
+	public func asyncRepeat(while condition: @autoclosure @escaping () -> Bool, loop: @escaping () -> Void) {
+		return self.body.asyncRepeat(while: condition, loop: loop)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension DispatchQueue {
+	
+	static func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
 		
 		if Thread.isMainThread {
 			work()
@@ -36,17 +64,17 @@ extension EltasoContainer where Containee == DispatchQueue {
 	
 }
 
-extension EltasoContainer where Containee == DispatchQueue {
+extension DispatchQueue {
 	
-	public var isAvailable: Bool {
+	var isAvailable: Bool {
 		
-		guard Thread.current != self.body else {
+		guard Thread.current != self else {
 			return true
 		}
 		
 		let semaphore = DispatchSemaphore(value: 0)
 		
-		self.body.async {
+		self.async {
 			semaphore.signal()
 		}
 		
@@ -56,11 +84,11 @@ extension EltasoContainer where Containee == DispatchQueue {
 	
 }
 
-extension EltasoContainer where Containee == DispatchQueue {
+extension DispatchQueue {
 	
-	public func syncRepeat(while condition: @autoclosure () -> Bool, loop: () -> Void) {
+	func syncRepeat(while condition: @autoclosure () -> Bool, loop: () -> Void) {
 		
-		self.body.sync {
+		self.sync {
 			while condition() == true {
 				loop()
 			}
@@ -68,9 +96,9 @@ extension EltasoContainer where Containee == DispatchQueue {
 		
 	}
 	
-	public func asyncRepeat(while condition: @autoclosure @escaping () -> Bool, loop: @escaping () -> Void) {
+	func asyncRepeat(while condition: @autoclosure @escaping () -> Bool, loop: @escaping () -> Void) {
 		
-		self.body.async {
+		self.async {
 			while condition() == true {
 				loop()
 			}

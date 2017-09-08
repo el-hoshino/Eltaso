@@ -8,125 +8,291 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension Array: EltasoCompatible {
-	public var eltaso: EltasoSingleAssociatedTypeContainer<Array<Element>, Element> {
-		return EltasoSingleAssociatedTypeContainer(body: self)
-	}
+	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
 	public var shuffled: Array<AssociatedType> {
-		var array = self.body
-		for i in array.indices.reversed().dropLast() {
-			let j = Int.Eltaso.makeRandom(within: array.indices.lowerBound ..< i)
-			array.swapAt(i, j)
-		}
-		return array
+		
+		return self.body.shuffled
+		
 	}
 	
 	public static func shuffle(_ target: inout Array<AssociatedType>) {
-		target = target.eltaso.shuffled
+		
+		target.shuffle()
+		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
-	public var randomElement: AssociatedType? {
-		guard self.body.count > 0 else {
-			return nil
-		}
-		let randomIndex = Int.Eltaso.makeRandom(within: self.body.indices)
-		return self.body[randomIndex]
+	public var random: AssociatedType? {
+		
+		return self.body.random
+		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
 	public subscript (optional offset: Int) -> AssociatedType? {
 		
-		return self.body.suffix(from: offset).first
+		return self.body[optional: offset]
 		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
 	public func appending(_ newElement: AssociatedType) -> Array<AssociatedType> {
-		return self.body + [newElement]
+		
+		return self.body.appending(newElement)
+		
 	}
 	
 	public func appending(_ newElements: [AssociatedType]) -> Array<AssociatedType> {
-		return self.body + newElements
+		
+		return self.body.appending(newElements)
+		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
-	public static func append(_ newElements: [AssociatedType], to target: inout Array<AssociatedType>) {
-		target += newElements
+	public static func append(_ target: inout Array<AssociatedType>, with newElements: [AssociatedType]) {
+		
+		target.append(newElements)
+		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
 	public func keeping(at n: Int) -> Array<AssociatedType> {
-		let n = n.eltaso.limited(within: self.body.indices)
-		return [self.body[n]]
+		
+		return self.body.keeping(at: n)
+		
 	}
 	
 	public func keepingFirst(_ n: Int = 1) -> Array<AssociatedType> {
-		let n = n.eltaso.limited(within: self.body.indices)
-		return Array(self.body[0 ..< n])
+		
+		return self.body.keepingFirst(n)
+		
 	}
 	
 	public func keepingLast(_ n: Int = 1) -> Array<AssociatedType> {
-		let n = n.eltaso.limited(within: self.body.indices)
-		return Array(self.body[(self.body.count - n) ..< self.body.count])
+		
+		return self.body.keepingLast(n)
+		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
 	public static func keep(at n: Int, in target: inout Array<AssociatedType>) {
-		target = target.eltaso.keeping(at: n)
+		
+		target.keep(at: n)
+		
 	}
 	
 	public static func keepFirst(_ n: Int = 1, in target: inout Array<AssociatedType>) {
-		target = target.eltaso.keepingFirst(n)
+		
+		target.keepFirst(n)
+		
 	}
 	
 	public static func keepLast(_ n: Int = 1, in target: inout Array<AssociatedType>) {
-		target = target.eltaso.keepingLast(n)
+		
+		target.keepLast(n)
+		
 	}
 	
 }
 
-extension EltasoSingleAssociatedTypeContainer where Containee == Array<AssociatedType> {
+extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {
 	
 	public func removing(at n: Int) -> Array<AssociatedType> {
-		let n = n.eltaso.limited(within: self.body.indices)
-		let result = self.body.enumerated().reduce([]) { (result, tuple) -> Array<AssociatedType> in
-			return tuple.offset == n ? result : result.eltaso.appending(tuple.element)
-		}
-		return result
+		
+		return self.body.removing(at: n)
+		
 	}
 	
 	public func removingFirst(_ n: Int = 1) -> Array<AssociatedType> {
-		let n = n.eltaso.limited(within: self.body.indices)
-		return Array(self.body[n ..< self.body.count])
+		
+		return self.body.removingFirst(n)
+		
 	}
 	
 	public func removingLast(_ n: Int = 1) -> Array<AssociatedType> {
-		let n = n.eltaso.limited(within: self.body.indices)
-		return Array(self.body[0 ..< (self.body.count - n)])
+		
+		return self.body.removingLast(n)
+		
 	}
 	
 }
 
+
+// MARK: - Internal methods
+extension Array {
+	
+	var shuffled: Array {
+		
+		var array = self
+		for i in array.indices.reversed().dropLast() {
+			let j = Int.makeRandom(within: array.indices.lowerBound ..< i)
+			array.swapAt(i, j)
+		}
+		
+		return array
+		
+	}
+	
+	mutating func shuffle() {
+		
+		self = self.shuffled
+		
+	}
+	
+}
+
+extension Array {
+	
+	var random: Element? {
+		
+		guard self.count > 0 else {
+			return nil
+		}
+		let randomIndex = Int.makeRandom(within: self.indices)
+		
+		return self[randomIndex]
+		
+	}
+	
+}
+
+extension Array {
+	
+	subscript (optional offset: Int) -> Element? {
+		
+		return self.suffix(from: offset).first
+		
+	}
+	
+}
+
+extension Array {
+	
+	func appending(_ newElement: Element) -> Array {
+		
+		return self + [newElement]
+		
+	}
+	
+	func appending(_ newElements: [Element]) -> Array {
+		
+		return self + newElements
+		
+	}
+	
+}
+
+extension Array {
+	
+	mutating func append(_ newElements: [Element]) {
+		
+		self += newElements
+		
+	}
+	
+}
+
+extension Array {
+	
+	func keeping(at n: Int) -> Array {
+		
+		let n = n.limited(within: self.indices)
+		
+		return [self[n]]
+		
+	}
+	
+	func keepingFirst(_ n: Int = 1) -> Array {
+		
+		let n = n.limited(within: self.indices)
+		
+		return Array(self[0 ..< n])
+		
+	}
+	
+	func keepingLast(_ n: Int = 1) -> Array {
+		
+		let n = n.limited(within: self.indices)
+		
+		return Array(self[(self.count - n) ..< self.count])
+		
+	}
+	
+}
+
+extension Array {
+	
+	mutating func keep(at n: Int) {
+		
+		self = self.keeping(at: n)
+		
+	}
+	
+	mutating func keepFirst(_ n: Int = 1) {
+		
+		self = self.keepingFirst(n)
+		
+	}
+	
+	mutating func keepLast(_ n: Int = 1) {
+		
+		self = self.keepingLast(n)
+		
+	}
+	
+}
+
+extension Array {
+	
+	public func removing(at n: Int) -> Array {
+		
+		let n = n.limited(within: self.indices)
+		let result = self.enumerated().reduce([]) { (result, tuple) -> Array in
+			return tuple.offset == n ? result : result.appending(tuple.element)
+		}
+		
+		return result
+		
+	}
+	
+	public func removingFirst(_ n: Int = 1) -> Array {
+		
+		let n = n.limited(within: self.indices)
+		
+		return Array(self[n ..< self.count])
+		
+	}
+	
+	public func removingLast(_ n: Int = 1) -> Array {
+		
+		let n = n.limited(within: self.indices)
+		
+		return Array(self[0 ..< (self.count - n)])
+		
+	}
+	
+}

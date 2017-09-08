@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Public methods
 public struct CGScale {
 	
 	public var horizontal: CGFloat
@@ -76,15 +77,13 @@ extension CGScale {
 }
 
 extension CGScale: EltasoCompatible {
-	public var eltaso: EltasoContainer<CGScale> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
 extension EltasoContainer where Containee == CGScale {
 	
 	public static func `init`(scale: CGFloat) -> Containee {
-		return Containee(horizontal: scale, vertical: scale)
+		return Containee(scale: scale)
 	}
 	
 }
@@ -92,13 +91,32 @@ extension EltasoContainer where Containee == CGScale {
 extension EltasoContainer where Containee == CGScale {
 	
 	public var aspectFitScale: CGFloat {
-		return min(self.body.horizontal, self.body.vertical)
+		return self.body.aspectFitScale
 	}
 	
 	public var aspectFillScale: CGFloat {
-		return max(self.body.horizontal, self.body.vertical)
+		return self.body.aspectFillScale
 	}
 	
 }
 
+// MARK: - Internal methods
+extension CGScale {
+	
+	static func `init`(scale: CGFloat) -> CGScale {
+		return CGScale(horizontal: scale, vertical: scale)
+	}
+	
+}
 
+extension CGScale {
+	
+	var aspectFitScale: CGFloat {
+		return min(self.horizontal, self.vertical)
+	}
+	
+	var aspectFillScale: CGFloat {
+		return max(self.horizontal, self.vertical)
+	}
+	
+}

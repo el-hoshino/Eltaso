@@ -8,24 +8,37 @@
 
 import UIKit
 
+// MARK: - Public methods
 extension UINavigationController: EltasoCompatible {
-	public var eltaso: EltasoContainer<UINavigationController> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
-extension EltasoContainer where Containee == UINavigationController {
+extension EltasoContainer where Containee: UINavigationController {
 	
 	public func push(_ viewController: UIViewController, animated: Bool, completion: ((Bool) -> Void)?) {
+		return self.body.push(viewController, animated: animated, completion: completion)
+	}
+	
+	@discardableResult
+	public func pop(animated: Bool, completion: ((Bool) -> Void)?) -> UIViewController? {
+		return self.body.pop(animated: animated, completion: completion)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UINavigationController {
+	
+	func push(_ viewController: UIViewController, animated: Bool, completion: ((Bool) -> Void)?) {
 		
-		guard !self.body.viewControllers.contains(viewController) else {
+		guard !self.viewControllers.contains(viewController) else {
 			completion?(false)
 			return
 		}
 		
-		self.body.pushViewController(viewController, animated: animated)
+		self.pushViewController(viewController, animated: animated)
 		
-		if animated, let coordinator = self.body.transitionCoordinator {
+		if animated, let coordinator = self.transitionCoordinator {
 			coordinator.animate(alongsideTransition: nil) { _ in completion?(true) }
 			
 		} else {
@@ -35,16 +48,16 @@ extension EltasoContainer where Containee == UINavigationController {
 	}
 	
 	@discardableResult
-	public func pop(animated: Bool, completion: ((Bool) -> Void)?) -> UIViewController? {
+	func pop(animated: Bool, completion: ((Bool) -> Void)?) -> UIViewController? {
 		
-		let poppedViewController = self.body.popViewController(animated: animated)
+		let poppedViewController = self.popViewController(animated: animated)
 		
 		guard poppedViewController != nil else {
 			completion?(false)
 			return nil
 		}
 		
-		if animated, let coordinator = self.body.transitionCoordinator {
+		if animated, let coordinator = self.transitionCoordinator {
 			coordinator.animate(alongsideTransition: nil) { _ in completion?(true) }
 			
 		} else {

@@ -8,8 +8,15 @@
 
 public protocol EltasoCompatible {
 	
-	associatedtype Eltaso
-	var eltaso: Eltaso { get }
+}
+
+extension EltasoCompatible {
+	
+	public typealias Eltaso = EltasoContainer<Self>
+	
+	public var eltaso: Eltaso {
+		return EltasoContainer(body: self)
+	}
 	
 }
 
@@ -19,13 +26,13 @@ public struct EltasoContainer<Containee: EltasoCompatible> {
 	
 }
 
-public struct EltasoSingleAssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType> {
+public struct Eltaso1AssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType> {
 	
 	public let body: Containee
 	
 }
 
-public struct EltasoDualAssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType1, AssociatedType2> {
+public struct Eltaso2AssociatedTypeContainer<Containee: EltasoCompatible, AssociatedType1, AssociatedType2> {
 	
 	public let body: Containee
 	

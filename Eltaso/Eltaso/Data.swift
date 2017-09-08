@@ -8,10 +8,9 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension Data: EltasoCompatible {
-	public var eltaso: EltasoContainer<Data> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
 extension EltasoContainer where Containee == Data {
@@ -22,42 +21,11 @@ extension EltasoContainer where Containee == Data {
 	}
 	
 	public func getValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T? {
-		
-		let startIndex: Containee.Index
-		let endIndex: Containee.Index
-		
-		switch advanceSizeType {
-		case .byteSize:
-			startIndex = self.body.index(self.body.startIndex, offsetBy: offset)
-			endIndex = self.body.index(startIndex, offsetBy: MemoryLayout<T>.size)
-			
-		case .resultTypeSize:
-			let advanceSize = MemoryLayout<T>.size
-			startIndex = self.body.index(self.body.startIndex, offsetBy: offset * advanceSize)
-			endIndex = self.body.index(startIndex, offsetBy: advanceSize)
-			
-		}
-		
-		guard self.body.indices.contains(startIndex) && self.body.indices.contains(endIndex) else {
-			return nil
-		}
-		
-		let result: T = self.body.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: startIndex).assumingMemoryBound(to: T.self).pointee }
-		
-		return result
-		
+		return self.body.getValue(at: offset, by: advanceSizeType)
 	}
 	
 	public func getUnsafeValue <T> (at offset: Data.Index = 0, by advanceSizeType: PointerAdvanceSizeType = .byteSize) -> T {
-		
-		switch advanceSizeType {
-		case .byteSize:
-			return self.body.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: offset).assumingMemoryBound(to: T.self).pointee }
-			
-		case .resultTypeSize:
-			return self.body.withUnsafeBytes { $0.advanced(by: offset).pointee }
-		}
-		
+		return self.body.getUnsafeValue(at: offset, by: advanceSizeType)
 	}
 	
 }
@@ -65,33 +33,15 @@ extension EltasoContainer where Containee == Data {
 extension EltasoContainer where Containee == Data {
 	
 	public static func append(_ byte: UInt8, to target: inout Containee) {
-		
-		var byte = byte
-		let pointer = UnsafeBufferPointer(start: &byte, count: 1)
-		let data = Containee(buffer: pointer)
-		
-		target.append(data)
-		
+		target.append(byte)
 	}
 	
 	public static func append(_ dualByte: UInt16, to target: inout Containee) {
-		
-		var dualByte = dualByte
-		let pointer = UnsafeBufferPointer(start: &dualByte, count: 1)
-		let data = Containee(buffer: pointer)
-		
-		target.append(data)
-		
+		target.append(dualByte)
 	}
 	
 	public static func append(_ quadByte: UInt32, to target: inout Containee) {
-		
-		var quadByte = quadByte
-		let pointer = UnsafeBufferPointer(start: &quadByte, count: 1)
-		let data = Containee(buffer: pointer)
-		
-		target.append(data)
-		
+		target.append(quadByte)
 	}
 	
 }
@@ -99,8 +49,84 @@ extension EltasoContainer where Containee == Data {
 extension EltasoContainer where Containee == Data {
 	
 	public static func append(_ data: Data, to target: inout Containee) {
-		
 		target.append(data)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension Data {
+	
+	func getValue <T> (at offset: Data.Index = 0, by advanceSizeType: EltasoContainer<Data>.PointerAdvanceSizeType = .byteSize) -> T? {
+		
+		let startIndex: Data.Index
+		let endIndex: Data.Index
+		
+		switch advanceSizeType {
+		case .byteSize:
+			startIndex = self.index(self.startIndex, offsetBy: offset)
+			endIndex = self.index(startIndex, offsetBy: MemoryLayout<T>.size)
+			
+		case .resultTypeSize:
+			let advanceSize = MemoryLayout<T>.size
+			startIndex = self.index(self.startIndex, offsetBy: offset * advanceSize)
+			endIndex = self.index(startIndex, offsetBy: advanceSize)
+			
+		}
+		
+		guard self.indices.contains(startIndex) && self.indices.contains(endIndex) else {
+			return nil
+		}
+		
+		let result: T = self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: startIndex).assumingMemoryBound(to: T.self).pointee }
+		
+		return result
+		
+	}
+	
+	func getUnsafeValue <T> (at offset: Data.Index = 0, by advanceSizeType: EltasoContainer<Data>.PointerAdvanceSizeType = .byteSize) -> T {
+		
+		switch advanceSizeType {
+		case .byteSize:
+			return self.withUnsafeBytes { UnsafeRawPointer($0).advanced(by: offset).assumingMemoryBound(to: T.self).pointee }
+			
+		case .resultTypeSize:
+			return self.withUnsafeBytes { $0.advanced(by: offset).pointee }
+		}
+		
+	}
+	
+}
+
+extension Data {
+	
+	mutating func append(_ byte: UInt8) {
+		
+		var byte = byte
+		let pointer = UnsafeBufferPointer(start: &byte, count: 1)
+		let data = Data(buffer: pointer)
+		
+		self.append(data)
+		
+	}
+	
+	mutating func append(_ dualByte: UInt16) {
+		
+		var dualByte = dualByte
+		let pointer = UnsafeBufferPointer(start: &dualByte, count: 1)
+		let data = Data(buffer: pointer)
+		
+		self.append(data)
+		
+	}
+	
+	mutating func append(_ quadByte: UInt32) {
+		
+		var quadByte = quadByte
+		let pointer = UnsafeBufferPointer(start: &quadByte, count: 1)
+		let data = Data(buffer: pointer)
+		
+		self.append(data)
 		
 	}
 	

@@ -8,46 +8,76 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension UIView: EltasoCompatible {
-	public var eltaso: EltasoContainer<UIView> {
-		return EltasoContainer(body: self)
-	}
+	
 }
 
-extension EltasoContainer where Containee == UIView {
+extension EltasoContainer where Containee: UIView {
 	
 	public var midPoint: CGPoint {
-		return self.body.bounds.eltaso.midPoint
+		return self.body.midPoint
 	}
 	
 }
 
-extension EltasoContainer where Containee == UIView {
+extension EltasoContainer where Containee: UIView {
 	
 	public func removeAllSubviews() {
-		self.body.subviews.forEach { (subview) in
+		return self.body.removeAllSubviews()
+	}
+	
+	public func addSubviews(_ subviews: [UIView]) {
+		return self.body.addSubviews(subviews)
+	}
+	
+}
+
+extension EltasoContainer where Containee: UIView {
+	
+	public static func animateJumpViews(_ views: [Containee], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
+		return Containee.animateJumpViews(views, forHeight: height, within: duration, reversing: reversing, completion: completion)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UIView {
+	
+	var midPoint: CGPoint {
+		return self.bounds.midPoint
+	}
+	
+}
+
+extension UIView {
+	
+	func removeAllSubviews() {
+		self.subviews.forEach { (subview) in
 			subview.removeFromSuperview()
 		}
 	}
 	
-	public func addSubviews(_ subviews: [UIView]) {
+	func addSubviews(_ subviews: [UIView]) {
 		subviews.forEach { (view) in
-			self.body.addSubview(view)
+			self.addSubview(view)
 		}
 	}
 	
 }
 
-extension EltasoContainer where Containee == UIView {
+extension UIView {
 	
-	public static func animateJumpViews(_ views: [Containee], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
+	static func animateJumpViews(_ views: [UIView], forHeight height: CGFloat, within duration: TimeInterval, reversing: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
 		
 		let initialDuration = duration * 0.2
 		let reversingDuration = duration - initialDuration
-		UIView.animate(withDuration: initialDuration, animations: { 
+		
+		UIView.animate(withDuration: initialDuration, animations: {
 			views.forEach({ (view) in
 				view.frame.origin.y -= height
 			})
+			
 		}, completion: { (_) in
 			UIView.animate(withDuration: reversingDuration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: [], animations: {
 				views.forEach({ (view) in
@@ -55,7 +85,8 @@ extension EltasoContainer where Containee == UIView {
 					reversing?()
 				})
 			}, completion: completion)
-		}) 
+			
+		})
 		
 	}
 	

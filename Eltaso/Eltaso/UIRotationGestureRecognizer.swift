@@ -8,10 +8,20 @@
 
 import UIKit
 
-extension EltasoContainer where Containee == UIRotationGestureRecognizer {
+// MARK: - Public methods
+extension EltasoContainer where Containee: UIRotationGestureRecognizer {
 	
 	public func resetRotation() {
-		self.body.rotation = 0
+		return self.body.resetRotation()
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UIRotationGestureRecognizer {
+	
+	func resetRotation() {
+		self.rotation = 0
 	}
 	
 }

@@ -3,18 +3,8 @@
 import UIKit
 import Eltaso
 
-var str = "Hello, playground"
+let a: [String: Int] = ["a": 1]
+let b: [String: Int] = ["b": 2]
 
-String.Eltaso.keepFirst(5, in: &str)
+let c = a + b
 
-let a = [1, 2, 3]
-a.eltaso.randomElement
-
-let b = true
-b.eltaso.chained { $0
-	.negated
-	.numbered
-	.commit()
-}
-
-let c = EltasoContainerChain<Bool>.makeRandom().negated.commit

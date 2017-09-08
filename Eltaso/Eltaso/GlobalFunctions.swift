@@ -8,6 +8,12 @@
 
 import Foundation
 
+public func =? <T> (lhs: inout T, rhs: T?) {
+	if let rhs = rhs {
+		lhs = rhs
+	}
+}
+
 public func cot(_ x: Double) -> Double {
 	return 1 / tan(x)
 }

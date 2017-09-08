@@ -8,29 +8,60 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension EltasoContainer where Containee: Strideable {
+	
+	public var increased: Containee {
+		return self.body.increased
+	}
+	
+	public var decreased: Containee {
+		return self.body.decreased
+	}
+	
+	public func increased(by n: Containee.Stride) -> Containee {
+		return self.body.increased(by: n)
+	}
+	
+	public func decreased(by n: Containee.Stride) -> Containee {
+		return self.body.decreased(by: n)
+	}
+	
+	public static func increase(_ body: inout Containee, by n: Containee.Stride = 1) {
+		body.increase(by: n)
+	}
+	
+	public static func decrease(_ body: inout Containee, by n: Containee.Stride = 1) {
+		body.decrease(by: n)
+	}
+	
+}
+
+
+// MARK: - Internal methods
 extension Strideable {
 	
-	public var increased: Self {
+	var increased: Self {
 		return self.advanced(by: 1)
 	}
 	
-	public var decreased: Self {
+	var decreased: Self {
 		return self.advanced(by: -1)
 	}
 	
-	public func increased(by n: Self.Stride) -> Self {
+	func increased(by n: Self.Stride) -> Self {
 		return self.advanced(by: n)
 	}
 	
-	public func decreased(by n: Self.Stride) -> Self {
+	func decreased(by n: Self.Stride) -> Self {
 		return self.advanced(by: -n)
 	}
 	
-	public mutating func increase(by n: Self.Stride = 1) {
+	mutating func increase(by n: Self.Stride = 1) {
 		self = self.increased(by: n)
 	}
 	
-	public mutating func decrease(by n: Self.Stride = 1) {
+	mutating func decrease(by n: Self.Stride = 1) {
 		self = self.decreased(by: n)
 	}
 	

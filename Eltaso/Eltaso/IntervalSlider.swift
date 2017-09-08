@@ -12,7 +12,7 @@ open class IntervalSlider: UISlider {
 	
 	open var interval: Float?
 	
-	fileprivate var onValueChangedAction: ((_ sender: IntervalSlider, _ newValue: Float) -> Void)?
+	private var onValueChangedAction: ((_ sender: IntervalSlider, _ newValue: Float) -> Void)?
 	
 	public init(frame: CGRect = .zero, interval: Float? = 1) {
 		
@@ -36,7 +36,7 @@ open class IntervalSlider: UISlider {
 
 extension IntervalSlider {
 	
-	@objc fileprivate func roundValue() {
+	@objc private func roundValue() {
 		
 		guard let interval = self.interval else {
 			return
@@ -47,7 +47,7 @@ extension IntervalSlider {
 		
 	}
 	
-	@objc fileprivate func valueChanged(_ sender: IntervalSlider) {
+	@objc private func valueChanged(_ sender: IntervalSlider) {
 		self.onValueChangedAction?(sender, self.value)
 	}
 	

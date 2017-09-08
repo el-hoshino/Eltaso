@@ -8,10 +8,22 @@
 
 import UIKit
 
-extension EltasoContainer where Containee == UIPanGestureRecognizer {
+// MARK: - Public methods
+extension EltasoContainer where Containee: UIPanGestureRecognizer {
 	
 	public func resetTranslation(inView view: UIView? = nil) {
-		self.body.setTranslation(.zero, in: view)
+		return self.body.resetTranslation(inView: view)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UIPanGestureRecognizer {
+	
+	func resetTranslation(inView view: UIView? = nil) {
+		
+		self.setTranslation(.zero, in: view)
+		
 	}
 	
 }

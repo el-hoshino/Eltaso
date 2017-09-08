@@ -17,10 +17,18 @@ public protocol EltasoChainableContainer {
 
 extension EltasoChainableContainer {
 	
-	public func chained <Result: EltasoCompatible> (_ process: (EltasoContainerChain<Containee>) throws -> Result) rethrows -> Result {
+	public func chained (_ process: (EltasoContainerChain<Containee>) throws -> EltasoContainerChain<Containee>) rethrows -> Containee {
 		
 		let chain = EltasoContainerChain(body: self.body)
-		let result = try process(chain)
+		let result = try process(chain).commit()
+		return result
+		
+	}
+	
+	public func chained <Result: EltasoCompatible> (_ process: (EltasoContainerChain<Containee>) throws -> EltasoContainerChain<Result>) rethrows -> Result {
+		
+		let chain = EltasoContainerChain(body: self.body)
+		let result = try process(chain).commit()
 		return result
 		
 	}
@@ -42,5 +50,5 @@ extension EltasoContainerChain {
 }
 
 extension EltasoContainer: EltasoChainableContainer { }
-extension EltasoSingleAssociatedTypeContainer: EltasoChainableContainer { }
-extension EltasoDualAssociatedTypeContainer: EltasoChainableContainer { }
+extension Eltaso1AssociatedTypeContainer: EltasoChainableContainer { }
+extension Eltaso2AssociatedTypeContainer: EltasoChainableContainer { }

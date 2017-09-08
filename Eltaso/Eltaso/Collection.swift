@@ -8,9 +8,58 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension EltasoContainer where Containee: RandomAccessCollection {
+	
+	public var second: Containee.Element? {
+		
+		return self.body.second
+		
+	}
+	
+}
+
+extension EltasoContainer where Containee: Collection {
+	
+	public var firstIndex: Containee.Index {
+		return self.body.firstIndex
+	}
+	
+}
+
+extension EltasoContainer where Containee: Collection {
+	
+	public var firstElement: Containee.Element {
+		get {
+			return self.body.firstElement
+		}
+	}
+	
+}
+
+extension EltasoContainer where Containee: BidirectionalCollection {
+	
+	public var lastIndex: Containee.Index {
+		return self.body.lastIndex
+	}
+	
+}
+
+extension EltasoContainer where Containee: BidirectionalCollection {
+	
+	public var lastElement: Containee.Element {
+		get {
+			return self.body.lastElement
+		}
+	}
+	
+}
+
+
+// MARK: - Internal methods
 extension Collection where Self: RandomAccessCollection {
 	
-	public var second: Self.Iterator.Element? {
+	var second: Element? {
 		
 		guard let secondIndex = self.index(self.startIndex, offsetBy: 1, limitedBy: self.index(before: self.endIndex)) else {
 			return nil
@@ -24,20 +73,16 @@ extension Collection where Self: RandomAccessCollection {
 
 extension Collection {
 	
-	public var firstIndex: Index {
+	var firstIndex: Index {
 		guard self.count > 0 else {
 			fatalError("Index out of range")
 		}
 		return self.startIndex
 	}
 	
-}
-
-extension Collection {
-	
-	public var firstElement: Iterator.Element {
+	var firstElement: Element {
 		get {
-			return self[firstIndex]
+			return self[self.firstIndex]
 		}
 	}
 	
@@ -45,12 +90,12 @@ extension Collection {
 
 extension Collection where Self: MutableCollection {
 	
-	public var firstElement: Iterator.Element {
+	var firstElement: Element {
 		get {
-			return self[firstIndex]
+			return self[self.firstIndex]
 		}
 		set {
-			self[firstIndex] = newValue
+			self[self.firstIndex] = newValue
 		}
 	}
 	
@@ -58,33 +103,29 @@ extension Collection where Self: MutableCollection {
 
 extension Collection where Self: BidirectionalCollection {
 	
-	public var lastIndex: Index {
+	var lastIndex: Index {
 		guard self.count > 0 else {
 			fatalError("Index out of range")
 		}
 		return self.index(before: self.endIndex)
 	}
 	
-}
-
-extension Collection where Self: BidirectionalCollection {
-	
-	public var lastElement: Iterator.Element {
+	var lastElement: Element {
 		get {
-			return self[lastIndex]
+			return self[self.lastIndex]
 		}
 	}
 	
 }
 
-extension Collection where Self: BidirectionalCollection, Self: MutableCollection {
+extension Collection where Self: MutableCollection, Self: BidirectionalCollection {
 	
-	public var lastElement: Iterator.Element {
+	var lastElement: Element {
 		get {
-			return self[lastIndex]
+			return self[self.lastIndex]
 		}
 		set {
-			self[lastIndex] = newValue
+			self[self.lastIndex] = newValue
 		}
 	}
 	

@@ -18,9 +18,9 @@ public enum MatrixMathError: Error {
 
 public struct Matrix <Element> {
 	
-	fileprivate var _value: [Element]
-	fileprivate var _columnCount: Int
-	fileprivate var _rowCount: Int
+	private var _value: [Element]
+	private var _columnCount: Int
+	private var _rowCount: Int
 	
 	public typealias Index = (i: Int, j: Int)
 	public typealias Size = (m: Int, n: Int)
@@ -40,7 +40,7 @@ public struct Matrix <Element> {
 				throw MatrixInitError.rowsWithDifferentColumns
 			}
 		}
-		self._value = array.flatten
+		self._value = array.eltaso.flatten
 		self._columnCount = columnCount
 		self._rowCount = rowCount
 	}
@@ -189,7 +189,7 @@ extension Matrix {
 			})
 		}
 		
-		return enumeratedMatrix.reduce(+) ?? []
+		return enumeratedMatrix.eltaso.reduce(+) ?? []
 		
 	}
 	

@@ -11,6 +11,10 @@ import UIKit
 // MARK: - Public methods
 extension UIImage: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UIImage> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == UIImage {

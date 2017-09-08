@@ -56,6 +56,10 @@ extension Range {
 
 extension Range: EltasoCompatible {
 	
+	public var eltaso: Eltaso1AssociatedTypeContainer<Range<Bound>, Bound> {
+		return Eltaso1AssociatedTypeContainer(body: self)
+	}
+	
 }
 
 extension Eltaso1AssociatedTypeContainer where Containee == Range<AssociatedType>, AssociatedType: Strideable {

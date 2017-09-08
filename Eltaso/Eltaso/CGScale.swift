@@ -78,6 +78,10 @@ extension CGScale {
 
 extension CGScale: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<CGScale> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == CGScale {

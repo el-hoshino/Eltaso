@@ -12,6 +12,10 @@ import Foundation
 // MARK: - Public methods
 extension CGAffineTransform: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<CGAffineTransform> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == CGAffineTransform {

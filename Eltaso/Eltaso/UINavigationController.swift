@@ -11,6 +11,10 @@ import UIKit
 // MARK: - Public methods
 extension UINavigationController: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UINavigationController> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee: UINavigationController {

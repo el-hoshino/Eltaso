@@ -11,6 +11,10 @@ import Foundation
 // MARK: - Public methods
 extension URLComponents: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<URLComponents> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == URLComponents {

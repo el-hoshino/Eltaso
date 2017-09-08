@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - Public methods
-extension EltasoContainer where Containee: Sequence {
+extension Eltaso1AssociatedTypeContainer where Containee: Sequence {
 	
 	public func flatten <T> (in type: T.Type) -> [T] {
 		return self.body.flatten(in: type)
@@ -17,24 +17,24 @@ extension EltasoContainer where Containee: Sequence {
 	
 }
 
-extension EltasoContainer where Containee: Sequence, Containee.Element: OptionalType {
-	
+extension Eltaso1AssociatedTypeContainer where Containee: Sequence, Containee.Element: OptionalType {
+
 	public var flatten: [Containee.Element.WrappedType] {
 		return self.body.flatten
 	}
 	
 }
 
-extension EltasoContainer where Containee: Sequence, Containee.Element: Sequence {
-	
+extension Eltaso1AssociatedTypeContainer where Containee: Sequence, Containee.Element: Sequence {
+
 	public var flatten: [Containee.Element.Element] {
 		return self.body.flatten
 	}
 	
 }
 
-extension EltasoContainer where Containee: Sequence {
-	
+extension Eltaso1AssociatedTypeContainer where Containee: Sequence {
+
 	public func firstFlatMap <T> (_ transform: (Containee.Element) throws -> T?) rethrows -> T? {
 		
 		return try self.body.firstFlatMap(transform)
@@ -43,8 +43,8 @@ extension EltasoContainer where Containee: Sequence {
 	
 }
 
-extension EltasoContainer where Containee: Sequence {
-	
+extension Eltaso1AssociatedTypeContainer where Containee: Sequence {
+
 	public func group(condition: (_ previous: Containee.Element, _ next: Containee.Element) throws -> Bool) rethrows -> [[Containee.Element]] {
 		
 		return try self.body.group(condition: condition)
@@ -53,8 +53,8 @@ extension EltasoContainer where Containee: Sequence {
 	
 }
 
-extension EltasoContainer where Containee: Sequence {
-	
+extension Eltaso1AssociatedTypeContainer where Containee: Sequence {
+
 	public func reduce(_ nextPartialResult: (_ previous: Containee.Element, _ next: Containee.Element) throws -> Containee.Element) rethrows -> Containee.Element? {
 		
 		return try self.body.reduce(nextPartialResult)

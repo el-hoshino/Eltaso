@@ -11,6 +11,10 @@ import Foundation
 // MARK: - Public methods
 extension CGFloat: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<CGFloat> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == CGFloat {

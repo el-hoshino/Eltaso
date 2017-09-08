@@ -11,6 +11,10 @@ import UIKit
 // MARK: - Public methods
 extension UIApplication: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UIApplication> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee: UIApplication {

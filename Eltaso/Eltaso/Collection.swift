@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - Public methods
-extension EltasoContainer where Containee: RandomAccessCollection {
+extension Eltaso1AssociatedTypeContainer where Containee: RandomAccessCollection {
 	
 	public var second: Containee.Element? {
 		
@@ -19,7 +19,7 @@ extension EltasoContainer where Containee: RandomAccessCollection {
 	
 }
 
-extension EltasoContainer where Containee: Collection {
+extension Eltaso1AssociatedTypeContainer where Containee: Collection {
 	
 	public var firstIndex: Containee.Index {
 		return self.body.firstIndex
@@ -27,7 +27,7 @@ extension EltasoContainer where Containee: Collection {
 	
 }
 
-extension EltasoContainer where Containee: Collection {
+extension Eltaso1AssociatedTypeContainer where Containee: Collection {
 	
 	public var firstElement: Containee.Element {
 		get {
@@ -37,7 +37,7 @@ extension EltasoContainer where Containee: Collection {
 	
 }
 
-extension EltasoContainer where Containee: BidirectionalCollection {
+extension Eltaso1AssociatedTypeContainer where Containee: BidirectionalCollection {
 	
 	public var lastIndex: Containee.Index {
 		return self.body.lastIndex
@@ -45,7 +45,7 @@ extension EltasoContainer where Containee: BidirectionalCollection {
 	
 }
 
-extension EltasoContainer where Containee: BidirectionalCollection {
+extension Eltaso1AssociatedTypeContainer where Containee: BidirectionalCollection {
 	
 	public var lastElement: Containee.Element {
 		get {

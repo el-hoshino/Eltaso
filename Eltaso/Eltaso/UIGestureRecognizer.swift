@@ -11,6 +11,10 @@ import UIKit
 // MARK: - Public methods
 extension UIGestureRecognizer: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UIGestureRecognizer> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee: UIGestureRecognizer {

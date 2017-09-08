@@ -11,6 +11,10 @@ import Foundation
 // MARK: - Public methods
 extension Dictionary: EltasoCompatible {
 	
+	public var eltaso: Eltaso2AssociatedTypeContainer<Dictionary<Key, Value>, Key, Value> {
+		return Eltaso2AssociatedTypeContainer(body: self)
+	}
+	
 }
 
 extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {

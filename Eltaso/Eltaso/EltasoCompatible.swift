@@ -8,15 +8,9 @@
 
 public protocol EltasoCompatible {
 	
-}
-
-extension EltasoCompatible {
+	associatedtype Eltaso
 	
-	public typealias Eltaso = EltasoContainer<Self>
-	
-	public var eltaso: Eltaso {
-		return EltasoContainer(body: self)
-	}
+	var eltaso: Eltaso { get }
 	
 }
 

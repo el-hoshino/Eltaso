@@ -12,6 +12,10 @@ import Foundation
 // MARK: - Public methods
 extension Double: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<Double> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == Double {

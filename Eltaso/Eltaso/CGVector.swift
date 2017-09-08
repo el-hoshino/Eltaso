@@ -63,6 +63,10 @@ extension CGVector {
 
 extension CGVector: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<CGVector> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == CGVector {

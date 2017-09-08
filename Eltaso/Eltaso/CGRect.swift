@@ -47,6 +47,10 @@ extension CGRect {
 
 extension CGRect: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<CGRect> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == CGRect {

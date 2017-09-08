@@ -11,6 +11,10 @@ import Foundation
 // MARK: - Public methods
 extension Array: EltasoCompatible {
 	
+	public var eltaso: Eltaso1AssociatedTypeContainer<Array<Element>, Element> {
+		return Eltaso1AssociatedTypeContainer(body: self)
+	}
+	
 }
 
 extension Eltaso1AssociatedTypeContainer where Containee == Array<AssociatedType> {

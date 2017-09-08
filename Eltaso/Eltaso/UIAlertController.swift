@@ -11,6 +11,10 @@ import UIKit
 // MARK: - Public methods
 extension UIAlertController: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UIAlertController> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee: UIAlertController {

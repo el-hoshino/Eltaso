@@ -11,6 +11,10 @@ import Foundation
 // MARK: - Public methods
 extension UIView: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UIView> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee: UIView {

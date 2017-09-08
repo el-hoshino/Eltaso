@@ -11,6 +11,10 @@ import UIKit
 // MARK: - Public methods
 extension UIColor: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<UIColor> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == UIColor {

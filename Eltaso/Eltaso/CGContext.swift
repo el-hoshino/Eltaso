@@ -11,6 +11,10 @@ import CoreGraphics
 // MARK: - Public methods
 extension CGContext: EltasoCompatible {
 	
+	public var eltaso: EltasoContainer<CGContext> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
 extension EltasoContainer where Containee == CGContext {

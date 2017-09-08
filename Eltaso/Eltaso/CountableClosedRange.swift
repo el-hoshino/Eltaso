@@ -39,6 +39,10 @@ extension CountableClosedRange {
 
 extension CountableClosedRange: EltasoCompatible {
 	
+	public var eltaso: Eltaso1AssociatedTypeContainer<CountableClosedRange<Bound>, Bound> {
+		return Eltaso1AssociatedTypeContainer(body: self)
+	}
+	
 }
 
 extension Eltaso1AssociatedTypeContainer where Containee == CountableClosedRange<AssociatedType>, AssociatedType: Strideable {

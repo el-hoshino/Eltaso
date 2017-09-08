@@ -56,6 +56,10 @@ extension ClosedRange {
 
 extension ClosedRange: EltasoCompatible {
 	
+	public var eltaso: Eltaso1AssociatedTypeContainer<ClosedRange<Bound>, Bound> {
+		return Eltaso1AssociatedTypeContainer(body: self)
+	}
+	
 }
 
 extension Eltaso1AssociatedTypeContainer where Containee == ClosedRange<AssociatedType>, AssociatedType: Strideable {

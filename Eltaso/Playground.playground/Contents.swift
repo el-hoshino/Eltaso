@@ -3,8 +3,11 @@
 import UIKit
 import Eltaso
 
-let a: [String: Int] = ["a": 1]
-let b: [String: Int] = ["b": 2]
+let flag = true
 
-let c = a + b
+let i = flag.eltaso.chained { $0
+	.negated
+	.numbered
+}
 
+i

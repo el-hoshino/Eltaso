@@ -20,7 +20,7 @@ extension EltasoChainableContainerType {
 	
 	public func chained <Result: EltasoCompatible> (_ process: (EltasoContainerChain<Containee>) throws -> EltasoContainerChain<Result>) rethrows -> Result {
 		
-		let chain = EltasoContainerChain(body: self.body)
+		let chain = EltasoContainerChain(self.body)
 		let result = try process(chain).commit()
 		return result
 		
@@ -31,6 +31,14 @@ extension EltasoChainableContainerType {
 public struct EltasoContainerChain<Containee> {
 	
 	let body: Containee
+	
+	init(body: Containee) {
+		self.body = body
+	}
+	
+	public init(_ body: Containee) {
+		self.body = body
+	}
 	
 }
 

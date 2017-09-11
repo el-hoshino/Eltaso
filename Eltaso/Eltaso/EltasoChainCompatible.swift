@@ -8,22 +8,15 @@
 
 import Foundation
 
-public protocol EltasoChainableContainer {
+public protocol EltasoChainableContainerType {
 	
 	associatedtype Containee: EltasoCompatible
+	
 	var body: Containee { get }
 	
 }
 
-extension EltasoChainableContainer {
-	
-	public func chained (_ process: (EltasoContainerChain<Containee>) throws -> EltasoContainerChain<Containee>) rethrows -> Containee {
-		
-		let chain = EltasoContainerChain(body: self.body)
-		let result = try process(chain).commit()
-		return result
-		
-	}
+extension EltasoChainableContainerType {
 	
 	public func chained <Result: EltasoCompatible> (_ process: (EltasoContainerChain<Containee>) throws -> EltasoContainerChain<Result>) rethrows -> Result {
 		
@@ -49,6 +42,6 @@ extension EltasoContainerChain {
 	
 }
 
-extension EltasoContainer: EltasoChainableContainer { }
-extension Eltaso1AssociatedTypeContainer: EltasoChainableContainer { }
-extension Eltaso2AssociatedTypeContainer: EltasoChainableContainer { }
+extension EltasoContainer: EltasoChainableContainerType { }
+extension Eltaso1AssociatedTypeContainer: EltasoChainableContainerType { }
+extension Eltaso2AssociatedTypeContainer: EltasoChainableContainerType { }

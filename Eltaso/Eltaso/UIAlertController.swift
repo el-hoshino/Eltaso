@@ -8,9 +8,27 @@
 
 import UIKit
 
-extension UIAlertController {
+// MARK: - Public methods
+extension UIAlertController: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<UIAlertController> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee: UIAlertController {
 	
 	public func addActions(_ actions: [UIAlertAction]) {
+		return self.body.addActions(actions)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UIAlertController {
+	
+	func addActions(_ actions: [UIAlertAction]) {
 		actions.forEach { (action) in
 			self.addAction(action)
 		}

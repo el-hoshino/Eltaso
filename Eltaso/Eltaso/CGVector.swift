@@ -8,67 +8,119 @@
 
 import Foundation
 
-public func + (lhs: CGVector, rhs: CGVector) -> CGVector {
-	return CGVector(dx: lhs.dx + rhs.dx, dy: lhs.dy + rhs.dy)
+// MARK: - Public methods
+extension CGVector {
+	
+	public static func + (lhs: CGVector, rhs: CGVector) -> CGVector {
+		return CGVector(dx: lhs.dx + rhs.dx, dy: lhs.dy + rhs.dy)
+	}
+	
+	public static func += (lhs: inout CGVector, rhs: CGVector) {
+		lhs = lhs + rhs
+	}
+	
+	public static func - (lhs: CGVector, rhs: CGVector) -> CGVector {
+		return CGVector(dx: lhs.dx - rhs.dx, dy: lhs.dy - rhs.dy)
+	}
+	
+	public static func -= (lhs: inout CGVector, rhs: CGVector) {
+		lhs = lhs - rhs
+	}
+	
+	public static func * (lhs: CGVector, rhs: CGFloat) -> CGVector {
+		return CGVector(dx: lhs.dx * rhs, dy: lhs.dy * rhs)
+	}
+	
+	public static func *= (lhs: inout CGVector, rhs: CGFloat) {
+		lhs = lhs * rhs
+	}
+	
+	public static func * (lhs: CGVector, rhs: CGScale) -> CGVector {
+		return CGVector(dx: lhs.dx * rhs.horizontal, dy: lhs.dy * rhs.vertical)
+	}
+	
+	public static func *= (lhs: inout CGVector, rhs: CGScale) {
+		lhs = lhs * rhs
+	}
+	
+	public static func / (lhs: CGVector, rhs: CGFloat) -> CGVector {
+		return CGVector(dx: lhs.dx / rhs, dy: lhs.dy / rhs)
+	}
+	
+	public static func /= (lhs: inout CGVector, rhs: CGFloat) {
+		lhs = lhs / rhs
+	}
+	
+	public static func / (lhs: CGVector, rhs: CGScale) -> CGVector {
+		return CGVector(dx: lhs.dx / rhs.horizontal, dy: lhs.dy / rhs.vertical)
+	}
+	
+	public static func /= (lhs: inout CGVector, rhs: CGScale) {
+		lhs = lhs / rhs
+	}
+	
 }
 
-public func += (lhs: inout CGVector, rhs: CGVector) {
-	lhs = lhs + rhs
+extension CGVector: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<CGVector> {
+		return EltasoContainer(body: self)
+	}
+	
 }
 
-public func - (lhs: CGVector, rhs: CGVector) -> CGVector {
-	return CGVector(dx: lhs.dx - rhs.dx, dy: lhs.dy - rhs.dy)
+extension EltasoContainer where Containee == CGVector {
+	
+	public static let identity = Containee.identity
+	
 }
 
-public func -= (lhs: inout CGVector, rhs: CGVector) {
-	lhs = lhs - rhs
+extension EltasoContainer where Containee == CGVector {
+	
+	public static func reflected(from point: CGPoint, addedBy anotherPoint: CGPoint = .zero) -> Containee {
+		return Containee.reflected(from: point, addedBy: anotherPoint)
+	}
+	
+	public static func reflected(from point: CGPoint, subtractedBy anotherPoint: CGPoint) -> Containee {
+		return Containee.reflected(from: point, subtractedBy: anotherPoint)
+	}
+	
 }
 
-public func * (lhs: CGVector, rhs: CGFloat) -> CGVector {
-	return CGVector(dx: lhs.dx * rhs, dy: lhs.dy * rhs)
+extension EltasoContainer where Containee == CGVector {
+	
+	public var angle: CGFloat {
+		return self.body.angle
+	}
+	
 }
 
-public func *= (lhs: inout CGVector, rhs: CGFloat) {
-	lhs = lhs * rhs
+extension EltasoContainer where Containee == CGVector {
+	
+	public func rotated(by angle: CGFloat) -> Containee {
+		return self.body.rotated(by: angle)
+	}
+	
+	public static func rotate(_ target: inout Containee, by angle: CGFloat) {
+		target.rotate(by: angle)
+	}
+	
 }
 
-public func * (lhs: CGVector, rhs: CGScale) -> CGVector {
-	return CGVector(dx: lhs.dx * rhs.horizontal, dy: lhs.dy * rhs.vertical)
-}
-
-public func *= (lhs: inout CGVector, rhs: CGScale) {
-	lhs = lhs * rhs
-}
-
-public func / (lhs: CGVector, rhs: CGFloat) -> CGVector {
-	return CGVector(dx: lhs.dx / rhs, dy: lhs.dy / rhs)
-}
-
-public func /= (lhs: inout CGVector, rhs: CGFloat) {
-	lhs = lhs / rhs
-}
-
-public func / (lhs: CGVector, rhs: CGScale) -> CGVector {
-	return CGVector(dx: lhs.dx / rhs.horizontal, dy: lhs.dy / rhs.vertical)
-}
-
-public func /= (lhs: inout CGVector, rhs: CGScale) {
-	lhs = lhs / rhs
+// MARK: - Internal methods
+extension CGVector {
+	
+	static let identity = CGVector(dx: 1, dy: 1)
+	
 }
 
 extension CGVector {
 	
-	public static let identity = CGVector(dx: 1, dy: 1)
-	
-}
-
-extension CGVector {
-	
-	public static func reflected(from point: CGPoint, addedBy anotherPoint: CGPoint) -> CGVector {
+	static func reflected(from point: CGPoint, addedBy anotherPoint: CGPoint = .zero) -> CGVector {
 		return CGVector(dx: point.x + anotherPoint.x, dy: point.y + anotherPoint.y)
 	}
 	
-	public static func reflected(from point: CGPoint, subtractedBy anotherPoint: CGPoint = .zero) -> CGVector {
+	static func reflected(from point: CGPoint, subtractedBy anotherPoint: CGPoint) -> CGVector {
 		return CGVector(dx: point.x - anotherPoint.x, dy: point.y - anotherPoint.y)
 	}
 	
@@ -76,7 +128,7 @@ extension CGVector {
 
 extension CGVector {
 	
-	public var angle: CGFloat {
+	var angle: CGFloat {
 		return atan2(-self.dy, self.dx)
 	}
 	
@@ -84,7 +136,7 @@ extension CGVector {
 
 extension CGVector {
 	
-	public func rotated(by angle: CGFloat) -> CGVector {
+	func rotated(by angle: CGFloat) -> CGVector {
 		
 		let rotatedX = self.dx * cos(angle) + self.dy * -sin(angle)
 		let rotatedY = self.dx * sin(angle) + self.dy * cos(angle)
@@ -94,7 +146,7 @@ extension CGVector {
 		
 	}
 	
-	public mutating func rotate(by angle: CGFloat) {
+	mutating func rotate(by angle: CGFloat) {
 		self = self.rotated(by: angle)
 	}
 	

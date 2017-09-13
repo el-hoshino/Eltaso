@@ -8,57 +8,65 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension Dictionary: EltasoCompatible {
+	
+	public var eltaso: Eltaso2AssociatedTypeContainer<Dictionary<Key, Value>, Key, Value> {
+		return Eltaso2AssociatedTypeContainer(body: self)
+	}
+	
+}
+
+extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+	
+	public static func combine(_ a: Containee, with b: Containee, uniquingKeyWith combine: ((AssociatedType2, AssociatedType2) -> AssociatedType2) = { $1 }) -> Containee {
+		
+		return Containee.combine(a, with: b, uniquingKeyWith: combine)
+		
+	}
+	
+}
+
+extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+	
+	public func containsKey(_ key: AssociatedType1) -> Bool {
+		
+		return self.body.containsKey(key)
+		
+	}
+	
+}
+
+extension Eltaso2AssociatedTypeContainer where Containee == Dictionary<AssociatedType1, AssociatedType2> {
+	
+	public func dropping(_ key: AssociatedType1) -> Dictionary<AssociatedType1, AssociatedType2> {
+		
+		return self.body.dropping(key)
+		
+	}
+	
+	public static func drop(_ target: inout Dictionary<AssociatedType1, AssociatedType2>, with key: AssociatedType1) {
+		
+		target.drop(key: key)
+		
+	}
+	
+}
+
+// MARK: - Internal methods
 extension Dictionary {
 	
-	public init<S: Sequence> (tuples seq: S) where S.Iterator.Element == Element {
-		self.init()
-		for (k,v) in seq {
-			self[k] = v
-		}
+	static func combine(_ a: Dictionary, with b: Dictionary, uniquingKeyWith combine: ((Value, Value) -> Value) = { $1 }) -> Dictionary {
+		
+		return a.merging(b, uniquingKeysWith: combine)
+		
 	}
 	
 }
 
 extension Dictionary {
 	
-	public func map <T> (_ transform: (Value) throws -> T) rethrows -> Dictionary<Key, T> {
-		
-		var iterator = self.makeIterator()
-		
-		var dictionary: [Key: T] = [:]
-		
-		while let next = iterator.next() {
-			dictionary[next.key] = try transform(next.value)
-		}
-		
-		return dictionary
-		
-	}
-	
-}
-
-extension Dictionary {
-	
-	@available(*, deprecated: 3.3, message: "Use Dictionary#map instead")
-	public func dictionaryMap <T> (_ transform: (Value) throws -> T) rethrows -> Dictionary<Key, T> {
-		
-		var iterator = self.makeIterator()
-		
-		var dictionary: [Key: T] = [:]
-		
-		while let next = iterator.next() {
-			dictionary[next.key] = try transform(next.value)
-		}
-		
-		return dictionary
-		
-	}
-	
-}
-
-extension Dictionary {
-	
-	public func containsKey(_ key: Key) -> Bool {
+	func containsKey(_ key: Key) -> Bool {
 		
 		return self[key] != nil
 		
@@ -68,22 +76,19 @@ extension Dictionary {
 
 extension Dictionary {
 	
-	public func dropping(_ key: Key) -> Dictionary<Key, Value> {
+	func dropping(_ key: Key) -> Dictionary {
+		
 		var dictionary = self
 		dictionary.removeValue(forKey: key)
+		
 		return dictionary
+		
 	}
 	
-	public mutating func drop(_ key: Key) {
+	mutating func drop(key: Key) {
+		
 		self = self.dropping(key)
+		
 	}
 	
-}
-
-public func + <Key, Value> (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
-	var dictionary = lhs
-	rhs.forEach { (key, value) in
-		dictionary[key] = value
-	}
-	return dictionary
 }

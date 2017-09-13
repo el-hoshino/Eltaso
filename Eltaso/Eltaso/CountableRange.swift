@@ -8,21 +8,79 @@
 
 import Foundation
 
+// MARK: - Public methods
 extension CountableRange {
 	
-	public var width: Bound.Stride {
+	public static func …= (lhs: Bound, rhs: CountableRange) -> Bool {
+		if lhs >= rhs.lowerBound && lhs < rhs.upperBound {
+			return true
+		} else {
+			return false
+		}
+	}
+	
+	public static func …= (lhs: CountableRange, rhs: CountableRange) -> Bool {
+		if lhs.lowerBound >= rhs.lowerBound && lhs.upperBound <= rhs.upperBound {
+			return true
+		} else {
+			return false
+		}
+	}
+	
+	public static func !…= (lhs: CountableRange, rhs: CountableRange) -> Bool {
+		return !(lhs …= rhs)
+	}
+	
+	public static func !…= (lhs: Bound, rhs: CountableRange) -> Bool {
+		return !(lhs …= rhs)
+	}
+	
+}
+
+extension CountableRange: EltasoCompatible {
+	
+	public var eltaso: Eltaso1AssociatedTypeContainer<CountableRange<Bound>, Bound> {
+		return Eltaso1AssociatedTypeContainer(body: self)
+	}
+	
+}
+
+extension Eltaso1AssociatedTypeContainer where Containee == CountableRange<AssociatedType>, AssociatedType: Strideable {
+	
+	public var width: AssociatedType.Stride {
+		return self.body.width
+	}
+	
+	public func offset(by n: AssociatedType.Stride) -> CountableRange<AssociatedType> {
+		return self.body.offset(by: n)
+	}
+	
+	public func appendingUpperBound(by n: AssociatedType.Stride) -> CountableRange<AssociatedType> {
+		return self.body.appendingUpperBound(by: n)
+	}
+	
+	public func appendingLowerBound(by n: AssociatedType.Stride) -> CountableRange<AssociatedType> {
+		return self.body.appendingLowerBound(by: n)
+	}
+	
+}
+
+// MARK: - Internal methods
+extension CountableRange where Bound: Strideable {
+	
+	var width: Bound.Stride {
 		return self.lowerBound.distance(to: self.upperBound)
 	}
 	
-	public func offset(by n: Bound.Stride) -> CountableRange {
+	func offset(by n: Bound.Stride) -> CountableRange {
 		return self.lowerBound.advanced(by: n) ..< self.upperBound.advanced(by: n)
 	}
 	
-	public func appendingUpperBound(by n: Bound.Stride) -> CountableRange {
+	func appendingUpperBound(by n: Bound.Stride) -> CountableRange {
 		return self.lowerBound ..< self.upperBound.advanced(by: n)
 	}
 	
-	public func appendingLowerBound(by n: Bound.Stride) -> CountableRange {
+	func appendingLowerBound(by n: Bound.Stride) -> CountableRange {
 		return self.lowerBound.advanced(by: -n) ..< self.upperBound
 	}
 	

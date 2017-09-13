@@ -8,9 +8,27 @@
 
 import UIKit
 
+// MARK: - Public methods
+extension UIColor: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<UIColor> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == UIColor {
+	
+	public static func `init`(hexRGBAValue: UInt) -> Containee {
+		return Containee(hexRGBAValue: hexRGBAValue)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension UIColor {
 	
-	public convenience init(hexRGBAValue: UInt) {
+	static func `init`(hexRGBAValue: UInt) -> UIColor {
 		
 		let hexRed = (hexRGBAValue & 0xFF000000) >> 24
 		let hexGreen = (hexRGBAValue & 0x00FF0000) >> 16
@@ -22,7 +40,8 @@ extension UIColor {
 		let blue = CGFloat(hexBlue) / CGFloat(UInt8.max)
 		let alpha = CGFloat(hexAlpha) / CGFloat(UInt8.max)
 		
-		self.init(red: red, green: green, blue: blue, alpha: alpha)
+		let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+		return color
 		
 	}
 	

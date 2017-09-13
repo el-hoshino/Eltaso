@@ -8,14 +8,20 @@
 
 import Foundation
 
+public func =? <T> (lhs: inout T, rhs: T?) {
+	if let rhs = rhs {
+		lhs = rhs
+	}
+}
+
 public func cot(_ x: Double) -> Double {
 	return 1 / tan(x)
 }
 
-public func stride <T: Strideable> (_ range: Range<T>, by stride: T.Stride) -> StrideTo<T> {
+public func stride <T> (_ range: Range<T>, by stride: T.Stride) -> StrideTo<T> {
 	return Swift.stride(from: range.lowerBound, to: range.upperBound, by: stride)
 }
 
-public func stride <T: Strideable> (_ range: ClosedRange<T>, by stride: T.Stride) -> StrideThrough<T> {
+public func stride <T> (_ range: ClosedRange<T>, by stride: T.Stride) -> StrideThrough<T> {
 	return Swift.stride(from: range.lowerBound, through: range.upperBound, by: stride)
 }

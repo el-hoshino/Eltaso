@@ -3,6 +3,11 @@
 import UIKit
 import Eltaso
 
-var str = "Hello, playground"
+let flag = true
 
-str.keepFirst(5)
+let i = flag.eltaso.chained { $0
+	.negated
+	.numbered
+}
+
+i

@@ -23,7 +23,7 @@ open class Downloader {
 		
 	}
 	
-	fileprivate init() {
+	private init() {
 		
 	}
 	

@@ -8,9 +8,27 @@
 
 import UIKit
 
-extension UIApplication {
+// MARK: - Public methods
+extension UIApplication: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<UIApplication> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee: UIApplication {
 	
 	public var currentViewController: UIViewController? {
+		return self.body.currentViewController
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UIApplication {
+	
+	var currentViewController: UIViewController? {
 		
 		guard var controller = self.keyWindow?.rootViewController else {
 			return nil

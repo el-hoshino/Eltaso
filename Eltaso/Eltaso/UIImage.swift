@@ -8,17 +8,57 @@
 
 import UIKit
 
+// MARK: - Public methods
+extension UIImage: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<UIImage> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == UIImage {
+	
+	public static func `init`(named name: String, inBundle bundle: Bundle?) -> Containee? {
+		return Containee(named: name, inBundle: bundle)
+	}
+	
+}
+
+extension EltasoContainer where Containee: UIImage {
+	
+	public func resized(to size: CGSize) -> UIImage? {
+		return self.body.resized(to: size)
+	}
+	
+	public func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
+		return self.body.cropped(in: rect, onColor: canvasColor)
+	}
+	
+	public enum RotatingMode {
+		case keepingSize
+		case showWholeImage
+	}
+	
+	public func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: EltasoContainer<UIImage>.RotatingMode = .showWholeImage) -> UIImage? {
+		return self.body.rotated(by: angle, onColor: canvasColor, mode: mode)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension UIImage {
 	
-	public convenience init?(named name: String, inBundle bundle: Bundle?) {
-		self.init(named: name, in: bundle, compatibleWith: nil)
+	static func `init`(named name: String, inBundle bundle: Bundle?) -> UIImage? {
+		let image = UIImage(named: name, in: bundle, compatibleWith: nil)
+		return image
 	}
 	
 }
 
 extension UIImage {
 	
-	open func resized(to size: CGSize) -> UIImage? {
+	func resized(to size: CGSize) -> UIImage? {
 		
 		UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
 		
@@ -32,7 +72,7 @@ extension UIImage {
 		
 	}
 	
-	open func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
+	func cropped(in rect: CGRect, onColor canvasColor: UIColor = .clear) -> UIImage? {
 		
 		let opaque = canvasColor != .clear
 		
@@ -46,7 +86,7 @@ extension UIImage {
 			context.fill(rect.zeroPositionedFrame)
 		}
 		
-		let drawPoint = rect.origin.inverted(in: .both)
+		let drawPoint = rect.origin.negated
 		self.draw(at: drawPoint)
 		let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
 		
@@ -56,12 +96,7 @@ extension UIImage {
 		
 	}
 	
-	public enum RotatingMode {
-		case keepingSize
-		case showWholeImage
-	}
-	
-	open func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: RotatingMode = .showWholeImage) -> UIImage? {
+	func rotated(by angle: CGFloat, onColor canvasColor: UIColor = .clear, mode: EltasoContainer<UIImage>.RotatingMode = .showWholeImage) -> UIImage? {
 		
 		let opaque = canvasColor != .clear
 		let canvasSize: CGSize
@@ -78,8 +113,8 @@ extension UIImage {
 			return nil
 		}
 		
-		let canvasOrigin = CGPoint(x: -canvasSize.width / 2, y: -canvasSize.height / 2)
-		let imageOrigin = CGPoint(x: -self.size.width / 2, y: -self.size.height / 2)
+		let canvasOrigin = canvasSize.centerPoint.negated
+		let imageOrigin = self.size.centerPoint.negated
 		
 		if opaque {
 			context.setFillColor(canvasColor.cgColor)

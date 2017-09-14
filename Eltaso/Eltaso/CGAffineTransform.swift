@@ -9,34 +9,45 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension CGAffineTransform: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<CGAffineTransform> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGAffineTransform {
+	
+	public var possibleTranslation: CGVector {
+		return self.body.possibleTranslation
+	}
+	
+	public var possibleScale: CGScale {
+		return self.body.possibleScale
+	}
+	
+	public var possibleRotation: CGFloat {
+		return self.body.possibleRotation
+	}
+	
+}
+
+// MARK: - Internal methods
 extension CGAffineTransform {
 	
-	public var translation: (x: CGFloat, y: CGFloat) {
-		return (self.tx, self.ty)
+	var possibleTranslation: CGVector {
+		return CGVector(dx: self.tx, dy: self.ty)
 	}
 	
-	public var scale: (x: CGFloat, y: CGFloat) {
-		return (sqrt(self.a * self.a + self.c * self.c), sqrt(self.b * self.b + self.d * self.d))
+	var possibleScale: CGScale {
+		return CGScale(horizontal: sqrt(self.a * self.a + self.c * self.c),
+		               vertical: sqrt(self.b * self.b + self.d * self.d))
 	}
 	
-	public var rotation: CGFloat {
+	var possibleRotation: CGFloat {
 		return atan2(self.b, self.a)
-	}
-	
-	public mutating func translateBy(x: CGFloat, y: CGFloat) {
-		self = self.translatedBy(x: x, y: y)
-	}
-	
-	public mutating func scaleBy(x: CGFloat, y: CGFloat) {
-		self = self.scaledBy(x: x, y: y)
-	}
-	
-	public mutating func rotate(by angle: CGFloat) {
-		self = self.rotated(by: angle)
-	}
-	
-	public mutating func invert() {
-		self = self.inverted()
 	}
 	
 }

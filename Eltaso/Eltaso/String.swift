@@ -8,13 +8,87 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension String: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<String> {
+		return EltasoContainer(body: self)
+	}
+
+}
+
+extension EltasoContainer where Containee == String {
+	
+	public var localized: Containee {
+		return self.body.localized
+	}
+	
+	public func localized(inTable tableName: Containee, inBundle bundle: Bundle = .main, defaultValue value: Containee? = nil, comment: Containee = "") -> Containee {
+		return self.body.localized(inTable: tableName, inBundle: bundle, defaultValue: value, comment: comment)
+	}
+	
+}
+
+extension EltasoContainer where Containee == String {
+	
+	public func keepingFirst(_ n: Int = 1) -> Containee {
+		return self.body.keepingFirst(n)
+	}
+	
+	public func keepingLast(_ n: Int = 1) -> Containee {
+		return self.body.keepingLast(n)
+	}
+	
+	public static func keepFirst(_ n: Int = 1, in target: inout Containee) {
+		target.keepFirst(n)
+	}
+	
+	public static func keepLast(_ n: Int = 1, in target: inout Containee) {
+		target.keepLast(n)
+	}
+	
+}
+
+extension EltasoContainer where Containee == String {
+
+	public func droppingFirst(_ n: Int = 1) -> Containee {
+		return self.body.droppingFirst(n)
+	}
+	
+	public func droppingLast(_ n: Int = 1) -> Containee {
+		return self.body.droppingLast(n)
+	}
+	
+	public static func dropFirst(_ n: Int, in target: inout Containee) {
+		target.dropFirst(n)
+	}
+	
+	public static func dropLast(_ n: Int, in target: inout Containee) {
+		target.dropLast(n)
+	}
+	
+}
+
+extension EltasoContainer where Containee == String {
+	
+	public func components(separatedBy separator: String, allowingEmptyComponent: Bool) -> [Containee] {
+		return self.body.components(separatedBy: separator, allowingEmptyComponent: allowingEmptyComponent)
+	}
+	
+	public func components(separatedBy separator: CharacterSet, allowingEmptyComponent: Bool) -> [Containee] {
+		return self.body.components(separatedBy: separator, allowingEmptyComponent: allowingEmptyComponent)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension String {
 	
-	public var localized: String {
+	var localized: String {
 		return NSLocalizedString(self, comment: "")
 	}
 	
-	public func localized(inTable tableName: String, inBundle bundle: Bundle = .main, defaultValue value: String? = nil, comment: String = "") -> String {
+	func localized(inTable tableName: String, inBundle bundle: Bundle = .main, defaultValue value: String? = nil, comment: String = "") -> String {
 		return NSLocalizedString(self, tableName: tableName, bundle: bundle, value: value ?? self, comment: comment)
 	}
 	
@@ -22,11 +96,27 @@ extension String {
 
 extension String {
 	
-	public mutating func keepFirst(_ n: Int = 1) {
+	func keepingFirst(_ n: Int = 1) -> String {
+		
+		let remainingIndex = self.index(self.startIndex, offsetBy: n, limitedBy: self.endIndex) ?? self.endIndex
+		let remainedText = String(self[..<remainingIndex])
+		return remainedText
+		
+	}
+	
+	func keepingLast(_ n: Int = 1) -> String {
+		
+		let remainingIndex = self.index(self.endIndex, offsetBy: -n, limitedBy: self.startIndex) ?? self.startIndex
+		let remainedText = String(self[remainingIndex...])
+		return remainedText
+		
+	}
+	
+	mutating func keepFirst(_ n: Int = 1) {
 		self = self.keepingFirst(n)
 	}
 	
-	public mutating func keepLast(_ n: Int = 1) {
+	mutating func keepLast(_ n: Int = 1) {
 		self = self.keepingLast(n)
 	}
 	
@@ -34,11 +124,27 @@ extension String {
 
 extension String {
 	
-	public mutating func dropFirst(_ n: Int = 1) {
+	func droppingFirst(_ n: Int = 1) -> String {
+		
+		let remainingIndex = self.index(self.startIndex, offsetBy: n, limitedBy: self.endIndex) ?? self.endIndex
+		let remainedText = String(self[remainingIndex...])
+		return remainedText
+		
+	}
+	
+	func droppingLast(_ n: Int = 1) -> String {
+		
+		let remainingIndex = self.index(self.endIndex, offsetBy: -n, limitedBy: self.startIndex) ?? self.startIndex
+		let remainedText = String(self[..<remainingIndex])
+		return remainedText
+		
+	}
+	
+	mutating func dropFirst(_ n: Int) {
 		self = self.droppingFirst(n)
 	}
 	
-	public mutating func dropLast(_ n: Int = 1) {
+	mutating func dropLast(_ n: Int) {
 		self = self.droppingLast(n)
 	}
 	
@@ -46,59 +152,40 @@ extension String {
 
 extension String {
 	
-	public func keepingFirst(_ n: Int = 1) -> String {
+	private func emptyElementsFiltered(from array: [String]) -> [String] {
 		
-		let remainingIndex = self.characters.index(self.startIndex, offsetBy: n, limitedBy: self.endIndex) ?? self.endIndex
-		return self.substring(to: remainingIndex)
-		
-	}
-	
-	public func keepingLast(_ n: Int = 1) -> String {
-		
-		let remainingIndex = self.characters.index(self.endIndex, offsetBy: -n, limitedBy: self.startIndex) ?? self.startIndex
-		return self.substring(from: remainingIndex)
-		
-	}
-	
-}
-
-extension String {
-
-	public func droppingFirst(_ n: Int = 1) -> String {
-		
-		let remainingIndex = self.characters.index(self.startIndex, offsetBy: n, limitedBy: self.endIndex) ?? self.endIndex
-		return self.substring(from: remainingIndex)
-		
-	}
-	
-	public func droppingLast(_ n: Int = 1) -> String {
-		
-		let remainingIndex = self.characters.index(self.endIndex, offsetBy: -n, limitedBy: self.startIndex) ?? self.startIndex
-		return self.substring(to: remainingIndex)
-		
-	}
-	
-	public func components(separatedBy separator: String, allowEmptyComponent: Bool) -> [String] {
-		
-		return self.components(separatedBy: separator).filter({ (component) -> Bool in
-			if allowEmptyComponent {
-				return true
-			} else {
-				return !component.isEmpty
-			}
+		let filtered = array.filter({ (component) -> Bool in
+			return !component.isEmpty
 		})
+		return filtered
 		
 	}
 	
-	public func components(separatedBy separator: CharacterSet, allowEmptyComponent: Bool) -> [String] {
+	func components(separatedBy separator: String, allowingEmptyComponent: Bool) -> [String] {
 		
-		return self.components(separatedBy: separator).filter({ (component) -> Bool in
-			if allowEmptyComponent {
-				return true
-			} else {
-				return !component.isEmpty
-			}
-		})
+		let components = self.components(separatedBy: separator)
+		
+		if allowingEmptyComponent {
+			return components
+		}
+		else {
+			let filtered = self.emptyElementsFiltered(from: components)
+			return filtered
+		}
+		
+	}
+	
+	func components(separatedBy separator: CharacterSet, allowingEmptyComponent: Bool) -> [String] {
+		
+		let components = self.components(separatedBy: separator)
+		
+		if allowingEmptyComponent {
+			return components
+		}
+		else {
+			let filtered = self.emptyElementsFiltered(from: components)
+			return filtered
+		}
 		
 	}
 	

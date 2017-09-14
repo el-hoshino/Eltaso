@@ -14,7 +14,7 @@ public protocol ElementExchangableView {
 
 extension ElementExchangableView where Self: UIView {
 	
-	public func removeOldView(_ oldView: UIView?, andAddNewView newView: UIView?, at index: Int? = nil) {
+	public func replace(_ oldView: UIView?, with newView: UIView?, at index: Int? = nil) {
 		
 		if let view = oldView {
 			view.removeFromSuperview()
@@ -30,7 +30,7 @@ extension ElementExchangableView where Self: UIView {
 		
 	}
 	
-	public func removeOldViews(_ oldViews: [UIView], andAddNewViews newViews: [UIView], at index: Int? = nil) {
+	public func replace(_ oldViews: [UIView], with newViews: [UIView], at index: Int? = nil) {
 		
 		oldViews.forEach { (view) in
 			view.removeFromSuperview()

@@ -8,10 +8,22 @@
 
 import UIKit
 
-extension UIPinchGestureRecognizer {
+// MARK: - Public methods
+extension EltasoContainer where Containee: UIPinchGestureRecognizer {
 	
 	public func resetScale() {
+		return self.body.resetScale()
+	}
+	
+}
+
+// MARK: - Internal methods
+extension UIPinchGestureRecognizer {
+	
+	func resetScale() {
+		
 		self.scale = 1
+		
 	}
 	
 }

@@ -8,9 +8,47 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension DispatchQueue: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<DispatchQueue> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee: DispatchQueue {
+	
+	public static func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
+		return Containee.runMainQueueWork(forcedSync: shouldUseSync, execute: work)
+	}
+	
+}
+
+extension EltasoContainer where Containee: DispatchQueue {
+	
+	public var isAvailable: Bool {
+		return self.body.isAvailable
+	}
+	
+}
+
+extension EltasoContainer where Containee: DispatchQueue {
+	
+	public func syncRepeat(while condition: @autoclosure () -> Bool, loop: () -> Void) {
+		return self.body.syncRepeat(while: condition, loop: loop)
+	}
+	
+	public func asyncRepeat(while condition: @autoclosure @escaping () -> Bool, loop: @escaping () -> Void) {
+		return self.body.asyncRepeat(while: condition, loop: loop)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension DispatchQueue {
 	
-	open class func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
+	static func runMainQueueWork(forcedSync shouldUseSync: Bool = false, execute work: @escaping @convention(block) () -> Swift.Void) {
 		
 		if Thread.isMainThread {
 			work()
@@ -32,10 +70,10 @@ extension DispatchQueue {
 
 extension DispatchQueue {
 	
-	public var isRunning: Bool {
+	var isAvailable: Bool {
 		
 		guard Thread.current != self else {
-			return false
+			return true
 		}
 		
 		let semaphore = DispatchSemaphore(value: 0)
@@ -52,7 +90,7 @@ extension DispatchQueue {
 
 extension DispatchQueue {
 	
-	public func syncRepeat(while condition: () -> Bool, loop: () -> Void) {
+	func syncRepeat(while condition: @autoclosure () -> Bool, loop: () -> Void) {
 		
 		self.sync {
 			while condition() == true {
@@ -62,7 +100,7 @@ extension DispatchQueue {
 		
 	}
 	
-	public func asyncRepeat(while condition: @escaping () -> Bool, loop: @escaping () -> Void) {
+	func asyncRepeat(while condition: @autoclosure @escaping () -> Bool, loop: @escaping () -> Void) {
 		
 		self.async {
 			while condition() == true {

@@ -2,17 +2,24 @@
 //  OptionalType.swift
 //  Eltaso
 //
-//  Created by 史　翔新 on 2016/07/08.
-//  Copyright © 2016年 Crazism. All rights reserved.
+//  Created by 史　翔新 on 2017/09/07.
+//  Copyright © 2017年 Crazism. All rights reserved.
 //
 
 import Foundation
 
 public protocol OptionalType {
-	associatedtype T
-	var optionalValue: T? { get }
+	
+	associatedtype WrappedType
+	
+	var optinal: WrappedType? { get }
+	
 }
 
 extension Optional: OptionalType {
-	public var optionalValue: Wrapped? { return self }
+	
+	public var optinal: Wrapped? {
+		return self
+	}
+	
 }

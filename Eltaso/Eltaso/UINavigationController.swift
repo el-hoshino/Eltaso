@@ -8,10 +8,32 @@
 
 import UIKit
 
+// MARK: - Public methods
+extension UINavigationController: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<UINavigationController> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee: UINavigationController {
+	
+	public func push(_ viewController: UIViewController, animated: Bool, completion: ((Bool) -> Void)?) {
+		return self.body.push(viewController, animated: animated, completion: completion)
+	}
+	
+	@discardableResult
+	public func pop(animated: Bool, completion: ((Bool) -> Void)?) -> UIViewController? {
+		return self.body.pop(animated: animated, completion: completion)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension UINavigationController {
 	
-	// FIXME: Because push(_: animated: completion:) and pop(animated: completion:) is currently used in UIViewController extension, so here it's using pushViewController(_: animated: completion:) and popViewController(animated: completion:) as the method name. In Eltaso 4 those methods in UIViewController will be removed, and these methods will be renamed to push(_: animated: completion:) and pop(animated: completion:)
-	public func pushViewController(_ viewController: UIViewController, animated: Bool, completion: ((Bool) -> Void)?) {
+	func push(_ viewController: UIViewController, animated: Bool, completion: ((Bool) -> Void)?) {
 		
 		guard !self.viewControllers.contains(viewController) else {
 			completion?(false)
@@ -29,14 +51,14 @@ extension UINavigationController {
 		
 	}
 	
-	// FIXME: Here's a bug in Swift 3.x that @discardableResult doesn't work for optional returning values, so currently this method returns nothing. In the future when this bug is fixed, this method should return UINavigationController#popViewController(animated:)'s return value, which is poppedViewController here in the code.
-	public func popViewController(animated: Bool, completion: ((Bool) -> Void)?) {
+	@discardableResult
+	func pop(animated: Bool, completion: ((Bool) -> Void)?) -> UIViewController? {
 		
 		let poppedViewController = self.popViewController(animated: animated)
 		
 		guard poppedViewController != nil else {
 			completion?(false)
-			return
+			return nil
 		}
 		
 		if animated, let coordinator = self.transitionCoordinator {
@@ -46,7 +68,7 @@ extension UINavigationController {
 			completion?(true)
 		}
 		
-		return
+		return poppedViewController
 		
 	}
 	

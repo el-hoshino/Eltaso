@@ -8,10 +8,60 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension Bool: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<Bool> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == Bool {
+	
+	public static func makeRandom() -> Containee {
+		return Containee.makeRandom()
+	}
+	
+}
+
+extension EltasoContainer where Containee == Bool {
+	
+	public var negated: Containee {
+		return self.body.negated
+	}
+	
+	public static func nagate(_ target: inout Containee) {
+		target.nagate()
+	}
+	
+}
+
+extension EltasoContainerChain where Containee == Bool {
+	
+	public static func makeRandom() -> EltasoContainerChain<Bool> {
+		return .init(body: Containee.makeRandom())
+	}
+	
+}
+
+extension EltasoContainerChain where Containee == Bool {
+	
+	public var negated: EltasoContainerChain<Bool> {
+		return .init(body: self.body.negated)
+	}
+	
+	public var numbered: EltasoContainerChain<Int> {
+		return .init(body: self.body.numbered)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension Bool {
 	
-	public static func createRandom() -> Bool {
-		let randomNumber = Int.createRandom(within: 0 ... 1)
+	static func makeRandom() -> Bool {
+		let randomNumber = Int.makeRandom(within: 0 ... 1)
 		return randomNumber != 0
 	}
 	
@@ -19,12 +69,20 @@ extension Bool {
 
 extension Bool {
 	
-	public var negated: Bool {
+	var negated: Bool {
 		return !self
 	}
 	
-	public mutating func negate() {
+	mutating func nagate() {
 		self = self.negated
+	}
+	
+}
+
+extension Bool {
+	
+	var numbered: Int {
+		return self == true ? 1 : 0
 	}
 	
 }

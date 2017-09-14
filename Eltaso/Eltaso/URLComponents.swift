@@ -8,11 +8,30 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension URLComponents: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<URLComponents> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == URLComponents {
+	
+	public static func `init`(queryItems: [URLQueryItem]) -> Containee {
+		return Containee(queryItems: queryItems)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension URLComponents {
 	
-	public init(queryItems: [URLQueryItem]) {
-		self = URLComponents()
-		self.queryItems = queryItems
+	static func `init`(queryItems: [URLQueryItem]) -> URLComponents {
+		var components = URLComponents()
+		components.queryItems = queryItems
+		return components
 	}
 	
 }

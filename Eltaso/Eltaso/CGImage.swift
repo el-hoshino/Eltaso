@@ -8,9 +8,47 @@
 
 import CoreGraphics
 
-extension CGImage {
+// MARK: - Public methods
+extension CGImage: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<CGImage> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGImage {
 	
 	public var size: CGSize {
+		return self.body.size
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGImage {
+	
+	public static func makeImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> Containee? {
+		return Containee.makeImage(ofColor: color, opaque: opaque, forSize: size, atScale: scale)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGImage {
+	
+	public func resized(to size: CGSize, scale: CGFloat = 0) -> Containee {
+		return self.body.resized(to: size, scale: scale)
+	}
+	
+	public func cropped(in rect: CGRect, onColor canvasColor: CGColor = UIColor.clear.cgColor, scale: CGFloat = 0) -> Containee {
+		return self.body.cropped(in: rect, onColor: canvasColor, scale: scale)
+	}
+	
+}
+
+// MARK: Internal methods
+extension CGImage {
+	
+	var size: CGSize {
 		return CGSize(width: self.width, height: self.height)
 	}
 	
@@ -18,7 +56,7 @@ extension CGImage {
 
 extension CGImage {
 	
-	static func createImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> CGImage? {
+	static func makeImage(ofColor color: CGColor, opaque: Bool = false, forSize size: CGSize, atScale scale: CGFloat = 0) -> CGImage? {
 		
 		UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
@@ -39,7 +77,7 @@ extension CGImage {
 
 extension CGImage {
 	
-	public func resized(to size: CGSize, scale: CGFloat = 0) -> CGImage {
+	func resized(to size: CGSize, scale: CGFloat = 0) -> CGImage {
 		
 		UIGraphicsBeginImageContextWithOptions(size, false, scale)
 		guard let context = UIGraphicsGetCurrentContext() else {
@@ -61,7 +99,7 @@ extension CGImage {
 		
 	}
 	
-	public func cropped(in rect: CGRect, onColor canvasColor: CGColor = UIColor.clear.cgColor, scale: CGFloat = 0) -> CGImage {
+	func cropped(in rect: CGRect, onColor canvasColor: CGColor = UIColor.clear.cgColor, scale: CGFloat = 0) -> CGImage {
 		
 		let opaque = canvasColor.alpha > 0
 		
@@ -78,7 +116,7 @@ extension CGImage {
 			context.fill(rect.zeroPositionedFrame)
 		}
 		
-		context.draw(self, at: rect.origin.inverted(in: .both))
+		context.draw(self, at: rect.origin.negated)
 		
 		guard let croppedImage = context.makeImage() else {
 			return self

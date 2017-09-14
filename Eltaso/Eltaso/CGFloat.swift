@@ -8,9 +8,75 @@
 
 import Foundation
 
+// MARK: - Public methods
+extension CGFloat: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<CGFloat> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGFloat {
+	
+	public static func makeRandom(within range: Range<Containee>) -> Containee {
+		return Containee.makeRandom(within: range)
+	}
+	
+	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
+		return Containee.makeRandom(within: range)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGFloat {
+	
+	public var negated: Containee {
+		return self.body.negated
+	}
+	
+	public static func negate(_ target: inout Containee) {
+		target.negate()
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGFloat {
+	
+	public func limited(within range: ClosedRange<Containee>) -> Containee {
+		return self.body.limited(within: range)
+	}
+	
+	public static func limit(_ target: inout Containee, within range: ClosedRange<Containee>) {
+		target.limit(within: range)
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGFloat {
+	
+	public var radianValue: Containee {
+		return self.body.radianValue
+	}
+	
+	public var degreeValue: Containee {
+		return self.body.degreeValue
+	}
+	
+}
+
+extension EltasoContainer where Containee == CGFloat {
+	
+	public func vector(atAngle angle: Containee) -> CGVector {
+		return self.body.vector(atAngle: angle)
+	}
+	
+}
+
+// MARK: - Internal methods
 extension CGFloat {
 	
-	public static func createRndom(within range: Range<CGFloat>) -> CGFloat {
+	static func makeRandom(within range: Range<CGFloat>) -> CGFloat {
 		
 		let ratio = range.width / CGFloat(UInt32.max)
 		let random = CGFloat(arc4random_uniform(.max)) * ratio
@@ -19,7 +85,7 @@ extension CGFloat {
 		
 	}
 	
-	public static func createRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
+	static func makeRandom(within range: ClosedRange<CGFloat>) -> CGFloat {
 		
 		let ratio = range.width / CGFloat(UInt32.max.decreased)
 		let random = CGFloat(arc4random_uniform(.max)) * ratio
@@ -32,19 +98,19 @@ extension CGFloat {
 
 extension CGFloat {
 	
-	public var inverted: CGFloat {
+	var negated: CGFloat {
 		return -self
 	}
 	
-	public mutating func invert() {
-		self = self.inverted
+	mutating func negate() {
+		self = self.negated
 	}
 	
 }
 
 extension CGFloat {
 	
-	public func limited(within range: ClosedRange<CGFloat>) -> CGFloat {
+	func limited(within range: ClosedRange<CGFloat>) -> CGFloat {
 		
 		switch self {
 		case -.infinity ... range.lowerBound:
@@ -59,7 +125,7 @@ extension CGFloat {
 		
 	}
 	
-	public mutating func limit(within range: ClosedRange<CGFloat>) {
+	mutating func limit(within range: ClosedRange<CGFloat>) {
 		self = self.limited(within: range)
 	}
 	
@@ -67,13 +133,13 @@ extension CGFloat {
 
 extension CGFloat {
 	
-	public var radianValue: CGFloat {
+	var radianValue: CGFloat {
 		
 		return self / 180 * .pi
 		
 	}
 	
-	public var degreeValue: CGFloat {
+	var degreeValue: CGFloat {
 		
 		return self * 180 / .pi
 		
@@ -83,7 +149,7 @@ extension CGFloat {
 
 extension CGFloat {
 	
-	public func vector(atAngle angle: CGFloat) -> CGVector {
+	func vector(atAngle angle: CGFloat) -> CGVector {
 		
 		let dx = self * cos(angle)
 		let dy = self * sin(angle)

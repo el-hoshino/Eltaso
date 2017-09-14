@@ -8,9 +8,64 @@
 
 import Foundation
 
+
+// MARK: - Public methods
+extension Double: EltasoCompatible {
+	
+	public var eltaso: EltasoContainer<Double> {
+		return EltasoContainer(body: self)
+	}
+	
+}
+
+extension EltasoContainer where Containee == Double {
+	
+	public static func makeRandom(within range: Range<Containee>) -> Containee {
+		return Containee.makeRandom(within: range)
+	}
+	
+	public static func makeRandom(within range: ClosedRange<Containee>) -> Containee {
+		return Containee.makeRandom(within: range)
+	}
+	
+}
+
+extension EltasoContainer where Containee == Double {
+	
+	public var negated: Containee {
+		return self.body.negated
+	}
+	
+	public static func negate(_ target: inout Containee) {
+		target.negate()
+	}
+	
+}
+
+extension EltasoContainer where Containee == Double {
+	
+	public func limited(within range: ClosedRange<Containee>) -> Containee {
+		return self.body.limited(within: range)
+	}
+	
+	public static func limit(_ target: inout Containee, within range: ClosedRange<Containee>) {
+		target.limit(within: range)
+	}
+	
+}
+
+extension EltasoContainer where Containee == Double {
+	
+	public var radianValue: Containee {
+		return self.body.radianValue
+	}
+	
+}
+
+// MARK: - Internal methods
 extension Double {
 	
-	public static func createRndom(within range: Range<Double>) -> Double {
+	static func makeRandom(within range: Range<Double>) -> Double {
 		
 		let ratio = range.width / Double(UInt32.max)
 		let random = Double(arc4random_uniform(.max)) * ratio
@@ -19,7 +74,7 @@ extension Double {
 		
 	}
 	
-	public static func createRandom(within range: ClosedRange<Double>) -> Double {
+	static func makeRandom(within range: ClosedRange<Double>) -> Double {
 		
 		let ratio = range.width / Double(UInt32.max.decreased)
 		let random = Double(arc4random_uniform(.max)) * ratio
@@ -32,19 +87,19 @@ extension Double {
 
 extension Double {
 	
-	public var inverted: Double {
+	var negated: Double {
 		return -self
 	}
 	
-	public mutating func invert() {
-		self = self.inverted
+	mutating func negate() {
+		self = self.negated
 	}
 	
 }
 
 extension Double {
 	
-	public func limited(within range: ClosedRange<Double>) -> Double {
+	func limited(within range: ClosedRange<Double>) -> Double {
 		
 		switch self {
 		case -.infinity ... range.lowerBound:
@@ -59,7 +114,7 @@ extension Double {
 		
 	}
 	
-	public mutating func limit(within range: ClosedRange<Double>) {
+	mutating func limit(within range: ClosedRange<Double>) {
 		self = self.limited(within: range)
 	}
 	
@@ -67,7 +122,7 @@ extension Double {
 
 extension Double {
 	
-	public var radianValue: Double {
+	var radianValue: Double {
 		
 		if #available(iOS 10.0, *) {
 			let degreeMeasurement = Measurement(value: self, unit: UnitAngle.degrees)

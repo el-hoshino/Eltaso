@@ -18,9 +18,9 @@ public enum MatrixMathError: Error {
 
 public struct Matrix <Element> {
 	
-	fileprivate var _value: [Element]
-	fileprivate var _columnCount: Int
-	fileprivate var _rowCount: Int
+	private var _value: [Element]
+	private var _columnCount: Int
+	private var _rowCount: Int
 	
 	public typealias Index = (i: Int, j: Int)
 	public typealias Size = (m: Int, n: Int)
@@ -40,7 +40,7 @@ public struct Matrix <Element> {
 				throw MatrixInitError.rowsWithDifferentColumns
 			}
 		}
-		self._value = array.flatten
+		self._value = array.eltaso.flatten
 		self._columnCount = columnCount
 		self._rowCount = rowCount
 	}
@@ -189,7 +189,7 @@ extension Matrix {
 			})
 		}
 		
-		return enumeratedMatrix.reduce(+) ?? []
+		return enumeratedMatrix.eltaso.reduce(+) ?? []
 		
 	}
 	
@@ -203,11 +203,6 @@ extension Matrix {
 		
 		return enumeratedMatrix.reduce(+) ?? []
 		
-	}
-	
-	@available(*, deprecated: 3.3, message: "Use Matrix#enumeratedByRow() or Matrix#enumeratedByColumn() instead")
-	public func enumerated() -> [(index: Index, element: Element)] {
-		return self.enumeratedByRow()
 	}
 	
 }
@@ -311,8 +306,9 @@ private extension Matrix {
 		
 		var matrix = self
 		let initialInsertingIndex = i * self._columnCount
-		row.enumerated().forEach { (j, element) in
-			matrix._value.insert(element, at: initialInsertingIndex + j)
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value.insert(cell.element, at: initialInsertingIndex + j)
 		}
 		matrix._rowCount.increase()
 		return matrix
@@ -392,8 +388,9 @@ private extension Matrix {
 	func unsafeAppendingColumn(_ column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columnCount + self._columnCount)
+		column.enumerated().reversed().forEach { (cell) in
+			let i = cell.offset
+			matrix._value.insert(cell.element, at: i * self._columnCount + self._columnCount)
 		}
 		matrix._columnCount.increase()
 		
@@ -404,8 +401,9 @@ private extension Matrix {
 	func unsafeInsertingColumn(_ column: [Element], at j: Int) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().reversed().forEach { (i, element) in
-			matrix._value.insert(element, at: i * self._columnCount + j)
+		column.enumerated().reversed().forEach { (cell) in
+			let i = cell.offset
+			matrix._value.insert(cell.element, at: i * self._columnCount + j)
 		}
 		matrix._columnCount.increase()
 		
@@ -487,8 +485,9 @@ private extension Matrix {
 		
 		var matrix = self
 		let initialInsertingIndex = i * self._columnCount
-		row.enumerated().forEach { (j, element) in
-			matrix._value[initialInsertingIndex + j] = element
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value[initialInsertingIndex + j] = cell.element
 		}
 		return matrix
 		
@@ -497,8 +496,9 @@ private extension Matrix {
 	func unsafeReplacingFirstRow(with row: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		row.enumerated().forEach { (j, element) in
-			matrix._value[j] = element
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value[j] = cell.element
 		}
 		return matrix
 		
@@ -508,8 +508,9 @@ private extension Matrix {
 		
 		var matrix = self
 		let initialInsertingIndex = self._rowCount.decreased * self._columnCount
-		row.enumerated().forEach { (j, element) in
-			matrix._value[initialInsertingIndex + j] = element
+		row.enumerated().forEach { (cell) in
+			let j = cell.offset
+			matrix._value[initialInsertingIndex + j] = cell.element
 		}
 		return matrix
 		
@@ -615,8 +616,9 @@ private extension Matrix {
 	func unsafeReplacingColumn(at j: Int, with column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().forEach { (i, element) in
-			matrix._value[i * self._columnCount + j] = element
+		column.enumerated().forEach { (cell) in
+			let i = cell.offset
+			matrix._value[i * self._columnCount + j] = cell.element
 		}
 		return matrix
 		
@@ -625,8 +627,9 @@ private extension Matrix {
 	func unsafeReplacingFirstColumn(with column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().forEach { (i, element) in
-			matrix._value[i * self._columnCount] = element
+		column.enumerated().forEach { (cell) in
+			let i = cell.offset
+			matrix._value[i * self._columnCount] = cell.element
 		}
 		return matrix
 		
@@ -635,8 +638,9 @@ private extension Matrix {
 	func unsafeReplacingLastColumn(with column: [Element]) -> Matrix<Element> {
 		
 		var matrix = self
-		column.enumerated().forEach { (i, element) in
-			matrix._value[i * self._columnCount + self._rowCount.decreased] = element
+		column.enumerated().forEach { (cell) in
+			let i = cell.offset
+			matrix._value[i * self._columnCount + self._rowCount.decreased] = cell.element
 		}
 		return matrix
 		
@@ -741,7 +745,7 @@ extension Matrix {
 	
 	public func keepingRow(at m: Int) -> Matrix<Element> {
 		
-		let i = m.limited(within: self.indices.rows)
+		let i = m.eltaso.limited(within: self.indices.rows)
 		
 		var matrix = self
 		let row = matrix.indices.columns.map({ (j) -> Element in
@@ -756,7 +760,7 @@ extension Matrix {
 	
 	public func keepingFirstRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (0 ..< m).map { (i) -> [Element] in
@@ -773,7 +777,7 @@ extension Matrix {
 	
 	public func keepingLastRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
@@ -806,7 +810,7 @@ extension Matrix {
 	
 	public func keepingColumn(at n: Int) -> Matrix<Element> {
 		
-		let j = n.limited(within: self.indices.columns)
+		let j = n.eltaso.limited(within: self.indices.columns)
 		
 		var matrix = self
 		let column = self.indices.rows.map { (i) -> Element in
@@ -821,7 +825,7 @@ extension Matrix {
 	
 	public func keepingFirstColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -838,7 +842,7 @@ extension Matrix {
 	
 	public func keepingLastColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -871,7 +875,7 @@ extension Matrix {
 	
 	public func removingRow(at m: Int) -> Matrix<Element> {
 		
-		let i = m.limited(within: self.indices.rows)
+		let i = m.eltaso.limited(within: self.indices.rows)
 		
 		var matrix = self
 		let rows = Array(self.indices.rows).filter { (row) -> Bool in
@@ -890,7 +894,7 @@ extension Matrix {
 	
 	public func removingFirstRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (self._rowCount - m ..< self._rowCount).map { (i) -> [Element] in
@@ -907,7 +911,7 @@ extension Matrix {
 	
 	public func removingLastRows(of m: Int) -> Matrix<Element> {
 		
-		let m = m.limited(within: 0 ... self.size.m)
+		let m = m.eltaso.limited(within: 0 ... self.size.m)
 		
 		var matrix = self
 		let rows = (0 ..< m).map { (i) -> [Element] in
@@ -940,7 +944,7 @@ extension Matrix {
 	
 	public func removingColumn(at n: Int) -> Matrix<Element> {
 		
-		let j = n.limited(within: self.indices.columns)
+		let j = n.eltaso.limited(within: self.indices.columns)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -959,7 +963,7 @@ extension Matrix {
 	
 	public func removingFirstColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -976,7 +980,7 @@ extension Matrix {
 	
 	public func removingLastColumns(of n: Int) -> Matrix<Element> {
 		
-		let n = n.limited(within: 0 ... self.size.n)
+		let n = n.eltaso.limited(within: 0 ... self.size.n)
 		
 		var matrix = self
 		let rows = self.indices.rows.map { (i) -> [Element] in
@@ -1009,7 +1013,7 @@ extension Matrix {
 	
 	public mutating func applyForEach(_ transform: (Element) throws -> Element) rethrows {
 		
-		try self._value.applyForEach(transform)
+		self._value = try self._value.map(transform)
 		
 	}
 	
@@ -1031,7 +1035,7 @@ extension Matrix: CustomStringConvertible {
 	
 }
 
-public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: AdditionOperatable {
+public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: Numeric {
 	
 	guard lhs.size == rhs.size else {
 		throw MatrixMathError.sizeMismatch
@@ -1048,11 +1052,11 @@ public func + <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 }
 
-public func += <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: AdditionOperatable {
+public func += <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Numeric {
 	lhs = try lhs + rhs
 }
 
-public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: SubtractionOperatable {
+public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: Numeric {
 	
 	guard lhs.size == rhs.size else {
 		throw MatrixMathError.sizeMismatch
@@ -1069,11 +1073,11 @@ public func - <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 }
 
-public func -= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: SubtractionOperatable {
+public func -= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Numeric {
 	lhs = try lhs - rhs
 }
 
-public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: AdditionOperatable, T: MultiplicationOperatable {
+public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: Numeric {
 	
 	guard lhs.size.n == rhs.size.m else {
 		throw MatrixMathError.sizeMismatch
@@ -1084,10 +1088,15 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	let resultElementFactorIndices: CountableRange<Int> = lhs.indices.columns
 	
 	func getMultipliedValue(at index: Matrix<T>.Index) -> T {
-		return resultElementFactorIndices.reduce(T.additionOperationInitialValue) { (result, indice) -> T in
-			let factor = lhs[index.i, indice] * rhs[indice, index.j]
-			return result + factor
+		let resultElementFactors = resultElementFactorIndices.map { (factorIndex) -> T in
+			let factor = lhs[index.i, factorIndex] * rhs[factorIndex, index.j]
+			return factor
 		}
+		let result = resultElementFactors.reduce { (result, next) -> T in
+			let result = result + next
+			return result
+		}
+		return result ?? 0
 	}
 	
 	let value = resultIndices.rows.map { (i) -> [T] in
@@ -1100,7 +1109,7 @@ public func * <T> (lhs: Matrix<T>, rhs: Matrix<T>) throws -> Matrix<T> where T: 
 	
 }
 
-public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: MultiplicationOperatable {
+public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: Numeric {
 	
 	var matrix = rhs
 	for i in matrix.indices.rows {
@@ -1112,15 +1121,15 @@ public func * <T> (lhs: T, rhs: Matrix<T>) -> Matrix<T> where T: MultiplicationO
 	
 }
 
-public func * <T> (lhs: Matrix<T>, rhs: T) -> Matrix<T> where T: MultiplicationOperatable {
+public func * <T> (lhs: Matrix<T>, rhs: T) -> Matrix<T> where T: Numeric {
 	return rhs * lhs
 }
 
-public func *= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: AdditionOperatable, T: MultiplicationOperatable {
+public func *= <T> (lhs: inout Matrix<T>, rhs: Matrix<T>) throws where T: Numeric {
 	lhs = try lhs * rhs
 }
 
-public func *= <T> (lhs: inout Matrix<T>, rhs: T) where T: MultiplicationOperatable {
+public func *= <T> (lhs: inout Matrix<T>, rhs: T) where T: Numeric {
 	lhs = lhs * rhs
 }
 

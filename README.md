@@ -11,5 +11,6 @@ This is a framework that contains some convenient methods and extensions for mys
 Since Xcode 9, there's a bug that it shows wrong suggestions in auto-completion, which Eltaso heavily relies on. And this bug still isn't fixed yet in Xcode 10.2. So I decided to suspend this project, until this bug being fixed.
 
 You can find details about this bug here:
-https://bugs.swift.org/browse/SR-5466
-https://bugs.swift.org/browse/SR-10442
+
+- https://bugs.swift.org/browse/SR-5466
+- https://bugs.swift.org/browse/SR-10442
